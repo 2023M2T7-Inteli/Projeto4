@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
+    <title>CRUD</title>
+  </head>
+  <h1>Atualização de Formacao</h1>
+
+    <form name="form1" method="post" action="/atualizaUsuario">
+        CURSO: <input type="text" id="CURSO" name="CURSO" size="50" value="">
+        <br>
+        DATA INICIAL: <input type="text" id="DATA_INI" name="DATA_INI" value="">
+        <br>
+        DATA FINAL: <input type="text" id="DATA_FIM" name="DATA_FIM" value="">
+        <br>
+        DESCRICAO: <input type="text" id="DESCRICAO" name="DESCRICAO" value="">
+        <br>
+        <input type="hidden" id="ID_FORMACAO" name="ID_FORMACAO" value="">
+        
+        <input type="submit" value="ATUALIZAR">  
+    </form>    
+
+    <script>
+        let url = new URL(window.location.href);
+        let params = url.searchParams;
+        url = '/atualizaUsuario?ID_FORMACAO='+url.searchParams.get("ID_FORMACAO");
+
+        fetch(url)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            let usuarios = data;
+
+            usuarios.map(function(TblFORMACAO) {
+                document.getElementById('ID_FORMACAO').value = TblFORMACAO.ID_FORMACAO;
+                document.getElementById('CURSO').value = TblFORMACAO.CURSO;
+                document.getElementById('DATA_INI').value = TblFORMACAO.DATA_INI;
+                document.getElementById('DATA_FIM').value = TblFORMACAO.DATA_FIM;
+                document.getElementById('DESCRICAO').value = TblFORMACAO.DESCRICAO;
+            });
+            alert(response.json());
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+    </script>
+</body>
+</html>
