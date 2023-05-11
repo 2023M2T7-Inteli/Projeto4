@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3').verbose();
 const DBPATH = '../data/Banco_Projeto.db';
 
 const hostname = '127.0.0.1';
-const port = 2040;
+const port = 2021;
 const app = express();
 
 /* Colocar toda a parte estática no frontend */
@@ -17,19 +17,19 @@ app.use(express.static("../frontend/"));
 app.use(express.json());
 
 // Retorna todos registros da tabela USUARIO (é o R do CRUD - Read)
-app.get('/usuarios', (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	var sql = 'SELECT * FROM USUARIO ORDER BY Telefone COLLATE NOCASE';
-		db.all(sql, [],  (err, rows ) => {
-			if (err) {
-				throw err;
-			}
-			res.json(rows);
-		});
-		db.close(); // Fecha o banco
-});
+ app.get('/usuarios', (req, res) => {
+ 	res.statusCode = 200;
+ 	res.setHeader('Access-Control-Allow-Origin', '*');
+ 	var db = new sqlite3.Database(DBPATH); // Abre o banco
+ 	var sql = 'SELECT * FROM USUARIO ORDER BY Telefone COLLATE NOCASE';
+ 		db.all(sql, [],  (err, rows ) => {
+ 			if (err) {
+ 				throw err;
+ 			}
+ 			res.json(rows);
+ 		});
+ 		db.close(); // Fecha o banco
+ });
 
 // Insere um registro na tabela USUARIO (é o C do CRUD - Create)
 app.post('/insereUsuario', urlencodedParser, (req, res) => {
@@ -99,11 +99,11 @@ app.get('/removeUsuario', urlencodedParser, (req, res) => {
 });
 
 // Retorna todos os registros da tabela PERGUNTA (é o R do CRUD - Reading)
-app.get('/pergunta', (req, res) => {
+app.get('/perguntas', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	var sql = 'SELECT * FROM PERGUNTA ORDER BY Pergunta COLLATE NOCASE';
+	var sql = 'SELECT * FROM PERGUNTA';
 		db.all(sql, [],  (err, rows ) => {
 			if (err) {
 				throw err;
@@ -266,7 +266,49 @@ app.get('/removeProtocolo', urlencodedParser, (req, res) => {
 	db.close(); // Fecha o banco
 });
 
+// Insere a atividade do protocolo na tabela PROTOCOLO (é o C do CRUD - Create)
+app.post('/insereResposta', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); 
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	sql = "INSERT INTO RESPOSTA (Resposta, Id_Pergunta_FK) VALUES ('" + req.body.Resposta + "', '" + req.body.Id_Pergunta_FK + "')";
+	console.log(sql);
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}	
+	});
+	res.write('<p>RESPOSTA INSERIDA COM SUCESSO!</p><a href="/">VOLTAR</a>');
+	db.close(); // Fecha o banco
+	res.end();
+});
 
+// Join entre as tabelas Pergunta & Resposta
+app.get('/JOIN_Pergunta_Resposta', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	var sql = 'SELECT Pergunta.Pergunta, Resposta.Resposta FROM Pergunta INNER JOIN Resposta ON Pergunta.Id_Pergunta = Resposta.Id_Pergunta_FK';
+		db.all(sql, [],  (err, rows ) => {
+			if (err) {
+				throw err;
+			}
+			res.json(rows);
+		});
+		db.close(); // Fecha o banco
+});
 
-
-
+// Retorna todos registros da tabela RESPOSTA (é o R do CRUD - Read)
+app.get('/respostas', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	var sql = 'SELECT * FROM RESPOSTA';
+		db.all(sql, [],  (err, rows ) => {
+			if (err) {
+				throw err;
+			}
+			res.json(rows);
+		});
+		db.close(); // Fecha o banco
+});
