@@ -1,0 +1,22 @@
+Dentro das barras de menu, terão:
+- Sobre o Protocom
+- Sobre a Natura
+- Como ser um membro da Natura
+- Pesquisas desenvolvidas a partir do Protocom/Futuras pesquisas
+
+Rodapé/Footer:
+- Quem somos
+- Suporte
+- FAQ
+- Termos de serviço
+- Políticas de privacidade
+
+Ao passar o mouse ou clicar na logo do Protocom, aparecerá a logo do Tukumã. Mudando apenas o verde para o laranja.
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Figma:
+
+- Aos lados do icone na pagina inicial: icones de ciencia, pesquisa, folhas e etc
+
+- Adicionar um campo para o pesquisador adicionar instruções dentro de uma categoria. O extrativista poderá clicar em um ícone de informação para ver como deve ser realizado a tarefa.

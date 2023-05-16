@@ -1,0 +1,82 @@
+/**Background of the options screen**/
+
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#smartphone {
+    width: 360px;
+    height: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#bg {
+    position: relative;
+}
+
+#bg img {
+    opacity: 0.13;
+    position: absolute;
+    width: 360px;
+    height: 538.95px;
+    left: 0px;
+    top: 90px;
+    z-index: -1;
+}
+
+header {
+    background-color: black;
+    width: 360px;
+    height: 49px;
+    left: 0px;
+    top: 0px;
+    align-items: center;
+    display: flex;
+}
+
+#menu {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    padding-left: 16px;
+}
+
+#home {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    padding-left: 322px;
+}
+
+#title_header {
+    color: white;
+    position: absolute;
+    width: 92px;
+    height: 26px;
+    padding-left: 57px;
+
+    font-family: 'Righteous';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+}
+
+#waves {
+    transform: scaleX(-1);
+    width: 100%;
+    height: 100%;
+}
+
+#logo {
+    width: auto;
+    height: auto;
+    position: absolute;
+    left: 440px;
+
+}
