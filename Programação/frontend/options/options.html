@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,29 +8,33 @@
     <title>Opções de entrada</title>
     <link rel="stylesheet" href="options.css">
 </head>
+
 <body>
     <header>
         <img id="menu" src="images/menu.png" alt="menu">
         <img id="home" src="images/home.png" alt="home">
-        <h2 id="title_header" >Protocom</h2>
+        <h2 id="title_header">Protocom</h2>
     </header>
+    <img id="waves" src="images/header_img.png" alt="design">
     <main>
-        <div id="bg">
-            <img src="images/bg.png" alt="background">
-        </div>
-        <img id="waves" src="images/header_img.png" alt="design">
-        <div id="center_info">
+        <div class="center_info">
             <img id="logo" src="images/logo.png" alt="logo">
-            <h1 id="title_logo">Protocom</h1>
+            <h1 id="title_logo">Entrar</h1>
+
+            <h2 id="email">Email</h2>
+            <img id="email_icon" src="" alt="password icon">
+            <input type="text" placeholder="Escreva seu email aqui">
+            <hr>
+            <h2 id="password">Senha</h2>
+            <img id="passaword_icon" src="" alt="password icon">
+            <input type="text" placeholder="Escreva sua senha aqui">
+            <hr>
+            <button id="forget_password">Esqueci a senha</button>
+            <button id="sign_in" class="button">Entrar</button>
+            <button id="sign_up" class="button">Cadastre sua conta</button>
+            <script src="options.js"></script>
         </div>
     </main>
-    <div id="options">
-        <h1>Bem vindo</h1>
-        <hr>
-        <p>Transformando informações em conhecimenrto</p>
-        <button id="sign_in" class="button">Entrar</button>
-        <button id="sign_up" class="button">Registrar</button>
-    </div>
-    <script src="options.js"></script>
 </body>
+
 </html>
