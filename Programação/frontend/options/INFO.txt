@@ -1,2 +1,0 @@
-1- Problema no icone de home no cabeçalho (gambiarra com o left)
-2- Ajuda para substituir a div para media screen e centralizá-la

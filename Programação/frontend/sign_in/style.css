@@ -1,5 +1,3 @@
-/*Background of the options screen*/
-
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap');
 
@@ -10,8 +8,9 @@
 
 input { 
     outline: 0;
-    border: 0 none;
+    border: 0;
     height: 16px;
+    width: 100%;
 }
 
 #input1 {
@@ -50,13 +49,20 @@ header {
     width: 22px;
     height: 22px;
     left: 16px;
+    cursor: pointer;
 }
 
-#home {
+#home_a {
     position: absolute;
     width: 25px;
     height: 25px;
     right: 16px;
+}
+
+#home {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
 }
 
 #title_header {
@@ -65,7 +71,6 @@ header {
     width: 92px;
     height: 26px;
     left: 57px;
-
     font-family: 'Righteous';
     font-style: normal;
     font-weight: 400;
@@ -78,14 +83,37 @@ header {
     height: 70px;
 }
 
-
 #logo {
+    position: absolute;
     width: 55px;
     height: 55px;
-    display: block;
+}
+
+#logos {
+    position: relative;
+    width: 55px;
+    height: 55px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 12px;
+    cursor: pointer;
+}
+
+#logo_tukuma {
+    position: absolute;
+    opacity: 0;
+    width: 55px;
+    height: 55px;
+    transition: opacity 0.2s ease-in-out;
+}
+
+#logos:hover #logo_tukuma {
+    opacity: 1;
+}
+
+#logos:hover #logo {
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0;
 }
 
 #title_logo {
@@ -107,7 +135,6 @@ header {
 }
 
 #center_all {
-
     display: flex;
     align-items: center;
     height: 80vh;
@@ -159,12 +186,6 @@ header {
     margin-left: 16px;
 }
 
-button {
-    display: block;
-    border: 0;
-    background: none;
-}
-
 #forget_password {
     font-family: 'Rubik';
     font-style: normal;
@@ -173,7 +194,11 @@ button {
     color: #939393;
 }
 
-#sign_in  {
+#forget_password:hover {
+    color: #000000;
+}
+
+#sign_in {
     background-color: #0E4936;
     color: white;
     width: 251px;
@@ -185,6 +210,23 @@ button {
     font-size: 17px;
     font-style: normal;
     margin-top: 29px;
+    transition: 0.2s;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sign_in:hover {
+    background-color: #EB5E28;
+}
+
+a {
+    width: fit-content;
+    display: block;
+    text-decoration: none;
 }
 
 #sign_up {
@@ -196,6 +238,11 @@ button {
     margin-left: auto;
     margin-right: auto;
     margin-top: 7px;
+    transition: 0.2s;
+}
+
+#sign_up:hover {
+    color: #EB5E28;
 }
 
 #trees {
@@ -227,4 +274,13 @@ button {
         display: inline;
         width: 100%;
     }
+
+    .center_info {
+        width: 370px;
+    }
+
+    #sign_in {
+        width: 100%;
+    }
+
 }
