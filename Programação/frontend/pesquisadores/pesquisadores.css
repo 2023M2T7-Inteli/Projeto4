@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+nav{
+    height: 60px;
+}
+
+nav ul li {
+  
+    display: inline-block;
+    margin-right: 80px;
+    margin-left: 30px;
+    margin-top: 18px;
+  }
+header {
+    height: 50px;
+}
+
+.imgfundo{
+    background-image: url(images/bg_faixa.jpg);
+    height: 80px; 
+}
+
+
+container {
+    display: grid;
+    margin-top:60px;
+    margin-left: 30px;
+    margin-right: 30px;
+    grid-template-columns: 1fr 1fr; /* Define três colunas com largura igual */
+    grid-template-rows: 40vh 40vh; /* Define duas linhas com alturas específicas */
+    grid-gap: 30px; /* Define o espaçamento entre as células da grid */
+    grid-template-areas:
+    "a b"
+    "a c";
+  }
+
+.navlateral ul li{
+  margin-top:100px;
+}
+
+h2{
+  width: 100vh ;
+  height: 100px;
+  position: absolute;
+  top: 130px;
+  left: 40vh;
+}
+.item {
+    background-color: #fff;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+
+.item:nth-child(1) {
+    grid-area: a;
+  }
+  
+.item2 {
+    grid-area: b;
+  }
+  
+.item3 {
+    grid-area: c;
+  }
+.background{
+    height: 10vh;
+}
+.menulateral{
+    background-color: #0e4936;
+    height: 100vh;
+    width: 110px;
+}
+body{
+  background-color: #edffec;
+}
