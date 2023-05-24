@@ -4,6 +4,7 @@
 * {
     padding: 0;
     margin: 0;
+    border: 2px solid red;
 } 
 
 
@@ -125,10 +126,9 @@ color: #FFFFFF;
     top: 75%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-background: #000000;
-border-radius: 6px;
-z-index: -1;
+    background: #000000;
+    border-radius: 6px;
+    z-index: -1;
 }
 
 #title2_btn {

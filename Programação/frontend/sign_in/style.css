@@ -1,7 +1,8 @@
+/* Imports the fonts used on the page */
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap');
 
-
+/* Defines new settings for page inputs */
 input { 
     outline: 0;
     border: 0;
@@ -9,19 +10,23 @@ input {
     width: 100%;
 }
 
+/* Defines the height of the first input */
 #input1 {
     margin-top: 1.5px;
 }
 
+/* Defines the height of the second input */
 #input2 {
     margin-top: 4px;
 }
 
+/* Defines the location of the field */
 #forget_password {
     margin-left: auto;
     margin-right: 1px;
 }
 
+/* Defines the appearance of input instructions */
 input::placeholder {
     font-family: 'Rubik';
     font-size: 13px;
@@ -30,6 +35,7 @@ input::placeholder {
     color: #939393;
 }
 
+/* Defines the appearance of the header */
 header {
     background-color: black;
     width: 100%;
@@ -40,6 +46,7 @@ header {
     display: flex;
 }
 
+/* Defines the position of the menu */
 #menu {
     position: absolute;
     width: 22px;
@@ -48,6 +55,7 @@ header {
     cursor: pointer;
 }
 
+/* Defines the position of the home */
 #home_a {
     position: absolute;
     width: 25px;
@@ -55,12 +63,14 @@ header {
     right: 16px;
 }
 
+/* Defines the size of the icon menu */
 #home {
     width: 25px;
     height: 25px;
     cursor: pointer;
 }
 
+/* Defines the position and the style of the name "Protocom"*/
 #title_header {
     color: white;
     position: absolute;
@@ -74,17 +84,20 @@ header {
     line-height: 25px;
 }
 
-#waves {
+/* Defines the position of the waves image */
+#waves { 
     width: 100%;
     height: 70px;
 }
 
+/* Defines the size of the logo */
 #logo {
     position: absolute;
     width: 55px;
     height: 55px;
 }
 
+/* Defines the size and position of the set of logos */
 #logos {
     position: relative;
     width: 55px;
@@ -95,6 +108,7 @@ header {
     cursor: pointer;
 }
 
+/* Defines the size of the logo Tukumã */
 #logo_tukuma {
     position: absolute;
     opacity: 0;
@@ -103,15 +117,18 @@ header {
     transition: opacity 0.2s ease-in-out;
 }
 
+/* Allows the transition of logo colors */
 #logos:hover #logo_tukuma {
     opacity: 1;
 }
 
+/* Allows the transition of logo colors */
 #logos:hover #logo {
     transition: opacity 0.2s ease-in-out;
     opacity: 0;
 }
 
+/* Defines the position and the style of the name "Entrar"*/
 #title_logo {
     width: 122px;
     font-family: 'Righteous';
@@ -124,35 +141,31 @@ header {
     margin-bottom: 30px;
 }
 
+/* Centralize login information */
 .center_info {
     position: absolute;
     left: 50%;
     transform: translate(-50%);
 }
 
+/* Centers all information below the header */
 #center_all {
     display: flex;
     align-items: center;
     height: 80vh;
 }
 
+/* Centralize email input */
 .center_email {
     display: flex;
 }
 
+/* Centralize password input */
 .center_password {
     display: flex;
 }
 
-#options {
-    position: absolute;
-    width: 100%;
-    height: 32%;
-    bottom: 0px;
-    background: #0E4936;
-    border-radius: 25px 25px 0px 0px;
-}
-
+/* Defines the position and the style of the name "Email"*/
 #email {
     width: 33px;
     font-family: 'Rubik';
@@ -164,6 +177,7 @@ header {
     margin-bottom: 10px;;
 }
 
+/* Defines the position and the style of the name "Password" */
 #password {
     margin-bottom: 12.5px;
     margin-left: 10px;
@@ -175,6 +189,7 @@ header {
     color: #000000;
 }
 
+/* Defines the position and size of the email and password icons */
 #email_icon, #password_icon {
     width: 17px;
     height: 17px;
@@ -182,6 +197,7 @@ header {
     margin-left: 16px;
 }
 
+/* Defines the position and the style of the name "Esqueci a senha" */
 #forget_password {
     font-family: 'Rubik';
     font-style: normal;
@@ -190,10 +206,12 @@ header {
     color: #939393;
 }
 
+/* Sets the highlight color when hovering over the "Esqueci a senha" field */
 #forget_password:hover {
     color: #000000;
 }
 
+/* Defines the size, appereance and position of the button "Entrar" */
 #sign_in {
     background-color: #0E4936;
     color: white;
@@ -215,16 +233,19 @@ header {
     align-items: center;
 }
 
+/* Sets the highlight color when hovering over the "Entrar" button */
 #sign_in:hover {
     background-color: #EB5E28;
 }
 
+/* Delete the anchor's default appearance */
 a {
     width: fit-content;
     display: block;
     text-decoration: none;
 }
 
+/* Defines the size, appereance and position of the button "Cadastrar" */
 #sign_up {
     font-family: 'Rubik';
     font-style: normal;
@@ -237,30 +258,36 @@ a {
     transition: 0.2s;
 }
 
+/* Sets the highlight color when hovering over the "Cadastrar" button */
 #sign_up:hover {
     color: #EB5E28;
 }
 
+/* Make the image invisible */
 #trees {
     display: none;
 }
 
+/* Defines the position and the style of the lines */
 .line {
     width: 100%;
     height: 1px;
     background-color: #939393;
 }
 
+/* Defines the size of the line1 */
 #line1 {
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
+/* Defines the size of the line2 */
 #line2 {
     margin-top: 12.5px;
     margin-bottom: 17px;
 }
 
+/*Allows the page to be responsive */
 @media (min-width: 700px) {
     #waves {
         display: none;
