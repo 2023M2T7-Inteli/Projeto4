@@ -10,6 +10,7 @@ nav{
 }
 
 nav ul li {
+  
     display: inline-block;
     margin-right: 80px;
     margin-left: 30px;
@@ -27,19 +28,30 @@ header {
 
 container {
     display: grid;
-    margin-top:50px;
+    margin-top:60px;
     margin-left: 30px;
     margin-right: 30px;
     grid-template-columns: 1fr 1fr; /* Define três colunas com largura igual */
-    grid-template-rows: 225px 225px; /* Define duas linhas com alturas específicas */
+    grid-template-rows: 40vh 40vh; /* Define duas linhas com alturas específicas */
     grid-gap: 30px; /* Define o espaçamento entre as células da grid */
     grid-template-areas:
     "a b"
     "a c";
   }
 
+.navlateral ul li{
+  margin-top:100px;
+}
+
+h2{
+  width: 100vh ;
+  height: 100px;
+  position: absolute;
+  top: 130px;
+  left: 40vh;
+}
 .item {
-    background-color: #ccc;
+    background-color: #fff;
     overflow: hidden;
     border-radius: 10px;
   }
@@ -59,7 +71,10 @@ container {
     height: 10vh;
 }
 .menulateral{
-    background-color: black;
+    background-color: #0e4936;
     height: 100vh;
     width: 110px;
+}
+body{
+  background-color: #edffec;
 }
