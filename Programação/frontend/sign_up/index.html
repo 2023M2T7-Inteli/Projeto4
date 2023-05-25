@@ -7,6 +7,8 @@
     <title>Cadastrar</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="javascript.js"></script>
 </head>
 <body>
     <header>
@@ -27,7 +29,7 @@
                         <label for="option1">Agricultor</label>
                     </div>
                     <div id="option2_div">
-                        <input type="radio" name="option" id="option2">
+                        <input type="radio" name="option" id="option2"> 
                         <label for="option2">Pesquisador</label>
                     </div>
                 </div>
@@ -50,17 +52,17 @@
                     <input type="password" id="input2" type="text" placeholder="Digite sua senha">
                 </div>
                 <div id="line4" class="line"></div>
-                <h2 id="plantation">Tipo de plantação</h2>
-                <div class="center_plantation">
+                <h2 id="plantation" class="option1">Tipo de plantação</h2>
+                <div id="center_plantation_id" class="center_plantation option1">
                     <img id="plant_icon" src="images/plant.png" alt="Icone de plantacao">
                     <input id="input1" type="text" placeholder="Informe a sua lavoura">
                 </div>
-                <div id="line5" class="line"></div>
+                <div id="line5" class="line option1"></div>
                 <a id="sign_in" href="../MainFarmer/Agricultor.html">Registrar</a>
                 <a id="sign_up" href="../sign_in/index.html">Já tem uma conta? Entre aqui.</a>
-                <script src="script.js"></script>
             </div>
         </div>
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

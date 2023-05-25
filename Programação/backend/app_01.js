@@ -12,6 +12,10 @@ const app = express();
 /* Colocar toda a parte estática no frontend */
 app.use(express.static("../frontend/"));
 
+app.get('/sign_up', (req, res) => {
+  res.render('../frontend/sign_up');
+});
+
 /* Definição dos endpoints */
 /******** CRUD ************/
 app.use(express.json());
