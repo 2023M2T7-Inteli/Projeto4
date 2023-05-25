@@ -25,7 +25,26 @@
     </header>
     <container>
         <div class = "item">  
-            <h2>Criar novo protocolo</h2>
+            <div class = novoproto>
+                <h2>Criar novo protocolo</h2>
+                <form>
+                    <br><br><br>
+                    <label for="texto">Nome:</label>
+                    <input type="text" id="texto" name="texto">
+                    <br><br><br>
+                    <label for="texto">Descrição:</label>
+                    <input type="text" id="texto" name="texto">
+                    <br><br><br>
+                    <label for="texto">Data:</label>
+                    <input type="text" id="texto" name="texto">
+                    <label for="texto">Horário:</label>
+                    <input type="text" id="texto" name="texto">
+                    <br><br><br>
+                </form>
+                <h2>Categorias</h2>
+                <br><br><br>
+                <div class="perguntasinseridas">Adicionar +</div>
+            </div>
             <div class ="menulateral">  
                 <nav class = "navlateral">
                     <ul>
@@ -37,10 +56,40 @@
                     </ul>
                 </nav>
             </div>
-
         </div>
-        <div class = "item">item2</div>
-        <div class = "item">item3</div>
+        <div class = "item">
+            <div class="predef">
+                <h2>Predefinições
+                    <button type="button">Protocolos</button>
+                    <button type="button">Destinatários</button>
+                    <button type="button">Histórico</button>
+                </h2>
+                <br><br><br>
+                <label for="texto">Procurar:</label>
+                <input type="text" id="texto" name="texto">
+                <br><br><br>
+                nenhum protocolo predefinido
+            </div>
+        </div>
+        <div class = "item">
+            <div class = "destino">
+                <h2>
+                    Destinatários     
+                    <button type="button">Salvar</button>
+                </h2>
+                <br><br><br>
+                <label for="texto">Procurar:</label>
+                <input type="text" id="texto" name="texto">             
+                <select>
+                    <option value="opcao1">Opção 1</option>
+                    <option value="opcao2">Opção 2</option>
+                    <option value="opcao3">Opção 3</option>
+                </select>
+                <br><br><br>
+                Nenhum destinatário selecionado
+                
+            </div>          
+        </div>
     </container>
 </body>
 
