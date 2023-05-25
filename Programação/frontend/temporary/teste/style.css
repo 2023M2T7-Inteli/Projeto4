@@ -1,0 +1,149 @@
+/* Imports the fonts used on the page */
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+/* Delete the margin and the padding */
+* {
+    padding: 0;
+    margin: 0;
+} 
+
+header {
+    background-color: black;
+    width: 100%;
+    height: 49px;
+    left: 0px;
+    top: 0px;
+    align-items: center;
+    display: flex;
+}
+
+/* Defines the position of the menu */
+#menu {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 16px;
+    cursor: pointer;
+}
+
+/* Defines the position of the home */
+#home_a {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: 16px;
+}
+
+/* Defines the size of the bell */
+#bell {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+/* Defines the appereance, size and position of "Protocom" */
+#title_header {
+    color: white;
+    position: absolute;
+    width: 92px;
+    height: 26px;
+    left: 57px;
+    font-family: 'Righteous';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+}
+
+#center {
+    height: calc(100vh - 49px);
+}
+
+/* Defines the appereance, size and position of the title */
+#title {
+    font-family: 'Righteous';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 37px;
+    
+    color: #000000;
+}
+
+/* Defines the appereance, size and position of the subtitle */
+#subtitle {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    width: fit-content;
+    color: #000000;
+}
+
+/* Defines the appereance, size and position of the button 1 */
+#btn_1 {
+    width: 317px;
+    height: 136px;
+    background: #000000;
+    border-radius: 6px;
+    z-index: -1;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#title1_btn {
+    font-family: 'Righteous';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 31px;
+    color: white;
+}
+
+#text1_btn {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #FFFFFF;
+}
+
+#center_all {
+    position: absolute;
+    width: fit-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Defines the appereance, size and position of the button 2 */
+#btn_2 {
+    width: 317px;
+    height: 136px;
+    background: #000000;
+    border-radius: 6px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#title2_btn {
+    font-family: 'Righteous';
+    font-style: normal;
+    font-size: 25px;
+    line-height: 31px;
+    color: #FFFFFF;
+}
+
+#text2_btn {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+}

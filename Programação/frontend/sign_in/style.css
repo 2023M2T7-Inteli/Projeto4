@@ -92,7 +92,7 @@ header {
 /* Defines the position of the waves image */
 #waves { 
     width: 100%;
-    height: 70px;
+    height: 195px;
 }
 
 /* Defines the size of the logo */
@@ -157,7 +157,7 @@ header {
 #center_all {
     display: flex;
     align-items: center;
-    height: 79vh;
+    height: calc(100vh - 195px - 80px);
 }
 
 /* Centralize email input */
@@ -305,6 +305,10 @@ a {
 
     .center_info {
         width: 370px;
+    }
+
+    #center_all {
+        height: 79vh;
     }
 
     #sign_in {
