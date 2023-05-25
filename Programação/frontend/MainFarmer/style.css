@@ -16,7 +16,6 @@ header {
     top: 0px;
     align-items: center;
     display: flex;
-    padding-top: 10px;
 }
 
 /* Defines the position of the menu */
@@ -57,15 +56,12 @@ header {
     line-height: 25px;
 }
 
+#center {
+    height: calc(100vh - 49px);
+}
+
 /* Defines the appereance, size and position of the title */
 #title {
-    position: absolute;
-    width: 305px;
-    height: 31px;
-    left: 50%;
-    top: 20%;
-    transform: translate(-50%, -50%);
-    
     font-family: 'Righteous';
     font-style: normal;
     font-weight: 400;
@@ -77,34 +73,36 @@ header {
 
 /* Defines the appereance, size and position of the subtitle */
 #subtitle {
-    position: absolute;
-    width: 261px;
-    height: 20px;
-    left: 48.5%;
-    top: 35%;
-    transform: translate(-50%, -50%);
-
     font-family: 'Rubik';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
-
+    width: fit-content;
     color: #000000;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+}
+
+#divbtn1 {
+    width: 317px;
+    height: 136px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 15px;
 }
 
 /* Defines the appereance, size and position of the button 1 */
 #btn_1 {
-    position: absolute;
     width: 317px;
     height: 136px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
     background: #000000;
     border-radius: 6px;
     z-index: -1;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #title1_btn {
@@ -119,24 +117,30 @@ header {
 #text1_btn {
     font-family: 'Rubik';
     font-style: normal;
-    font-weight: 400;
     font-size: 16px;
     line-height: 19px;
 
     color: #FFFFFF;
 }
 
-/* Defines the appereance, size and position of the button 2 */
-#btn_2 {
+#center_all {
     position: absolute;
-    width: 317px;
-    height: 136px;
-    top: 75%;
+    width: fit-content;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+/* Defines the appereance, size and position of the button 2 */
+#btn_2 {
+    width: 317px;
+    height: 136px;
     background: #000000;
     border-radius: 6px;
-    z-index: -1;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 #title2_btn {
@@ -145,13 +149,12 @@ header {
     font-weight: 400;
     font-size: 25px;
     line-height: 31px;
-    color: #FFFFFF;
+    color: white;
 }
 
 #text2_btn {
     font-family: 'Rubik';
     font-style: normal;
-    font-weight: 400;
     font-size: 16px;
     line-height: 19px;
     color: #FFFFFF;
