@@ -36,13 +36,14 @@ header {
     right: 16px;
 }
 
-
+/* Defines the size of the bell */
 #bell {
     width: 25px;
     height: 25px;
     cursor: pointer;
 }
 
+/* Defines the appereance, size and position of "Protocom" */
 #title_header {
     color: white;
     position: absolute;
@@ -56,6 +57,7 @@ header {
     line-height: 25px;
 }
 
+/* Defines the appereance, size and position of the title */
 #title {
     position: absolute;
     width: 305px;
@@ -73,6 +75,7 @@ header {
     color: #000000;
 }
 
+/* Defines the appereance, size and position of the subtitle */
 #subtitle {
     position: absolute;
     width: 261px;
@@ -90,6 +93,7 @@ header {
     color: #000000;
 }
 
+/* Defines the appereance, size and position of the button 1 */
 #btn_1 {
     position: absolute;
     width: 317px;
@@ -122,6 +126,7 @@ header {
     color: #FFFFFF;
 }
 
+/* Defines the appereance, size and position of the button 2 */
 #btn_2 {
     position: absolute;
     width: 317px;
