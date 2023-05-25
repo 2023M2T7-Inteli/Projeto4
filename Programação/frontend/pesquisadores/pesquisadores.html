@@ -9,24 +9,29 @@
 </head>
 
 <body>
+    <!--Cabeçario da página com os botões de navegação da plataforma-->
     <header>
+        <!--interface de navegação para redirecionar a página-->
         <nav>
             <ul>
-                <li><a href="#">Protocom</a></li>
+                <li><a href="#"><img src="images/Protocom.jpg" alt="Protocom"></a></li>
                 <li><a href="#">Criar Protocolo</a></li>
                 <li><a href="#">Relatórios</a></li>
                 <li><a href="#">Histórico</a></li>
                 <li><a href="#">Usuários</a></li>
                 <li><a href="#">Perfil</a></li>
-                <li><a href="#">Notificações</a></li>
+                <li><a href="#"><img class="notificacao" src="images/notifications.png" alt="notificacao"></a></li>
             </ul>
         </nav>
         <div class="imgfundo"></div>
     </header>
+    <!--container dividido em 3 com a estrutura geral da página-->
     <container>
+        <!--primeira divisão que representa a interface de criação do protocolo-->
         <div class = "item">  
-            <div class = novoproto>
+            <div class = criarproto>
                 <h2>Criar novo protocolo</h2>
+                <!--campos para preenchimento de texto pelo usuário com o nome, a descrição, a data e o horario do protocolo-->
                 <form>
                     <br><br><br>
                     <label for="texto">Nome:</label>
@@ -45,6 +50,8 @@
                 <br><br><br>
                 <div class="perguntasinseridas">Adicionar +</div>
             </div>
+            <!--barra de navegação lateral com botões que modificam a tela de criação de protolocolos,
+            possibilitando criação de perguntas, deletar, salvar, enviar e um botão adicional de ajuda-->
             <div class ="menulateral">  
                 <nav class = "navlateral">
                     <ul>
@@ -57,6 +64,7 @@
                 </nav>
             </div>
         </div>
+        <!--segunda divisão com a interface de potocolos e destinatários salvos previamente, também possui um histórico de envios-->
         <div class = "item">
             <div class="predef">
                 <h2>Predefinições
@@ -71,6 +79,8 @@
                 nenhum protocolo predefinido
             </div>
         </div>
+        <!--terceira divisão que representa a interface de seleção de destinatários, 
+        aonde o usuário seleciona os agricultores para os quais o protocolo será enviado-->
         <div class = "item">
             <div class = "destino">
                 <h2>
@@ -79,7 +89,8 @@
                 </h2>
                 <br><br><br>
                 <label for="texto">Procurar:</label>
-                <input type="text" id="texto" name="texto">             
+                <input type="text" id="texto" name="texto">  
+                <!--criação de uma caixa de opções que serve como filtro para a seleção dos destinatários-->           
                 <select>
                     <option value="opcao1">Opção 1</option>
                     <option value="opcao2">Opção 2</option>
@@ -87,7 +98,26 @@
                 </select>
                 <br><br><br>
                 Nenhum destinatário selecionado
-                
+                <!--criação de checkboxes para a seleção dos destinatários-->
+                <form>
+                    <fieldset>
+                        <legend>Caixa de seleção</legend>
+                        <label>
+                            <input type="checkbox" name="opcao1" value="Opção 1">
+                            Opção 1
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="opcao2" value="Opção 2">
+                            Opção 2
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="opcao3" value="Opção 3">
+                            Opção 3
+                        </label>
+                    </fieldset>
+                </form>
             </div>          
         </div>
     </container>
