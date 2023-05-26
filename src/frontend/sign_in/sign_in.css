@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap');
 
+/* Set margins and paddings to 0px on all elements */
 * {
     padding: 0;
     margin: 0;

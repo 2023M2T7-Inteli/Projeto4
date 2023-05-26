@@ -2,12 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
-/* Delete the margin and the padding */
+/* Set margins and paddings to 0px on all elements */
 * {
     padding: 0;
     margin: 0;
 } 
 
+/* Defines the appearance of the header */
 header {
     background-color: black;
     width: 100%;
@@ -56,6 +57,7 @@ header {
     line-height: 25px;
 }
 
+/* Set a size for the div, which fits the rest of the screen */
 #center {
     height: calc(100vh - 49px);
 }
@@ -85,6 +87,7 @@ header {
 
 }
 
+/* Defines a position for the div that encompasses all the elements that make up a button */ */
 #divbtn1 {
     width: 317px;
     height: 136px;
@@ -105,6 +108,8 @@ header {
     margin-right: auto;
 }
 
+
+/* Defines the appereance of the first button's title */
 #title1_btn {
     font-family: 'Righteous';
     font-style: normal;
@@ -114,6 +119,7 @@ header {
     color: white;
 }
 
+/* Defines the appereance of the first button's text */
 #text1_btn {
     font-family: 'Rubik';
     font-style: normal;
@@ -123,6 +129,7 @@ header {
     color: #FFFFFF;
 }
 
+/* Centers all the elements within this div */
 #center_all {
     position: absolute;
     width: fit-content;
@@ -143,6 +150,7 @@ header {
 
 }
 
+/* Defines the appereance of the second button's title */
 #title2_btn {
     font-family: 'Righteous';
     font-style: normal;
@@ -152,6 +160,7 @@ header {
     color: white;
 }
 
+/* Defines the appereance of the second button's text */
 #text2_btn {
     font-family: 'Rubik';
     font-style: normal;
