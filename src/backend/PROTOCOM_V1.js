@@ -16,12 +16,30 @@ app.use(express.static("../frontend/"));
 /******** CRUD ************/
 app.use(express.json());
 
+// Insere um registro na tabela USUARIO (é o C do CRUD - Create)
+app.post('/insereUsuario', urlencodedParser, (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    const { Telefone, Email, Senha, Categoria } = req.body;
+    sql = "INSERT INTO USUARIO (Telefone, Email, Senha, Categoria) VALUES (?, ?, ?, ?)";
+    console.log(sql);
+    db.run(sql, [Telefone, Email, Senha, Categoria], err => {
+        if (err) {
+            throw err;
+        }
+    });
+    res.write('<p>USUARIO INSERIDO COM SUCESSO!</p><a href="/">VOLTAR</a>');
+    db.close(); // Fecha o banco
+    res.end();
+});
+
 // Retorna todos registros da tabela USUARIO (é o R do CRUD - Read)
  app.get('/usuarios', (req, res) => {
  	res.statusCode = 200;
  	res.setHeader('Access-Control-Allow-Origin', '*');
  	var db = new sqlite3.Database(DBPATH); // Abre o banco
- 	var sql = 'SELECT * FROM USUARIO ORDER BY Telefone COLLATE NOCASE';
+ 	var sql = 'SELECT * FROM USUARIO';
  		db.all(sql, [],  (err, rows ) => {
  			if (err) {
  				throw err;
@@ -31,71 +49,75 @@ app.use(express.json());
  		db.close(); // Fecha o banco
  });
 
-// Insere um registro na tabela USUARIO (é o C do CRUD - Create)
-app.post('/insereUsuario', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	sql = "INSERT INTO USUARIO (Telefone, Email, Senha, Categoria) VALUES ('" + req.body.Telefone + "', '" + req.body.Email + "', '" + req.body.Senha + "', '" + req.body.Categoria + "')";
-	console.log(sql);
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}	
-	});
-	res.write('<p>USUARIO INSERIDO COM SUCESSO!</p><a href="/">VOLTAR</a>');
-	db.close(); // Fecha o banco
-	res.end();
-});
-
 // Monta o formulário para o update da tabela USUARIO (é o U do CRUD - Update)
 app.get('/atualizaUsuario', (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	sql = "SELECT * FROM USUARIO WHERE Id_Usuario="+ req.query.Id_usuario;
-	console.log(sql);
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.all(sql, [],  (err, rows ) => {
-		if (err) {
-			throw err;
-		}
-		res.json(rows);
-	});
-	db.close(); // Fecha o banco
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const idUsuario = req.query.Id_usuario;
+    sql = "SELECT * FROM USUARIO WHERE Id_Usuario = ?";
+    console.log(sql);
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    db.all(sql, [idUsuario],  (err, rows ) => {
+        if (err) {
+            throw err;
+        }
+        res.json(rows);
+    });
+    db.close(); // Fecha o banco
 });
 
 // Atualiza um registro da tabela USUARIO (é o U do CRUD - Update)
 app.post('/atualizaUsuario', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	sql = "UPDATE USUARIO SET Telefone='" + req.body.Telefone + "', Email= '" + req.body.Email + "' , Senha='" + req.body.Senha + "' , Categoria='" + req.body.Categoria + "' WHERE Id_Usuario= " + req.body.Id_Usuario;
-	console.log(sql);
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}
-		res.end();
-	});
-	res.write('<p>USUARIO ATUALIZADO COM SUCESSO!</p><a href="/">VOLTAR</a>');
-	db.close(); // Fecha o banco
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const { Telefone, Email, Senha, Categoria, Id_Usuario } = req.body;
+    sql = "UPDATE USUARIO SET Telefone = ?, Email = ?, Senha = ?, Categoria = ? WHERE Id_Usuario = ?";
+    console.log(sql);
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    db.run(sql, [Telefone, Email, Senha, Categoria, Id_Usuario],  err => {
+        if (err) {
+            throw err;
+        }
+        res.end();
+    });
+    res.write('<p>USUARIO ATUALIZADO COM SUCESSO!</p><a href="/">VOLTAR</a>');
+    db.close(); // Fecha o banco
 });
 
 // Exclui um registro da tabela USUARIO (é o D do CRUD - Delete)
-app.get('/removeUsuario', urlencodedParser, (req, res) => {
+app.post('/removeUsuario', urlencodedParser, (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const { Id_Usuario } = req.body;
+    sql = "DELETE FROM USUARIO WHERE Id_Usuario = ?";
+    console.log(sql);
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    db.run(sql, [Id_Usuario],  err => {
+        if (err) {
+            throw err;
+        }
+        res.write('<p>USUARIO REMOVIDO COM SUCESSO!</p><a href="/">VOLTAR</a>');
+        res.end();
+    });
+    db.close(); // Fecha o banco
+});
+
+// Insere uma pergunta na tabela PERGUNTA (é o C do CRUD - Create)
+app.post('/inserePergunta', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	sql = "DELETE FROM USUARIO WHERE Id_Usuario=" + req.body.Id_Usuario;
-	console.log(sql);
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [],  err => {
+	const { Pergunta } = req.body;
+	sql = "INSERT INTO PERGUNTA (Pergunta) VALUES (?)";
+	console.log(sql);
+	db.run(sql, [Pergunta],  err => {
 		if (err) {
 		    throw err;
-		}
-		res.write('<p>USUARIO REMOVIDO COM SUCESSO!</p><a href="/">VOLTAR</a>');
-		res.end();
+		}	
 	});
+	res.write('<p>PERGUNTA INSERIDA COM SUCESSO!</p><a href="/">VOLTAR</a>');
 	db.close(); // Fecha o banco
+	res.end();
 });
 
 // Retorna todos os registros da tabela PERGUNTA (é o R do CRUD - Reading)
@@ -113,35 +135,15 @@ app.get('/perguntas', (req, res) => {
 		db.close(); // Fecha o banco
 });
 
-// Insere uma pergunta na tabela PERGUNTA (é o C do CRUD - Create)
-app.post('/inserePergunta', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	sql = "INSERT INTO PERGUNTA (Pergunta) VALUES ('" + req.body.Pergunta + "')";
-	console.log(sql);
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}	
-	});
-	res.write('<p>PERGUNTA INSERIDO COM SUCESSO!</p><a href="/">VOLTAR</a>');
-	db.close(); // Fecha o banco
-	res.end();
-});
-
-app.listen(port, hostname, () => {
-  console.log(`Servidor rodando em http://${hostname}:${port}/`);
-});
-
 // Monta o formulário para o update da tabela PERGUNTA (é o U do CRUD - Update)
 app.get('/atualizaPergunta', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	sql = "SELECT * FROM PERGUNTA WHERE Id_Pergunta="+ req.query.Id_Pergunta;
+	const idPergunta = req.query.Id_Pergunta;
+	sql = "SELECT * FROM PERGUNTA WHERE Id_Pergunta= ?";
 	console.log(sql);
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.all(sql, [],  (err, rows ) => {
+	db.all(sql, [idPergunta],  (err, rows ) => {
 		if (err) {
 			throw err;
 		}
@@ -152,29 +154,31 @@ app.get('/atualizaPergunta', (req, res) => {
 
 // Atualiza um registro da tabela PERGUNTA (é o U do CRUD - Update)
 app.post('/atualizaPergunta', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	sql = "UPDATE PERGUNTA SET Pergunta='" + req.body.Pergunta + "' WHERE Id_Pergunta= " + req.body.Id_Pergunta;
-	console.log(sql);
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}
-		res.end();
-	});
-	res.write('<p>PERGUNTA ATUALIZADO COM SUCESSO!</p><a href="/">VOLTAR</a>');
-	db.close(); // Fecha o banco
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*'); 
+    const { Pergunta, Id_Pergunta } = req.body;
+    sql = "UPDATE PERGUNTA SET Pergunta = ? WHERE Id_Pergunta = ?";
+    console.log(sql);
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    db.run(sql, [Pergunta, Id_Pergunta], err => {
+        if (err) {
+            throw err;
+        }
+        res.end();
+    });
+    res.write('<p>PERGUNTA ATUALIZADA COM SUCESSO!</p><a href="/">VOLTAR</a>');
+    db.close(); // Fecha o banco
 });
 
 // Exclui um registro da tabela PERGUNTA (é o D do CRUD - Delete)
-app.get('/removePergunta', urlencodedParser, (req, res) => {
+app.post('/removePergunta', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	sql = "DELETE FROM PERGUNTA WHERE Id_Pergunta=" + req.body.Id_Pergunta;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	const { Id_Pergunta } = req.body; 
+	sql = "DELETE FROM PERGUNTA WHERE Id_Pergunta= ?";
 	console.log(sql);
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [],  err => {
+	db.run(sql, [Id_Pergunta],  err => {
 		if (err) {
 		    throw err;
 		}
@@ -189,9 +193,10 @@ app.post('/insereAtividadeDoProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	sql = "INSERT INTO PROTOCOLO (Atividade) VALUES ('" + req.body.Atividade + "')";
+	const { Atividade } = req.body;
+	sql = "INSERT INTO PROTOCOLO (Atividade) VALUES (?)";
 	console.log(sql);
-	db.run(sql, [],  err => {
+	db.run(sql, [Atividade],  err => {
 		if (err) {
 		    throw err;
 		}	
@@ -206,7 +211,7 @@ app.get('/protocolo', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	var sql = 'SELECT * FROM PROTOCOLO ORDER BY Atividade COLLATE NOCASE';
+	var sql = 'SELECT * FROM PROTOCOLO';
 		db.all(sql, [],  (err, rows ) => {
 			if (err) {
 				throw err;
@@ -220,10 +225,11 @@ app.get('/protocolo', (req, res) => {
 app.get('/atualizaProtocolo', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	sql = "SELECT * FROM PROTOCOLO WHERE Id_Protocolo="+ req.query.Id_Protocolo;
+	const idProtocolo = req.query.Id_Protocolo;
+	sql = "SELECT * FROM PROTOCOLO WHERE Id_Protocolo= ?";
 	console.log(sql);
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.all(sql, [],  (err, rows ) => {
+	db.all(sql, [idProtocolo],  (err, rows ) => {
 		if (err) {
 			throw err;
 		}
@@ -236,27 +242,29 @@ app.get('/atualizaProtocolo', (req, res) => {
 app.post('/atualizaProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	sql = "UPDATE PROTOCOLO SET Atividade='" + req.body.Atividade + "' WHERE Id_Protocolo= " + req.body.Id_Protocolo;
+	const { Atividade, Id_Protocolo } = req.body;
+	sql = "UPDATE PROTOCOLO SET Atividade = ? WHERE Id_Protocolo = ?";
 	console.log(sql);
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [],  err => {
+	db.run(sql, [Atividade, Id_Protocolo],  err => {
 		if (err) {
 		    throw err;
 		}
 		res.end();
 	});
-	res.write('<p>PROTOCOLO ATUALIZADO COM SUCESSO!</p><a href="/">VOLTAR</a>');
+	res.write('<p>ATIVIDADE DO PROTOCOLO ATUALIZADA COM SUCESSO!</p><a href="/">VOLTAR</a>');
 	db.close(); // Fecha o banco
 });
 
 // Exclui um registro da tabela PROTOCOLO (é o D do CRUD - Delete)
-app.get('/removeProtocolo', urlencodedParser, (req, res) => {
+app.post('/removeProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	sql = "DELETE FROM PROTOCOLO WHERE Id_Protocolo=" + req.body.Id_Protocolo;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	const { Id_Protocolo } = req.body; 
+	sql = "DELETE FROM PROTOCOLO WHERE Id_Protocolo= ?";
 	console.log(sql);
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [],  err => {
+	db.run(sql, [Id_Protocolo],  err => {
 		if (err) {
 		    throw err;
 		}
@@ -266,14 +274,15 @@ app.get('/removeProtocolo', urlencodedParser, (req, res) => {
 	db.close(); // Fecha o banco
 });
 
-// Insere a atividade do protocolo na tabela PROTOCOLO (é o C do CRUD - Create)
+// Insere uma resposta na tabela RESPOSTA (é o C do CRUD - Create)
 app.post('/insereResposta', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); 
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	const { Resposta, Id_Pergunta_FK} = req.body; 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	sql = "INSERT INTO RESPOSTA (Resposta, Id_Pergunta_FK) VALUES ('" + req.body.Resposta + "', '" + req.body.Id_Pergunta_FK + "')";
+	sql = "INSERT INTO RESPOSTA (Resposta, Id_Pergunta_FK) VALUES (?, ?)";
 	console.log(sql);
-	db.run(sql, [],  err => {
+	db.run(sql, [Resposta, Id_Pergunta_FK],  err => {
 		if (err) {
 		    throw err;
 		}	
@@ -281,21 +290,6 @@ app.post('/insereResposta', urlencodedParser, (req, res) => {
 	res.write('<p>RESPOSTA INSERIDA COM SUCESSO!</p><a href="/">VOLTAR</a>');
 	db.close(); // Fecha o banco
 	res.end();
-});
-
-// Join entre as tabelas Pergunta & Resposta
-app.get('/JOIN_Pergunta_Resposta', (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	var sql = 'SELECT Pergunta.Pergunta, Resposta.Resposta FROM Pergunta INNER JOIN Resposta ON Pergunta.Id_Pergunta = Resposta.Id_Pergunta_FK';
-		db.all(sql, [],  (err, rows ) => {
-			if (err) {
-				throw err;
-			}
-			res.json(rows);
-		});
-		db.close(); // Fecha o banco
 });
 
 // Retorna todos registros da tabela RESPOSTA (é o R do CRUD - Read)
@@ -312,3 +306,75 @@ app.get('/respostas', (req, res) => {
 		});
 		db.close(); // Fecha o banco
 });
+
+// Monta o formulário para o update da tabela RESPOSTA (é o U do CRUD - Update)
+app.get('/atualizaRespostas', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); 
+	const idResposta = req.query.Id_Resposta;
+	sql = "SELECT * FROM RESPOSTA WHERE Id_Resposta= ?";
+	console.log(sql);
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	db.all(sql, [idResposta],  (err, rows ) => {
+		if (err) {
+			throw err;
+		}
+		res.json(rows);
+	});
+	db.close(); // Fecha o banco
+});
+
+// Atualiza um registro da tabela RESPOSTA (é o U do CRUD - Update)
+app.post('/atualizaRespostas', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); 
+	const { Resposta, Id_Resposta } = req.body;
+	sql = "UPDATE RESPOSTA SET Resposta = ? WHERE Id_resposta = ?";
+	console.log(sql);
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	db.run(sql, [Resposta, Id_Resposta],  err => {
+		if (err) {
+		    throw err;
+		}
+		res.end();
+	});
+	res.write('<p>RESPOSTA ATUALIZADA COM SUCESSO!</p><a href="/">VOLTAR</a>');
+	db.close(); // Fecha o banco
+});
+
+// Exclui um registro da tabela RESPOSTA (é o D do CRUD - Delete)
+app.post('/removeRespostas', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	const { Id_Resposta } = req.body; 
+	sql = "DELETE FROM RESPOSTA WHERE Id_Resposta= ?";
+	console.log(sql);
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	db.run(sql, [Id_Resposta],  err => {
+		if (err) {
+		    throw err;
+		}
+		res.write('<p>RESPOSTA REMOVIDA COM SUCESSO!</p><a href="/">VOLTAR</a>');
+		res.end();
+	});
+	db.close(); // Fecha o banco
+});
+
+// Join entre as tabelas PERGUNTA & RESPOSTA
+app.get('/JOIN_Pergunta_Resposta', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	var sql = 'SELECT Pergunta.Pergunta, Resposta.Resposta FROM Pergunta INNER JOIN Resposta ON Pergunta.Id_Pergunta = Resposta.Id_Pergunta_FK';
+		db.all(sql, [],  (err, rows ) => {
+			if (err) {
+				throw err;
+			}
+			res.json(rows);
+		});
+		db.close(); // Fecha o banco
+});
+
+app.listen(port, hostname, () => {
+	console.log(`Servidor rodando em http://${hostname}:${port}/`);
+  });
