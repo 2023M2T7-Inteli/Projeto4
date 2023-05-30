@@ -21,10 +21,10 @@ app.post('/insereUsuario', urlencodedParser, (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
-    const { Telefone, Email, Senha, Categoria } = req.body;
-    sql = "INSERT INTO USUARIO (Telefone, Email, Senha, Categoria) VALUES (?, ?, ?, ?)";
+    const { Telefone, Email, Senha, Categoria, Nome } = req.body;
+    sql = "INSERT INTO USUARIO (Telefone, Email, Senha, Categoria, Nome) VALUES (?, ?, ?, ?, ?)";
     console.log(sql);
-    db.run(sql, [Telefone, Email, Senha, Categoria], err => {
+    db.run(sql, [Telefone, Email, Senha, Categoria, Nome], err => {
         if (err) {
             throw err;
         }
@@ -193,10 +193,10 @@ app.post('/insereAtividadeDoProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	const { Atividade } = req.body;
-	sql = "INSERT INTO PROTOCOLO (Atividade) VALUES (?)";
+	const { Atividade, Name_Protocolo } = req.body;
+	sql = "INSERT INTO PROTOCOLO (Atividade, Name_Protocolo) VALUES (?, ?)";
 	console.log(sql);
-	db.run(sql, [Atividade],  err => {
+	db.run(sql, [Atividade, Name_Protocolo],  err => {
 		if (err) {
 		    throw err;
 		}	
@@ -242,11 +242,11 @@ app.get('/atualizaProtocolo', (req, res) => {
 app.post('/atualizaProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	const { Atividade, Id_Protocolo } = req.body;
-	sql = "UPDATE PROTOCOLO SET Atividade = ? WHERE Id_Protocolo = ?";
+	const { Atividade, Name_Protocolo, Id_Protocolo } = req.body;
+	sql = "UPDATE PROTOCOLO SET Atividade = ?, Name_Protocolo = ? WHERE Id_Protocolo = ?";
 	console.log(sql);
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [Atividade, Id_Protocolo],  err => {
+	db.run(sql, [Atividade, Name_Protocolo, Id_Protocolo],  err => {
 		if (err) {
 		    throw err;
 		}
@@ -366,6 +366,36 @@ app.get('/JOIN_Pergunta_Resposta', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
 	var sql = 'SELECT Pergunta.Pergunta, Resposta.Resposta FROM Pergunta INNER JOIN Resposta ON Pergunta.Id_Pergunta = Resposta.Id_Pergunta_FK';
+		db.all(sql, [],  (err, rows ) => {
+			if (err) {
+				throw err;
+			}
+			res.json(rows);
+		});
+		db.close(); // Fecha o banco
+});
+
+// Join entre as tabelas PROTOCOLO & PERGUNTA
+app.get('/JOIN_Protocolo_Pergunta', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	var sql = 'SELECT Protocolo.Atividade, Protocolo.Name_Protocolo, Pergunta.Pergunta FROM Protocolo INNER JOIN Pergunta ON Protocolo.Id_Protocolo = Pergunta.Id_Protocolo_FK';
+		db.all(sql, [],  (err, rows ) => {
+			if (err) {
+				throw err;
+			}
+			res.json(rows);
+		});
+		db.close(); // Fecha o banco
+});
+
+// Join entre as tabelas USUARIO & PERGUNTA
+app.get('/JOIN_Usuario_Pergunta', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	var sql = 'SELECT Usuario.Nome, Usuario.Categoria, Protocolo.Name_Protocolo, Protocolo.Atividade FROM Usuario INNER JOIN Protocolo ON Usuario.Id_Usuario = Protocolo.Id_Usuario_FK';
 		db.all(sql, [],  (err, rows ) => {
 			if (err) {
 				throw err;

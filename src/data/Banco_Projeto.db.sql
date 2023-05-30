@@ -1,31 +1,39 @@
 BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "RESPOSTA" (
+	"Id_Resposta"	INTEGER NOT NULL,
+	"Resposta"	TEXT NOT NULL,
+	"Id_Pergunta_FK"	INTEGER,
+	PRIMARY KEY("Id_Resposta"),
+	FOREIGN KEY("Id_Pergunta_FK") REFERENCES "PERGUNTA"("Id_Pergunta")
+);
+CREATE TABLE IF NOT EXISTS "PERGUNTA" (
+	"Id_Pergunta"	INTEGER NOT NULL,
+	"Pergunta"	TEXT,
+	"Id_Protocolo_FK"	INTEGER,
+	PRIMARY KEY("Id_Pergunta"),
+	FOREIGN KEY("Id_Protocolo_FK") REFERENCES "PROTOCOLO"("Id_Protocolo")
+);
+CREATE TABLE IF NOT EXISTS "PROTOCOLO" (
+	"Id_Protocolo"	INTEGER NOT NULL,
+	"Atividade"	TEXT NOT NULL,
+	"Id_Usuario_FK"	INTEGER,
+	"Name_Protocolo"	TEXT NOT NULL,
+	PRIMARY KEY("Id_Protocolo"),
+	FOREIGN KEY("Id_Usuario_FK") REFERENCES "USUARIO"("Id_Usuario")
+);
 CREATE TABLE IF NOT EXISTS "USUARIO" (
 	"Id_Usuario"	INTEGER NOT NULL,
 	"Telefone"	INTEGER NOT NULL,
 	"Email"	TEXT NOT NULL,
 	"Senha"	TEXT NOT NULL,
 	"Categoria"	TEXT NOT NULL,
+	"Nome"	TEXT NOT NULL,
 	PRIMARY KEY("Id_Usuario")
 );
-CREATE TABLE IF NOT EXISTS "PROTOCOLO" (
-	"Id_Protocolo"	INTEGER NOT NULL,
-	"Atividade"	TEXT NOT NULL,
-	"Id_Usuario"	INTEGER,
-	PRIMARY KEY("Id_Protocolo"),
-	FOREIGN KEY("Id_Usuario") REFERENCES "USUARIO"("Id_Usuario")
-);
-CREATE TABLE IF NOT EXISTS "PERGUNTA" (
-	"Id_Pergunta"	INTEGER NOT NULL,
-	"Pergunta"	TEXT,
-	"Id_Protocolo"	INTEGER,
-	PRIMARY KEY("Id_Pergunta"),
-	FOREIGN KEY("Id_Protocolo") REFERENCES "PROTOCOLO"("Id_Protocolo")
-);
-CREATE TABLE IF NOT EXISTS "RESPOSTA" (
-	"Id_Resposta"	INTEGER NOT NULL,
-	"Resposta"	TEXT NOT NULL,
-	"Id_Pergunta"	INTEGER,
-	PRIMARY KEY("Id_Resposta"),
-	FOREIGN KEY("Id_Pergunta") REFERENCES "PERGUNTA"("Id_Pergunta")
-);
+INSERT INTO "RESPOSTA" VALUES (1,'tenho 18 anos',1);
+INSERT INTO "PERGUNTA" VALUES (1,'qual a sua idade?',1);
+INSERT INTO "PERGUNTA" VALUES (2,'qual o seu nome?',1);
+INSERT INTO "PERGUNTA" VALUES (3,'da onde veio?',1);
+INSERT INTO "PROTOCOLO" VALUES (1,'ativo',1,'Teste01');
+INSERT INTO "USUARIO" VALUES (1,'12-34343-43434','ott0000000@gmail.com','otto123','agricultor','Otto');
 COMMIT;
