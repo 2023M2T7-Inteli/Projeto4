@@ -1,29 +1,33 @@
+/* Imports the fonts used on the page */
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
+/* Set margins and paddings to 0px on all elements */
 * {
     padding: 0;
     margin: 0;
 }
-/*definicao de altura da barra de navegação*/
+
+/* Definition of the navigation bar height */
 nav{
     height: 60px;
 }
 
-/* define as propriedades dos itens na barra de navegação*/
+/* Defines the properties of the items in the navigation bar */
 nav ul li {
-  
     display: inline-block;
     margin-right: 80px;
     margin-left: 8vh;
     margin-top: -2vh;
   }
 
+/* Sets the first child li element within ul elements inside an element with the class "navhorizontal" to display inline. */
 .navhorizontal ul li:first-child {
     display: inline;
 }
-nav ul li:nth-child(2){
 
+/* Styles the second child li element within ul elements inside a nav element with specific width, height, font properties, and color. */
+nav ul li:nth-child(2){
   width: 92px;
   height: 26px;
 
@@ -34,20 +38,20 @@ nav ul li:nth-child(2){
   line-height: 25px;
 
   color: #000000;
-
 }
-/*define a altura do cabeçario*/
+
+/* Defines the height of the header */
 header {
     height: 50px;
 }
 
-/*define o endereço da imagem que se comporta como uma faixa no background*/
+/* Defines the image address that behaves as a background banner */
 .imgfundo{
     background-image: url(images/bg_faixa.jpg);
     height: 80px; 
 }
 
-/* define uma grid e os parametros do container*/
+/* Defines a grid and the parameters of the container */
 container {
     display: grid;
     margin-top:60px;
@@ -61,12 +65,12 @@ container {
     "a c";
   }
 
-/* define a margem acima da barra de navegação vertical*/
+/* Defines the margin above the vertical navigation bar */
 .navvertical ul li{
   margin-top:5vh;
 }
 
-/* define as propriedades de tamanho e posicionamento da interface de criação do protocolo*/
+/* Defines the size and positioning properties of the protocol creation interface */
 .criarproto{
   width: 100vh;
   height: 100px;
@@ -74,7 +78,8 @@ container {
   top: 22vh;
   left: 25vh;
 }
-/* define as propriedades de tamanho e posicionamento da interface de seleção dos destinatários*/
+
+/* Defines the size and positioning properties of the recipients selection interface */
 .destino{
   width: 100vh;
   height: 100px;
@@ -82,7 +87,8 @@ container {
   margin-top: 3vh;  
   margin-left: 5vh;
 }
-/* define as propriedades de tamanho e posicionamento da interface de protocolos e destinatários predefinidos*/
+
+/* Defines the size and positioning properties of the pre-defined protocols and recipients interface */
 .predef{
   width: 100vh;
   height: 100px;
@@ -90,47 +96,52 @@ container {
   top: 22vh;
   margin-left: 5vh;
 }
-/*define a cor para os blocos participantes da grid*/
+
+/* Defines the color for the participating blocks in the grid */
 .item {
     background-color: #E7E7E7;
     overflow: hidden;
     border-radius: 10px;
   }
 
-/*define a area da grid para o primeiro item*/
+/* Defines the grid area for the first item */
 .item:nth-child(1) {
     grid-area: a;
   }
   
-/*define a area da grid para o segundo item*/
+/* Defines the grid area for the second item */
 .item2 {
     grid-area: b;
   }
-  
-/*define a area da grid para o terceiro item*/
+
+/* Defines the grid area for the third item */
 .item3 {
     grid-area: c;
   }
-/*define a altura da imagem no background*/
+
+/* Defines the height of the background image */
 .background{
     height: 10vh;
 }
-/*define a cor e o tamanho do menu de navegação vertical*/
+
+/* Defines the color and size of the vertical navigation menu */
 .menuvertical{
     background-color: #03110C;
     height: 100vh;
     width: 18vh;
 }
-/*define a cor do body*/
+
+/* Define the color of the body */
 body{
   background-color: #f6f6f6;
 }
-/*define uma margem para a caixa de opções*/
+
+/* Defines a margin for the options box */
 select{
   margin-left: 15vh;
 }
 
-/* define as margens e a largura do campo de checkbox*/
+/* Defines the margins and width of the checkbox field */
 fieldset{
   margin-top: -8vh;
   margin-left: 53vh;
@@ -138,11 +149,13 @@ fieldset{
   
 }
 
+/* Defines the size of the notification icon */
 .notificacao{
   width: 3.5vh;
   height: 3.5vh;
 }
 
+/* Defines the size and position of the logo */
 .Logo{
   width: 3.5vh;
   height: 3.5vh;
