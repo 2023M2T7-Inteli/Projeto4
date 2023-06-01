@@ -193,10 +193,10 @@ app.post('/insereAtividadeDoProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	const { Atividade, Name_Protocolo } = req.body;
-	sql = "INSERT INTO PROTOCOLO (Atividade, Name_Protocolo) VALUES (?, ?)";
+	const { Atividade, Nome_Protocolo, Descricao, Data, Horario } = req.body;
+	sql = "INSERT INTO PROTOCOLO (Atividade, Nome_Protocolo, Descricao, Data, Horario) VALUES (?, ?, ?, ?, ?)";
 	console.log(sql);
-	db.run(sql, [Atividade, Name_Protocolo],  err => {
+	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario],  err => {
 		if (err) {
 		    throw err;
 		}	
@@ -242,11 +242,11 @@ app.get('/atualizaProtocolo', (req, res) => {
 app.post('/atualizaProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	const { Atividade, Name_Protocolo, Id_Protocolo } = req.body;
-	sql = "UPDATE PROTOCOLO SET Atividade = ?, Name_Protocolo = ? WHERE Id_Protocolo = ?";
+	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Protocolo } = req.body;
+	sql = "UPDATE PROTOCOLO SET Atividade = ?, Nome_Protocolo = ?, Descricao = ?, Data = ?, Horario = ? WHERE Id_Protocolo = ?";
 	console.log(sql);
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [Atividade, Name_Protocolo, Id_Protocolo],  err => {
+	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Protocolo],  err => {
 		if (err) {
 		    throw err;
 		}
@@ -281,12 +281,15 @@ app.post('/insereResposta', urlencodedParser, (req, res) => {
 	const { Resposta, Id_Pergunta_FK} = req.body; 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
 	sql = "INSERT INTO RESPOSTA (Resposta, Id_Pergunta_FK) VALUES (?, ?)";
-	console.log(sql);
-	db.run(sql, [Resposta, Id_Pergunta_FK],  err => {
+	
+	const databaseReturn = db.run(sql, [Resposta, Id_Pergunta_FK],  (err, rows) => {
 		if (err) {
 		    throw err;
 		}	
+
+		return rows
 	});
+
 	res.write('<p>RESPOSTA INSERIDA COM SUCESSO!</p><a href="/">VOLTAR</a>');
 	db.close(); // Fecha o banco
 	res.end();
@@ -365,7 +368,7 @@ app.get('/JOIN_Pergunta_Resposta', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	var sql = 'SELECT Pergunta.Pergunta, Resposta.Resposta FROM Pergunta INNER JOIN Resposta ON Pergunta.Id_Pergunta = Resposta.Id_Pergunta_FK';
+	var sql = 'SELECT Pergunta.Id_Pergunta, Pergunta.Pergunta, Resposta.Id_Resposta, Resposta.Resposta FROM Pergunta INNER JOIN Resposta ON Pergunta.Id_Pergunta = Resposta.Id_Pergunta_FK';
 		db.all(sql, [],  (err, rows ) => {
 			if (err) {
 				throw err;
