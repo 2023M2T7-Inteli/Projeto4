@@ -8,40 +8,107 @@
     margin: 0;
     font-family: 'Rubik';
 }
-
-/* Defines the appearance of the header */
-header {
-    background-color: black;
-    width: 100%;
-    height: 49px;
-    left: 0px;
-    top: 0px;
-    align-items: center;
+.header {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #ffffff;
+    height: 49px;
 }
 
-/* Defines the position of the menu */
-#menu {
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    left: 16px;
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    width: 100%; 
+}
+
+.header-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; 
+}
+
+.header-button {
+    padding: 15px 16px; 
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 1px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
-/* Defines the position of the home */
-#home_a {
-    position: absolute;
+.header-logo,
+.header-button,
+.header-img-button {
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 1px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.header-logo {
+    width: 30px;
+    height: 30px;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+.header-info {
     width: 25px;
     height: 25px;
-    right: 16px;
 }
 
-/* Defines the size of the icon menu */
-#home {
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
+h2 {
+    padding-left: 0;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.header-button {
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border: none;
+    text-decoration: none;
+}
+
+.header-button:hover, 
+.header-img-button:hover {
+    background-color: #EB5E28;
+}
+
+.imgfundo {
+    width: 100%;
+    height: 74px;
+    background-image: url('images/trees.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    width: 537px;
+    max-width: 100%; 
+    height: 75vh; 
+    overflow: auto; 
+    background-color: #FFFFFF;
+    border-radius: 7px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
+    margin: -3vh auto; 
+    padding: 20px; 
 }
 
 /* Defines the size and cursor to the label of the input */
@@ -181,7 +248,7 @@ input[type='radio']:checked:before {
 
 /* Defines the position and the style of the name "Password"*/
 #password {
-    margin-bottom: 12.5px;
+    margin-bottom: 1.5px;
     margin-left: 10px;
     width: 39px;
     font-family: 'Rubik';
@@ -220,7 +287,7 @@ input[type='radio']:checked:before {
     margin-bottom: 12px;
 }
 
-/* Defines the position and the style of the name "Criar uma conta"*/
+/* Defines the position and the style of the name "Cadastrar um estrativista"*/
 #title_logo {
     width: fit-content;
     font-family: 'Righteous';

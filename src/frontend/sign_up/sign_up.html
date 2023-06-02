@@ -11,64 +11,77 @@
     <script src="sign_up.js"></script> <!-- Links the JavaScript file associated with this page -->
 </head>
 <body>
-    <!--Header. Where is located the menu to access the sidebar, the icon to return to the initial screen and the name Protocom-->
-    <header>
-        <img id="menu" src="images/menu.png" alt="Botão de menu lateral">
-        <a id="home_a" href="../home/index.html">
-            <img id="home" src="images/home.png" alt="Botão para navegar até a página inicial">
-        </a>
-        <h2 id="title_header">Protocom</h2>
-    </header>
+        <!-- Header -->
+<div class="header">
+    <div class="header-left">
+        <img class="header-logo" src="images/Logo.png" alt="Logo">
+        <h2>Protocom</h2>
+    </div>
+    <div class="header-right">
+        <div class="header-button-container">
+            <button class="header-button">Criar Protocolo</button>
+            <button class="header-button">Relatório</button>
+            <button class="header-button">Histórico</button>
+            <button class="header-button">Usuário</button>
+            <button class="header-button">Perfil</button>
+            <div class="header-img-button">
+                <img class="header-info" src="images/notifications.png" alt="Informações">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="imgfundo"></div>
+
     <main>
-        <!--Centralizing the information-->
-        <div id="center_all">
-            <div class="center_info">
-                <h1 id="title_logo">Criar uma conta</h1>
-                <h2 id="profile">Selecione seu perfil</h2>
-                <!-- Field that encompasses and centers the icon and options -->
-                <div id="center_options">
-                    <div id="option1_div">
-                        <input type="radio" name="option" id="option1" checked>
-                        <label for="option1">Agricultor</label>
+        <div class="container">
+            <!--Centralizing the information-->
+            <div id="center_all">
+                <div class="center_info">
+                    <h1 id="title_logo">Criar uma conta</h1>
+                    <div id="center_options">
                     </div>
-                    <div id="option2_div">
-                        <input type="radio" name="option" id="option2"> 
-                        <label for="option2">Pesquisador</label>
+                    <h2 id="name">Nome</h2>
+                    <!-- Field that encompasses and centers the icon and options -->
+                    <div class="center_name">
+                        <img id="profile_icon" src="images/profile2.png" alt="Icone de perfil">
+                        <input id="input1" type="text" placeholder="Digite seu nome">
                     </div>
+                    <div id="line1" class="line"></div>
+                    <h2 id="email">Email</h2>
+                    <!-- Field that encompasses and centers the icon and name input -->
+                    <div class="center_email">
+                        <img id="email_icon" src="images/email.png" alt="Icone de email">
+                        <input id="input1" type="text" placeholder="Digite seu email">
+                    </div>
+                    <div id="line2" class="line"></div>
+                    <h2 id="password">Senha</h2>
+                    <!-- Field that encompasses and centers the icon and email input -->
+                    <div class="center_password">
+                        <img id="password_icon" src="images/password.png" alt="Icone de senha">
+                        <input type="password" id="input2" type="text" placeholder="Digite sua senha">
+                    </div>
+                    <div id="line3" class="line"></div>
+                    <h2 id="password" style="display: inline;">Confirmar Senha</h2>
+                    <!-- Field that encompasses and centers the icon and user password input -->
+                    <div class="center_password">
+                        <img id="password_icon" src="images/password.png" alt="Icone de senha">
+                        <input type="password" id="input2" type="text" placeholder="Digite a senha novamente">
+                    </div>
+                    
+                    <div id="line4" class="line"></div>
+                    <h2 id="plantation" class="option1">Tipo de plantação</h2>
+                    <!-- Field that encompasses and centers the icon and plantation input -->
+                    <div id="center_plantation" class="center_plantation option1">
+                        <img id="plant_icon" src="images/plant.png" alt="Icone de plantacao">
+                        <input id="input1" type="text" placeholder="Digite o tipo de plantação">
+                    </div>
+                    <div id="line5" class="line option1"></div>
+                    <!--Redirects the user to the farmer screen-->
+                    <a id="sign_up" href="../MainFarmer/Agricultor.html">Cadastrar</a>
+                    <!--Redirects the user to the sign_in screen-->
+                
                 </div>
-                <div id="line1" class="line"></div>
-                <h2 id="name">Nome</h2>
-                <!-- Field that encompasses and centers the icon and name input -->
-                <div class="center_name">
-                    <img id="profile_icon" src="images/profile2.png" alt="Icone de perfil">
-                    <input id="input1" type="text" placeholder="Digite seu nome">
-                </div>
-                <div id="line2" class="line"></div>
-                <h2 id="email">Email</h2>
-                <!-- Field that encompasses and centers the icon and email input -->
-                <div class="center_email">
-                    <img id="email_icon" src="images/email.png" alt="Icone de email">
-                    <input id="input1" type="text" placeholder="Digite seu email">
-                </div>
-                <div id="line3" class="line"></div>
-                <h2 id="password">Senha</h2>
-                <!-- Field that encompasses and centers the icon and user password input -->
-                <div class="center_password">
-                    <img id="password_icon" src="images/password.png" alt="Icone de senha">
-                    <input type="password" id="input2" type="text" placeholder="Digite sua senha">
-                </div>
-                <div id="line4" class="line"></div>
-                <h2 id="plantation" class="option1">Tipo de plantação</h2>
-                <!-- Field that encompasses and centers the icon and plantation input -->
-                <div id="center_plantation" class="center_plantation option1">
-                    <img id="plant_icon" src="images/plant.png" alt="Icone de plantacao">
-                    <input id="input1" type="text" placeholder="Informe a sua lavoura">
-                </div>
-                <div id="line5" class="line option1"></div>
-                <!--Redirects the user to the farmer screen-->
-                <a id="sign_up" href="../MainFarmer/Agricultor.html">Registrar</a>
-                <!--Redirects the user to the sign_in screen-->
-                <a id="sign_in" href="../sign_in/sign_in.html">Já tem uma conta? Entre aqui.</a>
             </div>
         </div>
     </main>
