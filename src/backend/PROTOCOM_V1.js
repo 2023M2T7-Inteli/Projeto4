@@ -21,10 +21,10 @@ app.post('/insereUsuario', urlencodedParser, (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
-    const { Telefone, Email, Senha, Categoria, Nome } = req.body;
-    sql = "INSERT INTO USUARIO (Telefone, Email, Senha, Categoria, Nome) VALUES (?, ?, ?, ?, ?)";
+    const { Telefone, Email, Senha, Categoria, Nome, TipoDePlantacao } = req.body;
+    sql = "INSERT INTO USUARIO (Telefone, Email, Senha, Categoria, Nome, TipoDePlantacao) VALUES (?, ?, ?, ?, ?, ?)";
     console.log(sql);
-    db.run(sql, [Telefone, Email, Senha, Categoria, Nome], err => {
+    db.run(sql, [Telefone, Email, Senha, Categoria, Nome, TipoDePlantacao], err => {
         if (err) {
             throw err;
         }

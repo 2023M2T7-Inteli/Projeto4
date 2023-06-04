@@ -9,6 +9,8 @@
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon"> <!-- Adds a shortcut icon to the page -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="sign_up.js"></script> <!-- Links the JavaScript file associated with this page -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 <body>
         <!-- Header -->
@@ -45,21 +47,21 @@
                     <!-- Field that encompasses and centers the icon and options -->
                     <div class="center_name">
                         <img id="profile_icon" src="images/profile2.png" alt="Icone de perfil">
-                        <input id="input1" type="text" placeholder="Digite seu nome">
+                        <input id="idNome" type="text" placeholder="Digite seu nome">
                     </div>
                     <div id="line1" class="line"></div>
                     <h2 id="email">Email</h2>
                     <!-- Field that encompasses and centers the icon and name input -->
                     <div class="center_email">
                         <img id="email_icon" src="images/email.png" alt="Icone de email">
-                        <input id="input1" type="text" placeholder="Digite seu email">
+                        <input id="idEmail" type="text" placeholder="Digite seu email">
                     </div>
                     <div id="line2" class="line"></div>
                     <h2 id="password">Senha</h2>
                     <!-- Field that encompasses and centers the icon and email input -->
                     <div class="center_password">
                         <img id="password_icon" src="images/password.png" alt="Icone de senha">
-                        <input type="password" id="input2" type="text" placeholder="Digite sua senha">
+                        <input type="password" id="idSenha" type="text" placeholder="Digite sua senha">
                     </div>
                     <div id="line3" class="line"></div>
                     <h2 id="password" style="display: inline;">Confirmar Senha</h2>
@@ -74,11 +76,19 @@
                     <!-- Field that encompasses and centers the icon and plantation input -->
                     <div id="center_plantation" class="center_plantation option1">
                         <img id="plant_icon" src="images/plant.png" alt="Icone de plantacao">
-                        <input id="input1" type="text" placeholder="Digite o tipo de plantação">
+                        <input id="idPla" type="text" placeholder="Digite o tipo de plantação">
+                    </div>
+                    <div id="line5" class="line option1"></div>
+
+                    <h2 id="telefone" class="option1">Telefone</h2>
+                    <!-- Field that encompasses and centers the icon and plantation input -->
+                    <div id="center_plantation" class="center_plantation option1">
+                        <img id="plant_icon" src="images/plant.png" alt="Icone de plantacao">
+                        <input id="idTel" type="text" placeholder="Digite o telefone">
                     </div>
                     <div id="line5" class="line option1"></div>
                     <!--Redirects the user to the farmer screen-->
-                    <a id="sign_up" href="../MainFarmer/Agricultor.html">Cadastrar</a>
+                    <button onclick="criarConta()" id="sign_up">Cadastrar</button>
                     <!--Redirects the user to the sign_in screen-->
                 
                 </div>

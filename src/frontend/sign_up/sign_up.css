@@ -270,6 +270,17 @@ input[type='radio']:checked:before {
     margin-bottom: 10px;
 }
 
+#telefone {
+    width: fit-content;
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    color: #000000;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
 /* Defines the position and size of the icons */
 #email_icon, #password_icon, #plant_icon, #profile_icon {
     width: 17px;
