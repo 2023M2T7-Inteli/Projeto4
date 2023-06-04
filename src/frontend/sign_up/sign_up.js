@@ -1,10 +1,11 @@
-var nome = "";
-var email = "";
-var senha = "";
-var tipoDePlantacao = "";
-var telefone = "";
+var nome = ""; // Variável para armazenar o nome
+var email = ""; // Variável para armazenar o email
+var senha = ""; // Variável para armazenar a senha
+var tipoDePlantacao = ""; // Variável para armazenar o tipo de plantação
+var telefone = ""; // Variável para armazenar o telefone
 
 function inserirResposta(nome, email, senha, tipoDePlantacao, telefone, categoria) {
+  // Cria um objeto XMLHttpRequest
   var xhr = new XMLHttpRequest();
   xhr.open('POST', 'http://localhost:2021/insereUsuario', true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -15,7 +16,6 @@ function inserirResposta(nome, email, senha, tipoDePlantacao, telefone, categori
       if (xhr.status === 200) {
         // A requisição foi bem-sucedida (status 200)
         console.log('Requisição bem-sucedida');
-        // Aqui você pode realizar qualquer lógica adicional com a resposta recebida do servidor
       } else {
         // A requisição falhou com um status diferente de 200
         console.log('Erro na requisição: ' + xhr.status);
@@ -24,8 +24,9 @@ function inserirResposta(nome, email, senha, tipoDePlantacao, telefone, categori
   };
 
   if (nome === "" || email === "" || senha === "" || tipoDePlantacao === "" || telefone === "") {
+    // Verifica se algum campo está vazio
     console.log("não foi possível cadastrar o usuário");
-    exibirToast03();
+    exibirToast03(); // Exibe uma mensagem de erro
   } else {
     var params = new URLSearchParams();
     params.append('Nome', nome);
@@ -37,9 +38,11 @@ function inserirResposta(nome, email, senha, tipoDePlantacao, telefone, categori
 
     console.log("cadastro feito com sucesso");
 
-    setTimeout(() => {xhr.send(params.toString())}, 3000)
+    setTimeout(() => {
+      xhr.send(params.toString()); // Envia a requisição após um atraso de 3 segundos
+    }, 3000);
 
-    exibirToast();
+    exibirToast(); // Exibe uma mensagem de sucesso
   }
 }
 
@@ -55,7 +58,7 @@ function criarConta() {
 }
 
 function exibirToast () {
-  exibirToast02();
+  exibirToast02(); // Chama a função para exibir um toast de sucesso
 }
 
 function exibirToast02() {
@@ -77,4 +80,3 @@ function exibirToast03() {
     position: "right", // Alinhamento do toast (left, center, right)
   }).showToast();
 }
-
