@@ -25,36 +25,35 @@ function inserirResposta(nome, email, senha, tipoDePlantacao, telefone, categori
   };
 
   if (nome === "" || email === "" || senha === "" || senha2 === "" || tipoDePlantacao === "" || telefone === "") {
-    // Verifica se algum campo está vazio
     exibirToast03(); // Exibe uma mensagem de erro
+    return;
+  } else if (senha !== senha2) {
+    exibirToast04(); // Exibe uma mensagem de erro
+    return;
+  } else if (!/@.+/.test(email)) {
+    exibirToast05(); // Exibe uma mensagem de erro
+    return;
   }
-  else if (senha !== senha2) {
-    exibirToast04();
-  }
-  else {
-    if (!/@.+/.test(email)) {
-      exibirToast05();
-    }
-    else {
-      var params = new URLSearchParams();
-      params.append('Nome', nome);
-      params.append('Email', email);
-      params.append('Senha', senha);
-      params.append('ConfirmarSenha', senha2);
-      params.append('TipoDePlantacao', tipoDePlantacao);
-      params.append('Telefone', telefone);
-      params.append('Categoria', categoria);
-  
-      console.log("Cadastro feito com sucesso");
-  
-      setTimeout(() => {
-        xhr.send(params.toString()); // Envia a requisição após um atraso de 3 segundos
-      }, 3000);
-  
-      exibirToast02(); // Exibe uma mensagem de sucesso
-    }
-  }  
+
+  // Se todas as verificações passarem, prossegue com o cadastro
+  var params = new URLSearchParams();
+  params.append('Nome', nome);
+  params.append('Email', email);
+  params.append('Senha', senha);
+  params.append('ConfirmarSenha', senha2);
+  params.append('TipoDePlantacao', tipoDePlantacao);
+  params.append('Telefone', telefone);
+  params.append('Categoria', categoria);
+
+  console.log("Cadastro feito com sucesso");
+
+  setTimeout(() => {
+    xhr.send(params.toString()); // Envia a requisição após um atraso de 3 segundos
+  }, 3000);
+
+  exibirToast02(); // Exibe uma mensagem de sucesso
 }
+
 
 function criarConta() {
   var nome = document.getElementById('idNome').value;
