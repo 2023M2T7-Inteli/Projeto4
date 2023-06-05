@@ -37,8 +37,10 @@ function verificaUsuario() {
             // Prosseguir para a próxima tela
             if (tipoA === "agricultor") {
               window.location.href = "agricultor.html";
+              console.log('tchau')
             } else if (tipoP === "pesquisador") {
               window.location.href = "create_protocolos.html";
+              console.log('oi');
             }
           } else {
             // Login falhou
