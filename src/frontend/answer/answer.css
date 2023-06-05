@@ -55,6 +55,8 @@ section > img {
 #icons_div {
     margin-left: auto;
     margin-right: 16px;
+    display: flex;
+    align-items: center;
 }
 
 #icons_div > img {
@@ -414,13 +416,13 @@ section > img {
     font-size: 10px;
     width: 81px;
     height: 18px;
-    background: linear-gradient(90deg, #1F8C69 0%, #0E4936 100%);
+    background: linear-gradient(92.83deg, #1F8C69 0%, #0E4936 100%);
     border-radius: 10px;
 }
 
 .add_image:hover {
     cursor: pointer;
-    background: linear-gradient(90deg, #FF7541 0%, #E04C13 100%);
+    background: linear-gradient(92.83deg, #FF7541 0%, #E04C13 100%);
 }
 
 .category_inputs > ul > li > span {
