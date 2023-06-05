@@ -274,6 +274,21 @@ app.post('/removeProtocolo', urlencodedParser, (req, res) => {
 	db.close(); // Fecha o banco
 });
 
+// Retorna o número de registros da tabela protocolo com determinado id (é o R do CRUD - Read)
+app.get('/numeroProtocolos', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	var sql = 'SELECT COUNT(*) AS quantidade_campos FROM PROTOCOLO WHERE Id_Usuario_FK = ?;';
+		db.all(sql, [],  (err, rows ) => {
+			if (err) {
+				throw err;
+			}
+			res.json(rows);
+		});
+		db.close(); // Fecha o banco
+});
+
 // Insere uma resposta na tabela RESPOSTA (é o C do CRUD - Create)
 app.post('/insereResposta', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
