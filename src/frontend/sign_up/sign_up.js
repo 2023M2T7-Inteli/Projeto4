@@ -62,7 +62,7 @@ function criarConta() {
   var senha2 = document.getElementById('idSenha2').value;
   var tipoDePlantacao = document.getElementById('idPla').value;
   var telefone = document.getElementById('idTel').value;
-  var categoria = "Agricultor";
+  var categoria = "agricultor";
 
   inserirResposta(nome, email, senha, tipoDePlantacao, telefone, categoria, senha2);
 }
