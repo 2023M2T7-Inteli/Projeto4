@@ -1,0 +1,166 @@
+/* Imports the fonts used on the page */
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+/* Set margins and paddings to 0px on all elements */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* Definition of the navigation bar height */
+nav{
+    height: 60px;
+}
+
+/* Defines the properties of the items in the navigation bar */
+nav ul li {
+    display: inline-block;
+    margin-right: 80px;
+    margin-left: 8vh;
+    margin-top: -2vh;
+  }
+
+/* Sets the first child li element within ul elements inside an element with the class "navhorizontal" to display inline. */
+.navhorizontal ul li:first-child {
+    display: inline;
+}
+
+/* Styles the second child li element within ul elements inside a nav element with specific width, height, font properties, and color. */
+nav ul li:nth-child(2){
+  width: 92px;
+  height: 26px;
+
+  font-family: 'Righteous';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+
+  color: #000000;
+}
+
+/* Defines the height of the header */
+header {
+    height: 50px;
+}
+
+/* Defines the image address that behaves as a background banner */
+.imgfundo{
+    background-image: url(images/bg_faixa.jpg);
+    height: 80px; 
+}
+
+/* Defines a grid and the parameters of the container */
+container {
+    display: grid;
+    margin-top:60px;
+    margin-left: 30px;
+    margin-right: 30px;
+    grid-template-columns: 1fr 1fr; /* Define três colunas com largura igual */
+    grid-template-rows: 36vh 36vh; /* Define duas linhas com alturas específicas */
+    grid-gap: 30px; /* Define o espaçamento entre as células da grid */
+    grid-template-areas:/* Define o posicionamento entre as células da grid*/
+    "a b"
+    "a c";
+  }
+
+/* Defines the margin above the vertical navigation bar */
+.navvertical ul li{
+  margin-top:5vh;
+}
+
+/* Defines the size and positioning properties of the protocol creation interface */
+.criarproto{
+  width: 100vh;
+  height: 100px;
+  position: absolute;
+  top: 22vh;
+  left: 25vh;
+}
+
+/* Defines the size and positioning properties of the recipients selection interface */
+.destino{
+  width: 100vh;
+  height: 100px;
+  position: absolute;
+  margin-top: 3vh;  
+  margin-left: 5vh;
+}
+
+/* Defines the size and positioning properties of the pre-defined protocols and recipients interface */
+.predef{
+  width: 100vh;
+  height: 100px;
+  position: absolute;
+  top: 22vh;
+  margin-left: 5vh;
+}
+
+/* Defines the color for the participating blocks in the grid */
+.item {
+    background-color: #E7E7E7;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+
+/* Defines the grid area for the first item */
+.item:nth-child(1) {
+    grid-area: a;
+  }
+  
+/* Defines the grid area for the second item */
+.item2 {
+    grid-area: b;
+  }
+
+/* Defines the grid area for the third item */
+.item3 {
+    grid-area: c;
+  }
+
+/* Defines the height of the background image */
+.background{
+    height: 10vh;
+}
+
+/* Defines the color and size of the vertical navigation menu */
+.menuvertical{
+    background-color: #03110C;
+    height: 100vh;
+    width: 18vh;
+}
+
+/* Define the color of the body */
+body{
+  background-color: #f6f6f6;
+}
+
+/* Defines a margin for the options box */
+select{
+  margin-left: 15vh;
+}
+
+/* Defines the margins and width of the checkbox field */
+fieldset{
+  margin-top: -8vh;
+  margin-left: 53vh;
+  width: 25vh;
+  
+}
+
+/* Defines the size of the notification icon */
+.notificacao{
+  width: 3.5vh;
+  height: 3.5vh;
+}
+
+/* Defines the size and position of the logo */
+.Logo{
+  width: 3.5vh;
+  height: 3.5vh;
+  vertical-align: middle;
+  margin-right: -16vh;
+  margin-top:1vh;
+  margin-bottom: 2vh;
+}

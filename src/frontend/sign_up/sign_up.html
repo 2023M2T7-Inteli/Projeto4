@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar</title> <!-- Title of the page -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="sign_up.css"> <!-- Links the CSS file associated with this page -->
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon"> <!-- Adds a shortcut icon to the page -->
+</head>
+<body>
+        <!-- Header -->
+    <div class="header">
+        <img class="header-logo" src="images/Logo.png" alt="Logo">
+        <h1>Protocom</h1>
+        <div class="header-right">
+            <button class="header-button">Criar Protocolo</button>
+            <button class="header-button">Histórico</button>
+            <button class="header-button">Usuários</button>
+            <div id="current_page">
+                <button class="header-button">Cadastrar</button>
+                <div id="orange_bg"></div>
+            </div>
+            <button class="header-button">Perfil</button>
+            <div class="header-img-button">
+                <img class="header-info" src="images/notifications.png" alt="Informações">
+            </div>
+        </div>
+    </div>
+
+    <div class="imgfundo">
+        <img src="images/trees.jpeg" alt="Imagem de fundo" id="trees">
+    </div>
+
+    <main>
+        <img src="images/orange_leaves.png" alt="Folhas laranjas como imagem de fundo" id="orange_leaves">
+        <img src="images/green_leaves.png" alt="Folhas verdes como imagem de fundo" id="green_leaves">
+        <div class="container">
+            <!--Centralizing the information-->
+            <div class="center_info">
+                <h1 id="title_logo">Cadastrar um extrativista</h1>
+                <div id="inputs_div">
+                    <h2 id="name">Nome</h2>
+                    <!-- Field that encompasses and centers the icon and options -->
+                    <div class="center_name">
+                        <img id="profile_icon" src="images/profile2.png" alt="Icone de perfil">
+                        <input id="idNome" type="text" placeholder="Digite seu nome">
+                    </div>
+                    <div id="line1" class="line"></div>
+                    <h2 id="email">Email</h2>
+                    <!-- Field that encompasses and centers the icon and name input -->
+                    <div class="center_email">
+                        <img id="email_icon" src="images/email.png" alt="Icone de email">
+                        <input id="idEmail" type="text" placeholder="Digite seu email">
+                    </div>
+                    <div id="line2" class="line"></div>
+                    <h2 id="password">Senha</h2>
+                    <!-- Field that encompasses and centers the icon and email input -->
+                    <div class="center_password">
+                        <img id="password_icon" src="images/password.png" alt="Icone de senha">
+                        <input type="password" id="idSenha" type="text" placeholder="Digite sua senha">
+                    </div>
+                    <div id="line3" class="line"></div>
+                    <h2 id="password2">Confirmar Senha</h2>
+                    <!-- Field that encompasses and centers the icon and user password input -->
+                    <div class="center_password">
+                        <img id="password_icon" src="images/password.png" alt="Icone de senha">
+                        <input type="password" id="idSenha2" type="text" placeholder="Digite a senha novamente">
+                    </div>
+                    
+                    <div id="line4" class="line"></div>
+                    <h2 id="plantation" class="option1">Tipo de plantação</h2>
+                    <!-- Field that encompasses and centers the icon and plantation input -->
+                    <div id="center_plantation" class="center_plantation option1">
+                        <img id="plant_icon" src="images/plant.png" alt="Icone de plantacao">
+                        <input id="idPla" type="text" placeholder="Digite o tipo de plantação">
+                    </div>
+                    <div id="line5" class="line option1"></div>
+    
+                    <!-- <h2 id="telefone" class="option1">Telefone</h2> -->
+                    <!-- Field that encompasses and centers the icon and plantation input -->
+                    <!-- <div id="center_plantation" class="center_plantation option1">
+                        <img id="plant_icon" src="images/plant.png" alt="Icone de plantacao">
+                        <input id="idTel" type="text" placeholder="Digite o telefone">
+                    </div>
+                    <div id="line5" class="line option1"></div> -->
+                    <!--Redirects the user to the farmer screen-->
+                    <button onclick="criarConta()" id="sign_up">Cadastrar</button>
+                    <!--Redirects the user to the sign_in screen-->
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="sign_up.js"></script> <!-- Links the JavaScript file associated with this page -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+</html>

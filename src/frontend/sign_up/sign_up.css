@@ -1,0 +1,521 @@
+/* Imports the fonts used on the page */
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap');
+
+/* Set margins and paddings to 0px on all elements */
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Rubik';
+}
+
+body {
+    background-color: #f6f6f6;
+}
+
+main {
+    height: calc(100vh - 48px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#orange_leaves, #green_leaves {
+    position: absolute;
+    height: 240px;
+    width: 240px;
+    z-index: -1;
+    opacity: 0;
+}
+
+#orange_leaves {
+    transform: rotate(45deg);
+    left: -68px;
+    bottom: -78px;
+}
+
+#green_leaves {
+    transform: rotate(-45deg);
+    bottom: -68px;
+    right: -78px;
+}
+
+
+.header {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    z-index: -2;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header > h1 {
+    font-family: 'Righteous';
+    font-size: 25px;
+    font-weight: 400;
+    margin-left: 6px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%; 
+    height: 48px;
+}
+
+.header-button {
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    background: none;
+    outline: none;
+    border: none;
+    color: #535353;
+    text-decoration: none;
+    height: 100%;
+}
+
+.header-logo, .header-img-button {
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.header-logo {
+    width: 30px;
+    height: 30px;
+    margin-left: 16px;
+}
+
+.header-info {
+    width: 25px;
+    height: 25px;
+}
+
+.header-button:hover {
+    color: #000000;
+}
+
+.imgfundo {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+}
+
+#trees {
+    height: 64px;
+    z-index: -1;
+}
+
+.container {
+    width: 480px;
+    height: 90%; 
+    background-color: #FFFFFF;
+    border-radius: 7px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Defines the size and cursor to the label of the input */
+label {
+    font-size: 11px;
+    cursor: pointer;
+}
+
+/* Defines the appearance of the options (circle) */
+input[type='radio'] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #000000;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 4px;
+}
+
+/* Defines the appearance of the options (circle) */
+input[type='radio']:before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    background-color: #0E4936;
+    border-color: #0E4936;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+/* Defines the opacity to 1 of the options (circle) when it's checked */
+input[type='radio']:checked:before {
+    opacity: 1;
+}
+
+/* Defines the display of the options */
+#option1_div, #option2_div {
+    display: flex;
+    align-items: center;
+}
+
+/* Defines the position and the style of the name "Protocom"*/
+#title_header {
+    color: white;
+    position: absolute;
+    width: 92px;
+    height: 26px;
+    left: 57px;
+    font-family: 'Righteous';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+}
+
+/* Centralize login information */
+.center_info {
+    height: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Centralize email input */
+.center_email {
+    display: flex;
+}
+
+/* Centralize password input */
+.center_password {
+    display: flex;
+}
+
+/* Centralize name input */
+.center_name {
+    display: flex;
+}
+
+/* Centralize plantation input */
+.center_plantation {
+    display: flex;
+}
+
+/* Centralize the options (circles) */
+#center_options {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* Defines the position and the style of the name "Name"*/
+#name {
+    width: fit-content;
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: #000000;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+/* Defines the position and the style of the name "Profile"*/
+#profile {
+    width: fit-content;
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: #000000;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+/* Defines the position and the style of the name "Email"*/
+#email {
+    width: 33px;
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: #000000;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+/* Defines the position and the style of the name "Password"*/
+#password {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    width: 39px;
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: #000000;
+}
+
+#password2 {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    width: fit-content;
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: #000000;
+}
+
+#inputs_div {
+    width: calc(100% - 25px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Defines the position and the style of the name "Plantation"*/
+#plantation {
+    width: fit-content;
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: #000000;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+#telefone {
+    width: fit-content;
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: #000000;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+/* Defines the position and size of the icons */
+#email_icon, #password_icon, #plant_icon, #profile_icon {
+    width: 17px;
+    height: 17px;
+    margin-right: 6px;
+    margin-left: 16px;
+}
+
+/* Defines the position and the style of the lines */
+.line {
+    width: 100%;
+    height: 1.5px;
+    background-color: #939393;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+/* Defines the position and the style of the name "Cadastrar um estrativista"*/
+#title_logo {
+    width: fit-content;
+    font-family: 'Righteous';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    color: #000000;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+/* Defines the appearance of input instructions */
+input { 
+    outline: 0;
+    border: 0;
+    height: 16px;
+    width: 100%;
+    font-size: 11px;
+    font-weight: 300;
+}
+
+/* Defines the size, appereance and position of the button "Já tem uma conta? Entre aqui" */
+#sign_up {
+    background: linear-gradient(90deg, #1F8C69 0%, #0E4936 100%);
+    color: white;
+    width: calc(100% - 50px);
+    height: 30px;
+    border-radius: 6px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: 'Rubik';
+    font-weight: 300;
+    font-size: 15px;
+    font-style: normal;
+    margin-top: 29px;
+    transition: 0.2s;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+}
+
+/* Sets the highlight color when hovering over the "Já tem uma conta? Entre aqui" button */
+#sign_up:hover {
+    background: linear-gradient(90.75deg, #FF7541 0%, #E04C13 100%);
+}
+
+/* Defines the size, appereance and position of the button "Registrar" */
+#sign_in {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    color: #0E4936;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 7px;
+    transition: 0.2s;
+    border-color: blue;
+}
+
+/* Sets the highlight color when hovering over the "Registrar" button */
+#sign_in:hover {
+    color: #EB5E28;
+}
+
+/* Delete the anchor's default appearance */
+a {
+    width: fit-content;
+    display: block;
+    text-decoration: none;
+}
+
+#current_page {
+    position: relative;
+    height: 100%;
+    width: fit-content;
+}
+
+#current_page > button {
+    color: rgb(255, 255, 255)
+}
+
+#orange_bg {
+    position: absolute;
+    background-color: #EB5E28;
+    width: 170px;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+}
+
+@media (min-width: 1107px) {
+    #trees {
+        width: 100%;
+    }
+}
+
+@media (max-width: 989px) {
+    #orange_bg {
+        width: 110px;
+    }
+}
+
+@media (max-width: 728px) {
+    .header-button {
+        font-size: 11px;
+    }
+
+    #orange_bg {
+        width: 80px;
+    }
+
+    .header-info{
+        width: 20px;
+        height: 20px;
+    }
+
+    .header-logo {
+        height: 23px;
+        width: 23px;
+    }
+
+    .header > h1 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 528px) {
+    .container {
+        width: calc(100vw - 48px);
+    }
+
+    #trees {
+        display: none;
+    }
+    
+    #orange_bg {
+        width: 65px;
+    }
+
+    #orange_bg {
+        height: calc(100% - 35px);
+        border-radius: 5px;
+    }
+
+    main {
+        margin-top: -11px;
+    }
+
+    #orange_leaves, #green_leaves {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 464px) {
+    .header-button {
+        font-size: 9px;
+    }
+
+    #orange_bg {
+        width: calc(100% + 6px);
+    }
+
+    .header-info{
+        width: 15px;
+        height: 15px;
+    }
+
+    .header-logo {
+        height: 19px;
+        width: 19px;
+        margin-left: 8px;
+    }
+
+    .header > h1 {
+        font-size: 16px;
+        margin-left: 2px;
+    }
+}
+
+@media (max-width: 420px) {
+    #title_logo {
+        font-size: 20px;
+    }
+}
