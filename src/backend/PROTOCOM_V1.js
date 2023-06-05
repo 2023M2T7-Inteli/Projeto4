@@ -21,10 +21,10 @@ app.post('/insereUsuario', urlencodedParser, (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
-    const { Telefone, Email, Senha, Categoria, Nome, TipoDePlantacao, ConfirmarSenha } = req.body;
-    sql = "INSERT INTO USUARIO (Telefone, Email, Senha, Categoria, Nome, TipoDePlantacao, ConfirmarSenha) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    const { Email, Senha, Categoria, Nome, TipoDePlantacao, ConfirmarSenha } = req.body;
+    sql = "INSERT INTO USUARIO (Email, Senha, Categoria, Nome, TipoDePlantacao, ConfirmarSenha) VALUES (?, ?, ?, ?, ?, ?)";
     console.log(sql);
-    db.run(sql, [Telefone, Email, Senha, Categoria, Nome, TipoDePlantacao, ConfirmarSenha], err => {
+    db.run(sql, [Email, Senha, Categoria, Nome, TipoDePlantacao, ConfirmarSenha], err => {
         if (err) {
             throw err;
         }
@@ -70,11 +70,11 @@ app.get('/atualizaUsuario', (req, res) => {
 app.post('/atualizaUsuario', urlencodedParser, (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
-    const { Telefone, Email, Senha, Categoria, Id_Usuario } = req.body;
-    sql = "UPDATE USUARIO SET Telefone = ?, Email = ?, Senha = ?, Categoria = ? WHERE Id_Usuario = ?";
+    const { Email, Senha, Categoria, Id_Usuario } = req.body;
+    sql = "UPDATE USUARIO SET Email = ?, Senha = ?, Categoria = ? WHERE Id_Usuario = ?";
     console.log(sql);
     var db = new sqlite3.Database(DBPATH); // Abre o banco
-    db.run(sql, [Telefone, Email, Senha, Categoria, Id_Usuario],  err => {
+    db.run(sql, [Email, Senha, Categoria, Id_Usuario],  err => {
         if (err) {
             throw err;
         }
