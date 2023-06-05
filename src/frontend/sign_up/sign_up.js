@@ -3,8 +3,9 @@ var email = ""; // Variável para armazenar o email
 var senha = ""; // Variável para armazenar a senha
 var tipoDePlantacao = ""; // Variável para armazenar o tipo de plantação
 var telefone = ""; // Variável para armazenar o telefone
+var senha2 = ""; // Variável para confirmar senha
 
-function inserirResposta(nome, email, senha, tipoDePlantacao, telefone, categoria) {
+function inserirResposta(nome, email, senha, tipoDePlantacao, telefone, categoria, senha2) {
   // Cria um objeto XMLHttpRequest
   var xhr = new XMLHttpRequest();
   xhr.open('POST', 'http://localhost:2021/insereUsuario', true);
@@ -23,42 +24,48 @@ function inserirResposta(nome, email, senha, tipoDePlantacao, telefone, categori
     }
   };
 
-  if (nome === "" || email === "" || senha === "" || tipoDePlantacao === "" || telefone === "") {
+  if (nome === "" || email === "" || senha === "" || senha2 === "" || tipoDePlantacao === "" || telefone === "") {
     // Verifica se algum campo está vazio
-    console.log("não foi possível cadastrar o usuário");
     exibirToast03(); // Exibe uma mensagem de erro
-  } else {
-    var params = new URLSearchParams();
-    params.append('Nome', nome);
-    params.append('Email', email);
-    params.append('Senha', senha);
-    params.append('TipoDePlantacao', tipoDePlantacao);
-    params.append('Telefone', telefone);
-    params.append('Categoria', categoria);
-
-    console.log("cadastro feito com sucesso");
-
-    setTimeout(() => {
-      xhr.send(params.toString()); // Envia a requisição após um atraso de 3 segundos
-    }, 3000);
-
-    exibirToast(); // Exibe uma mensagem de sucesso
   }
+  else if (senha !== senha2) {
+    exibirToast04();
+  }
+  else {
+    if (!/@.+/.test(email)) {
+      exibirToast05();
+    }
+    else {
+      var params = new URLSearchParams();
+      params.append('Nome', nome);
+      params.append('Email', email);
+      params.append('Senha', senha);
+      params.append('ConfirmarSenha', senha2);
+      params.append('TipoDePlantacao', tipoDePlantacao);
+      params.append('Telefone', telefone);
+      params.append('Categoria', categoria);
+  
+      console.log("Cadastro feito com sucesso");
+  
+      setTimeout(() => {
+        xhr.send(params.toString()); // Envia a requisição após um atraso de 3 segundos
+      }, 3000);
+  
+      exibirToast02(); // Exibe uma mensagem de sucesso
+    }
+  }  
 }
 
 function criarConta() {
   var nome = document.getElementById('idNome').value;
   var email = document.getElementById('idEmail').value;
   var senha = document.getElementById('idSenha').value;
+  var senha2 = document.getElementById('idSenha2').value;
   var tipoDePlantacao = document.getElementById('idPla').value;
   var telefone = document.getElementById('idTel').value;
   var categoria = "Agricultor";
 
-  inserirResposta(nome, email, senha, tipoDePlantacao, telefone, categoria);
-}
-
-function exibirToast () {
-  exibirToast02(); // Chama a função para exibir um toast de sucesso
+  inserirResposta(nome, email, senha, tipoDePlantacao, telefone, categoria, senha2);
 }
 
 function exibirToast02() {
@@ -74,6 +81,26 @@ function exibirToast02() {
 function exibirToast03() {
   Toastify({
     text: "CADASTRO NÃO REALIZADO, VERIFIQUE SE FORAM PREENCHIDOS TODOS OS CAMPOS!",
+    duration: 3000, // Duração em milissegundos
+    close: true, // Mostrar botão de fechar
+    gravity: "top", // Posição do toast (top, bottom, left, right)
+    position: "right", // Alinhamento do toast (left, center, right)
+  }).showToast();
+}
+
+function exibirToast05() {
+  Toastify({
+    text: "ISSO NÃO É UM EMAIL!",
+    duration: 3000, // Duração em milissegundos
+    close: true, // Mostrar botão de fechar
+    gravity: "top", // Posição do toast (top, bottom, left, right)
+    position: "right", // Alinhamento do toast (left, center, right)
+  }).showToast();
+}
+
+function exibirToast04() {
+  Toastify({
+    text: "SENHAS DIFERENTES!",
     duration: 3000, // Duração em milissegundos
     close: true, // Mostrar botão de fechar
     gravity: "top", // Posição do toast (top, bottom, left, right)
