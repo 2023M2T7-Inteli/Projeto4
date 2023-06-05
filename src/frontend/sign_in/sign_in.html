@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon"> <!-- Adds a shortcut icon to the page -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="sign_in.css"> <!-- Links the CSS file associated with this page -->
     <title>Opções de entrada</title> <!-- Title of the page -->
 </head>
@@ -34,24 +35,26 @@
                 <!-- Field that encompasses and centers the icon and email input -->
                 <div class="center_email">
                     <img id="email_icon" src="images/email.png" alt="Icone de email">
-                    <input id="input1" type="text" placeholder="Digite seu email aqui">
+                    <input id="idEMail" type="text" placeholder="Digite seu email aqui">
                 </div>
                 <div id="line1" class="line"></div>
                 <h2 id="password">Senha</h2>  
                 <!-- Field that encompasses and centers the icon and user password input -->
                 <div class="center_password">
                     <img id="password_icon" src="images/password.png" alt="Icone de senha">
-                    <input type="password" id="input2" type="text" placeholder="Digite sua senha aqui">
+                    <input type="password" id="idSEnha" type="text" placeholder="Digite sua senha aqui">
                 </div>
                 <div id="line2" class="line"></div>
                 <!--Redirects the user to the password recovery screen-->
                 <a id="forget_password" href="../forgot_password/index.html">Esqueci a senha</a>
                 <!--Redirects the user to the screen that allows the selection of pending or delivered protocols-->
-                <a id="sign_in" href="../agricultor/agricultor.html">Entrar</a>
+                <button onclick="verificaUsuario()" id="sign_in">Entrar</button>
                 <!-- Redirects the user to the registration screen -->
                 <a id="sign_up" href="../sign_up/sign_up.html">Cadastre sua conta</a>
             </div>
         </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="sing_in.js"></script>
 </body>
 </html>
