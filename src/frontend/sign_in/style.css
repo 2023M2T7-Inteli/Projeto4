@@ -21,6 +21,11 @@ body {
     height: 100vh;
 }
 
+input {
+    background: none;
+    padding-left: 8px;
+}
+
 #logo {
     width: 55px;
     height: 55px;
