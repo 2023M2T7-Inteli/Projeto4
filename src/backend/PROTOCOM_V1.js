@@ -9,10 +9,10 @@ const hostname = '127.0.0.1';
 const port = 2021;
 const app = express();
 
-/* Move all static content to the frontend /
+/* Move all static content to the frontend */
 app.use(express.static("../frontend/"));
 
-/ Definition of endpoints */
+/* Definition of endpoints */
 /******** CRUD ************/
 app.use(express.json());
 
@@ -193,10 +193,10 @@ app.post('/insereAtividadeDoProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
 	var db = new sqlite3.Database(DBPATH); 
-	const { Atividade, Nome_Protocolo, Descricao, Data, Horario } = req.body;
-	sql = "INSERT INTO PROTOCOLO (Atividade, Nome_Protocolo, Descricao, Data, Horario) VALUES (?, ?, ?, ?, ?)";
+	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Usuario_FK } = req.body;
+	sql = "INSERT INTO PROTOCOLO (Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Usuario_FK) VALUES (?, ?, ?, ?, ?, ?)";
 	console.log(sql);
-	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario],  err => {
+	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Usuario_FK],  err => {
 		if (err) {
 		    throw err;
 		}	
@@ -242,11 +242,11 @@ app.get('/atualizaProtocolo', (req, res) => {
 app.post('/atualizaProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Protocolo } = req.body;
-	sql = "UPDATE PROTOCOLO SET Atividade = ?, Nome_Protocolo = ?, Descricao = ?, Data = ?, Horario = ? WHERE Id_Protocolo = ?";
+	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Protocolo, Id_Usuario_FK } = req.body;
+	sql = "UPDATE PROTOCOLO SET Atividade = ?, Nome_Protocolo = ?, Descricao = ?, Data = ?, Horario = ?, Id_Usuario_FK = ? WHERE Id_Protocolo = ?";
 	console.log(sql);
 	var db = new sqlite3.Database(DBPATH); 
-	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Protocolo],  err => {
+	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Usuario_FK, Id_Protocolo],  err => {
 		if (err) {
 		    throw err;
 		}
@@ -278,16 +278,17 @@ app.post('/removeProtocolo', urlencodedParser, (req, res) => {
 app.get('/numeroProtocolos', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
+	const { Id_Usuario_FK } = req.query;
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
 	var sql = 'SELECT COUNT(*) AS quantidade_campos FROM PROTOCOLO WHERE Id_Usuario_FK = ?;';
-		db.all(sql, [],  (err, rows ) => {
-			if (err) {
-				throw err;
-			}
-			res.json(rows);
-		});
-		db.close(); // Fecha o banco
-});
+	db.all(sql, [Id_Usuario_FK], (err, rows) => {
+	  if (err) {
+		throw err;
+	  }
+	  res.json(rows);
+	});
+	db.close(); // Fecha o banco
+  });  
 
 // Inserts a response into the RESPONSE table (it's the C in CRUD - Create). On line 282, it opens the database, and on line 294, it closes the database. 
 app.post('/insereResposta', urlencodedParser, (req, res) => {

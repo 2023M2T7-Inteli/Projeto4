@@ -30,20 +30,21 @@
             <p id="subtitle">Selecione uma das opções abaixo</p>
             <div id="divbtn1">
                 <!-- Button to access the protocols that need to be sent -->
-                <button id="btn_1" class="button">
-                <h1 id="title1_btn">Protocolos pendentes</h1>
-                <p id="text1_btn">Aqui você pode acessar os protocolos que você ainda precisa responder.</p>
-                <div id="notification">2</div>
+                <button onclick="redirecionarTela01()" id="btn_1" class="button">
+                    <h1 id="title1_btn">Protocolos pendentes</h1>
+                    <p id="text1_btn">Aqui você pode acessar os protocolos que você ainda precisa responder.</p>
+                <div id="notification"></div>
                 </button>
             </div>
             <div id="divbtn2">
                 <!-- Button to access the protocols that have been sent -->
-                <button id="btn_2" class="button">
+                <button onclick="redirecionarTela02()" id="btn_2" class="button">
                     <h1 id="title2_btn">Tarefas entregues</h1>
                     <p id="text2_btn">Aqui você pode acessar as tarefas que você já realizou.</p>
                 </button>
             </div>
         </div>
     </main>   
+    <script src="agricultor.js"></script>
 </body>
 </html>

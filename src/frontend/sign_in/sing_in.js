@@ -38,15 +38,23 @@ function verificaUsuario() {
       }
 
       // Check if the login was successful
-      if (emailExistente && senhaExistente) {
-        // Successful login
-        console.log("Login successful");
-        // Proceed to the next screen
-        if (tipoA === "agricultor") {
-          window.location.href = "agricultor.html";
-        } else if (tipoP === "pesquisador") {
-          window.location.href = "create_protocolos.html";
-        }
+      // ...
+
+// Verificar se o login foi bem-sucedido
+if (emailExistente && senhaExistente) {
+  // Login bem-sucedido
+  console.log("Login feito");
+
+  // Obter o ID do usuário
+  var userID = usuarios[i].Id_Usuario; // Supondo que a propriedade do ID do usuário seja chamada de "ID"
+  console.log(userID)
+
+  // Prosseguir para a próxima tela e passar o ID do usuário pela URL
+  if (tipoA === "agricultor") {
+    window.location.href = "/agricultor/agricultor.html?id=" + userID;
+  } else if (tipoP === "pesquisador") {
+    window.location.href = "/pesquisadores/pesquisadores.html?id=" + userID;
+  }
       } else {
         // Login failed
         exibirToast00();
