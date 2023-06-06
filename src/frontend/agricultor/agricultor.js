@@ -34,9 +34,7 @@ fetch('http://localhost:2021/numeroProtocolos?Id_Usuario_FK=' + userId)
       p.style.color = '#000000';
     }
 
-    function redirecionarTela01() {
-      // Function to redirect to the protocol response screen
-    }
+
 
     function redirecionarTela02() {
       // Function to redirect to the delivered protocols screen
@@ -45,3 +43,7 @@ fetch('http://localhost:2021/numeroProtocolos?Id_Usuario_FK=' + userId)
   .catch(function(error) {
     console.error('Error:', error.message);
   });
+
+  function redirecionarTela01() {
+    window.location.href = "/Select_P/Select_P.html"
+  }
