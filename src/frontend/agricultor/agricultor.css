@@ -78,7 +78,7 @@ main {
     font-style: normal;
     font-weight: 400;
     margin-left: 6px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 #icons_div {
@@ -139,7 +139,7 @@ main {
 #btn_1 {
     width: 398px;
     height: 96px;
-    background: linear-gradient(93.1deg, #1F8C69 0.35%, #0E4936 100%);;
+    background: white;
     border-radius: 10px;
     z-index: -1;
     display: block;
@@ -248,3 +248,4 @@ main {
         width: 100%;
     }
 }
+
