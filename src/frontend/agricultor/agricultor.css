@@ -10,9 +10,9 @@
 
 /* Defines the appearance of the header */
 header {
-    background-color: #F6F6F6;
+    background-color: #f6f6f6;
     width: 100%;
-    height: 49px;
+    height: 48px;
     align-items: center;
     display: flex;
 }
@@ -30,10 +30,11 @@ main {
 }
 
 #img_div {
-    overflow: hidden;
     display: flex;
     justify-content: center;
+    overflow: hidden;
     width: 100%;
+    z-index: -1;
 }
 
 /* Defines the position of the logo */
@@ -53,23 +54,26 @@ main {
 
 /* Defines the size of the gear */
 #gear {
-    width: 31px;
-    height: 31px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
 }
 
 /* Defines the size of the chat */
 #chat {
-    width: 27px;
-    height: 27px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
+}
+
+#trees {
+    height: 64px;
 }
 
 /* Defines the appereance, size and position of "Protocom" */
 #title_header {
     color: #000000;
-    width: 92px;
-    height: 26px;
+    width: fit-content;
     font-family: 'Righteous';
     font-style: normal;
     font-weight: 400;
@@ -121,6 +125,10 @@ main {
     padding-bottom: 15px;
 }
 
+#divbtn2 {
+    pointer-events: none;
+}
+
 #divbtn1 > button > :is(h1, p) {
     margin-left: 18px;
     width: calc(100% - 18px - 18px);
@@ -135,11 +143,11 @@ main {
 #btn_1 {
     width: 398px;
     height: 96px;
-    background: linear-gradient(93.1deg, #1F8C69 0.35%, #0E4936 100%);;
+    background: white;
     border-radius: 10px;
-    z-index: -1;
     display: block;
     margin-bottom: 17px;
+    cursor: pointer;
     position: relative;
     box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.16);
 }
@@ -238,3 +246,10 @@ main {
     color: #535353;
     text-align: left;
 }
+
+@media (min-width: 1107px) {
+    #trees {
+        width: 100%;
+    }
+}
+

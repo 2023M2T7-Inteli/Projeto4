@@ -1,0 +1,204 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Rubik";
+}
+
+body {
+    background-color: #f6f6f6;
+}
+
+header {
+    height: 48px;
+    display: flex;
+    align-items: center;
+}
+
+header > img {
+    margin-left: 16px;
+    width: 30px;
+    height: 30px;
+}
+
+header > h1 {
+    font-family: 'Righteous';
+    font-weight: 400;
+    font-size: 25px;
+    margin-left: 6px;
+}
+
+main {
+    height: calc(100vh - 48px);
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    overflow: hidden;
+}
+
+main > section {
+    width: 690px;
+    height: 90%;
+    /* height: 490px; */
+    background-color: #ffffff;
+    box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.12);
+}
+
+section > img {
+    width: 30px;
+    height: 30px;
+}
+
+#icons_div {
+    margin-left: auto;
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+}
+
+#icons_div > img {
+    width: 30px;
+    height: 30px;
+}
+
+#settings_icon {
+    margin-left: 13px;
+    margin-right: -2.5px;
+}
+
+#img_div {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+
+#trees {
+    height: 64px;
+}
+
+#title_div {
+    display: flex;
+    align-items: center;
+    height: 47px;
+    margin-left: 22px;
+    overflow: auto;
+}
+
+#title_div > button > img {
+    width: 25px;
+    height: 25px;
+    margin-left: -7.3px;
+    margin-right: -7.3px;
+}
+
+#title_div > h1 {
+    font-size: 17px;
+    font-weight: 500;
+    margin-left: 16px;
+}
+
+#title_div > button {
+    background: none;
+    display: flex;
+    align-items: center;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.line_1 {
+    height: 2px;
+    background-color: #e7e7e7;
+    width: calc(100% - 30px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buttons button {
+    width: 640px;
+    height: 71px;
+    border: 1px solid #E7E7E7;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: calc(90% - 36px);
+    padding: 25px;
+    padding-bottom: 36px;
+    overflow: auto;
+}
+
+
+.button-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 17px;
+    height: 100%;
+}
+
+.date-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 17px;
+    height: 100%;
+}
+
+.text-container h2{
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+}
+
+.text-container p {
+    font-family: 'Rubik', sans-serif;
+    font-size: 10px;
+    color: #535353;
+}
+
+.button-info h2,
+.button-info p,
+.date-container img,
+.date-container p {
+    margin: 0;
+}
+
+.button-info img {
+    width: 22px;
+    height: auto;
+}
+
+.date-container p {
+    font-family: 'Rubik', sans-serif;
+    font-size: 15px;
+}
+
+.buttons button:hover {
+    background: linear-gradient(rgba(255, 117, 65, 1), rgba(224, 76, 19, 1));
+}
+
+@media (max-width: 768px) {
+    .button-container button {
+        width: 90%;
+        height: 60px;
+    }
+}
+
+@media (min-width: 1107px) {
+    #trees {
+        width: 100%;
+    }
+}

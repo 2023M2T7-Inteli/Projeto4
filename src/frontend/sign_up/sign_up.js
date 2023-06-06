@@ -1,17 +1,104 @@
-/*Este código usa jQuery para manipular eventos de clique
-nos botões de rádio. Com base no botão selecionado, os elementos com a classe "option1"
-são mostrados se for a opção 1 selecionada, caso contrário, são ocultados. Os elementos com a classe "option2"
-são mostrados se não for a opção 1 selecionada, caso contrário, são ocultados.*/
+var nome = ""; // Variable to store the name
+var email = ""; // Variable to store the email
+var senha = ""; // Variable to store the password
+var tipoDePlantacao = ""; // Variable to store the type of plantation
+var senha2 = ""; // Variable to confirm the password
 
-$(document).ready(function() {
-  $('input[type="radio"]').click(function() {
-    var selectedValue = $(this).attr('id');
-    if (selectedValue === "option1") {
-      $('.option1').show();
-      $('.option2').hide();
-    } else {
-      $('.option1').hide();
-      $('.option2').show();
+function inserirResposta(nome, email, senha, tipoDePlantacao, categoria, senha2) {
+  // Create an XMLHttpRequest object
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'http://localhost:2021/insereUsuario', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      // The request has been completed and the response is ready
+      if (xhr.status === 200) {
+        // The request was successful (status 200)
+        console.log('Successful request');
+      } else {
+        // The request failed with a status other than 200
+        console.log('Request error: ' + xhr.status);
+      }
     }
-  });
-});
+  };
+
+  if (nome === "" || email === "" || senha === "" || senha2 === "" || tipoDePlantacao === "") {
+    exibirToast03(); // Display an error message
+    return;
+  } else if (senha !== senha2) {
+    exibirToast04(); // Display an error message
+    return;
+  } else if (!/@.+/.test(email)) {
+    exibirToast05(); // Display an error message
+    return;
+  }
+
+  // If all checks pass, proceed with the registration
+  var params = new URLSearchParams();
+  params.append('Nome', nome);
+  params.append('Email', email);
+  params.append('Senha', senha);
+  params.append('ConfirmarSenha', senha2);
+  params.append('TipoDePlantacao', tipoDePlantacao);
+  params.append('Categoria', categoria);
+
+  console.log("Registration successful");
+
+  setTimeout(() => {
+    xhr.send(params.toString()); // Send the request after a delay of 3 seconds
+  }, 3000);
+
+  exibirToast02(); // Display a success message
+}
+
+function criarConta() {
+  var nome = document.getElementById('idNome').value;
+  var email = document.getElementById('idEmail').value;
+  var senha = document.getElementById('idSenha').value;
+  var senha2 = document.getElementById('idSenha2').value;
+  var tipoDePlantacao = document.getElementById('idPla').value;
+  var categoria = "agricultor";
+
+  inserirResposta(nome, email, senha, tipoDePlantacao, categoria, senha2);
+}
+
+function exibirToast02() {
+  Toastify({
+    text: "REGISTRO CONCLUIDO!",
+    duration: 3000, // Duration in milliseconds
+    close: true, // Show close button
+    gravity: "top", // Toast position (top, bottom, left, right)
+    position: "right", // Toast alignment (left, center, right)
+  }).showToast();
+}
+
+function exibirToast03() {
+  Toastify({
+    text: "REGISTRO NÃO CONCLUIDO, VERIFIQUE SE TODOS OS CAMPOS FORAM PREENCHIDOS!",
+    duration: 3000, // Duration in milliseconds
+    close: true, // Show close button
+    gravity: "top", // Toast position (top, bottom, left, right)
+    position: "right", // Toast alignment (left, center, right)
+  }).showToast();
+}
+
+function exibirToast05() {
+  Toastify({
+    text: "ISSO NÃO É UM EMAIL!",
+    duration: 3000, // Duration in milliseconds
+    close: true, // Show close button
+    gravity: "top", // Toast position (top, bottom, left, right)
+    position: "right", // Toast alignment (left, center, right)
+  }).showToast();
+}
+
+function exibirToast04() {
+  Toastify({
+    text: "SENHAS DIFERENTES!",
+    duration: 3000, // Duration in milliseconds
+    close: true, // Show close button
+    gravity: "top", // Toast position (top, bottom, left, right)
+    position: "right", // Toast alignment (left, center, right)
+  }).showToast();
+}

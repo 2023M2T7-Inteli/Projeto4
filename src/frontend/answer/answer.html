@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responder protocolo</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="answer.css">
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="logo">
+        <h1>Protocom</h1>
+        <div id="icons_div">
+            <img src="images/chat.png" alt="chat_icon">
+            <img src="images/settings.png" alt="settings_icon" id="settings_icon">
+        </div>
+    </header>
+    <div id="img_div">
+        <img src="images/trees.jpeg" alt="background image" id="trees">
+        <div id="image_color"></div>
+    </div>
+    <main>
+        <img src="images/orange_leaves.png" alt="Folhas laranjas como imagem de fundo" id="orange_leaves">
+        <img src="images/green_leaves.png" alt="Folhas verdes como imagem de fundo" id="green_leaves">
+        <section>
+            <!-- TITULO DO PROTOCOLO -->
+            <div id="title_div">
+                <img src="images/back.png" alt="back">
+                <h1>Protocolo: <span id="protocol_name">“Folha do açaí”</span></h1>
+                <button id="done_button">Pronto</button>
+            </div>
+            <div class="line_1"></div>
+
+            <div id="scroll">
+                <!-- DESCRIÇÃO -->
+                <p id="desc">Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa</p>
+                <div class="line"></div>
+
+                <!--CATEGORIA DE IMAGEM-->
+                <div class="category">
+                    <div class="category_header">
+                        <img src="images/image_category.png" alt="Ícone da categoria de imagem">
+                        <h2 class="category_name">Fotos da planta</h2>
+                    </div>
+                    <h3 class="category_desc">Tirar fotos de todos os lados da planta</h3>
+                    <div class="category_inputs">
+                        <ul>
+                            <li><span>Imagem 1:</span><button class="added_image">image240394_9391391_8239.jpg</button></li>
+                            <li><span>Imagem 2:</span><button class="added_image">image371948_03642_1143.jpg</button></li>
+                            <li><span>Imagem 3:</span><button class="add_image">Inserir arquivo</button></li>
+                            <li><span>Imagem 4:</span><button class="add_image">Inserir arquivo</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="line"></div>
+
+                <!--CATEGORIA DE TEXTO-->
+                <div class="category">
+                    <div class="category_header">
+                        <img src="images/text_category.png" alt="Ícone da categoria de texto">
+                        <h2 class="category_name">Clima</h2>
+                    </div>
+                    <h3 class="category_desc">Como estava o clima quando você extraiu a planta?</h3>
+                    <div class="category_inputs">
+                        <textarea required></textarea>
+                        <label>Digite sua resposta aqui.</label>
+                    </div>
+                </div>
+                <div class="line"></div>
+
+                <!--CATEGORIA DE OPÇÃO-->
+                <div class="category">
+                    <div class="category_header">
+                        <img src="images/option_category.png" alt="Ícone da categoria de opções">
+                        <h2 class="category_name">Estado da planta</h2>
+                    </div>
+                    <h3 class="category_desc">A planta estava madura ou verde ao extraí-la?</h3>
+                    <div class="category_inputs">
+                        <div class="option_div">
+                            <input type="radio" name="option" id="option_1">
+                            <label for="option_1">Opção</label>
+                        </div>
+                        <div class="option_div">
+                            <input type="radio" name="option" id="option_2">
+                            <label for="option_2">Opção</label>
+                        </div>
+                        <div class="option_div">
+                            <input type="radio" name="option" id="option_3">
+                            <label for="option_3">Opção</label>
+                        </div>
+                        <div class="option_div">
+                            <input type="radio" name="option" id="option_4">
+                            <label for="option_4">Opção</label>
+                        </div>
+                        <div class="option_div">
+                            <input type="radio" name="option" id="option_5">
+                            <label for="option_5">Opção</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+
+                <div class="category">
+                    <div class="category_header">
+                        <img src="images/check_category.png" alt="Ícone da categoria de checkbox">
+                        <h2 class="category_name">Processos</h2>
+                    </div>
+                    <h3 class="category_desc">Marque os processos que você realizou</h3>
+                    <div class="category_inputs_checkbox">
+                        <div class="option_div">
+                            <input type="checkbox" name="option" id="checkbox_1">
+                            <label for="checkbox_1">Fiz isso</label>
+                        </div>
+                        <div class="option_div">
+                            <input type="checkbox" name="option" id="checkbox_2">
+                            <label for="checkbox_2">Fiz isso</label>
+                        </div>
+                        <div class="option_div">
+                            <input type="checkbox" name="option" id="checkbox_3">
+                            <label for="checkbox_3">Fiz isso</label>
+                        </div>
+                        <div class="option_div">
+                            <input type="checkbox" name="option" id="checkbox_4">
+                            <label for="checkbox_4">Fiz isso</label>
+                        </div>
+                        <div class="option_div">
+                            <input type="checkbox" name="option" id="checkbox_5">
+                            <label for="checkbox_5">Fiz isso</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+            </div>
+        </section>
+    </main>
+    <script src="answer.js"></script>
+</body>
+</html>
