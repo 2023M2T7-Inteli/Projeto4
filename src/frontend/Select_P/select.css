@@ -87,7 +87,7 @@ section > img {
     overflow: auto;
 }
 
-#title_div > img {
+#title_div > button > img {
     width: 25px;
     height: 25px;
     margin-left: -7.3px;
@@ -98,6 +98,15 @@ section > img {
     font-size: 17px;
     font-weight: 500;
     margin-left: 16px;
+}
+
+#title_div > button {
+    background: none;
+    display: flex;
+    align-items: center;
+    outline: none;
+    border: none;
+    cursor: pointer;
 }
 
 .line_1 {
