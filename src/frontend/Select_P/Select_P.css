@@ -1,36 +1,37 @@
+/* Importing the external fonts from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
 
-
+/* Setting default properties for all elements */
 * {
     padding: 0px;
     margin: 0px;
     font-family: "Rubik";
 }
-
+/* Styling for the body */
 body {
     background-color: #f6f6f6;
 }
-
+/* Styling for the header */
 header {
     height: 48px;
     display: flex;
     align-items: center;
 }
-
+/* Styling for the image in the header */
 header > img {
     margin-left: 16px;
     width: 30px;
     height: 30px;
 }
-
+/* Styling for the h1 heading in the header */
 header > h1 {
     font-family: 'Righteous';
     font-weight: 400;
     font-size: 25px;
     margin-left: 6px;
 }
-
+/* Styling for the main section of the webpage */
 main {
     height: calc(100vh - 48px);
     display: flex;
@@ -39,11 +40,11 @@ main {
     justify-content: center;
     overflow: hidden;
 }
-
+/* Styling for sections inside the main */
 main > section {
     width: 690px;
     height: 90%;
-    /* height: 490px; */
+    
     background-color: #ffffff;
     box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.12);
 }
@@ -52,7 +53,7 @@ section > img {
     width: 30px;
     height: 30px;
 }
-
+/* Styling for a div that presumably contains icons and a specific icon id */
 #icons_div {
     margin-left: auto;
     margin-right: 16px;
@@ -82,7 +83,7 @@ section > img {
 #trees {
     height: 64px;
 }
-
+/* Styling for a container likely holding a title and the title itself */
 #title_div {
     display: flex;
     align-items: center;
@@ -103,7 +104,7 @@ section > img {
     font-weight: 500;
     margin-left: 16px;
 }
-
+/* Styling for a divider line */
 .line_1 {
     height: 2px;
     background-color: #e7e7e7;
@@ -111,7 +112,7 @@ section > img {
     margin-left: auto;
     margin-right: auto;
 }
-
+/* Styling for buttons and their containers */
 .buttons button {
     width: 640px;
     min-height: 71px;
@@ -259,6 +260,7 @@ section > img {
     background-color: rgba(234, 53, 53, 1);
 }
 
+/* The @media rules for responsiveness */
 @media (max-width: 768px) {
     .button-container button {
         width: 90%;

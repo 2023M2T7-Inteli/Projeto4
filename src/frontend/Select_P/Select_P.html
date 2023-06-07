@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Metadata about the webpage -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +11,16 @@
 </head>
 <body>
     <header>
+        <!-- Logo for the webpage -->
         <img src="images/logo.png" alt="logo">
         <h1>Protocom</h1>
+        <!-- Div container for chat and settings icons -->
         <div id="icons_div">
             <img src="images/chat.png" alt="chat_icon">
             <img src="images/settings.png" alt="settings_icon" id="settings_icon">
         </div>
     </header>
+     <!-- Div for displaying background image -->
     <div id="img_div">
         <img src="images/trees.jpeg" alt="background image" id="trees">
     </div>
@@ -24,15 +28,16 @@
         
         <section>
             
-                <!-- TITULO DO PROTOCOLO -->
+                <!-- Div for protocol title -->
                 <div id="title_div">
                     <img src="images/back.png" alt="back">
                     <h1>Protocolos pendentes</h1>
                 </div>
+                <!-- Line separator -->
                 <div class="line_1"></div>
-
+                <!-- Scrollable area starts -->
                 <div id="scroll">
-                <!-- BOTÕES -->
+                <!-- Buttons container-->
                 <div class="buttons">
                     <div class="button_div">
                         <div class="circle"></div>
@@ -157,13 +162,7 @@
             </div>
         </section>
     </main>
+    <!-- JavaScript file linked -->
     <script src="Select_P.js"></script>
-    <script>
-        window.onload = function() {
-            var buttons = document.querySelectorAll('.buttons button');
-            buttons[0].classList.add('first-two-buttons');
-            buttons[1].classList.add('first-two-buttons');
-        }
-    </script>
 </body>
 </html>
