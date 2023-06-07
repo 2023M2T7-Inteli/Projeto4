@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
+
+
 * {
     padding: 0px;
     margin: 0px;
@@ -110,25 +114,30 @@ section > img {
 
 .buttons button {
     width: 640px;
-    height: 71px;
+    min-height: 71px;
     border: 1px solid #E7E7E7;
+    margin-bottom: 100px;
 }
+
+.buttons button:last-child {
+    margin-bottom: 17px;
+}
+
 
 .buttons {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     height: calc(90% - 36px);
     padding: 25px;
     padding-bottom: 36px;
     overflow: auto;
 }
 
-
 .button-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .text-container {
@@ -151,13 +160,20 @@ section > img {
 
 .text-container h2{
     font-family: 'Rubik', sans-serif;
-    font-size: 14px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 17.78px;
 }
 
+
 .text-container p {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Rubik';
     font-size: 10px;
     color: #535353;
+}
+
+.buttons .indicator {
+    border-radius: 5px; 
 }
 
 .button-info h2,
@@ -178,7 +194,69 @@ section > img {
 }
 
 .buttons button:hover {
-    background: linear-gradient(rgba(255, 117, 65, 1), rgba(224, 76, 19, 1));
+    background:
+    linear-gradient(90.71deg, #FF7541 0%, #E04C13 100%);
+    
+}
+
+.buttons button:hover .text-container h2,
+.buttons button:hover .text-container p,
+.buttons button:hover .date-container p {
+    color: white;
+}
+
+#scroll {
+    width: 690px;
+    height: calc(100% - 49px);
+    overflow: auto;
+}
+
+#scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+#scroll::-webkit-scrollbar-thumb {
+    background-color: #1d1d1d;
+    border-radius: 6px;
+}
+
+#scroll::-webkit-scrollbar-track-piece:end {
+    background-color: #e7e7e7;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+#scroll::-webkit-scrollbar-track-piece:start {
+    background-color: #e7e7e7;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+#scroll > *:first-child {
+    margin-top: 14.5px;
+}
+
+#scroll > *:nth-last-child(2) {
+    margin-bottom: 13px;
+}
+
+.circle {
+    background-color:rgba(234, 196, 53, 1);
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin-left: -17px;
+    margin-right: 7px;
+    display: block;
+}
+
+.button_div {
+    display: flex;
+    align-items: center;
+
+}
+.buttons .button_div:last-child .indicator {
+    background-color: rgba(234, 53, 53, 1);
 }
 
 @media (max-width: 768px) {
