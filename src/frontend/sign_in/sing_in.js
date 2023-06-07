@@ -47,13 +47,12 @@ if (emailExistente && senhaExistente) {
 
   // Obter o ID do usuário
   var userID = usuarios[i].Id_Usuario; // Supondo que a propriedade do ID do usuário seja chamada de "ID"
-  console.log(userID)
 
   // Prosseguir para a próxima tela e passar o ID do usuário pela URL
   if (tipoA === "agricultor") {
     window.location.href = "/agricultor/agricultor.html?id=" + userID;
   } else if (tipoP === "pesquisador") {
-    window.location.href = "/pesquisadores/pesquisadores.html?id=" + userID;
+    window.location.href = "/create-protocols/create-protocols.html?id=" + userID;
   }
       } else {
         // Login failed
