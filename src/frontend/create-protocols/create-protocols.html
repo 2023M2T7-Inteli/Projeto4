@@ -34,17 +34,46 @@
         <div id="left_sec">
             <section>
                 <aside>
-                    <button onclick="mudarCor(this)" class="aside_buttons">Salvar</button>
-                    <button onclick="mudarCor(this)" class="aside_buttons">Apagar tudo</button>
-                    <button onclick="mudarCor(this)" class="aside_buttons">Categorias</button>
-                    <button onclick="mudarCor(this)" class="aside_buttons">Enviar</button>
-                    <button onclick="mudarCor(this)" class="aside_buttons">Ajuda</button>
+                    <button onclick="changeColor(this)">Salvar</button>
+                    <button onclick="changeColor(this)">Apagar tudo</button>
+                    <button onclick="changeColor(this)" id="categories_button">Categorias<img src="images/arrow_down.png"></button>
+                    <button onclick="changeColor(this)">Enviar</button>
+                    <button onclick="changeColor(this)">Ajuda</button>
                 </aside>
+                <div id="articles_div">
+                    <article id="new_protocol_article">
+                        <h1 class="title_section">Criar novo protocolo</h1>
+                        <div class="line"></div>
+                        <div class="label_div"><label>Título:</label><input type="text"></div>
+                        <div class="label_div"><label>Descrição:</label><textarea></textarea></div>
+                        <div class="label_div">
+                            <label>Data limite:</label><input type="text">
+                            <label>Horário limite:</label><input type="text">
+                        </div>
+                    </article>
+                    <article id="categories_article">
+                        <h1 class="title_section">Categorias</h1>
+                        <div class="line"></div>
+                        <div class="centralize">
+                            <p>Nenhuma categoria selecionada</p>
+                        </div>
+                    </article>
+                </div>
             </section>
         </div>
         <div id="right_sec">
-            <section></section>
-            <section></section>
+            <section>
+                <article>
+                    <h1 class="title_section">Predefinições</h1>
+                    <div class="line"></div>
+                </article>
+            </section>
+            <section>
+                <article>
+                    <h1 class="title_section">Destinatários</h1>
+                    <div class="line"></div>
+                </article>
+            </section>
         </div>
     </main>
     <script src="create-protocols.js"></script>

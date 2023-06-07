@@ -78,7 +78,6 @@ aside {
     background-color: #1d1d1d;
     height: 100%;
     width: 25%;
-    min-width: 55px;
 }
 
 aside > button {
@@ -89,6 +88,18 @@ aside > button {
     cursor: pointer;
     height: 55px;
     padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+aside > .category {
+    padding-left: 25px;
+    height: 45px;
+    animation: slideDown 1s ease;
+}
+
+aside > .category:last-child {
 }
 
 aside > button:hover {
@@ -97,6 +108,57 @@ aside > button:hover {
 
 aside > button:first-child {
     margin-top: 14px;
+}
+
+aside > button > img {
+    width: 18px;
+    height: 18px;
+    margin-left: auto;
+}
+
+article {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-left: 22px;
+    font-weight: 400;
+    font-size: 13px;
+    display: block;
+    color: #535353;
+    width: 100px;
+    min-width: max-content;
+    margin-top: 6px;
+}
+
+input {
+    outline: none;
+    border: 1px solid #e7e7e7;
+    border-radius: 6px;
+    height: 27px;
+    margin-left: 8px;
+    width: 100%;
+    margin-right: 22px;
+}
+
+textarea {
+    outline: none;
+    border: 1px solid #e7e7e7;
+    border-radius: 6px;
+    height: 68px;
+    resize: none;
+    width: 100%;
+    margin-left: 8px;
+    margin-right: 22px;
+}
+
+p {
+    font-weight: 400;
+    font-size: 15px;
+    color: #9F9F9F;
+    width: fit-content;
 }
 
 #left_sec, #right_sec {
@@ -115,6 +177,7 @@ aside > button:first-child {
     justify-content: space-between;
     height: 90%;
     align-items: center;
+    width: 95%;
 }
 
 #left_sec > section {
@@ -124,6 +187,7 @@ aside > button:first-child {
     width: calc(100% - 25px);
     height: 90%;
     overflow: auto;
+    display: flex;
 }
 
 #right_sec > section {
@@ -176,6 +240,57 @@ aside > button:first-child {
     height: 64px;
 }
 
+
+#articles_div {
+    width: 100%;
+}
+
+#new_protocol_article {
+    height: calc(50% - 1px);
+}
+
+#new_protocol_article > div {
+    display: flex;
+}
+
+#categories_article {
+    height: calc(50% + 1px);
+}
+
+#categories_article > .centralize {
+    height: 100%;
+    margin-bottom: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label_div {
+    margin-bottom: 20px;
+}
+
+.label_div:last-child {
+    margin-bottom: 0px;
+}
+
+.title_section {
+    margin-top: 13px;
+    margin-left: 22px;
+    font-weight: 400;
+    font-size: 15px;
+    color: #9F9F9F;
+}
+
+.line {
+    height: 1.5px;
+    background-color: #e7e7e7;
+    width: calc(100% - 26px);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 13px;
+    margin-bottom: 13px;
+}
+
 @media (min-width: 1107px) {
     #trees {
         width: 100%;
@@ -185,6 +300,26 @@ aside > button:first-child {
 @media (max-width: 989px) {
     #orange_bg {
         width: 110px;
+    }
+
+    aside > button {
+        font-size: 9px;
+    }
+
+    aside > button > img {
+        width: 11.5px;
+        height: 11.5px;
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
