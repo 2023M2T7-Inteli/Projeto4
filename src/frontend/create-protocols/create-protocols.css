@@ -99,9 +99,6 @@ aside > .category {
     animation: slideDown 1s ease;
 }
 
-aside > .category:last-child {
-}
-
 aside > button:hover {
     color: rgba(255, 255, 255, 0.75);
 }

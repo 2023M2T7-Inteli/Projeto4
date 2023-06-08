@@ -19,6 +19,7 @@ body {
     justify-content: center;
     flex-direction: column;
     height: 100vh;
+    background-color: #f6f6f6;
 }
 
 input {
@@ -64,7 +65,7 @@ input {
 }
 
 #section1 {
-    background: #F6F6F6;
+    background: #ffffff;
     border-radius: 23px 0px 0px 23px;
     width: 450px;
     height: 400px;
@@ -320,12 +321,11 @@ input {
 }
 
 #seepassword_icon {
-
     height: 16px;
     right: 132px;
     left: 374px;
     top: 274px;
-    margin-left: 80px;
+    margin-left: 60px;
 }
 
 #seepassword_icon2 {
