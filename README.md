@@ -94,6 +94,23 @@ npm start
 * 0.2.0 - 15/01/2022
     * Remove `setDefaultXYZ()`
     * Adiciona `init()`
+
+* 0.3.1 - 02/06/2023
+    * Integração da página de login
+    * Adiciona comentários na tela de login
+    * Desenvolvimento da tela inicial do agricultor
+
+* 0.3.0 - 01/06/2023
+    * Melhorias no banco de dados
+    * Aprimoramente do frontend da tela de login
+    
+* 0.2.9 - 29/05/2023
+    * Arruma todas as vulnerabilidades de injeção de SQL
+    * Criação de novos endpoints
+    
+* 0.2.8 - 26/05/2023
+    * Adiciona comentários nas telas restantes
+    
 * 0.2.7 - 25/05/2023
     * Confecção do Read.me
     * Adiciona imagens na tela do agricultor
