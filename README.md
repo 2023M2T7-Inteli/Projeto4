@@ -89,11 +89,45 @@ npm start
 
 ## 🗃 Histórico de lançamentos
 
-* 0.2.1 - 25/01/2022
-    * Atualização de documentos (código do módulo permanece inalterado).
-* 0.2.0 - 15/01/2022
-    * Remove `setDefaultXYZ()`
-    * Adiciona `init()`
+* 0.3.6 - 07/06/2023
+    * Desenvolvimento e correção do design na página de selecionar protocolos (Select_P)
+    * Alteração de alguns detalhes de design e funcionamento da página "create-protocols"
+    * Alteração na documentação (WAD)
+    * Novas imagens ao WAD
+    * Update no readme.md
+    * Inserção de comentários na frontend da página de responder protocolos (answer)
+    * Remoção da antiga página dos pesquisadores
+
+* 0.3.5 - 06/06/2023
+    * Correção de erros de design
+    * Implementação da responsividade na página de cadastro
+    * Início à nova página dos pesquisadores (create-protocols)
+    * Desenvolvimento e correções de erros na página de selecionar protocolos (Select_P)
+    * Modificação das tags de botão para âncora no HTML
+    * Integraçao da navegação entre algumas páginas
+    * Correção do erro de um botão na página inicial do agricultor
+    * Versão em PDF dos WADs adicionada
+    * Update no readme.md
+
+* 0.3.4 - 05/06/2023
+    * Correção de erros no código de integração da página de login
+    * Implementação da responsividade na página de login e na página inicial do agricultor
+    * Alteração do design da página do agricultor para manter o mesmo padrão em relação as outras páginas
+    * Criação da nova tela de login
+    * Novo endpoint e novo script para a página do agricultor
+    * Remoção de elementos desnecessários para o cadastro do extrativista (telefone)
+    * Tradução de alguns comentários do backend e página de login do português para inglês
+    * Integração do backend para a página incial do agricultor
+
+* 0.3.3 - 04/06/2023
+    * Integração da página de cadastro
+    * Alterações no código backend
+    * Correção de erros no código de integração da página de cadastro
+
+* 0.3.2 - 03/06/2023
+    * Integração do frontend página de cadastro
+    * Adiciona comentários no código JavaScript da página de cadastro
+    * Criação da página de responder protocolos
 
 * 0.3.1 - 02/06/2023
     * Integração da página de login
