@@ -87,28 +87,64 @@ npm start
 5. Agora você pode acessar a aplicação através do link http://localhost:1234/
 6. O servidor está online.
 
-
-```
-Alunos inteli (remover essa observação do readme.md após leitura e execução):
-
-1. Certifique-se que há um arquivo "package.json" na pasta backend do projeto.
-
-2. Dentro deste arquivo, encontre a propriedade "scripts", e adicione um atributo de nome "start"
-com o valor "node <CAMINHO_DO_ARQUIVO_DO_SERVIDOR>." Atenção: "<CAMINHO_DO_ARQUIVO_DO_SERVIDOR>" 
-deve ser substituído pelo caminho para o arquivo principal da aplicação, utilizado para subir o
-servidor. Por exemplo, se o arquivo utilizado para subir o servidor é "app.js", o atributo start
-deve possuir o valor "node app.js".
-
-3. No arquivo utilizado para subir a aplicação, defina a porta padrão de execução para "1234".
-````
-
 ## 🗃 Histórico de lançamentos
 
-* 0.2.1 - 25/01/2022
-    * Atualização de documentos (código do módulo permanece inalterado).
-* 0.2.0 - 15/01/2022
-    * Remove `setDefaultXYZ()`
-    * Adiciona `init()`
+* 0.3.6 - 07/06/2023
+    * Desenvolvimento e correção do design na página de selecionar protocolos (Select_P)
+    * Alteração de alguns detalhes de design e funcionamento da página "create-protocols"
+    * Alteração na documentação (WAD)
+    * Novas imagens ao WAD
+    * Update no readme.md
+    * Inserção de comentários na frontend da página de responder protocolos (answer)
+    * Remoção da antiga página dos pesquisadores
+
+* 0.3.5 - 06/06/2023
+    * Correção de erros de design
+    * Implementação da responsividade na página de cadastro
+    * Início à nova página dos pesquisadores (create-protocols)
+    * Desenvolvimento e correções de erros na página de selecionar protocolos (Select_P)
+    * Modificação das tags de botão para âncora no HTML
+    * Integraçao da navegação entre algumas páginas
+    * Correção do erro de um botão na página inicial do agricultor
+    * Versão em PDF dos WADs adicionada
+    * Update no readme.md
+
+* 0.3.4 - 05/06/2023
+    * Correção de erros no código de integração da página de login
+    * Implementação da responsividade na página de login e na página inicial do agricultor
+    * Alteração do design da página do agricultor para manter o mesmo padrão em relação as outras páginas
+    * Criação da nova tela de login
+    * Novo endpoint e novo script para a página do agricultor
+    * Remoção de elementos desnecessários para o cadastro do extrativista (telefone)
+    * Tradução de alguns comentários do backend e página de login do português para inglês
+    * Integração do backend para a página incial do agricultor
+
+* 0.3.3 - 04/06/2023
+    * Integração da página de cadastro
+    * Alterações no código backend
+    * Correção de erros no código de integração da página de cadastro
+
+* 0.3.2 - 03/06/2023
+    * Integração do frontend página de cadastro
+    * Adiciona comentários no código JavaScript da página de cadastro
+    * Criação da página de responder protocolos
+
+* 0.3.1 - 02/06/2023
+    * Integração da página de login
+    * Adiciona comentários na tela de login
+    * Desenvolvimento da tela inicial do agricultor
+
+* 0.3.0 - 01/06/2023
+    * Melhorias no banco de dados
+    * Aprimoramente do frontend da tela de login
+    
+* 0.2.9 - 29/05/2023
+    * Arruma todas as vulnerabilidades de injeção de SQL
+    * Criação de novos endpoints
+    
+* 0.2.8 - 26/05/2023
+    * Adiciona comentários nas telas restantes
+    
 * 0.2.7 - 25/05/2023
     * Confecção do Read.me
     * Adiciona imagens na tela do agricultor
