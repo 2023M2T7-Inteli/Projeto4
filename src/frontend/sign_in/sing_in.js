@@ -3,6 +3,9 @@ function verificaUsuario() {
   // Get the email and password from the form
   var email = document.getElementById('idEMail').value;
   var senha = document.getElementById('idSEnha').value;
+
+  email = String(email);
+  senha = String(senha);
   
   // Variables to store the user type
   var tipoA = "";
@@ -40,15 +43,15 @@ function verificaUsuario() {
       // Check if the login was successful
       // ...
 
-// Verificar se o login foi bem-sucedido
+// Check if the login was successful
 if (emailExistente && senhaExistente) {
-  // Login bem-sucedido
+// Login successful
   console.log("Login feito");
 
-  // Obter o ID do usuário
+// Get the user ID
   var userID = usuarios[i].Id_Usuario; // Supondo que a propriedade do ID do usuário seja chamada de "ID"
 
-  // Prosseguir para a próxima tela e passar o ID do usuário pela URL
+// Proceed to the next screen and pass the userid through the URL
   if (tipoA === "agricultor") {
     window.location.href = "/agricultor/agricultor.html?id=" + userID;
   } else if (tipoP === "pesquisador") {
