@@ -42,14 +42,10 @@ function verificaUsuario() {
         }
       }
 
-<<<<<<< Updated upstream
       // Check if the login was successful
       // ...
 
 // Check if the login was successful
-=======
-// Verificar se o login foi bem-sucedido
->>>>>>> Stashed changes
 if (emailExistente && senhaExistente) {
 // Login successful
   console.log("Login feito");

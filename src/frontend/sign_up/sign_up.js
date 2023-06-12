@@ -50,7 +50,6 @@ function inserirResposta(nome, email, senha, tipoDePlantacao, categoria, senha2)
   }, 3000);
 
   exibirToast02(); // Display a success message
-  limparDados();
 }
 
 function criarConta() {
@@ -65,6 +64,7 @@ function criarConta() {
 }
 
 function exibirToast02() {
+  limparDados();
   Toastify({
     text: "REGISTRO CONCLUIDO!",
     duration: 3000, // Duration in milliseconds
@@ -105,9 +105,19 @@ function exibirToast04() {
 }
 
 function limparDados() {
-  document.getElementById("idNome").value = "";
-  document.getElementById("idEMail").value = "";
-  document.getElementById("idSenha").value = "";
-  document.getElementById("idSenha2").value = "";
-  document.getElementById("idPla").value = "";
+  var idNome = document.getElementById("idNome");
+  var idEmail = document.getElementById("idEmail");
+  var idSenha = document.getElementById("idSenha");
+  var idSenha2 = document.getElementById("idSenha2");
+  var idPla = document.getElementById("idPla");
+
+  if (idNome && idEmail && idSenha && idSenha2 && idPla) {
+    idNome.value = "";
+    idEmail.value = "";
+    idSenha.value = "";
+    idSenha2.value = "";
+    idPla.value = "";
+  }
 }
+
+
