@@ -193,10 +193,10 @@ app.post('/insereAtividadeDoProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
 	var db = new sqlite3.Database(DBPATH); 
-	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Usuario_FK } = req.body;
-	sql = "INSERT INTO PROTOCOLO (Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Usuario_FK) VALUES (?, ?, ?, ?, ?, ?)";
+	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK } = req.body;
+	sql = "INSERT INTO PROTOCOLO (Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	console.log(sql);
-	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Usuario_FK],  err => {
+	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK],  err => {
 		if (err) {
 		    throw err;
 		}	
@@ -242,11 +242,11 @@ app.get('/atualizaProtocolo', (req, res) => {
 app.post('/atualizaProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Protocolo, Id_Usuario_FK } = req.body;
-	sql = "UPDATE PROTOCOLO SET Atividade = ?, Nome_Protocolo = ?, Descricao = ?, Data = ?, Horario = ?, Id_Usuario_FK = ? WHERE Id_Protocolo = ?";
+	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Protocolo, Id_Usuario_FK } = req.body;
+	sql = "UPDATE PROTOCOLO SET Atividade = ?, Nome_Protocolo = ?, Descricao = ?, Data = ?, Horario = ?, Visualizado = ?, Id_Usuario_FK = ? WHERE Id_Protocolo = ?";
 	console.log(sql);
 	var db = new sqlite3.Database(DBPATH); 
-	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Id_Usuario_FK, Id_Protocolo],  err => {
+	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Id_Protocolo],  err => {
 		if (err) {
 		    throw err;
 		}
