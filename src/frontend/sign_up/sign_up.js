@@ -50,6 +50,7 @@ function inserirResposta(nome, email, senha, tipoDePlantacao, categoria, senha2)
   }, 3000);
 
   exibirToast02(); // Display a success message
+  limparDados();
 }
 
 function criarConta() {
@@ -101,4 +102,12 @@ function exibirToast04() {
     gravity: "top", // Toast position (top, bottom, left, right)
     position: "right", // Toast alignment (left, center, right)
   }).showToast();
+}
+
+function limparDados() {
+  document.getElementById("idNome").value = "";
+  document.getElementById("idEMail").value = "";
+  document.getElementById("idSenha").value = "";
+  document.getElementById("idSenha2").value = "";
+  document.getElementById("idPla").value = "";
 }

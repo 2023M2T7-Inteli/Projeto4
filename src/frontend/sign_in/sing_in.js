@@ -10,6 +10,8 @@ function verificaUsuario() {
   // Variables to store the user type
   var tipoA = "";
   var tipoP = "";
+  var emailExistente = false;
+  var senhaExistente = false;
   
   // Create an AJAX request
   var xhr = new XMLHttpRequest();
@@ -19,13 +21,13 @@ function verificaUsuario() {
       // Convert the response into a JSON object
       var usuarios = JSON.parse(xhr.responseText);
   
-      // Variables to check if the email and password exist
-      var emailExistente = false;
-      var senhaExistente = false;
-  
       // Check if the email and password exist in the database
       for (var i = 0; i < usuarios.length; i++) {
-        if (usuarios[i].Email === email && usuarios[i].Senha === senha) {
+        console.log(usuarios[i].Email);
+        console.log(email);
+        console.log(usuarios[i].Senha);
+        console.log(senha);
+        if (usuarios[i].Email === email && String(usuarios[i].Senha) === senha) {
           emailExistente = true;
           senhaExistente = true;
     
@@ -40,10 +42,14 @@ function verificaUsuario() {
         }
       }
 
+<<<<<<< Updated upstream
       // Check if the login was successful
       // ...
 
 // Check if the login was successful
+=======
+// Verificar se o login foi bem-sucedido
+>>>>>>> Stashed changes
 if (emailExistente && senhaExistente) {
 // Login successful
   console.log("Login feito");
