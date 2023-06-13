@@ -1,3 +1,4 @@
+// AJAX request to get protocols information
 fetch('http://localhost:2021/protocolo')
 .then(function(response) {
     if (response.ok) {
@@ -6,55 +7,66 @@ fetch('http://localhost:2021/protocolo')
     throw new Error('Request error');
   })
   .then(function(data) {
-    
+    //creates a representation of the protocols present in the database in the front end 
     for(i=0;i<data.length;i++){
      
       let nomeProtocolo = data[i].Nome_Protocolo;
       let descProtocolo = data[i].Descricao;
       let dataProtocolo = data[i].Data;
+      let vizualizadoProtocolo = data[i].Vizualizado;
         
-        // Cria o elemento div com a classe "button_div"
+        // Create the div element with the class "button_div"
         const buttonDiv = document.createElement("div");
         buttonDiv.className = "button_div";
       
-        // Cria o elemento div com a classe "circle"
+        // Create the div element with the class "circle"
         const circleDiv = document.createElement("div");
         circleDiv.className = "circle";
       
-        // Cria o elemento button com a classe "indicator"
+        // Create the button element with the class "indicator"
         const buttonElement = document.createElement("button");
         buttonElement.className = "indicator";
-      
-        // Cria o elemento div com a classe "button-info"
+
+        // Add a click event listener to each button
+        buttonElement.addEventListener('click', function() {
+          // Hide the corresponding circle
+          circleDiv.style.display = "none";
+        });
+        
+        if(vizualizadoProtocolo=="True"){
+          circleDiv.style.display = "none";
+        }
+
+        // Create the div element with the class "button-info"
         const buttonInfoDiv = document.createElement("div");
         buttonInfoDiv.className = "button-info";
       
-        // Cria o elemento div com a classe "text-container"
+        // Create the div element with the class "text-container"
         const textContainerDiv = document.createElement("div");
         textContainerDiv.className = "text-container";
       
-        // Cria o elemento h2 para o título
+        // Create the h2 element for the title
         const h2Element = document.createElement("h2");
         h2Element.textContent = nomeProtocolo;
       
-        // Cria o elemento p para o texto
+        // Create the p element for the text
         const pElement = document.createElement("p");
         pElement.textContent = descProtocolo;
       
-        // Cria o elemento div com a classe "date-container"
+        // Create the div element with the class "date-container"
         const dateContainerDiv = document.createElement("div");
         dateContainerDiv.className = "date-container";
       
-        // Cria a imagem
+        // Create the image
         const imgElement = document.createElement("img");
         imgElement.src = "images/time_copy.png";
         imgElement.alt = "Imagem do botão 1";
       
-        // Cria o elemento p para a data
+        // Create the p element for the date
         const pDateElement = document.createElement("p");
         pDateElement.textContent = dataProtocolo;
       
-        // Adiciona os elementos criados à estrutura HTML
+        // Add the created elements to the HTML structure
         textContainerDiv.appendChild(h2Element);
         textContainerDiv.appendChild(pElement);
       
@@ -69,29 +81,16 @@ fetch('http://localhost:2021/protocolo')
         buttonDiv.appendChild(circleDiv);
         buttonDiv.appendChild(buttonElement);
       
-        // Encontra o elemento pai onde o trecho será adicionado
+        // Find the parent element where the snippet will be added
         const container = document.getElementById("buttons");
       
-        // Adiciona o trecho ao elemento pai
+        // Add the snippet to the parent element
         container.appendChild(buttonDiv);
 
       }
 
     })
         
-      
-      
-
-      
-
-// Select all elements with the class 'button_div'
-document.querySelectorAll('.button_div').forEach(buttonDiv => {
-    // Add event listener for click event on the 'indicator' child of each 'button_div'
-    buttonDiv.querySelector('.indicator').addEventListener('click', () => {
-        // On click, hide the 'circle' child of 'button_div'
-        buttonDiv.querySelector('.circle').style.display = 'none';
-    });
-});
 
 // Select all elements with the class 'indicator' that are children of elements with class 'buttons'
 document.querySelectorAll('.buttons .indicator').forEach(button => {
@@ -113,9 +112,24 @@ document.querySelectorAll('.buttons .indicator').forEach(button => {
     });
 });
 
-var urlParams = new URLSearchParams(window.location.search);
-var userId = urlParams.get('id');
-
-function voltarTela(){
-    window.location.href = "/agricultor/agricultor.html?id=" + userId;
-}
+// function changeVisualizationStatus(circleDiv) {
+  
+//   fetch('http://localhost:2021/atualizaProtocolo', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/x-www-form-urlencoded'
+//     },
+//     body: 'Vizualizado=True'
+//   })
+//   .then(function(response) {
+//     if (response.ok) {
+//       console.log('Status updated successfully');
+//     } else {
+//       throw new Error('Status update failed');
+//     }
+//   })
+//   .catch(function(error) {
+//     console.log('Error:', error.message);
+    
+//   });
+// }
