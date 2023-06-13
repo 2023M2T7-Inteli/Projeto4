@@ -1,13 +1,12 @@
-<<<<<<< Updated upstream
-// AJAX request to get protocols information
-fetch('http://localhost:2021/protocolo')
-=======
+function voltarTela(){
+  window.location.href = "/agricultor/agricultor.html?id=" + userId;
+}
+
 // Get the user ID from the URL
 var urlParams = new URLSearchParams(window.location.search);
 var userId = urlParams.get('id');
 
 fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
->>>>>>> Stashed changes
 .then(function(response) {
     if (response.ok) {
       return response.json();

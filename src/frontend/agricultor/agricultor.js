@@ -45,5 +45,5 @@ fetch('http://localhost:2021/numeroProtocolos?Id_Usuario_FK=' + userId)
   });
 
   function redirecionarTela01() {
-    window.location.href = "/Select_P/Select_P.html?id=" + userId
+    window.location.href = "/select_P/select_P.html?id=" + userId
   }
