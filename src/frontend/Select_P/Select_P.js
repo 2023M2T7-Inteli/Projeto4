@@ -1,5 +1,12 @@
-// AJAX request to get protocols information
-fetch('http://localhost:2021/protocolo')
+// Get the user ID from the URL
+var urlParams = new URLSearchParams(window.location.search);
+var userId = urlParams.get('idUser');
+
+function voltarTela(){
+  window.location.href = "/agricultor/agricultor.html?idUser=" + userId;
+}
+
+fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
 .then(function(response) {
     if (response.ok) {
       return response.json();
@@ -27,8 +34,7 @@ fetch('http://localhost:2021/protocolo')
       let diaProtocolo = dataProtocoloPartes[0];
       let mesProtocolo = dataProtocoloPartes[1];
       let anoProtocolo = dataProtocoloPartes[2];
-
-      console.log(horaAtual);
+      let idP = data[i].Id_Protocolo;
 
         // Create the div element with the class "button_div"
         const buttonDiv = document.createElement("div");
@@ -65,6 +71,7 @@ fetch('http://localhost:2021/protocolo')
 
         // Add a click event listener to each button
         buttonElement.addEventListener('click', function() {
+          window.location.href = "/answer/answer.html?idProtocol=" + idP + "&idUser=" + userId + "&nomeProtocolo=" + nomeProtocolo;
 
           // Hide the corresponding circle
           circleDiv.style.display = "none";

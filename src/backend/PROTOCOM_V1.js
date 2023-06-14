@@ -10,7 +10,12 @@ const port = 2021;
 const app = express();
 
 /* Move all static content to the frontend */
-app.use(express.static("../frontend/"));
+app.use(express.static("../frontend"));
+
+/* Redirect root to sign_in.html */
+app.get('/', (req, res) => {
+	res.redirect('/sign_in/sign_in.html');
+  });
 
 /* Definition of endpoints */
 /******** CRUD ************/
@@ -107,10 +112,10 @@ app.post('/inserePergunta', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
 	var db = new sqlite3.Database(DBPATH);
-	const { Pergunta, Tipo } = req.body;
-	sql = "INSERT INTO PERGUNTA (Pergunta, Tipo) VALUES (?, ?)";
+	const { Pergunta, Tipo, Titulo } = req.body;
+	sql = "INSERT INTO PERGUNTA (Pergunta, Tipo, Titulo) VALUES (?, ?, ?)";
 	console.log(sql);
-	db.run(sql, [Pergunta, Tipo],  err => {
+	db.run(sql, [Pergunta, Tipo, Titulo],  err => {
 		if (err) {
 		    throw err;
 		}	
@@ -124,9 +129,10 @@ app.post('/inserePergunta', urlencodedParser, (req, res) => {
 app.get('/perguntas', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
+	let idProtocolo = req.query.Id_Protocolo_FK;
 	var db = new sqlite3.Database(DBPATH); 
-	var sql = 'SELECT * FROM PERGUNTA';
-		db.all(sql, [],  (err, rows ) => {
+	var sql = 'SELECT * FROM PERGUNTA WHERE Id_Protocolo_FK = ?';
+		db.all(sql, [idProtocolo],  (err, rows ) => {
 			if (err) {
 				throw err;
 			}
@@ -156,11 +162,11 @@ app.get('/atualizaPergunta', (req, res) => {
 app.post('/atualizaPergunta', urlencodedParser, (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*'); 
-    const { Pergunta, Tipo, Id_Protocolo_FK, Id_Pergunta } = req.body;
-    sql = "UPDATE PERGUNTA SET Pergunta = ?, Tipo = ?, Id_Protocolo_FK = ? WHERE Id_Pergunta = ?";
+    const { Pergunta, Tipo, Titulo, Id_Protocolo_FK, Id_Pergunta } = req.body;
+    sql = "UPDATE PERGUNTA SET Pergunta = ?, Tipo = ?, Titulo = ?, Id_Protocolo_FK = ? WHERE Id_Pergunta = ?";
     console.log(sql);
     var db = new sqlite3.Database(DBPATH); 
-    db.run(sql, [Pergunta, Tipo, Id_Protocolo_FK, Id_Pergunta], err => {
+    db.run(sql, [Pergunta, Tipo, Titulo, Id_Protocolo_FK, Id_Pergunta], err => {
         if (err) {
             throw err;
         }

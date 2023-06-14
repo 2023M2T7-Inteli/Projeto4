@@ -55,9 +55,9 @@ if (emailExistente && senhaExistente) {
 
 // Proceed to the next screen and pass the userid through the URL
   if (tipoA === "agricultor") {
-    window.location.href = "/agricultor/agricultor.html?id=" + userID;
+    window.location.href = "/agricultor/agricultor.html?idUser=" + userID;
   } else if (tipoP === "pesquisador") {
-    window.location.href = "/create-protocols/create-protocols.html?id=" + userID;
+    window.location.href = "/create-protocols/create-protocols.html?idUser=" + userID;
   }
       } else {
         // Login failed
