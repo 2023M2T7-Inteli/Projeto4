@@ -1,12 +1,5 @@
-function voltarTela(){
-  window.location.href = "/agricultor/agricultor.html?id=" + userId;
-}
-
-// Get the user ID from the URL
-var urlParams = new URLSearchParams(window.location.search);
-var userId = urlParams.get('id');
-
-fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
+// AJAX request to get protocols information
+fetch('http://localhost:2021/protocolo')
 .then(function(response) {
     if (response.ok) {
       return response.json();
@@ -14,14 +7,29 @@ fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
     throw new Error('Request error');
   })
   .then(function(data) {
+
+    var dataAtual = new Date();
+    var diaAtual = dataAtual.getDate();
+    var mesAtual = dataAtual.getMonth() + 1;
+    var anoAtual = dataAtual.getFullYear();
+    var horaAtual = dataAtual.getHours();
+    var minutoAtual = dataAtual.getMinutes();
+
     //creates a representation of the protocols present in the database in the front end 
     for(i=0;i<data.length;i++){
      
       let nomeProtocolo = data[i].Nome_Protocolo;
       let descProtocolo = data[i].Descricao;
       let dataProtocolo = data[i].Data;
+      let horarioProtocolo = data[i].Horario;
+      let dataProtocoloPartes = dataProtocolo.split("/");
       let vizualizadoProtocolo = data[i].Vizualizado;
-        
+      let diaProtocolo = dataProtocoloPartes[0];
+      let mesProtocolo = dataProtocoloPartes[1];
+      let anoProtocolo = dataProtocoloPartes[2];
+
+      console.log(horaAtual);
+
         // Create the div element with the class "button_div"
         const buttonDiv = document.createElement("div");
         buttonDiv.className = "button_div";
@@ -34,8 +42,30 @@ fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
         const buttonElement = document.createElement("button");
         buttonElement.className = "indicator";
 
+        var vencido = false;
+
+        // Comparação do ano
+        if (anoAtual > anoProtocolo) {
+          vencido = true;
+        } else if (anoAtual == anoProtocolo) {
+          // Comparação do mês
+          if (mesAtual > mesProtocolo) {
+            vencido = true;
+          } else if (mesAtual == mesProtocolo) {
+            // Comparação do dia
+            if (diaAtual > diaProtocolo) {
+              vencido = true;
+            }
+          }
+        }
+
+        if(vencido==true){
+          buttonElement.style.backgroundColor='red';
+        }
+
         // Add a click event listener to each button
         buttonElement.addEventListener('click', function() {
+
           // Hide the corresponding circle
           circleDiv.style.display = "none";
         });
@@ -97,6 +127,8 @@ fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
       }
 
     })
+
+    
         
 
 // Select all elements with the class 'indicator' that are children of elements with class 'buttons'

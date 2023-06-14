@@ -256,9 +256,6 @@ section > img {
     align-items: center;
 
 }
-.buttons .button_div:last-child .indicator {
-    background-color: rgba(234, 53, 53, 1);
-}
 
 /* The @media rules for responsiveness */
 @media (max-width: 768px) {
