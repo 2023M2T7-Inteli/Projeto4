@@ -1,6 +1,6 @@
 // Get the user ID from the URL
 var urlParams = new URLSearchParams(window.location.search);
-var userId = urlParams.get('id');
+var userId = urlParams.get('idUser');
 
 // Now you can use the user ID as needed
 console.log('User ID:', userId);
@@ -20,7 +20,6 @@ fetch('http://localhost:2021/numeroProtocolos?Id_Usuario_FK=' + userId)
     console.log('Number of protocols:', data[0].quantidade_campos);
     let notification = data[0].quantidade_campos;
     document.getElementById('notification').textContent = notification;
-    console.log(notification, 'hi');
 
     var elemento = document.getElementById('btn_1');
     var h1 = document.getElementById('title1_btn');
@@ -45,5 +44,5 @@ fetch('http://localhost:2021/numeroProtocolos?Id_Usuario_FK=' + userId)
   });
 
   function redirecionarTela01() {
-    window.location.href = "/Select_P/Select_P.html?id=" + userId
+    window.location.href = "/select_P/select_P.html?idUser=" + userId
   }

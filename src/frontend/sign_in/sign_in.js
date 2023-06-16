@@ -3,10 +3,15 @@ function verificaUsuario() {
   // Get the email and password from the form
   var email = document.getElementById('idEMail').value;
   var senha = document.getElementById('idSEnha').value;
+
+  email = String(email);
+  senha = String(senha);
   
   // Variables to store the user type
   var tipoA = "";
   var tipoP = "";
+  var emailExistente = false;
+  var senhaExistente = false;
   
   // Create an AJAX request
   var xhr = new XMLHttpRequest();
@@ -16,13 +21,13 @@ function verificaUsuario() {
       // Convert the response into a JSON object
       var usuarios = JSON.parse(xhr.responseText);
   
-      // Variables to check if the email and password exist
-      var emailExistente = false;
-      var senhaExistente = false;
-  
       // Check if the email and password exist in the database
       for (var i = 0; i < usuarios.length; i++) {
-        if (usuarios[i].Email === email && usuarios[i].Senha === senha) {
+        console.log(usuarios[i].Email);
+        console.log(email);
+        console.log(usuarios[i].Senha);
+        console.log(senha);
+        if (usuarios[i].Email === email && String(usuarios[i].Senha) === senha) {
           emailExistente = true;
           senhaExistente = true;
     
@@ -40,19 +45,19 @@ function verificaUsuario() {
       // Check if the login was successful
       // ...
 
-// Verificar se o login foi bem-sucedido
+// Check if the login was successful
 if (emailExistente && senhaExistente) {
-  // Login bem-sucedido
+// Login successful
   console.log("Login feito");
 
-  // Obter o ID do usuário
+// Get the user ID
   var userID = usuarios[i].Id_Usuario; // Supondo que a propriedade do ID do usuário seja chamada de "ID"
 
-  // Prosseguir para a próxima tela e passar o ID do usuário pela URL
+// Proceed to the next screen and pass the userid through the URL
   if (tipoA === "agricultor") {
-    window.location.href = "/agricultor/agricultor.html?id=" + userID;
+    window.location.href = "/agricultor/agricultor.html?idUser=" + userID;
   } else if (tipoP === "pesquisador") {
-    window.location.href = "/create-protocols/create-protocols.html?id=" + userID;
+    window.location.href = "/create-protocols/create-protocols.html?idUser=" + userID;
   }
       } else {
         // Login failed

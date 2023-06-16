@@ -64,6 +64,7 @@ function criarConta() {
 }
 
 function exibirToast02() {
+  limparDados();
   Toastify({
     text: "REGISTRO CONCLUIDO!",
     duration: 3000, // Duration in milliseconds
@@ -102,3 +103,21 @@ function exibirToast04() {
     position: "right", // Toast alignment (left, center, right)
   }).showToast();
 }
+
+function limparDados() {
+  var idNome = document.getElementById("idNome");
+  var idEmail = document.getElementById("idEmail");
+  var idSenha = document.getElementById("idSenha");
+  var idSenha2 = document.getElementById("idSenha2");
+  var idPla = document.getElementById("idPla");
+
+  if (idNome && idEmail && idSenha && idSenha2 && idPla) {
+    idNome.value = "";
+    idEmail.value = "";
+    idSenha.value = "";
+    idSenha2.value = "";
+    idPla.value = "";
+  }
+}
+
+

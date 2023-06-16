@@ -92,7 +92,15 @@ section > img {
     overflow: auto;
 }
 
-#title_div > img {
+#title_div > button {
+    background: none;
+    border: none;
+    outline: none;
+    width: 25px;
+    height: 25px;
+}
+
+#title_div > button > img {
     width: 25px;
     height: 25px;
     margin-left: -7.3px;
@@ -255,9 +263,6 @@ section > img {
     display: flex;
     align-items: center;
 
-}
-.buttons .button_div:last-child .indicator {
-    background-color: rgba(234, 53, 53, 1);
 }
 
 /* The @media rules for responsiveness */
