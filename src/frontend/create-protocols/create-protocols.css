@@ -134,52 +134,63 @@ aside > button > img {
 
 /* Setting overflow of article element to auto and display as flex container with items in column direction */
 article {
-    overflow: auto;
     display: flex;
     flex-direction: column;
 }
 
 /* Setting left margin of label element to 22px, font weight to 400, font size to 13px, display to block, color to dark gray, width to 100px, min-width to max-content and top margin to 6px */
-label {
-    margin-left: 22px;
-    font-weight: 400;
-    font-size: 13px;
+
+label, input, textarea {
     display: block;
-    color: #535353;
-    width: 100px;
-    min-width: max-content;
-    margin-top: 6px;
 }
 
 /* Setting outline of input element to none, border to 1px solid light gray with border radius of 6px, height to 27px, left margin to 8px and width to 100% */
-input {
-    outline: none;
-    border: 1px solid #e7e7e7;
-    border-radius: 6px;
-    height: 27px;
-    margin-left: 8px;
-    width: 100%;
-    margin-right: 22px;
-}
 
 /* Setting outline of textarea element to none, border to 1px solid light gray with border radius of 6px, height to 68px, resize to none, width to 100%, left margin to 8px and right margin to 22px */
 textarea {
     outline: none;
     border: 1px solid #e7e7e7;
     border-radius: 6px;
-    height: 68px;
+    height: 61px;
     resize: none;
     width: 100%;
-    margin-left: 8px;
-    margin-right: 22px;
+    margin-right: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
+    font-size: 13px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 /* Setting font weight of p element to 400, font size to 15px and color to light gray */
-p {
+.centralize > p {
     font-weight: 400;
     font-size: 15px;
     color: #9F9F9F;
     width: fit-content;
+}
+
+/* Selects the scrollbar track of #scroll in WebKit browsers */
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Selects the scrollbar thumb of #scroll in WebKit browsers */
+*::-webkit-scrollbar-thumb {
+    background-color: #1d1d1d;
+    border-radius: 6px;
+}
+
+/* Selects the end part of the scrollbar track of #scroll in WebKit browsers */
+*::-webkit-scrollbar-track-piece:end {
+    background-color: #e7e7e7;
+    border-radius: 12px;
+}
+
+/* Selects the start part of the scrollbar track of #scroll in WebKit browsers */
+*::-webkit-scrollbar-track-piece:start {
+    background-color: #e7e7e7;
+    border-radius: 12px;
 }
 
 /* Displaying elements with id 'left_sec' and 'right_sec' as flex containers with items in column direction and height of calc(100vh -48px) */
@@ -282,11 +293,8 @@ p {
 /* Setting height of element with id 'new_protocol_article' to calc(50% - 1px) */
 #new_protocol_article {
     height: calc(50% - 1px);
-}
-
-/* Displaying div element within element with id 'new_protocol_article' as flex container */
-#new_protocol_article > div {
-    display: flex;
+    width: 100%;
+    overflow: auto;
 }
 
 /* Setting height of element with id 'categories_article' to calc(50% + 1px) */
@@ -301,16 +309,191 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid green;
+}
+
+#more_label_div {
+    display: flex;
+    width: 100%;
+}
+
+#more_label_div > div:last-child {
+    margin-left: 10px;
+}
+
+#total_categories_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 13px;
+    position: relative;
+    width: calc(100% - 26px);
+    margin-left: auto;
+    margin-right: 13px;
+}
+
+#total_categories_div > p{
+    color: #535353;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#total_categories_div > button {
+    position: absolute;
+    right: 10px;
+    color: #535353;
+    font-size: 12px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#total_categories_div > button:hover {
+    color: black;
+}
+
+#total_categories_div > button > img {
+    width: 9px;
+    height: 9px;
+    margin-left: 5px;
+}
+
+#presets_article, #recipient_article {
+    height: calc(100% - 13px);
+    margin-bottom: 13px;
+}
+
+#preset_buttons_div {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: -7px;
+}
+
+#preset_buttons_div > div {
+    margin-left: auto;
+    margin-right: 22px;
+    display: flex;
+}
+
+#preset_buttons_div > div > button {
+    background-color: #1d1d1d;
+    height: 33px;
+    color: rgb(255, 255, 255, 35%);
+    width: 120px;
+}
+
+#preset_buttons_div > div > button:nth-child(1) {
+    border-radius: 6px 0px 0px 6px;
+    background-color: #EB5E28;
+    color: rgb(255, 255, 255, 75%);
+}
+
+#preset_buttons_div > div > button:nth-child(3) {
+    border-radius: 0px 6px 6px 0px;
+}
+
+.category_div {
+    border: 1px solid #E7E7E7;
+    border-radius: 6px;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 8.9px;
+    overflow: hidden;
+}
+
+.category_div:last-child {
+    margin-bottom: 1px;
+}
+
+.category_div > img {
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+}
+
+.category_div > .category_name {
+    margin-left: 7.5px;
+    font-size: 15px;
+    color: #535353;
+    font-weight: 400;
+    min-width: fit-content;
+}
+
+.category_div > .category_description {
+    margin-left: 15px;
+    font-size: 12px;
+    color: #727272;
+    min-width: fit-content;
 }
 
 /* Setting bottom margin of elements with class 'label_div' to 20px */
 .label_div {
+    display: flex;
     margin-bottom: 20px;
+    width: 100%;
 }
 
-/* Setting bottom margin of last child element with class 'label_div' to 0px */
-.label_div:last-child {
+#more_label_div > .label_div {
     margin-bottom: 0px;
+}
+
+.label_div > label {
+    font-weight: 400;
+    font-size: 13px;
+    color: #535353;
+    min-width: 90px;
+    margin-top: 6px;
+}
+
+#presets_article .label_div {
+    margin-bottom: 13px;
+}
+
+#presets_article .label_div > label {
+    min-width: 75px;
+}
+
+#presets_article .centralize_p {
+    height: calc(100% - 42px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 15px;
+    color: #9F9F9F;
+}
+
+#save_button_div {
+    display: flex;
+    align-items: baseline;
+}
+
+#save_button_div > button {
+    background-color: #9F9F9F;
+    color: rgb(255, 255, 255, 75%);
+    width: 144px;
+    height: 33px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    margin-left: auto;
+    margin-right: 22px;
+    margin-bottom: -7px;
+}
+
+.label_div > input {
+    outline: none;
+    border: 1px solid #e7e7e7;
+    border-radius: 6px;
+    height: 27px;
+    width: 100%;
+    margin-right: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
+    font-size: 13px;
 }
 
 /* Setting top margin of elements with class 'title_section' to 13px, left margin to 22px, font weight to 400, font size to 15px and color to light gray */
@@ -331,6 +514,263 @@ p {
     margin-right: auto;
     margin-top: 13px;
     margin-bottom: 13px;
+}
+
+.main_article {
+    width: calc(100% - 26px);
+    margin-left: auto;
+    margin-right: 8px;
+    height: 100%;
+    overflow: auto;
+}
+
+#recipient_article .main_article {
+    display: flex;
+}
+
+#recipient_article .main_article > div:first-child {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    margin-right: 9px;
+}
+
+#recipient_article .main_article > div:nth-child(2) {
+    display: flex;
+    align-items: end;
+    height: 100%;
+    flex-direction: column;
+    overflow: auto;
+}
+
+#recipient_article .main_article > div:last-child {
+    width: 30%;
+    height: 100%;
+    margin-left: 10px;
+    flex-direction: column;
+    overflow: auto;
+    display: flex;
+}
+
+#colunas {
+    display: flex;
+    justify-content: space-around;
+    margin-right: 10px;
+    margin-bottom: 13px;
+}
+
+#presets_div {
+    height: calc(100% - 70.5px);
+    overflow: auto;
+}
+
+#presets_article .main_article > div {
+    height: 100%;
+    overflow: auto;
+}
+
+#colunas > div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+#colunas > div > img {
+    width: 16px;
+    height: 16px;
+    margin-left: 3px;
+}
+
+#colunas > div > p {
+    font-size: 13px;
+    text-align: center;
+}
+
+.preset_div > p {
+    font-size: 13px;
+    width: 50%;
+    text-align: center;
+}
+
+.categories_main_article{
+    margin-bottom: 13px;
+}
+
+.vertical_line {
+    width: 1px;
+    height: calc(100% - 27px);
+    background-color: #e7e7e7;
+}
+
+#recipient_article .label_div > label {
+    min-width: 75px;
+}
+
+.category_inputs_checkbox {
+    position: relative;
+    display: block;
+    height: 100%;
+    overflow: auto;
+}
+
+/* Styling for list items within .category_inputs > ul */
+.category_inputs > ul > li {
+    list-style: none;
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+/* Styling for buttons within .category_inputs > ul > li */
+.category_inputs > ul > li > button {
+    border: none;
+    background-color: transparent;
+}
+
+/* Styling for option_div container */
+.option_div {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.option_div > img {
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+}
+
+/* Styling for checkbox input within .option_div */
+.option_div > input[type=checkbox] {
+    appearance: none;
+    min-width: 17px;
+    height: 17px;
+    border: 1.5px solid #535353;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Styling for checkbox input when hovered */
+.option_div:hover input[type=checkbox] {
+    border: 1.5px solid #000000;
+}
+
+/* Styling for radio input within .option_div */
+.option_div > input[type=radio] {
+    appearance: none;
+    border: 2px solid #535353;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Styling for radio input when hovered */
+.option_div:hover input[type=radio] {
+    border: 2px solid #000000;
+}
+
+
+/* Styling for labels within hovered option_div */
+.option_div:hover label {
+    color: #000000;
+}
+
+/* Styling for checkbox's unchecked state */
+.option_div > input[type=checkbox]::before{
+    content: "";
+    width: 11px;
+    height: 11px;
+    background-image: url(images/check_gray.png);
+    background-size: cover;
+    opacity: 0;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+}
+
+/* Styling for checkbox's checked state when hovered */
+.option_div:hover input[type=checkbox]::before {
+    background-image: url(images/check.png);
+}
+
+/* Styling for checkbox's checked state */
+.option_div > input[type=checkbox]:checked::before {
+    opacity: 1;
+}
+
+/* Styling for .category_inputs_checkbox's option_div container */
+.category_inputs_checkbox > .option_div {
+    margin-bottom: 5px;
+}
+
+/* Styling for last child option_div in .category_inputs_checkbox */
+.category_inputs_checkbox > .option_div:last-child {
+    margin-bottom: 0px;
+}
+
+/* Styling for radio input's checked state */
+.option_div > input[type=radio]::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    background-color: #535353;
+    border-color: #535353;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+/* Styling for radio input's checked state when hovered */
+.option_div:hover input[type=radio]::before {
+    background-color: #000000;
+}
+
+/* Styling for radio input's checked state */
+.option_div > input[type=radio]:checked::before {
+    opacity: 1;
+}
+
+/* Styling for last child option_div */
+.option_div:last-child {
+    margin-right: 0px;
+}
+
+/* Styling for labels within option_div */
+.option_div > label {
+    padding-left: 4px;
+    font-size: 13px;
+    color: #535353;
+    margin-top: 1px;
+    cursor: pointer
+}
+
+/* Styling for labels within hovered option_div */
+.option_div > label:hover {
+    color: #000000;
+}
+
+.preset_div {
+    border: 1px solid #E7E7E7;
+    border-radius: 6px;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 8.9px;
+    overflow: hidden;
+}
+
+.preset_div:last-child {
+    margin-bottom: 1px;
 }
 
 /* Setting width of element with id 'trees' to 100% for screens with minimum width of 1107px */
@@ -354,17 +794,17 @@ p {
         width: 11.5px;
         height: 11.5px;
     }
-}
 
-/* Adding slideDown animation */
-@keyframes slideDown {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
+    #more_label_div {
+        flex-direction: column;
     }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
+
+    #more_label_div > .label_div:last-child {
+        margin-left: 0px;
+    }
+
+    #more_label_div > .label_div:first-child {
+        margin-bottom: 20px;
     }
 }
 

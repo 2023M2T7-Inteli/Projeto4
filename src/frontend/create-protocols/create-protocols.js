@@ -3,15 +3,31 @@ var categoriesButton = document.getElementById("categories_button");
 var categoriesButtonClicked = false;
 
 function changeColor(button) {
+    console.log(selectedButton);
+    console.log(categoriesButtonClicked);
+
+    if (selectedButton == categoriesButton && button != categoriesButton) {
+      var buttons = document.getElementsByClassName("category");
+      while (buttons.length > 0) {
+        buttons[0].remove();
+      }
+      categoriesButtonClicked = false;
+    }
+
     if (selectedButton !== null) {
         selectedButton.style.backgroundColor = "";
         selectedButton.style.color = "";
       }
-    
+
+    if (button == selectedButton && button == categoriesButton) {
+      selectedButton.style.backgroundColor = "";
+      selectedButton.style.color = "";
+      selectedButton = null;
+    } else {
       button.style.backgroundColor = "#161616";
       button.style.color = "rgba(255, 255, 255, 0.75)";
-    
       selectedButton = button;
+    }
 }
 
 categoriesButton.onclick = () => {
@@ -48,3 +64,11 @@ categoriesButton.onclick = () => {
       categoriesButtonClicked = false;
     }
 }
+
+document.getElementById("expand_button").addEventListener('mouseover', () => {
+    document.getElementById('expand_img').src = 'images/expand_hover.png';
+})
+
+document.getElementById("expand_button").addEventListener('mouseout', () => {
+  document.getElementById('expand_img').src = 'images/expand.png';
+})
