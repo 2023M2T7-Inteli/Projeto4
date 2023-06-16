@@ -517,7 +517,7 @@ section > img {
     margin-bottom: 0px;
 }
 
-/* Hide the last child element within #scroll container */
+/* Hide the last child element within #scroll container */ 
 section > #scroll > div:last-child {
     display: none;
 }

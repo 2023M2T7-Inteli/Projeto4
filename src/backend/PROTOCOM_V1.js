@@ -228,6 +228,22 @@ app.get('/protocolo', (req, res) => {
 		db.close(); 
 });
 
+// Retrieves all records from the PROTOCOL table (it's the R in CRUD - Read). On line 213, it opens the database, and on line 221, it closes the database. 
+app.get('/protocolo2', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	const idProtocolo = req.query.Id_Protocolo;
+	var db = new sqlite3.Database(DBPATH);
+	var sql = 'SELECT * FROM PROTOCOLO WHERE Id_Protocolo = ?';
+		db.all(sql, [idProtocolo],  (err, rows ) => {
+			if (err) {
+				throw err;
+			}
+			res.json(rows);
+		});
+		db.close(); 
+});
+
 // Builds the form for updating the PROTOCOL table (it's the U in CRUD - Update). On line 231, it opens the database, and on line 238, it closes the database. 
 app.get('/atualizaProtocolo', (req, res) => {
 	res.statusCode = 200;

@@ -28,7 +28,7 @@ fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
       let nomeProtocolo = data[i].Nome_Protocolo;
       let descProtocolo = data[i].Descricao;
       let dataProtocolo = data[i].Data;
-      let horarioProtocolo = data[i].Horario;
+      // let horarioProtocolo = data[i].Horario;
       let dataProtocoloPartes = dataProtocolo.split("/");
       let vizualizadoProtocolo = data[i].Vizualizado;
       let diaProtocolo = dataProtocoloPartes[0];
@@ -71,7 +71,7 @@ fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
 
         // Add a click event listener to each button
         buttonElement.addEventListener('click', function() {
-          window.location.href = "/answer/answer.html?idProtocol=" + idP + "&idUser=" + userId + "&nomeProtocolo=" + nomeProtocolo;
+          window.location.href = "/answer/answer.html?idProtocol=" + idP + "&idUser=" + userId;
 
           // Hide the corresponding circle
           circleDiv.style.display = "none";
