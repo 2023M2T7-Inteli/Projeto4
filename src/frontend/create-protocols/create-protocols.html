@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar protocolos</title>
     <link rel="stylesheet" href="create-protocols.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
 </head>
+
 <body>
     <header>
         <img src="images/logo.png" alt="logo">
@@ -32,6 +34,8 @@
         <div id="image_color"></div>
     </figure>
     
+    <div>A resolução do seu dispositivo não é compatível com esta interface. Por favor, utilize um dispositivo de maior tamanho ou resolução.</div>
+
     <main>
         <!-- Left section -->
         <div id="left_sec">
@@ -40,7 +44,7 @@
                 <aside>
                     <button onclick="changeColor(this)">Salvar</button>
                     <button onclick="changeColor(this)">Apagar tudo</button>
-                    <button onclick="changeColor(this)" id="categories_button">Categorias<img src="images/arrow_down.png"></button>
+                    <button onclick="changeColor(this)" id="categories_button">Categorias<img id="arrow_img" src="images/arrow_down.png"></button>
                     <button onclick="changeColor(this)">Enviar</button>
                     <button onclick="changeColor(this)">Ajuda</button>
                 </aside>
@@ -60,10 +64,50 @@
                     <article id="categories_article">
                         <h1 class="title_section">Categorias</h1>
                         <div class="line"></div>
-                        <!-- <div class="centralize">
+                        <div class="centralize">
                             <p>Nenhuma categoria selecionada</p>
-                        </div> -->
+                        </div>
                         <div class="main_article categories_main_article">
+                            <div class="category_div">
+                                <img src="images/image_category.png" alt="image category">
+                                <p class="category_name">Fotos da plata</p>
+                                <p class="category_description">(<span>Tirar foto de todos os lados da planta</span>)</p>
+                            </div>
+                            <div class="category_div">
+                                <img src="images/text_category.png" alt="image category">
+                                <p class="category_name">Clima</p>
+                                <p class="category_description">(<span>Como estava o clima quando você extraiu a planta?</span>)</p>
+                            </div>
+                            <div class="category_div">
+                                <img src="images/option_category.png" alt="image category">
+                                <p class="category_name">Estado da planta</p>
+                                <p class="category_description">(<span>A planta estava madura ou verde ao ex...</span>)</p>
+                            </div>
+                            <div class="category_div">
+                                <img src="images/check_category.png" alt="image category">
+                                <p class="category_name">Processos</p>
+                                <p class="category_description">(<span>Marque os processos que você realizou</span>)</p>
+                            </div>
+                            <div class="category_div">
+                                <img src="images/image_category.png" alt="image category">
+                                <p class="category_name">Fotos da planta</p>
+                                <p class="category_description">(<span>Tirar foto de todos os lados da planta</span>)</p>
+                            </div>
+                            <div class="category_div">
+                                <img src="images/text_category.png" alt="image category">
+                                <p class="category_name">Clima</p>
+                                <p class="category_description">(<span>Como estava o clima quando você extraiu a planta?</span>)</p>
+                            </div>
+                            <div class="category_div">
+                                <img src="images/option_category.png" alt="image category">
+                                <p class="category_name">Estado da planta</p>
+                                <p class="category_description">(<span>A planta estava madura ou verde ao ex...</span>)</p>
+                            </div>
+                            <div class="category_div">
+                                <img src="images/check_category.png" alt="image category">
+                                <p class="category_name">Processos</p>
+                                <p class="category_description">(<span>Marque os processos que você realizou</span>)</p>
+                            </div>
                             <div class="category_div">
                                 <img src="images/image_category.png" alt="image category">
                                 <p class="category_name">Fotos da planta</p>
@@ -106,8 +150,8 @@
                             </div>
                         </div>
                         <div id="total_categories_div">
-                            <p>Total: <span id="total_categories">8</span></p>
-                            <button id="expand_button">Expandir<img id="expand_img" src="images/expand.png" alt="icon inside a button that expand the categories section"></button>
+                            <p>Total: <span id="total_categories"></span></p>
+                            <button id="expand_button" onclick="zoom()">Expandir<img id="expand_img" src="images/expand.png" alt="icon inside a button that expand the categories section"></button>
                         </div>
                     </article>
                 </div>
@@ -120,9 +164,9 @@
                     <div id="preset_buttons_div">
                         <h1 class="title_section">Predefinições</h1>
                         <div>
-                            <button>Protocolos</button>
-                            <button>Destinatários</button>
-                            <button>Histórico</button>
+                            <button id="protocol_preset" onclick="toProtocol()">Protocolos <img src="images/protocol.png" alt=""></button>
+                            <button id="recipient_preset" onclick="toRecipient()">Destinatários <img src="images/recipient.png" alt=""></button>
+                            <button id="historic_preset" onclick="toHistoric()">Histórico <img src="images/historic.png" alt=""></button>
                         </div>
                     </div>
                     <div class="line"></div>
@@ -147,7 +191,7 @@
                                     <p>26/05/2023</p>
                                 </div>
                                 <div class="preset_div">
-                                    <p>Fotos da planta</p>
+                                    <p>Fotos daaaaaaaaaaaaaaaaaaaaaa planta</p>
                                     <p>26/05/2023</p>
                                 </div>
                                 <div class="preset_div">
@@ -164,7 +208,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <p class="centralize_p">Nenhuma categoria selecionada</p> -->
+                        <p class="centralize_p">Nenhuma categoria selecionada</p>
                     </div>
                 </article>
             </section>
@@ -180,75 +224,63 @@
                             <div class="label_div"><label>Procurar:</label><input type="text"></div>
                             <div class="category_inputs_checkbox">
                                 <!--Options-->
-                                <div class="option_div">
-                                    <input type="checkbox" name="option" id="checkbox_1">
+                                <button class="option_div">
                                     <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_1">Fiz isso</label>
-                                </div>
-                                <div class="option_div">
-                                    <input type="checkbox" name="option" id="checkbox_2">
+                                    <label for="checkbox_1"> Josel de Carvalho Joselitjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjior Motta de Carvalho</label>
+                                </button>
+                                <button class="option_div">
                                     <img src="images/profile.png" alt="User's profile picture">
                                     <label for="checkbox_2">Fiz isso</label>
-                                </div>
-                                <div class="option_div">
-                                    <input type="checkbox" name="option" id="checkbox_3">
+                                </button>
+                                <button class="option_div">
                                     <img src="images/profile.png" alt="User's profile picture">
                                     <label for="checkbox_3">Fiz isso</label>
-                                </div>
-                                <div class="option_div">
-                                    <input type="checkbox" name="option" id="checkbox_4">
+                                </button>
+                                <button class="option_div">
                                     <img src="images/profile.png" alt="User's profile picture">
                                     <label for="checkbox_4">Fiz isso</label>
-                                </div>
-                                <div class="option_div">
-                                    <input type="checkbox" name="option" id="checkbox_5">
+                                </button>
+                                <button class="option_div">
                                     <img src="images/profile.png" alt="User's profile picture">
                                     <label for="checkbox_5">Fiz isso</label>
-                                </div>
-                                <div class="option_div">
-                                    <input type="checkbox" name="option" id="checkbox_6">
+                                </button>
+                                <button class="option_div">
                                     <img src="images/profile.png" alt="User's profile picture">
                                     <label for="checkbox_6">Fiz isso</label>
-                                </div>
-                                <div class="option_div">
-                                    <input type="checkbox" name="option" id="checkbox_7">
+                                </button>
+                                <button class="option_div">
                                     <img src="images/profile.png" alt="User's profile picture">
                                     <label for="checkbox_7">Fiz isso</label>
-                                </div>
-                                <div class="option_div">
-                                    <input type="checkbox" name="option" id="checkbox_8">
+                                </button>
+                                <button class="option_div">
                                     <img src="images/profile.png" alt="User's profile picture">
                                     <label for="checkbox_8">Fiz isso</label>
-                                </div>
-                                <div class="option_div">
-                                    <input type="checkbox" name="option" id="checkbox_9">
+                                </button>
+                                <button class="option_div">
                                     <img src="images/profile.png" alt="User's profile picture">
                                     <label for="checkbox_9">Fiz isso</label>
-                                </div>
-                                <div class="option_div">
-                                    <input type="checkbox" name="option" id="checkbox_10">
+                                </button>
+                                <button class="option_div">
                                     <img src="images/profile.png" alt="User's profile picture">
                                     <label for="checkbox_10">Fiz isso</label>
-                                </div>
+                                </button>
                             </div>
                         </div>
                         <div>
                             <div class="vertical_line"></div>
                         </div>
                         <div>
-                            <div class="label_div"><label>Selecionados:</label></div>
+                            <div class="label_div"><label id="selected_label">Selecionados:</label></div>
                             <div class="category_inputs_checkbox">
                                 <!--Options-->
-                                <div class="option_div">
-                                    <input type="checkbox" name="option" id="checkbox_11">
+                                <button class="option_div">
                                     <img src="images/profile.png" alt="User's profile picture">
                                     <label for="checkbox_11">Fiz isso</label>
-                                </div>
-                                <div class="option_div">
-                                    <input type="checkbox" name="option" id="checkbox_12">
+                                </button>
+                                <button class="option_div">
                                     <img src="images/profile.png" alt="User's profile picture">
                                     <label for="checkbox_12">Fiz isso</label>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
