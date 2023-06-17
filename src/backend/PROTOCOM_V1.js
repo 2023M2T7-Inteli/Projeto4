@@ -1,13 +1,21 @@
-const express = require('express'); 
+const express = require('express');
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const sqlite3 = require('sqlite3').verbose();
 const DBPATH = '../data/Banco_Projeto.db';
+const multer = require('multer');
 
 const hostname = '127.0.0.1';
 const port = 2021;
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
+
+// Adicione o middleware bodyParser para analisar o corpo das solicitações
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 /* Move all static content to the frontend */
 app.use(express.static("../frontend"));
@@ -15,11 +23,9 @@ app.use(express.static("../frontend"));
 /* Redirect root to sign_in.html */
 app.get('/', (req, res) => {
 	res.redirect('/sign_in/sign_in.html');
-  });
+});
 
-/* Definition of endpoints */
 /******** CRUD ************/
-app.use(express.json());
 
 // Inserts a record of Phone, Email, Password, Category, Name, PlantationType, ConfirmPassword into the USER table (it's the C in CRUD - Create). On line 23, it opens the database, and on line 33, it closes the database.
 app.post('/insereUsuario', urlencodedParser, (req, res) => {
@@ -313,26 +319,29 @@ app.get('/numeroProtocolos', (req, res) => {
 	db.close(); // Fecha o banco
   });  
 
-// Inserts a response into the RESPONSE table (it's the C in CRUD - Create). On line 282, it opens the database, and on line 294, it closes the database. 
-app.post('/insereResposta', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	const { Resposta, Id_Pergunta_FK} = req.body; 
-	var db = new sqlite3.Database(DBPATH); 
-	sql = "INSERT INTO RESPOSTA (Resposta, Id_Pergunta_FK) VALUES (?, ?)";
-	
-	const databaseReturn = db.run(sql, [Resposta, Id_Pergunta_FK],  (err, rows) => {
-		if (err) {
-		    throw err;
-		}	
+  app.post('/insereResposta', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  const data = req.body; // Obtém os dados enviados
 
-		return rows
-	});
+  console.log('Dados do formulário:', data);
 
-	res.write('<p>RESPOSTA INSERIDA COM SUCESSO!</p><a href="/">VOLTAR</a>');
-	db.close(); 
-	res.end();
+  var db = new sqlite3.Database(DBPATH);
+
+  // Percorre os dados e insere cada resposta no banco de dados
+  data.forEach(resposta => {
+    const { Respostatxt, Respostaimg, Id_Pergunta_FK } = resposta;
+    const sql = "INSERT INTO RESPOSTA (Respostatxt, Respostaimg, Id_Pergunta_FK) VALUES (?, ?, ?)";
+    console.log(sql);
+    db.run(sql, [Respostatxt, Respostaimg, Id_Pergunta_FK], (err, rows) => {
+      if (err) {
+        throw err;
+      }
+    });
+  });
+
+  res.sendStatus(200);
 });
+
 
 // Retrieves all records from the RESPONSE table (it's the R in CRUD - Read). On line 302, it opens the database, and on line 310, it closes the database. 
 app.get('/respostas', (req, res) => {
@@ -353,7 +362,7 @@ app.get('/respostas', (req, res) => {
 app.get('/atualizaRespostas', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	const idResposta = req.query.Id_Resposta;
+	const idResposta = req.body.Id_Resposta;
 	sql = "SELECT * FROM RESPOSTA WHERE Id_Resposta= ?";
 	console.log(sql);
 	var db = new sqlite3.Database(DBPATH); 
@@ -370,11 +379,11 @@ app.get('/atualizaRespostas', (req, res) => {
 app.post('/atualizaRespostas', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	const { Resposta, Id_Resposta } = req.body;
-	sql = "UPDATE RESPOSTA SET Resposta = ? WHERE Id_resposta = ?";
+	const { Respostatxt, Respostaimg, Id_Resposta, Id_Pergunta_FK } = req.body;
+	sql = "UPDATE RESPOSTA SET Respostatxt = ?, Respostaimg = ?, Id_Pergunta_FK = ? WHERE Id_resposta = ?";
 	console.log(sql);
 	var db = new sqlite3.Database(DBPATH); 
-	db.run(sql, [Resposta, Id_Resposta],  err => {
+	db.run(sql, [Respostatxt, Respostaimg, Id_Resposta, Id_Pergunta_FK],  err => {
 		if (err) {
 		    throw err;
 		}
@@ -402,21 +411,20 @@ app.post('/removeRespostas', urlencodedParser, (req, res) => {
 	db.close(); 
 });
 
-// Join between the QUESTION & RESPONSE tables. The "JOIN" command in a database is used to combine information from two or more tables based on a specified condition. On line 370, it opens the database, and on line 378, it closes the database. 
 app.get('/JOIN_Pergunta_Resposta', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	var db = new sqlite3.Database(DBPATH); 
-	var sql = 'SELECT Pergunta.Id_Pergunta, Pergunta.Pergunta, Resposta.Id_Resposta, Resposta.Resposta FROM Pergunta INNER JOIN Resposta ON Pergunta.Id_Pergunta = Resposta.Id_Pergunta_FK';
-		db.all(sql, [],  (err, rows ) => {
-			if (err) {
-				throw err;
-			}
-			res.json(rows);
-		});
-		db.close(); 
-});
-
+	var db = new sqlite3.Database(DBPATH);
+	var sql = 'SELECT Pergunta.Id_Pergunta, Pergunta.Pergunta, Resposta.Id_Resposta, Resposta.Respostatxt, Resposta.Respostaimg FROM Pergunta INNER JOIN Resposta ON Pergunta.Id_Pergunta = Resposta.Id_Pergunta_FK';
+	db.all(sql, [], (err, rows) => {
+	  if (err) {
+		throw err;
+	  }
+	  res.json(rows);
+	  db.close();
+	});
+  });  
+  
 // Join between the PROTOCOL & QUESTION tables. The "JOIN" command in a database is used to combine information from two or more tables based on a specified condition. On line 385, it opens the database, and on line 393, it closes the database. 
 app.get('/JOIN_Protocolo_Pergunta', (req, res) => {
 	res.statusCode = 200;
