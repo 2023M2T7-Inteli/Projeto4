@@ -12,6 +12,8 @@
 /* Setting body's background color to light gray */
 body {
     background-color: #f6f6f6;
+    height: 100vh;
+    width: 100vw;
 }
 
 /* Displaying header as flex container with items aligned to center and height of 48px */
@@ -127,8 +129,8 @@ aside > button:first-child {
 
 /* Setting width and height of img element within button element within aside element to 18px and left margin to auto */
 aside > button > img {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     margin-left: auto;
 }
 
@@ -306,10 +308,9 @@ textarea {
 #categories_article > .centralize {
     height: 100%;
     margin-bottom: 13px;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
-    border: 1px solid green;
 }
 
 #more_label_div {
@@ -381,16 +382,30 @@ textarea {
     height: 33px;
     color: rgb(255, 255, 255, 35%);
     width: 120px;
+    cursor: pointer;
+}
+
+#preset_buttons_div > div > button > img {
+    display: none;
 }
 
 #preset_buttons_div > div > button:nth-child(1) {
     border-radius: 6px 0px 0px 6px;
     background-color: #EB5E28;
     color: rgb(255, 255, 255, 75%);
+    margin-right: -1px;
+}
+
+#preset_buttons_div > div > button:nth-child(2) {
+    margin-right: -1px;
 }
 
 #preset_buttons_div > div > button:nth-child(3) {
     border-radius: 0px 6px 6px 0px;
+}
+
+body > div {
+    display: none;
 }
 
 .category_div {
@@ -458,7 +473,7 @@ textarea {
 
 #presets_article .centralize_p {
     height: calc(100% - 42px);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     font-weight: 400;
@@ -586,12 +601,15 @@ textarea {
 #colunas > div > p {
     font-size: 13px;
     text-align: center;
+    width: fit-content;
 }
 
 .preset_div > p {
     font-size: 13px;
     width: 50%;
     text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .categories_main_article{
@@ -630,17 +648,17 @@ textarea {
 
 /* Styling for option_div container */
 .option_div {
-    width: fit-content;
+    width: calc(100% - 10px);
     display: flex;
     align-items: center;
-    margin-right: 10px;
     cursor: pointer;
+    overflow: hidden;
+    margin-right: 10px;
 }
 
 .option_div > img {
     width: 15px;
     height: 15px;
-    margin-left: 5px;
 }
 
 /* Styling for checkbox input within .option_div */
@@ -750,7 +768,9 @@ textarea {
     font-size: 13px;
     color: #535353;
     margin-top: 1px;
-    cursor: pointer
+    cursor: pointer;
+    white-space: nowrap;
+    width: 0px;
 }
 
 /* Styling for labels within hovered option_div */
@@ -780,6 +800,16 @@ textarea {
     }
 }
 
+@media (max-width: 1107px) {
+    #preset_buttons_div > div > button {
+        width: 90px;
+    }
+
+    #save_button_div > button {
+        width: 110px;
+    }
+}
+
 /* Setting width of element with id 'orange_bg' to 110px and font size of button element within aside element to 9px for screens with maximum width of 989px */
 @media (max-width: 989px) {
     #orange_bg {
@@ -806,6 +836,29 @@ textarea {
     #more_label_div > .label_div:first-child {
         margin-bottom: 20px;
     }
+
+    #preset_buttons_div > div > button {
+        width: 35px;
+        font-size: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #preset_buttons_div > div > button > img {
+        display: block;
+        height: 20px;
+        width: 20px;
+    }
+
+    #preset_buttons_div > div {
+        margin-right: 23px;
+    }
+
+    #recipient_article .label_div > #selected_label {
+        font-size: 10.5px;
+        width: fit-content;
+    }
 }
 
 /* Setting font size of a element within nav element within header element to 11px, width and height of img element within button element within nav element within header element to 20px, height and width of img element within header element to 23px and left margin to 8px, font size of h1 element within header element to 20px for screens with maximum width of 728px */
@@ -831,6 +884,104 @@ textarea {
     header > h1 {
         font-size: 20px;
     }
+
+    .category_description {
+        display: none;
+    }
+}
+
+@media (max-width: 661px) {
+    #colunas > div > p {
+        font-size: 9px;
+        width: max-content;
+    }
+
+    .preset_div > p {
+        font-size: 9px;
+    }
+
+    .option_div > label {
+        font-size: 9px;
+    }
+
+    .category_div > .category_name {
+        font-size: 10px;
+    }
+
+    .label_div > label {
+        font-size: 9px;
+        min-width: 62px;
+        margin-top: 0px;
+        margin-bottom: 3px;
+    }
+
+    #recipient_article .label_div > #selected_label {
+        font-size: 7.5px;
+        width: fit-content;
+    }
+
+    #total_categories_div > p {
+        font-size: 9px;
+        margin-left: 1px;
+    }
+
+    #total_categories_div > button {
+        font-size: 9px;
+    }
+
+    #total_categories_div {
+        justify-content: start;
+    }
+
+    .title_section {
+        font-size: 11px;
+    }
+
+    #recipient_article .label_div > label {
+        min-width: 50px;
+    }
+
+    .label_div > input {
+        font-size: 9px;
+        width: calc(100% - 22px);
+        margin-right: 0px;
+    }
+
+    textarea {
+        font-size: 9px;
+        height: 54px;
+        width: calc(100% - 22px);
+        margin-right: 0px;
+    }
+
+    #preset_buttons_div > div > button {
+        height: 20px;
+        width: 20px;
+    }
+
+    #save_button_div > button {
+        height: 20px;
+        width: 45px;
+        font-size: 9px;
+    }
+
+    .label_div {
+        flex-direction: column;
+    }
+
+    #presets_div {
+        height: calc(100% - 84px);
+    }
+
+    aside {
+        min-width: 80px;
+    }
+
+    #preset_buttons_div > div > button > img {
+        display: block;
+        height: 14px;
+        width: 14px;
+    }
 }
 
 /* Setting display of element with id 'trees' to none and width of element with id 'orange_bg' to 100% for screens with maximum width of 528px */
@@ -851,6 +1002,16 @@ textarea {
 
     main {
         margin-top: -11px;
+    }
+
+    body > header, body > figure, body > main {
+        height: 0px;
+        width: 0px;
+        overflow: hidden;
+    }
+
+    body > div {
+        display: block;
     }
 }
 
