@@ -10,6 +10,10 @@ const hostname = '127.0.0.1';
 const port = 2021;
 const cors = require('cors');
 const app = express();
+const upload = multer({ dest: 'uploads/' });
+const path = require('path');
+const fs = require('fs')
+
 
 app.use(cors());
 
@@ -320,28 +324,26 @@ app.get('/numeroProtocolos', (req, res) => {
   });  
 
   app.post('/insereResposta', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  const data = req.body; // Obtém os dados enviados
-
-  console.log('Dados do formulário:', data);
-
-  var db = new sqlite3.Database(DBPATH);
-
-  // Percorre os dados e insere cada resposta no banco de dados
-  data.forEach(resposta => {
-    const { Respostatxt, Respostaimg, Id_Pergunta_FK } = resposta;
-    const sql = "INSERT INTO RESPOSTA (Respostatxt, Respostaimg, Id_Pergunta_FK) VALUES (?, ?, ?)";
-    console.log(sql);
-    db.run(sql, [Respostatxt, Respostaimg, Id_Pergunta_FK], (err, rows) => {
-      if (err) {
-        throw err;
-      }
-    });
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	const data = req.body; // Obtém os dados enviados
+	console.log('Dados do formulário:', data);
+	var db = new sqlite3.Database(DBPATH);
+	// Percorre os dados e insere cada resposta no banco de dados
+	data.forEach(resposta => {
+	  const { Respostatxt, Id_Pergunta_FK } = resposta;
+	  const sql = "INSERT INTO RESPOSTA (Respostatxt, Id_Pergunta_FK) VALUES (?, ?)";
+	  console.log(sql);
+	  db.run(sql, [Respostatxt, Id_Pergunta_FK], function(err) {
+		if (err) {
+		  console.error('Erro ao inserir dados no banco de dados:', err);
+		  res.status(500).json({ error: 'Erro interno do servidor' });
+		  return;
+		}
+	  });
+	});
+	db.close(); // Feche a conexão com o banco de dados
+	res.sendStatus(200);
   });
-
-  res.sendStatus(200);
-});
-
 
 // Retrieves all records from the RESPONSE table (it's the R in CRUD - Read). On line 302, it opens the database, and on line 310, it closes the database. 
 app.get('/respostas', (req, res) => {
@@ -455,6 +457,32 @@ app.get('/JOIN_Usuario_Pergunta', (req, res) => {
 		db.close(); 
 });
 
+app.post('/respImg', upload.single('file'), (req, res) => {
+	var db = new sqlite3.Database(DBPATH); 
+	const file = req.file; // Arquivo enviado pelo cliente
+	const Id_Pergunta_FK = req.body.Id_Pergunta_FK; // Valor do Id_Pergunta_FK
+  
+	// Verifique se o arquivo e o ID da pergunta são válidos
+	if (!file || !Id_Pergunta_FK) {
+	  console.error('Arquivo ou ID da pergunta inválido');
+	  res.status(400).json({ error: 'Dados inválidos' });
+	  return;
+	}  
+	// Salvar o arquivo no banco de dados como um blob
+	console.log("estou aqui", file, Id_Pergunta_FK);
+	const query = 'INSERT INTO RESPOSTA (Respostaimg, Id_Pergunta_FK) VALUES (?, ?)';
+	db.run(query, [file, Id_Pergunta_FK], function(error) {
+	  if (error) {
+		console.error('Erro ao salvar o arquivo no banco de dados:', error);
+		res.status(500).json({ error: 'Erro interno do servidor' });
+		return;
+	  }
+
+	  console.log('Arquivo salvo no banco de dados e na pasta uploads com sucesso!', file, Id_Pergunta_FK);
+	  res.json({ success: true });
+	});
+  });  
+  
 app.listen(port, hostname, () => {
 	console.log(`Servidor rodando em http://${hostname}:${port}/`);
   });

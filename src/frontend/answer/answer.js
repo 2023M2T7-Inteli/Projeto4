@@ -131,6 +131,8 @@ function voltarTela() {
 function enviarForms() {
   var pergIdElements = document.getElementsByClassName('pergID');
   var data = []; // Array para armazenar os dados das respostas
+  var formData = new FormData(); // FormData para enviar a imagem
+  var idPerguntaImg; // Variável separada para o ID da pergunta relacionada à imagem
 
   for (var i = 0; i < pergIdElements.length; i++) {
     var pergIdElement = pergIdElements[i];
@@ -143,20 +145,23 @@ function enviarForms() {
     if (pergtype === 'Text') {
       var respostaTxt = document.getElementById('respTxt_' + perguntaId).value;
       resposta.Respostatxt = respostaTxt;
+      resposta.Id_Pergunta_FK = pergId; // Chave estrangeira para respostas de texto
+      data.push(resposta);
     }
 
     if (pergtype === 'Img') {
       var respostaImg = document.getElementById('respImg_' + perguntaId).files[0];
-      resposta.Respostaimg = respostaImg;
+      formData.append('file', respostaImg);
+      idPerguntaImg = pergId; // Armazena o ID da pergunta para respostas de imagem
+
+      // Adiciona a chave estrangeira apenas para respostas de imagem no formData
+      formData.append('Id_Pergunta_FK', idPerguntaImg);
     }
-
-    resposta.Id_Pergunta_FK = pergId;
-
-    data.push(resposta);
   }
 
   console.log('Dados do formulário:', data);
-
+  console.log('Img:', formData, respostaImg, idPerguntaImg);
+  
   fetch('http://localhost:2021/insereResposta', {
     method: 'POST',
     headers: {
@@ -174,7 +179,25 @@ function enviarForms() {
     .catch(error => {
       console.error('Erro na requisição:', error);
     });
+
+  fetch('http://localhost:2021/respImg', {
+    method: 'POST',
+    body: formData,
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log('Imagem enviada com sucesso!');
+      } else {
+        throw new Error('Erro ao enviar a imagem. Código de status: ' + response.status);
+      }
+    })
+    .catch(error => {
+      console.error('Erro ao enviar a imagem:', error);
+    });
 }
+
+
+
 
 
 
