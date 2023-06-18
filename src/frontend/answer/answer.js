@@ -14,7 +14,7 @@ fetch('http://localhost:2021/perguntas?Id_Protocolo_FK=' + protocoloId)
   .then(function (data) {
     var saida = "";
     data.forEach(pergunta => {
-      const perguntaId = pergunta.Id_Pergunta;
+      var perguntaId = pergunta.Id_Pergunta;
       console.log(pergunta, perguntaId);
       if (pergunta.Tipo === 'Img') {
         saida += `
@@ -58,24 +58,35 @@ fetch('http://localhost:2021/perguntas?Id_Protocolo_FK=' + protocoloId)
               <h2 class="category_name">${pergunta.Titulo}</h2>
             </div>
             <h3 class="category_desc">${pergunta.Pergunta}</h3>
-            <div class="category_inputs_checkbox">
-              <!--Options-->
-              <div class="option_div">
-                <input type="checkbox" name="option" id="checkbox_1">
-                <label for="checkbox_1">Fiz isso</label>
-              </div>
-              <div class="option_div">
-                <input type="checkbox" name="option" id="checkbox_2">
-                <label for="checkbox_2">Fiz isso</label>
-              </div>
-              <div class="option_div">
-                <input type="checkbox" name="option" id="checkbox_3">
-                <label for="checkbox_3">Fiz isso</label>
-              </div>
+            <div class="category_inputs_checkbox" id="checkbox_${perguntaId}">
             </div>
           </div>
           <div class="line"></div>
         `;
+        fetch('http://localhost:2021/option?Id_Pergunta_FK=' + perguntaId)
+          .then(function (response) {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Request error');
+          })
+          .then(function (options) {
+            var checkboxDiv = document.getElementById('checkbox_' + perguntaId);
+            options.forEach(option => {
+              var optionId = option.Id_Option;
+              var optionLabel = option.nome_option;
+              var optionHTML = `
+                <div class="option_div">
+                  <input type="checkbox" name="checkbox_${perguntaId}" id="checkbox_${perguntaId}_${optionId}">
+                  <label for="checkbox_${perguntaId}_${optionId}">${optionLabel}</label>
+                </div>
+              `;
+              checkboxDiv.innerHTML += optionHTML;
+            });
+          })
+          .catch(function (error) {
+            console.error('Erro na requisição das opções:', error);
+          });
       } else if (pergunta.Tipo === 'Option') {
         saida += `
           <div class="category">
@@ -87,16 +98,16 @@ fetch('http://localhost:2021/perguntas?Id_Protocolo_FK=' + protocoloId)
             <div class="category_inputs">
               <!--Options-->
               <div class="option_div">
-                <input type="radio" name="option" id="option_1">
-                <label for="option_1">Opção</label>
+                <input type="radio" name="option_${perguntaId}" id="option_${perguntaId}_1">
+                <label for="option_${perguntaId}_1">Opção</label>
               </div>
               <div class="option_div">
-                <input type="radio" name="option" id="option_2">
-                <label for="option_2">Opção</label>
+                <input type="radio" name="option_${perguntaId}" id="option_${perguntaId}_2">
+                <label for="option_${perguntaId}_2">Opção</label>
               </div>
               <div class="option_div">
-                <input type="radio" name="option" id="option_3">
-                <label for="option_3">Opção</label>
+                <input type="radio" name="option_${perguntaId}" id="option_${perguntaId}_3">
+                <label for="option_${perguntaId}_3">Opção</label>
               </div>
             </div>
           </div>
@@ -104,24 +115,31 @@ fetch('http://localhost:2021/perguntas?Id_Protocolo_FK=' + protocoloId)
         `;
       }
     });
+
     document.getElementById('scroll').innerHTML += saida;
+  })
+  .catch(function (error) {
+    console.error('Erro na requisição das perguntas:', error);
+  });
 
-    fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
-      .then(function (response) {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error('Request error');
-      })
-      .then(function (data) {
-        for (let i = 0; i < data.length; i++) {
-          const titulo = data[i].Nome_Protocolo;
-          const desc = data[i].Descricao;
+fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
+  .then(function (response) {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error('Request error');
+  })
+  .then(function (data) {
+    for (let i = 0; i < data.length; i++) {
+      const titulo = data[i].Nome_Protocolo;
+      const desc = data[i].Descricao;
 
-          document.getElementById('desc').innerHTML = desc;
-          document.getElementById('protocol_name').innerHTML = titulo;
-        }
-      })
+      document.getElementById('desc').innerHTML = desc;
+      document.getElementById('protocol_name').innerHTML = titulo;
+    }
+  })
+  .catch(function (error) {
+    console.error('Erro na requisição do protocolo:', error);
   });
 
 function voltarTela() {
@@ -195,14 +213,3 @@ function enviarForms() {
       console.error('Erro ao enviar a imagem:', error);
     });
 }
-
-
-
-
-
-
-
-
-
-
-

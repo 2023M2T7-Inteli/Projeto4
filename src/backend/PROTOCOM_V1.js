@@ -481,7 +481,93 @@ app.post('/respImg', upload.single('file'), (req, res) => {
 	  console.log('Arquivo salvo no banco de dados e na pasta uploads com sucesso!', file, Id_Pergunta_FK);
 	  res.json({ success: true });
 	});
-  });  
+  });
+
+app.post('/insereOption', urlencodedParser, (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    const { resposta, nome_option, Id_Pergunta_FK } = req.body;
+    sql = "INSERT INTO OPTION (resposta, nome_option, Id_Pergunta_FK) VALUES (?, ?, ?)";
+    console.log(sql);
+    db.run(sql, [resposta, nome_option, Id_Pergunta_FK], err => {
+        if (err) {
+            throw err;
+        }
+    });
+    res.write('<p>OPTION INSERIDO COM SUCESSO!</p><a href="/">VOLTAR</a>');
+    db.close(); 
+    res.end();
+});
+
+// Retrieves all records from the USER table (it's the R in CRUD - Read). On line 41, it opens the database, and on line 49, it closes the database. 
+ app.get('/option', (req, res) => {
+ 	res.statusCode = 200;
+ 	res.setHeader('Access-Control-Allow-Origin', '*');
+	const idPergunta = req.query.Id_Pergunta_FK
+ 	var db = new sqlite3.Database(DBPATH);
+ 	var sql = 'SELECT * FROM OPTION WHERE Id_Pergunta_FK = ?';
+ 		db.all(sql, [idPergunta],  (err, rows ) => {
+ 			if (err) {
+ 				throw err;
+ 			}
+ 			res.json(rows);
+ 		});
+ 		db.close(); 
+ });
+
+// Builds the form for updating the USER table (it's the U in CRUD - Update). On line 59, it opens the database, and on line 66, it closes the database.
+app.get('/atualizaOption', (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const idOption = req.body.Id_Option;
+    sql = "SELECT * FROM OPTION WHERE Id_Option = ?";
+    console.log(sql);
+    var db = new sqlite3.Database(DBPATH); 
+    db.all(sql, [idOption],  (err, rows ) => {
+        if (err) {
+            throw err;
+        }
+        res.json(rows);
+    });
+    db.close(); 
+});
+
+// Updates a record of Phone, Email, Password, Category, User_Id in the USER table (it's the U in CRUD - Update). On line 76, it opens the database, and on line 84, it closes the database.
+app.post('/atualizaOption', urlencodedParser, (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const { resposta, nome_option, Id_Pergunta_FK } = req.body;
+    sql = "UPDATE OPTION SET resposta = ?, nome_option = ?, Id_Pergunta_FK = ? WHERE Id_Option = ?";
+    console.log(sql);
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    db.run(sql, [resposta, nome_option, Id_Pergunta_FK],  err => {
+        if (err) {
+            throw err;
+        }
+        res.end();
+    });
+    res.write('<p>USUARIO ATUALIZADO COM SUCESSO!</p><a href="/">VOLTAR</a>');
+    db.close(); 
+});
+
+// Deletes a record from the USER table (it's the D in CRUD - Delete). On line 94, it opens the database, and on line 102, it closes the database. 
+app.post('/removeOption', urlencodedParser, (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const { Id_Option } = req.body;
+    sql = "DELETE FROM OPTION WHERE Id_Option = ?";
+    console.log(sql);
+    var db = new sqlite3.Database(DBPATH); 
+    db.run(sql, [Id_Option],  err => {
+        if (err) {
+            throw err;
+        }
+        res.write('<p>OPTION REMOVIDO COM SUCESSO!</p><a href="/">VOLTAR</a>');
+        res.end();
+    });
+    db.close(); 
+});
   
 app.listen(port, hostname, () => {
 	console.log(`Servidor rodando em http://${hostname}:${port}/`);
