@@ -518,9 +518,9 @@ section > img {
 }
 
 /* Hide the last child element within #scroll container */ 
-section > #scroll > div:last-child {
+/* section > #scroll > div:last-child {
     display: none;
-}
+} */
 
 /* Media queries for different screen sizes */
 @media (min-width: 1107px) {

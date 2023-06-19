@@ -10,9 +10,28 @@ const hostname = '127.0.0.1';
 const port = 2021;
 const cors = require('cors');
 const app = express();
-const upload = multer({ dest: 'uploads/' });
 const path = require('path');
 const fs = require('fs')
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        // Extração da extensão do arquivo original:
+        const extensaoArquivo = file.originalname.split('.')[1];
+
+        // Cria um código randômico que será o nome do arquivo
+        const novoNomeArquivo = require('crypto')
+            .randomBytes(64)
+            .toString('hex');
+
+        // Indica o novo nome do arquivo:
+        cb(null, `${novoNomeArquivo}.${extensaoArquivo}`)
+    }
+});
+
+const upload = multer({ storage });
 
 
 app.use(cors());
@@ -326,7 +345,6 @@ app.get('/numeroProtocolos', (req, res) => {
   app.post('/insereResposta', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	const data = req.body; // Obtém os dados enviados
-	console.log('Dados do formulário:', data);
 	var db = new sqlite3.Database(DBPATH);
 	// Percorre os dados e insere cada resposta no banco de dados
 	data.forEach(resposta => {
@@ -467,18 +485,15 @@ app.post('/respImg', upload.single('file'), (req, res) => {
 	  console.error('Arquivo ou ID da pergunta inválido');
 	  res.status(400).json({ error: 'Dados inválidos' });
 	  return;
-	}  
-	// Salvar o arquivo no banco de dados como um blob
-	console.log("estou aqui", file, Id_Pergunta_FK);
+	}
 	const query = 'INSERT INTO RESPOSTA (Respostaimg, Id_Pergunta_FK) VALUES (?, ?)';
-	db.run(query, [file, Id_Pergunta_FK], function(error) {
+	db.run(query, [file.filename, Id_Pergunta_FK], function(error) {
 	  if (error) {
 		console.error('Erro ao salvar o arquivo no banco de dados:', error);
 		res.status(500).json({ error: 'Erro interno do servidor' });
 		return;
 	  }
-
-	  console.log('Arquivo salvo no banco de dados e na pasta uploads com sucesso!', file, Id_Pergunta_FK);
+	  console.log('Arquivo salvo no banco de dados e na pasta uploads com sucesso!');
 	  res.json({ success: true });
 	});
   });
