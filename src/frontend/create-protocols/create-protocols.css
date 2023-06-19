@@ -162,6 +162,7 @@ textarea {
     font-size: 13px;
     padding-top: 5px;
     padding-bottom: 5px;
+    color: #535353;
 }
 
 /* Setting font weight of p element to 400, font size to 15px and color to light gray */
@@ -193,6 +194,11 @@ textarea {
 *::-webkit-scrollbar-track-piece:start {
     background-color: #e7e7e7;
     border-radius: 12px;
+}
+
+::placeholder {
+    font-size: 13px;
+    color: #E7E7E7;
 }
 
 /* Displaying elements with id 'left_sec' and 'right_sec' as flex containers with items in column direction and height of calc(100vh -48px) */
@@ -308,9 +314,13 @@ textarea {
 #categories_article > .centralize {
     height: 100%;
     margin-bottom: 13px;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.centralize_p {
+    display: none;
 }
 
 #more_label_div {
@@ -385,6 +395,10 @@ textarea {
     cursor: pointer;
 }
 
+#protocol_preset:hover, #recipient_preset:hover, #historic_preset:hover {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
 #preset_buttons_div > div > button > img {
     display: none;
 }
@@ -417,6 +431,17 @@ body > div {
     margin-right: 10px;
     margin-bottom: 8.9px;
     overflow: hidden;
+    width: calc(100% - 10px);
+    cursor: pointer;
+}
+
+.category_div:hover {
+    background: linear-gradient(92.83deg, #FF7541 0%, #E04C13 100%);
+    border-color: white;
+}
+
+.category_div:hover > p {
+    color: white;
 }
 
 .category_div:last-child {
@@ -481,6 +506,17 @@ body > div {
     color: #9F9F9F;
 }
 
+#recipient_article .centralize_p {
+    height: calc(100% - 42px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 15px;
+    color: #9F9F9F;
+    margin-top: -11px;
+}
+
 #save_button_div {
     display: flex;
     align-items: baseline;
@@ -499,6 +535,196 @@ body > div {
     margin-bottom: -7px;
 }
 
+.modal > .label_div > input, .modal > .label_div > textarea {
+    margin-right: 30px;
+    margin-left: 9px;
+}
+
+.modal > .label_div > label {
+    margin-left: 30px;
+}
+
+#modal_bg {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.33);;
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+#save_modal > input {
+    border: 1px solid #E7E7E7;
+    border-radius: 6px;
+    outline: none;
+    width: 252px;
+    height: 32px;
+    font-size: 13px;
+}
+
+#save_modal > div {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+#save_modal > ::placeholder {
+    font-size: 13px;
+    text-align: center;
+}
+
+.cancelBtn {
+    background-color: #D6D6D6;
+    color: #535353;
+    width: 85px;
+    height: 26px;
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.saveBtn {
+    background: linear-gradient(94deg, #1F8C69 0%, #0E4936 100%);
+    color: white;
+    width: 85px;
+    height: 26px;
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.saveBtn:hover {
+    background: linear-gradient(92.83deg, #FF7541 0%, #E04C13 100%);
+}
+
+.modal > h1 {
+    font-size: 16px;
+    color: #000000;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+.modal > input {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 24px;
+    margin-top: 24px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+#save_modal {
+    position: absolute;
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
+    width: 297px;
+    height: 150px;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#add_image_modal, #add_text_modal, #add_checkbox_modal {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
+    width: 500px;
+    height: 237px;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#add_image_modal > div:last-child, #add_text_modal > div:last-child, #add_checkbox_modal > div:last-child {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    width: calc(100% - 30px);
+}
+
+#add_image_modal > div:last-child > .label_div, #add_text_modal > div:last-child > .label_div, #add_checkbox_modal > div:last-child > .label_div {
+    margin-bottom: 0px;
+    width: fit-content;
+}
+
+#add_image_modal > div:last-child > div:last-child, #add_text_modal > div:last-child > div:last-child, #add_checkbox_modal > div:last-child > div:last-child {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
+#add_image_modal > div:last-child > .label_div > label, #add_text_modal > div:last-child > .label_div > label, #add_checkbox_modal > div:last-child > .label_div > label {
+    margin-left: 30px;
+    min-width: 73.5px;
+}
+
+#add_image_modal > div:last-child > .label_div > input, #add_text_modal > div:last-child > .label_div > input {
+    margin-left: 9px;
+    width: 30px;
+}
+
+#add_image_modal > .label_div:nth-child(2), #add_text_modal > .label_div:nth-child(2), #add_checkbox_modal > .label_div:nth-child(2) {
+    margin-top: 22px;
+    margin-bottom: 22px;
+}
+
+#add_image_modal > .label_div:nth-child(3), #add_text_modal > .label_div:nth-child(3), #add_checkbox_modal > .label_div:nth-child(3) {
+    margin-bottom: 22px;
+}
+
+#add_image_modal > .label_div > label, #add_text_modal > .label_div > label, #add_checkbox_modal > .label_div > label {
+    min-width: 73.5px;
+}
+
+#add_checkbox_modal {
+    display: block;
+    height: 347px;
+}
+
+#add_checkbox_modal li {
+    list-style: none;
+}
+
+#add_checkbox_modal li input {
+    margin-right: 30px;
+    margin-left: 9px;
+}
+
+#add_checkbox_modal li label {
+    margin-left: 30px;
+    min-width: 73.5px;
+}
+
+#add_checkbox_modal ul {
+    margin-top: 22px;
+}
+
+#add_checkbox_modal .label_div {
+    margin-bottom: 8px;
+}
+
+#add_checkbox_modal li:last-child .label_div{
+    margin-bottom: 22px;
+}
+
+#modal_scroll {
+    overflow: auto;
+    height: calc(100% - 87px);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 8px;
+}
+
 .label_div > input {
     outline: none;
     border: 1px solid #e7e7e7;
@@ -509,6 +735,7 @@ body > div {
     padding-left: 7px;
     padding-right: 7px;
     font-size: 13px;
+    color: #535353;
 }
 
 /* Setting top margin of elements with class 'title_section' to 13px, left margin to 22px, font weight to 400, font size to 15px and color to light gray */
@@ -570,13 +797,13 @@ body > div {
 }
 
 #colunas {
-    display: flex;
+    display: none;
     justify-content: space-around;
     margin-right: 10px;
     margin-bottom: 13px;
 }
 
-#presets_div {
+.presets_div {
     height: calc(100% - 70.5px);
     overflow: auto;
 }
@@ -604,6 +831,59 @@ body > div {
     width: fit-content;
 }
 
+.toast {
+    display: block;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.24);
+    bottom: -41px;
+    width: 297px;
+    height: 40px;
+    z-index: 1;
+    color: #535353;
+    font-size: 15px;
+    overflow: hidden;
+    transition: bottom 1s ease;
+}
+
+.toast_color {
+    background-color: #1F8C69;
+    width: 19px;
+    height: 50px;
+    box-shadow: 3px 0px 7px rgba(0, 0, 0, 0.14);
+}
+
+.toast_line {
+    background-color: #E7E7E7;
+    position: absolute;
+    width: 0px;
+    height: 8px;
+    bottom: -1px;
+    left: 19px;
+}
+
+.toast_text {
+    position: absolute;
+    bottom: 14px;
+    left: 30px;
+}
+
+.turn_visible {
+    bottom: 10px;
+}
+
+.turn_invisible {
+    bottom: -41px;
+}
+
+.line_transition {
+    width: 278px;
+    transition: width 3.5s linear 0.6s;
+}
+
 .preset_div > p {
     font-size: 13px;
     width: 50%;
@@ -626,7 +906,7 @@ body > div {
     min-width: 75px;
 }
 
-.category_inputs_checkbox {
+.category_inputs_profile {
     position: relative;
     display: block;
     height: 100%;
@@ -646,8 +926,8 @@ body > div {
     background-color: transparent;
 }
 
-/* Styling for option_div container */
-.option_div {
+/* Styling for user_div container */
+.user_div {
     width: calc(100% - 10px);
     display: flex;
     align-items: center;
@@ -656,114 +936,53 @@ body > div {
     margin-right: 10px;
 }
 
-.option_div > img {
+.user_div > img {
     width: 15px;
     height: 15px;
 }
 
-/* Styling for checkbox input within .option_div */
-.option_div > input[type=checkbox] {
-    appearance: none;
-    min-width: 17px;
-    height: 17px;
-    border: 1.5px solid #535353;
-    border-radius: 2px;
-    cursor: pointer;
-    position: relative;
-}
-
-/* Styling for checkbox input when hovered */
-.option_div:hover input[type=checkbox] {
-    border: 1.5px solid #000000;
-}
-
-/* Styling for radio input within .option_div */
-.option_div > input[type=radio] {
-    appearance: none;
-    border: 2px solid #535353;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    position: relative;
+.flex {
     display: flex;
-    justify-content: center;
+}
+
+.flex_column {
+    display: flex;
+    flex-direction: column;
+}
+
+.user_profile_button {
+    display: flex;
     align-items: center;
     cursor: pointer;
 }
 
-/* Styling for radio input when hovered */
-.option_div:hover input[type=radio] {
-    border: 2px solid #000000;
+.user_profile_button > img {
+    width: 15px;
+    height: 15px;
 }
 
-
-/* Styling for labels within hovered option_div */
-.option_div:hover label {
+/* Styling for labels within hovered user_div */
+.user_div:hover label {
     color: #000000;
 }
 
-/* Styling for checkbox's unchecked state */
-.option_div > input[type=checkbox]::before{
-    content: "";
-    width: 11px;
-    height: 11px;
-    background-image: url(images/check_gray.png);
-    background-size: cover;
-    opacity: 0;
-    position: absolute;
-    left: 2px;
-    top: 2px;
-}
-
-/* Styling for checkbox's checked state when hovered */
-.option_div:hover input[type=checkbox]::before {
-    background-image: url(images/check.png);
-}
-
-/* Styling for checkbox's checked state */
-.option_div > input[type=checkbox]:checked::before {
-    opacity: 1;
-}
-
-/* Styling for .category_inputs_checkbox's option_div container */
-.category_inputs_checkbox > .option_div {
+/* Styling for .category_inputs_profile's user_div container */
+.flex {
     margin-bottom: 5px;
 }
 
-/* Styling for last child option_div in .category_inputs_checkbox */
-.category_inputs_checkbox > .option_div:last-child {
+/* Styling for last child user_div in .category_inputs_profile */
+.flex:last-child {
     margin-bottom: 0px;
 }
 
-/* Styling for radio input's checked state */
-.option_div > input[type=radio]::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    position: absolute;
-    background-color: #535353;
-    border-color: #535353;
-    border-radius: 50%;
-    opacity: 0;
-}
-
-/* Styling for radio input's checked state when hovered */
-.option_div:hover input[type=radio]::before {
-    background-color: #000000;
-}
-
-/* Styling for radio input's checked state */
-.option_div > input[type=radio]:checked::before {
-    opacity: 1;
-}
-
-/* Styling for last child option_div */
-.option_div:last-child {
+/* Styling for last child user_div */
+.user_div:last-child {
     margin-right: 0px;
 }
 
-/* Styling for labels within option_div */
-.option_div > label {
+/* Styling for labels within user_div */
+.user_div > p {
     padding-left: 4px;
     font-size: 13px;
     color: #535353;
@@ -773,8 +992,8 @@ body > div {
     width: 0px;
 }
 
-/* Styling for labels within hovered option_div */
-.option_div > label:hover {
+/* Styling for labels within hovered user_div */
+.user_div > p:hover {
     color: #000000;
 }
 
@@ -787,10 +1006,24 @@ body > div {
     margin-right: 10px;
     margin-bottom: 8.9px;
     overflow: hidden;
+    width: calc(100% - 10px);
+    cursor: pointer;
+    outline: none;
+}
+
+.preset_div:hover {
+    background: linear-gradient(92.83deg, #FF7541 0%, #E04C13 100%);
+    border-color: white;
+    color: white;
+    outline: none;
 }
 
 .preset_div:last-child {
     margin-bottom: 1px;
+}
+
+.modal {
+    display: none;
 }
 
 /* Setting width of element with id 'trees' to 100% for screens with minimum width of 1107px */
@@ -900,7 +1133,7 @@ body > div {
         font-size: 9px;
     }
 
-    .option_div > label {
+    .user_div > p {
         font-size: 9px;
     }
 
@@ -969,7 +1202,7 @@ body > div {
         flex-direction: column;
     }
 
-    #presets_div {
+    .presets_div {
         height: calc(100% - 84px);
     }
 
