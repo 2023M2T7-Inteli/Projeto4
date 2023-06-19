@@ -4,10 +4,41 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const sqlite3 = require('sqlite3').verbose();
 const DBPATH = '../data/Banco_Projeto.db';
+const multer = require('multer');
 
 const hostname = '127.0.0.1';
 const port = 2021;
+const cors = require('cors');
 const app = express();
+const path = require('path');
+const fs = require('fs')
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        // Extração da extensão do arquivo original:
+        const extensaoArquivo = file.originalname.split('.')[1];
+
+        // Cria um código randômico que será o nome do arquivo
+        const novoNomeArquivo = require('crypto')
+            .randomBytes(64)
+            .toString('hex');
+
+        // Indica o novo nome do arquivo:
+        cb(null, `${novoNomeArquivo}.${extensaoArquivo}`)
+    }
+});
+
+const upload = multer({ storage });
+
+
+app.use(cors());
+
+// Adicione o middleware bodyParser para analisar o corpo das solicitações
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 /* Move all static content to the frontend */
 app.use(express.static("../frontend"));
@@ -17,9 +48,7 @@ app.get('/', (req, res) => {
 	res.redirect('/sign_in/sign_in.html');
 });
 
-/* Definition of endpoints */
 /******** CRUD ************/
-app.use(express.json());
 
 // Inserts a record of Phone, Email, Password, Category, Name, PlantationType, ConfirmPassword into the USER table (it's the C in CRUD - Create). On line 23, it opens the database, and on line 33, it closes the database.
 app.post('/insereUsuario', urlencodedParser, (req, res) => {
@@ -327,26 +356,26 @@ app.get('/numeroProtocolos', (req, res) => {
 	db.close(); // Fecha o banco
 });
 
-// Inserts a response into the RESPONSE table (it's the C in CRUD - Create). On line 282, it opens the database, and on line 294, it closes the database. 
-app.post('/insereResposta', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
+  app.post('/insereResposta', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	const { Resposta, Id_Pergunta_FK } = req.body;
+	const data = req.body; // Obtém os dados enviados
 	var db = new sqlite3.Database(DBPATH);
-	sql = "INSERT INTO RESPOSTA (Resposta, Id_Pergunta_FK) VALUES (?, ?)";
-
-	const databaseReturn = db.run(sql, [Resposta, Id_Pergunta_FK], (err, rows) => {
+	// Percorre os dados e insere cada resposta no banco de dados
+	data.forEach(resposta => {
+	  const { Respostatxt, Id_Pergunta_FK } = resposta;
+	  const sql = "INSERT INTO RESPOSTA (Respostatxt, Id_Pergunta_FK) VALUES (?, ?)";
+	  console.log(sql);
+	  db.run(sql, [Respostatxt, Id_Pergunta_FK], function(err) {
 		if (err) {
-			throw err;
+		  console.error('Erro ao inserir dados no banco de dados:', err);
+		  res.status(500).json({ error: 'Erro interno do servidor' });
+		  return;
 		}
-
-		return rows
+	  });
 	});
-
-	res.write('<p>RESPOSTA INSERIDA COM SUCESSO!</p><a href="/">VOLTAR</a>');
-	db.close();
-	res.end();
-});
+	db.close(); // Feche a conexão com o banco de dados
+	res.sendStatus(200);
+  });
 
 // Retrieves all records from the RESPONSE table (it's the R in CRUD - Read). On line 302, it opens the database, and on line 310, it closes the database. 
 app.get('/respostas', (req, res) => {
@@ -354,7 +383,24 @@ app.get('/respostas', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	var db = new sqlite3.Database(DBPATH);
 	var sql = 'SELECT * FROM RESPOSTA';
-	db.all(sql, [], (err, rows) => {
+		db.all(sql, [],  (err, rows ) => {
+			if (err) {
+				throw err;
+			}
+			res.json(rows);
+		});
+		db.close(); 
+});
+
+// Builds the form for updating the RESPONSE table (it's the U in CRUD - Update). On line 320, it opens the database, and on line 327, it closes the database.
+app.get('/atualizaRespostas', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); 
+	const idResposta = req.body.Id_Resposta;
+	sql = "SELECT * FROM RESPOSTA WHERE Id_Resposta= ?";
+	console.log(sql);
+	var db = new sqlite3.Database(DBPATH); 
+	db.all(sql, [idResposta],  (err, rows ) => {
 		if (err) {
 			throw err;
 		}
@@ -383,12 +429,12 @@ app.get('/atualizaRespostas', (req, res) => {
 // Updates a record in the RESPONSE table (it's the U in CRUD - Update). On line 337, it opens the database, and on line 345, it closes the database. 
 app.post('/atualizaRespostas', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	const { Resposta, Id_Resposta } = req.body;
-	sql = "UPDATE RESPOSTA SET Resposta = ? WHERE Id_resposta = ?";
+	res.setHeader('Access-Control-Allow-Origin', '*'); 
+	const { Respostatxt, Respostaimg, Id_Resposta, Id_Pergunta_FK } = req.body;
+	sql = "UPDATE RESPOSTA SET Respostatxt = ?, Respostaimg = ?, Id_Pergunta_FK = ? WHERE Id_resposta = ?";
 	console.log(sql);
-	var db = new sqlite3.Database(DBPATH);
-	db.run(sql, [Resposta, Id_Resposta], err => {
+	var db = new sqlite3.Database(DBPATH); 
+	db.run(sql, [Respostatxt, Respostaimg, Id_Resposta, Id_Pergunta_FK],  err => {
 		if (err) {
 			throw err;
 		}
@@ -416,21 +462,20 @@ app.post('/removeRespostas', urlencodedParser, (req, res) => {
 	db.close();
 });
 
-// Join between the QUESTION & RESPONSE tables. The "JOIN" command in a database is used to combine information from two or more tables based on a specified condition. On line 370, it opens the database, and on line 378, it closes the database. 
 app.get('/JOIN_Pergunta_Resposta', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	var db = new sqlite3.Database(DBPATH);
-	var sql = 'SELECT Pergunta.Id_Pergunta, Pergunta.Pergunta, Resposta.Id_Resposta, Resposta.Resposta FROM Pergunta INNER JOIN Resposta ON Pergunta.Id_Pergunta = Resposta.Id_Pergunta_FK';
+	var sql = 'SELECT Pergunta.Id_Pergunta, Pergunta.Pergunta, Resposta.Id_Resposta, Resposta.Respostatxt, Resposta.Respostaimg FROM Pergunta INNER JOIN Resposta ON Pergunta.Id_Pergunta = Resposta.Id_Pergunta_FK';
 	db.all(sql, [], (err, rows) => {
-		if (err) {
-			throw err;
-		}
-		res.json(rows);
+	  if (err) {
+		throw err;
+	  }
+	  res.json(rows);
+	  db.close();
 	});
-	db.close();
-});
-
+  });  
+  
 // Join between the PROTOCOL & QUESTION tables. The "JOIN" command in a database is used to combine information from two or more tables based on a specified condition. On line 385, it opens the database, and on line 393, it closes the database. 
 app.get('/JOIN_Protocolo_Pergunta', (req, res) => {
 	res.statusCode = 200;
@@ -496,6 +541,115 @@ app.get('/catchGroup', (req, res) => {
 	db.close();
 })
 
+app.post('/respImg', upload.single('file'), (req, res) => {
+	var db = new sqlite3.Database(DBPATH); 
+	const file = req.file; // Arquivo enviado pelo cliente
+	const Id_Pergunta_FK = req.body.Id_Pergunta_FK; // Valor do Id_Pergunta_FK
+  
+	// Verifique se o arquivo e o ID da pergunta são válidos
+	if (!file || !Id_Pergunta_FK) {
+	  console.error('Arquivo ou ID da pergunta inválido');
+	  res.status(400).json({ error: 'Dados inválidos' });
+	  return;
+	}
+	const query = 'INSERT INTO RESPOSTA (Respostaimg, Id_Pergunta_FK) VALUES (?, ?)';
+	db.run(query, [file.filename, Id_Pergunta_FK], function(error) {
+	  if (error) {
+		console.error('Erro ao salvar o arquivo no banco de dados:', error);
+		res.status(500).json({ error: 'Erro interno do servidor' });
+		return;
+	  }
+	  console.log('Arquivo salvo no banco de dados e na pasta uploads com sucesso!');
+	  res.json({ success: true });
+	});
+  });
+
+app.post('/insereOption', urlencodedParser, (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    const { resposta, nome_option, Id_Pergunta_FK } = req.body;
+    sql = "INSERT INTO OPTION (resposta, nome_option, Id_Pergunta_FK) VALUES (?, ?, ?)";
+    console.log(sql);
+    db.run(sql, [resposta, nome_option, Id_Pergunta_FK], err => {
+        if (err) {
+            throw err;
+        }
+    });
+    res.write('<p>OPTION INSERIDO COM SUCESSO!</p><a href="/">VOLTAR</a>');
+    db.close(); 
+    res.end();
+});
+
+// Retrieves all records from the USER table (it's the R in CRUD - Read). On line 41, it opens the database, and on line 49, it closes the database. 
+ app.get('/option', (req, res) => {
+ 	res.statusCode = 200;
+ 	res.setHeader('Access-Control-Allow-Origin', '*');
+	const idPergunta = req.query.Id_Pergunta_FK
+ 	var db = new sqlite3.Database(DBPATH);
+ 	var sql = 'SELECT * FROM OPTION WHERE Id_Pergunta_FK = ?';
+ 		db.all(sql, [idPergunta],  (err, rows ) => {
+ 			if (err) {
+ 				throw err;
+ 			}
+ 			res.json(rows);
+ 		});
+ 		db.close(); 
+ });
+
+// Builds the form for updating the USER table (it's the U in CRUD - Update). On line 59, it opens the database, and on line 66, it closes the database.
+app.get('/atualizaOption', (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const idOption = req.body.Id_Option;
+    sql = "SELECT * FROM OPTION WHERE Id_Option = ?";
+    console.log(sql);
+    var db = new sqlite3.Database(DBPATH); 
+    db.all(sql, [idOption],  (err, rows ) => {
+        if (err) {
+            throw err;
+        }
+        res.json(rows);
+    });
+    db.close(); 
+});
+
+// Updates a record of Phone, Email, Password, Category, User_Id in the USER table (it's the U in CRUD - Update). On line 76, it opens the database, and on line 84, it closes the database.
+app.post('/atualizaOption', urlencodedParser, (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const { resposta, nome_option, Id_Pergunta_FK } = req.body;
+    sql = "UPDATE OPTION SET resposta = ?, nome_option = ?, Id_Pergunta_FK = ? WHERE Id_Option = ?";
+    console.log(sql);
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    db.run(sql, [resposta, nome_option, Id_Pergunta_FK],  err => {
+        if (err) {
+            throw err;
+        }
+        res.end();
+    });
+    res.write('<p>USUARIO ATUALIZADO COM SUCESSO!</p><a href="/">VOLTAR</a>');
+    db.close(); 
+});
+
+// Deletes a record from the USER table (it's the D in CRUD - Delete). On line 94, it opens the database, and on line 102, it closes the database. 
+app.post('/removeOption', urlencodedParser, (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const { Id_Option } = req.body;
+    sql = "DELETE FROM OPTION WHERE Id_Option = ?";
+    console.log(sql);
+    var db = new sqlite3.Database(DBPATH); 
+    db.run(sql, [Id_Option],  err => {
+        if (err) {
+            throw err;
+        }
+        res.write('<p>OPTION REMOVIDO COM SUCESSO!</p><a href="/">VOLTAR</a>');
+        res.end();
+    });
+    db.close(); 
+});
+  
 app.listen(port, hostname, () => {
 	console.log(`Servidor rodando em http://${hostname}:${port}/`);
 });

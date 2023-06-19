@@ -7,6 +7,7 @@
     <title>Responder protocolo</title>
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="answer.css">
+    <script src="https://cdn.jsdelivr.net/npm/uuid/dist/umd/uuidv4.min.js"></script>
 </head>
 <body>
     <header>
@@ -30,12 +31,13 @@
             <div id="title_div">
                 <img src="images/back.png" alt="back">
                 <h1>Protocolo: <span id="protocol_name"></span></h1>
-                <button id="done_button">Pronto</button>
+                <button onclick="enviarForms()" id="done_button">Pronto</button>
             </div>
             <div class="line_1"></div>
             <div id="scroll">
                 <p id="desc"></p>
                 <div class="line"></div>
+                <div id="scroll2"></div>
             </div>
         </section>
     </main>
