@@ -11,6 +11,89 @@
 </head>
 
 <body>
+    <div id="modal_bg"></div>
+    <div class="modal" id="save_modal">
+        <h1>Salvar destinatários</h1>
+        <input type="text" placeholder="Digite o nome do grupo" id="save_modal_input" class="modal_input">
+        <div>
+            <button class="cancelBtn" onclick="hideModals()">Cancelar</button>
+            <button class="saveBtn" onclick="saveRecipients2()">Salvar</button>
+        </div>
+    </div>
+
+    <div class="modal" id="add_image_modal">
+        <h1>Adicionar imagem</h1>
+        <div class="label_div"><label>Título:</label><input id="title_image_category" type="text" placeholder="Digite o título da categoria"></div>
+        <div class="label_div"><label>Descrição:</label><textarea id="desc_image_category" placeholder="Digite a descrição da categoria (opcional)"></textarea></div>
+        <div>
+            <div class="label_div"><label>Quantidade:</label><input id="qnt_image_category" type="number" maxlength="2"></div>
+            <div>
+                <button class="cancelBtn" onclick="hideModals()">Cancelar</button>
+                <button class="saveBtn" onclick="addImage()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="add_text_modal">
+        <h1>Adicionar parágrafo</h1>
+        <div class="label_div"><label>Título:</label><input id="title_text_category" type="text" placeholder="Digite o título da categoria"></div>
+        <div class="label_div"><label>Descrição:</label><textarea id="desc_text_category" placeholder="Digite a descrição da categoria (opcional)"></textarea></div>
+        <div>
+            <div>
+                <button class="cancelBtn" onclick="hideModals()">Cancelar</button>
+                <button class="saveBtn" onclick="addText()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="add_checkbox_modal">
+        <h1>Adicionar checkbox</h1>
+        <div id="modal_scroll">
+            <div class="label_div"><label>Título:</label><input id="title_checkbox_category" type="text" placeholder="Digite o título da categoria"></div>
+            <div class="label_div"><label>Descrição:</label><textarea id="desc_checkbox_category" placeholder="Digite a descrição da categoria (opcional)"></textarea></div>
+            <div class="line"></div>
+            <ul>
+                <li>
+                    <div class="label_div"><label>Opção 1:</label><input type="text" placeholder="Digite o nome da opção" id="1"></div>
+                </li>
+                <li>
+                    <div class="label_div"><label>Opção 2:</label><input type="text" placeholder="Digite o nome da opção" id="2"></div>
+                </li>
+                <li>
+                    <div class="label_div"><label>Opção 2:</label><input type="text" placeholder="Digite o nome da opção" id="2"></div>
+                </li>
+                <li>
+                    <div class="label_div"><label>Opção 2:</label><input type="text" placeholder="Digite o nome da opção" id="2"></div>
+                </li>
+                <li>
+                    <div class="label_div"><label>Opção 2:</label><input type="text" placeholder="Digite o nome da opção" id="2"></div>
+                </li>
+                <li>
+                    <div class="label_div"><label>Opção 2:</label><input type="text" placeholder="Digite o nome da opção" id="2"></div>
+                </li>
+                <li>
+                    <div class="label_div"><label>Opção 2:</label><input type="text" placeholder="Digite o nome da opção" id="2"></div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <button id="add_option_button" onclick="addOption()"></button>
+            <div>
+                <button class="cancelBtn" onclick="hideModals()">Cancelar</button>
+                <button class="saveBtn" onclick="addText()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast">
+        <div class="flex">
+            <div class="toast_color"></div>
+            <div class="flex_column">
+                <p class="toast_text"></p>
+                <div class="toast_line"></div>
+            </div>
+        </div>
+    </div>
     <header>
         <img src="images/logo.png" alt="logo">
         <h1>Protocom</h1>
@@ -53,11 +136,11 @@
                         <h1 class="title_section">Criar novo protocolo</h1>
                         <div class="line"></div>
                         <div class="main_article">
-                            <div class="label_div"><label>Título:</label><input type="text"></div>
-                            <div class="label_div"><label>Descrição:</label><textarea></textarea></div>
+                            <div class="label_div"><label>Título:</label><input type="text" placeholder="Digite o título do protocolo"></div>
+                            <div class="label_div"><label>Descrição:</label><textarea placeholder="Digite a descrição do protocolo (opcional)"></textarea></div>
                             <div id="more_label_div">
-                                <div class="label_div"><label>Data limite:</label><input type="text"></div>
-                                <div class="label_div"><label>Horário limite:</label><input type="text"></div>
+                                <div class="label_div"><label>Data limite:</label><input type="date" placeholder="dd/mm (opcional)"></div>
+                                <div class="label_div"><label>Horário limite:</label><input type="time" placeholder="dd/mm (opcional)"></div>
                             </div>
                         </div>
                     </article>
@@ -68,7 +151,7 @@
                             <p>Nenhuma categoria selecionada</p>
                         </div>
                         <div class="main_article categories_main_article">
-                            <div class="category_div">
+                            <!-- <div class="category_div">
                                 <img src="images/image_category.png" alt="image category">
                                 <p class="category_name">Fotos da plata</p>
                                 <p class="category_description">(<span>Tirar foto de todos os lados da planta</span>)</p>
@@ -147,10 +230,10 @@
                                 <img src="images/check_category.png" alt="image category">
                                 <p class="category_name">Processos</p>
                                 <p class="category_description">(<span>Marque os processos que você realizou</span>)</p>
-                            </div>
+                            </div> -->
                         </div>
                         <div id="total_categories_div">
-                            <p>Total: <span id="total_categories"></span></p>
+                            <p>Total: <span id="total_categories">0</span></p>
                             <button id="expand_button" onclick="zoom()">Expandir<img id="expand_img" src="images/expand.png" alt="icon inside a button that expand the categories section"></button>
                         </div>
                     </article>
@@ -172,7 +255,7 @@
                     <div class="line"></div>
                     <div class="main_article">
                         <div>
-                            <div class="label_div"><label>Procurar:</label><input type="text"></div>
+                            <div class="label_div"><label>Pesquisar:</label><input type="text" placeholder="Pesquise pelo nome do protocolo ou grupo de usuários" id="searchPresetInput"></div>
                             <div id="colunas">
                                 <div>
                                     <p>Nome</p><img src="images/sort.png" alt="">
@@ -181,34 +264,14 @@
                                     <p>Data de criação</p><img src="images/sort.png" alt="">
                                 </div>
                             </div>
-                            <div id="presets_div">
-                                <div class="preset_div">
-                                    <p>Fotos da planta</p>
-                                    <p>26/05/2023</p>
-                                </div>
-                                <div class="preset_div">
-                                    <p>Fotos da planta</p>
-                                    <p>26/05/2023</p>
-                                </div>
-                                <div class="preset_div">
-                                    <p>Fotos daaaaaaaaaaaaaaaaaaaaaa planta</p>
-                                    <p>26/05/2023</p>
-                                </div>
-                                <div class="preset_div">
-                                    <p>Fotos da planta</p>
-                                    <p>26/05/2023</p>
-                                </div>
-                                <div class="preset_div">
-                                    <p>Fotos da planta</p>
-                                    <p>26/05/2023</p>
-                                </div>
-                                <div class="preset_div">
-                                    <p>Fotos da planta</p>
-                                    <p>26/05/2023</p>
-                                </div>
+                            <div class="presets_div protocol_preset_div">
                             </div>
+                            <div class="presets_div recipient_preset_div">
+                            </div>
+                            <div class="presets_div historic_preset_div">
+                            </div>
+                            <p class="centralize_p">Nenhuma predefinição registrada</p>
                         </div>
-                        <p class="centralize_p">Nenhuma categoria selecionada</p>
                     </div>
                 </article>
             </section>
@@ -216,71 +279,24 @@
                 <article id="recipient_article">
                     <div id="save_button_div">
                         <h1 class="title_section">Destinatários</h1>
-                        <button>Salvar</button>
+                        <button id="save" onclick="saveRecipients()" onmouseenter="saveToOrange(this)" onmouseleave="saveToDefault(this)">Salvar</button>
                     </div>
                     <div class="line"></div>
                     <div class="main_article">
                         <div>
-                            <div class="label_div"><label>Procurar:</label><input type="text"></div>
-                            <div class="category_inputs_checkbox">
-                                <!--Options-->
-                                <button class="option_div">
-                                    <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_1"> Josel de Carvalho Joselitjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjior Motta de Carvalho</label>
-                                </button>
-                                <button class="option_div">
-                                    <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_2">Fiz isso</label>
-                                </button>
-                                <button class="option_div">
-                                    <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_3">Fiz isso</label>
-                                </button>
-                                <button class="option_div">
-                                    <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_4">Fiz isso</label>
-                                </button>
-                                <button class="option_div">
-                                    <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_5">Fiz isso</label>
-                                </button>
-                                <button class="option_div">
-                                    <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_6">Fiz isso</label>
-                                </button>
-                                <button class="option_div">
-                                    <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_7">Fiz isso</label>
-                                </button>
-                                <button class="option_div">
-                                    <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_8">Fiz isso</label>
-                                </button>
-                                <button class="option_div">
-                                    <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_9">Fiz isso</label>
-                                </button>
-                                <button class="option_div">
-                                    <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_10">Fiz isso</label>
-                                </button>
+                            <div class="label_div"><label>Pesquisar:</label><input type="text" placeholder="Digite a plantação, nome ou ID do usuário" id="searchUserInput"></div>
+                            <div class="category_inputs_profile" id="users">
+                                <!--Users-->
                             </div>
+                            <p class="centralize_p">Nenhum usuário cadastrado</p>
                         </div>
                         <div>
                             <div class="vertical_line"></div>
                         </div>
                         <div>
                             <div class="label_div"><label id="selected_label">Selecionados:</label></div>
-                            <div class="category_inputs_checkbox">
-                                <!--Options-->
-                                <button class="option_div">
-                                    <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_11">Fiz isso</label>
-                                </button>
-                                <button class="option_div">
-                                    <img src="images/profile.png" alt="User's profile picture">
-                                    <label for="checkbox_12">Fiz isso</label>
-                                </button>
+                            <div class="category_inputs_profile" id="selectedUsers">
+                                <!--Selected users-->
                             </div>
                         </div>
                     </div>
