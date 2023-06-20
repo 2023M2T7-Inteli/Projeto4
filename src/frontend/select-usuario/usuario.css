@@ -144,7 +144,7 @@ section > #title_div {
 .profile-label {
     width: 15px;
     height: 15px;
-    margin-right: 5px; /* Ajuste a margem conforme necessário */
+    margin-left: 5px; /* Ajuste a margem conforme necessário */
 }
 
 .button-container {
@@ -250,7 +250,7 @@ section > .button-container > .user-button {
 }
 
 .label-second {
-    margin-left: 40px; /* Adiciona 5px de margem à esquerda */
+    margin-left: 60px; /* Adiciona 5px de margem à esquerda */
 }
 
 .user-info {
