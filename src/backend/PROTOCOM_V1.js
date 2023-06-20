@@ -308,18 +308,20 @@ app.get('/atualizaProtocolo', (req, res) => {
 app.post('/atualizaProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Id_Protocolo } = req.body;
-	sql = "UPDATE PROTOCOLO SET Atividade = ?, Nome_Protocolo = ?, Descricao = ?, Data = ?, Horario = ?, Visualizado = ?, Id_Usuario_FK = ? WHERE Id_Protocolo = ?";
-	console.log(sql);
+	const atualizacao2 = req.body;
 	var db = new sqlite3.Database(DBPATH);
-	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Id_Protocolo], err => {
-		if (err) {
-			throw err;
-		}
-		res.end();
-	});
-	res.write('<p>ATIVIDADE DO PROTOCOLO ATUALIZADA COM SUCESSO!</p><a href="/">VOLTAR</a>');
+	atualizacao2.forEach(obj => {
+		console.log("aqui otario", obj)
+		let { Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Id_Protocolo } = obj;
+		const sql = "UPDATE PROTOCOLO SET Atividade = ?, Nome_Protocolo = ?, Descricao = ?, Data = ?, Horario = ?, Visualizado = ?, Id_Usuario_FK = ? WHERE Id_Protocolo = ?";
+		db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Id_Protocolo], err => {
+			if (err) {
+				throw err;
+			}
+		})
+	})
 	db.close();
+	res.write('<p>ATIVIDADE DO PROTOCOLO ATUALIZADA COM SUCESSO!</p><a href="/">VOLTAR</a>');
 });
 
 // Deletes a record from the PROTOCOL table (it's the D in CRUD - Delete). On line 266, it opens the database, and on line 274, it closes the database. 
