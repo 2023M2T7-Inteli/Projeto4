@@ -1,0 +1,285 @@
+/* Importing two fonts from Google Fonts: 'Righteous' and 'Rubik' */
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
+
+/* Setting default font for all elements to 'Rubik' and default padding and margin to 0 */
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Rubik";
+}
+
+/* Setting body's background color to light gray */
+body {
+    background-color: #f6f6f6;
+}
+
+/* Displaying header as flex container with items aligned to center and height of 48px */
+header {
+    display: flex;
+    align-items: center;
+    height: 48px;
+}
+
+/* Setting h1 element's font family to 'Righteous', font size to 20px, font weight to 400 and left margin to 6px */
+header > h1 {
+    font-family: 'Righteous';
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 6px;
+}
+
+/* Setting width and height of img element to 30px and left margin to 16px */
+header > img {
+    width: 30px;
+    height: 30px;
+    margin-left: 16px;
+}
+
+/* Displaying nav element as flex container with width of 100%, items justified with space around and aligned to center */
+header > nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Displaying div element as flex container with items aligned to center */
+header > nav > div {
+    display: flex;
+    align-items: center;
+}
+
+/* Setting font size of a element to 14px, cursor to pointer, color to dark gray, text decoration to none, display to block and height to fit-content */
+header > nav a {
+    font-size: 14px;
+    cursor: pointer;
+    color: #535353;
+    text-decoration: none;
+    display: block;
+    height: fit-content;
+}
+
+/* Setting color of a element on hover to black */
+header > nav a:hover{
+    color: black;
+}
+
+/* Define the style for the main section. */
+main {
+    height: calc(100vh - 48px);
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#trees {
+    height: 64px;
+    width: calc(100%); 
+
+}
+
+/* Define the style for each section inside the main section. */
+main > section {
+    width: 690px;
+    height: 90%;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.12);
+}
+
+.info-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  /* Estilo para a seção */
+section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%; /* Ajuste a largura conforme necessário */
+    height: 500px; /* Ajuste a altura conforme necessário */
+    background: white;
+    overflow: hidden; /* Isso mantém tudo dentro da seção */
+    box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.12);
+    border-radius: 10px; /* Adiciona cantos arredondados à seção */
+    margin-top: 30px;
+    padding: 23px;
+    position: absolute;
+    bottom: 35px;
+}
+
+/* Estilo para o cabeçalho dentro da seção */
+section > #title_div {
+    height: 60px;
+    background-color: #1D1D1D;
+    color: white; /* Define a cor do texto como branca */
+    padding: 10px; /* Adiciona algum preenchimento ao redor do texto */
+    box-sizing: border-box; /* Isso garante que o preenchimento não aumente a altura total */
+}
+
+.labels-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+}
+
+.label p {
+    margin-left: 5px; /* Ajuste a margem conforme necessário */
+}
+
+.profile-label {
+    width: 15px;
+    height: 15px;
+    margin-left: 5px; /* Ajuste a margem conforme necessário */
+}
+
+.button-container {
+    position: absolute;
+    top: 85px; /* altura do header mais o espaçamento desejado */
+    bottom: 0;
+    left: 23px;
+    right: 23px;
+    padding: 20px; /* Adicione essa linha para definir o espaçamento */
+    overflow-y: auto;
+}
+
+.button-container > .user-button:last-child {
+    margin-bottom: 70px; /* Adicione uma margem inferior maior para garantir que o último botão não seja cortado */
+}
+
+/* Estilo para a div que contém os botões */
+section > .button-container {
+    overflow-y: scroll; /* Permite a rolagem no eixo y */
+    height: calc(100% - 65px); /* Define a altura para ocupar o restante da seção, descontando o cabeçalho */
+}
+
+/* Estilo para os botões */
+section > .button-container > .user-button {
+    display: block;
+    width: 100%;
+    height: 56px;
+    margin-bottom: 15px; /* Adiciona uma margem na parte inferior de cada botão */
+    /* Adicione mais estilos aqui para personalizar a aparência dos botões */
+}
+
+/* Estilo para o cabeçalho dentro da seção */
+#title_div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 65px;
+    background-color: #1D1D1D;
+    color: white; /* Define a cor do texto como branca */ 
+    box-sizing: border-box; /* Isso garante que o preenchimento não aumente a altura total */
+    font-family: 'Rubik'; /* Aplica a fonte Rubik */
+    font-size: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100%); /* Ajuste conforme necessário */
+}
+
+.search-container {
+    margin: 23px; 
+    width: 100%;
+}
+
+/* Estilo para o container de pesquisa */
+#title_div > .search-container {
+    display: flex;
+    align-items: center;
+    font-family: 'Rubik'; /* Aplica a fonte Rubik */
+    font-size: 15px;
+    width: 100%; /* Ocupa toda a largura disponível */
+    justify-content: space-between;
+}
+
+/* Estilo para o campo de pesquisa */
+#title_div > .search-container > #search {
+    height: 18px;
+    border-radius: 5px; /* Adiciona bordas arredondadas ao campo de pesquisa */
+    margin-left: 10px; /* Adiciona uma margem à esquerda para separar o campo de pesquisa do rótulo */
+    background: transparent; /* Torna o campo de entrada transparente */
+    border: 1px solid white;
+    flex-grow: 1; /* Faz a caixa de texto crescer para ocupar o espaço extra */
+    margin-right: 5px;
+}
+
+/* Estilo para o texto de "Resultados encontrados" */
+#title_div > .search-container > #results {
+    margin-left: 10px; /* Adiciona uma margem à esquerda para separar o texto dos resultados do campo de pesquisa */
+}
+
+.user-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border: 1px solid #E7E7E7;
+    font-family: 'Rubik';
+    font-size: 15px;
+    padding:15px; /* Adiciona algum espaço em torno dos elementos dentro do botão */
+    border-radius:7px;
+}
+
+.user-button:hover {
+    background:
+    linear-gradient(90.71deg, #FF7541 0%, #E04C13 100%);
+    color: white;
+}
+
+.label-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 60px;
+    margin-top: 40px;
+}
+
+.label-second {
+    margin-left: 60px; /* Adiciona 5px de margem à esquerda */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;  
+    justify-content: space-between;
+    width: calc(100% - 50px); 
+}
+
+.profile-picture {
+    width: 25px; 
+    height: 25px;
+    margin-right: 1px;
+    object-fit: cover;
+    
+}
+
+.user-info p {
+    margin: 0 10px; /* Adiciona algum espaço em torno dos elementos de texto */
+    white-space: nowrap; /* Evita que o texto quebre para a linha seguinte */
+    overflow: hidden; /* Esconde qualquer excesso de texto */
+    text-overflow: ellipsis; /* Adiciona reticências quando o texto excede o espaço disponível */
+}
+
+.name {
+    display: flex;
+    align-items: center;
+}
+
+.user-button:hover .profile-picture {
+    content: url("profile3.png");
+}

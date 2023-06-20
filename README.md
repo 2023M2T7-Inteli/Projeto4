@@ -1,7 +1,7 @@
 # Inteli - Instituto de Tecnologia e Liderança 
 
 <p align="center">
-<a href= "https://www.inteli.edu.br/"><img src="https://www.inteli.edu.br/wp-content/uploads/2021/08/20172028/marca_1-2.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0"></a>
+<a href= "https://www.inteli.edu.br/"><img src="/imagens/inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0"></a>
 </p>
 
 # Protocom
@@ -36,22 +36,17 @@ Clique <a href="http://127.0.0.1:2021/sign_in/sing_in.html">AQUI</a> para ver o 
 
 ## 📁 Estrutura de pastas
 
-```
+
 |--> documentos<br>
   &emsp;| --> outros<br>
-  &emsp;| T7_G4_V1_Web_application_document.docx<br>
-  &emsp;| T7_G4_V1_Web_application_document.pdf<br>
-  &emsp;| T7_G4_V2_Web_application_document.docx<br>
-  &emsp;| T7_G4_V2_Web_application_document.pdf<br>
-  &emsp;| T7_G4_V3_Web_application_document.docx<br>
-  &emsp;| T7_G4_V3_Web_application_document.pdf<br>
-  &emsp;| T7_G4_V4_Web_application_document.docx<br>
-  &emsp;| T7_G4_V4_Web_application_document.pdf<br>
+  &emsp;| T7_G4_V5_Web_application_document.docx<br>
+  &emsp;| T7_G4_V5_Web_application_document.pdf<br>
 |--> imagens<br>
 |--> src<br>
   &emsp;|--> Backend<br>
   &emsp;|--> Data<br>
   &emsp;|--> Frontend<br>
+  &emsp;|.DS_Store<br>
 | .DS_Store<br>
 | .gitignore.txt<br>
 | readme.md<br>
@@ -89,6 +84,49 @@ npm start
 
 ## 🗃 Histórico de lançamentos
 
+* 0.4.2 - 19/06/2023
+    * Correção de erros no armazenamento de documentos da tela de responder protocolos (answer)
+    * Atualização no frontend da tela "create-protocols"
+    * Alteração de alguns detalhes de design na página "create-protocols"
+    * Finalização da tela "select-usuario"
+      
+* 0.4.1 - 18/06/2023
+    * Adiciona tabela no banco de dados para tratar respostas de checkbox e radio
+    * Desenvolvimento de endpoints para tratar as respostas de checkbox e radio
+    * Atualização da tela de responder protocolos (answer)
+      
+* 0.4.0 - 17/06/2023
+    * Continuação da integração da tela de responder protocolos (answer)
+    * Desenvolvimento do frontend da tela de "create-protocols"
+
+* 0.3.9 - 16/06/2023
+    * Alteração de alguns detalhes de design na página "create-protocols"
+    * Continuação da integração da tela de responder protocolos (answer)
+
+* 0.3.9 - 14/06/2023
+    * Atualização no frontend da tela responder protocolos (answer)
+    * Alteração da tela de responder protocolos (answer)
+    * Integração da tela de responder protocolos (answer)
+    * Atualização na visualização de protocolos da tela de seleção de protocolos (Select_P)
+
+* 0.3.9 - 13/06/2023
+    * Atualização e refatoração do código da tela de seleção de protocolos (Select_P)
+    * Alteração no frontend da tela de seleção de protocolos (Select_P)
+    * Alteração no frontend da tela do agricultor
+    * Alteração no frontend da tela de responder protocolos (answer)
+    * Alteração no frontend da tela de login (sign in)
+
+* 0.3.8 - 12/06/2023
+    * Correção de erros de senha da tela de login (sign in)
+    * Correção de erros de senha da tela de login (sign in)
+    * Atualização no funcionamento da tela de login (sign in)
+    * Adiciona "campo visualizado" na tabela protocolo da tela de selecionar protocolos  (Select_P)
+    * Atualização no funcionamento do frontend da tela de selecionar protocolos (Select_P)
+      
+* 0.3.7 - 08/06/2023
+    * Inserção de comentários no frontend da página de cadastro (sign up)
+    * Inserção de comentários no frontend da página "create-protocols"
+      
 * 0.3.6 - 07/06/2023
     * Desenvolvimento e correção do design na página de selecionar protocolos (Select_P)
     * Alteração de alguns detalhes de design e funcionamento da página "create-protocols"
@@ -104,7 +142,7 @@ npm start
     * Início à nova página dos pesquisadores (create-protocols)
     * Desenvolvimento e correções de erros na página de selecionar protocolos (Select_P)
     * Modificação das tags de botão para âncora no HTML
-    * Integraçao da navegação entre algumas páginas
+    * Integração da navegação entre algumas páginas
     * Correção do erro de um botão na página inicial do agricultor
     * Versão em PDF dos WADs adicionada
     * Update no readme.md
@@ -190,4 +228,4 @@ npm start
 
 ## 📋 Licença/License
 
-<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Spidus/Teste_Final_1">MODELO GIT INTELI</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://www.yggbrasil.com.br/vr">Inteli, Diogo Pelaes Burgierman, Freddy Mester Harari, Isabella Fernandes Saldanha, Joselito Júnior Motta de Carvalho, Marco Antonio Rizzi Meneguetti, Ricardo Baumgart Magalhães de Novaes, Vitoria Novaes Xavier</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International</a>.</p>
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/2023M2T7-Inteli/Projeto4">PROTOCOM</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/2023M2T7-Inteli/Projeto4">Inteli, <a href="https://www.linkedin.com/in/diogo-pelaes-a34593279/">Diogo Pelaes Burgierman</a>, <a href="https://www.linkedin.com/in/freddy-mester-harari-375860279">Freddy Mester Harari</a>, <a href="https://www.linkedin.com/in/isabella-fernandes-saldanha-138a631b4/">Isabella Fernandes Saldanha</a>, <a href="https://www.linkedin.com/in/joselitojunior/">Joselito Júnior Motta de Carvalho</a>, <a href="https://www.linkedin.com/in/marco-antonio-rizzi-meneguetti-620b56257/">Marco Antonio Rizzi Meneguetti</a>, <a href="https://www.linkedin.com/in/ricardo-novaes-24276b271/">Ricardo Baumgart Magalhães de Novaes</a>, <a href="https://www.linkedin.com/in/vitoria-novaes/">Vitoria Novaes Xavier</a></a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
