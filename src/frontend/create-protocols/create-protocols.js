@@ -555,6 +555,10 @@ function showDeleteAllModal() {
 	$("#delete_all_modal").css('display', 'block');
 }
 
+function saveProtocol() {
+	
+}
+
 function addImage() {
 	if ($("#title_image_category").val() != '' && $("#qnt_image_category").val() > 0) {
 		let span;
