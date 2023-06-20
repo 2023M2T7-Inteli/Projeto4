@@ -35,6 +35,11 @@ fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
       let mesProtocolo = dataProtocoloPartes[1];
       let anoProtocolo = dataProtocoloPartes[2];
       let idP = data[i].Id_Protocolo;
+      let atividade = data[i].Atividade;
+
+      if (atividade === 'Concluido') {
+        displayElement.style.display = 'none';
+      } 
 
         // Create the div element with the class "button_div"
         const buttonDiv = document.createElement("div");
@@ -67,7 +72,7 @@ fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
 
         if(vencido==true){
           buttonElement.style.backgroundColor='red';
-        }
+        }       
 
         // Add a click event listener to each button
         buttonElement.addEventListener('click', function() {
