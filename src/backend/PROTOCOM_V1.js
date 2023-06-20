@@ -311,7 +311,6 @@ app.post('/atualizaProtocolo', urlencodedParser, (req, res) => {
 	const atualizacao2 = req.body;
 	var db = new sqlite3.Database(DBPATH);
 	atualizacao2.forEach(obj => {
-		console.log("aqui otario", obj)
 		let { Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Id_Protocolo } = obj;
 		const sql = "UPDATE PROTOCOLO SET Atividade = ?, Nome_Protocolo = ?, Descricao = ?, Data = ?, Horario = ?, Visualizado = ?, Id_Usuario_FK = ? WHERE Id_Protocolo = ?";
 		db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Id_Protocolo], err => {
