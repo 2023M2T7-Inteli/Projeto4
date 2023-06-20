@@ -1,35 +1,8 @@
 $(document).ready(() => {
-	// setInterval(function () {
-	// 	if ($(".categories_main_article").children().length == 0) {
-	// 		$(".centrilize").css('display', 'flex');
-	// 		$(".categories_main_article").css('display', 'none');
-	// 	} else {
-	// 		$(".centrilize").css('display', 'block');
-	// 	}
-	// 	$("#total_categories").text($(".categories_main_article").children().length);
-	// }, 300);
-
-	// Requisição para pegar os agricultores
 	agricultores();
 
 	$("#modal_bg").on('click', () => {
 		hideModals();
-	})
-
-	$("#save_modal_input").on('click', () => {
-		$("#save_modal_input").css('border-color', '#E7E7E7')
-	})
-
-	$("#qnt_image_category").on('click', () => {
-		$("#qnt_image_category").css('border-color', '#E7E7E7')
-	})
-
-	$("#title_image_category").on('click', () => {
-		$("#title_image_category").css('border-color', '#E7E7E7')
-	})
-
-	$("#title_text_category").on('click', () => {
-		$("#title_text_category").css('border-color', '#E7E7E7')
 	})
 
 	toProtocol();
@@ -43,6 +16,23 @@ $(document).ready(() => {
 	document.addEventListener('dragend', element => {
 		element.target.classList.remove('dragging');
 	})
+
+	let saveBtn = document.querySelectorAll(".saveBtn, .deleteBtn, .cancelBtn");
+
+	Array.from(saveBtn).forEach(button => {
+		button.addEventListener('mouseenter', function () {
+			$(button).css('animation', 'changeSize 0.7s ease');
+		});
+	});
+
+	Array.from(saveBtn).forEach(button => {
+		button.addEventListener('mouseleave', function () {
+			$(button).css('animation', 'changeSize2 0.7s ease');
+		});
+		button.addEventListener('animationend', function () {
+			$(button).css('animation', '');
+		});
+	});
 })
 
 var selectedButton = null;
@@ -51,6 +41,7 @@ var categoriesButtonArrow = document.getElementById("arrow_img");
 var categoriesButtonClicked = false;
 var isExpanded = false;
 var selectedUsers = new Array();
+var lastClickedOptionButton;
 const params = new URLSearchParams(window.location.search);
 
 function changeColor(button) {
@@ -85,11 +76,13 @@ categoriesButton.onclick = () => {
 		var container = document.getElementsByTagName("aside")[0];
 
 		var botao1 = document.createElement('button');
-		botao1.setAttribute('onclick', 'showCategoryTextModal()')
+		botao1.setAttribute('onclick', 'showCategoryTextModal()');
 		var botao2 = document.createElement('button');
+		botao2.setAttribute('onclick', 'showCategoryOptionModal(this)');
 		var botao3 = document.createElement('button');
+		botao3.setAttribute('onclick', 'showCategoryOptionModal(this)');
 		var botao4 = document.createElement('button');
-		botao4.setAttribute('onclick', 'showCategoryImageModal()')
+		botao4.setAttribute('onclick', 'showCategoryImageModal()');
 
 		botao1.classList.add("category");
 		botao2.classList.add("category");
@@ -97,7 +90,7 @@ categoriesButton.onclick = () => {
 		botao4.classList.add("category");
 
 		botao1.innerText = 'Parágrafo';
-		botao2.innerText = 'Selecionar opção';
+		botao2.innerText = 'Opção única';
 		botao3.innerText = 'Checkbox';
 		botao4.innerText = 'Imagem';
 
@@ -391,7 +384,7 @@ function canSave() {
 function saveRecipients() {
 	if (canSave()) {
 		$("#modal_bg").css('display', 'block');
-		$("#save_modal").show();
+		$("#save_recipients_modal").show();
 	}
 }
 
@@ -476,7 +469,7 @@ function saveToDefault(button) {
 
 function hideModals() {
 	$("#modal_bg").css('display', 'none');
-	
+
 	let modals = $(".modal");
 	modals.hide();
 
@@ -489,6 +482,20 @@ function hideModals() {
 	$("#title_text_category").css('border-color', '#E7E7E7').val('');
 	$("#qnt_text_category").css('border-color', '#E7E7E7').val('');
 	$("#desc_text_category").val('');
+
+	$("#title_option_category").css('border-color', '#E7E7E7').val('');
+	$("#desc_option_category").val('');
+	$(".options").each((index, option) => {
+		$(option).css('border-color', '#E7E7E7').val('');
+		if (index > 1) {
+			option.closest('li').remove()
+		}
+	});
+
+	let saveBtn = document.querySelectorAll(".saveBtn, .deleteBtn, .cancelBtn");
+	Array.from(saveBtn).forEach(button => {
+		$(button).css('animation', '');
+	});
 }
 
 function showToast(text, color) {
@@ -519,16 +526,37 @@ function goUserInfo(button) {
 
 function showCategoryImageModal() {
 	$("#modal_bg").css('display', 'block');
-	$("#add_image_modal").css('display', 'block')
+	$("#add_image_modal").css('display', 'block');
 }
 
 function showCategoryTextModal() {
 	$("#modal_bg").css('display', 'block');
-	$("#add_text_modal").css('display', 'block')
+	$("#add_text_modal").css('display', 'block');
+}
+
+function showCategoryOptionModal(button) {
+	lastClickedOptionButton = button;
+	if ($(button).text() == "Checkbox") {
+		$("#add_option_modal").find('h1').text('Adicionar checkbox')
+	} else {
+		$("#add_option_modal").find('h1').text('Adicionar opção única')
+	}
+	$("#modal_bg").css('display', 'block');
+	$("#add_option_modal").css('display', 'block');
+}
+
+function showSaveProtocolsModal(button) {
+	$("#modal_bg").css('display', 'block');
+	$("#save_protocols_modal").css('display', 'block');
+}
+
+function showDeleteAllModal() {
+	$("#modal_bg").css('display', 'block');
+	$("#delete_all_modal").css('display', 'block');
 }
 
 function addImage() {
-	if ($("#title_image_category").val() != '' && $("#qnt_image_category").val() != '') {
+	if ($("#title_image_category").val() != '' && $("#qnt_image_category").val() > 0) {
 		let span;
 		if ($("#desc_image_category").val() != '') {
 			span = `(<span>${$("#desc_image_category").val().charAt(0).toUpperCase() + $("#desc_image_category").val().slice(1)}</span>)`;
@@ -554,7 +582,7 @@ function addImage() {
 		if ($("#title_image_category").val() == '') {
 			$("#title_image_category").css('border-color', '#EA3535');
 		}
-		if ($("#qnt_image_category").val() == '') {
+		if ($("#qnt_image_category").val() < 1) {
 			$("#qnt_image_category").css('border-color', '#EA3535');
 		}
 	}
@@ -584,12 +612,76 @@ function addText() {
 	updateCategories();
 }
 
+function addOptionCategory() {
+	let buttonName;
+	if ($(lastClickedOptionButton).text() == 'Checkbox') {
+		buttonName = 'check';
+	} else {
+		buttonName = 'option';
+	}
+	let filledOptions = 0;
+	$(".options").each((index, option) => {
+		if ($(option).val() != '') {
+			filledOptions += 1;
+		}
+	});
+	if (filledOptions < 2) {
+		let qntRedOptions = 0 + filledOptions;
+		$(".options").each((index, option) => {
+			if ($(option).val() == '') {
+				if (qntRedOptions < 2) {
+					qntRedOptions += 1;
+					$(option).css('border-color', '#EA3535');
+				}
+			}
+		});
+	}
+	if ($("#title_option_category").val() != '' && filledOptions >= 2) {
+		let span;
+		if ($("#desc_option_category").val() != '') {
+			span = `(<span>${$("#desc_option_category").val().charAt(0).toUpperCase() + $("#desc_option_category").val().slice(1)}</span>)`;
+		} else {
+			span = '<span></span>';
+		}
+		let html = `<button class="category_div" onmouseover="whiteImage(this)" onmouseout="blackImage(this)" draggable="true">
+						<img src="images/${buttonName}_category.png" alt="${buttonName} category">
+						<p class="category_name">${$("#title_option_category").val().charAt(0).toUpperCase() + $("#title_option_category").val().slice(1).toLowerCase()}</p>
+						<p class="category_description">${span}</p>
+					</button>`;
+		$(".categories_main_article").append(html);
+		hideModals();
+		showToast('Categoria inserida com sucesso!', 'green');
+		$("#total_categories").text(parseInt($("#total_categories").text()) + 1)
+	} else {
+		if ($("#title_option_category").val() == '') {
+			$("#title_option_category").css('border-color', '#EA3535');
+		}
+	}
+	updateCategories();
+}
+
+function deleteAll() {
+	$("#protocol_title").val('');
+	$("#protocol_desc").val('');
+	$("#protocol_date").val('');
+	$("#protocol_time").val('');
+	$("#selectedUsers").children('.flex').each((index, user) => {
+		selectUser($(user).find('.user_div').attr('id'))
+	})
+	hideModals()
+	showToast('Informações do protocolo apagadas!', 'green')
+}
+
 function whiteImage(button) {
 	let alt = $(button).find('img').attr('alt');
 	if (alt == 'image category') {
 		$(button).find('img').attr('src', 'images/image_category_white.png')
 	} else if (alt == 'text category') {
 		$(button).find('img').attr('src', 'images/text_category_white.png')
+	} else if (alt == 'option category') {
+		$(button).find('img').attr('src', 'images/option_category_white.png')
+	} else if (alt == 'check category') {
+		$(button).find('img').attr('src', 'images/check_category_white.png')
 	}
 }
 
@@ -599,5 +691,29 @@ function blackImage(button) {
 		$(button).find('img').attr('src', 'images/image_category.png')
 	} else if (alt == 'text category') {
 		$(button).find('img').attr('src', 'images/text_category.png')
+	} else if (alt == 'option category') {
+		$(button).find('img').attr('src', 'images/option_category.png')
+	} else if (alt == 'check category') {
+		$(button).find('img').attr('src', 'images/check_category.png')
 	}
+}
+
+function addOption() {
+	let length = $("#add_option_modal").find('li').length;
+	let html = `<li>
+					<div class="label_div"><label>Opção ${length + 1}:</label><input onclick="toGray(this)" type="text" placeholder="Digite o nome da opção" class="option${length + 1} options"></div>
+				</li>`;
+	let scrollDiv = $("#modal_scroll");
+	$('#add_option_modal').find('ul').append(html);
+	let modalHeight = scrollDiv.prop("scrollHeight");
+
+	if (scrollDiv.scrollTop() == 0) {
+		scrollDiv.animate({ scrollTop: modalHeight }, 1500);
+	} else {
+		scrollDiv.animate({ scrollTop: modalHeight }, 0);
+	}
+}
+
+function toGray(input) {
+	$(input).css('border-color', '#E7E7E7');
 }
