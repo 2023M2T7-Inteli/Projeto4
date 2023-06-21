@@ -308,18 +308,19 @@ app.get('/atualizaProtocolo', (req, res) => {
 app.post('/atualizaProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Id_Protocolo } = req.body;
-	sql = "UPDATE PROTOCOLO SET Atividade = ?, Nome_Protocolo = ?, Descricao = ?, Data = ?, Horario = ?, Visualizado = ?, Id_Usuario_FK = ? WHERE Id_Protocolo = ?";
-	console.log(sql);
+	const atualizacao2 = req.body;
 	var db = new sqlite3.Database(DBPATH);
-	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Id_Protocolo], err => {
-		if (err) {
-			throw err;
-		}
-		res.end();
-	});
-	res.write('<p>ATIVIDADE DO PROTOCOLO ATUALIZADA COM SUCESSO!</p><a href="/">VOLTAR</a>');
+	atualizacao2.forEach(obj => {
+		let { Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Id_Protocolo } = obj;
+		const sql = "UPDATE PROTOCOLO SET Atividade = ?, Nome_Protocolo = ?, Descricao = ?, Data = ?, Horario = ?, Visualizado = ?, Id_Usuario_FK = ? WHERE Id_Protocolo = ?";
+		db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Id_Protocolo], err => {
+			if (err) {
+				throw err;
+			}
+		})
+	})
 	db.close();
+	res.write('<p>ATIVIDADE DO PROTOCOLO ATUALIZADA COM SUCESSO!</p><a href="/">VOLTAR</a>');
 });
 
 // Deletes a record from the PROTOCOL table (it's the D in CRUD - Delete). On line 266, it opens the database, and on line 274, it closes the database. 
@@ -569,6 +570,7 @@ app.post('/insereOption', urlencodedParser, (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     const { resposta, nome_option, Id_Pergunta_FK } = req.body;
+	console.log("oiii", resposta, nome_option, Id_Pergunta_FK)
     sql = "INSERT INTO OPTION (resposta, nome_option, Id_Pergunta_FK) VALUES (?, ?, ?)";
     console.log(sql);
     db.run(sql, [resposta, nome_option, Id_Pergunta_FK], err => {
@@ -601,7 +603,7 @@ app.post('/insereOption', urlencodedParser, (req, res) => {
 app.get('/atualizaOption', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
-    const idOption = req.body.Id_Option;
+    const idOption = req.query.Id_Option;
     sql = "SELECT * FROM OPTION WHERE Id_Option = ?";
     console.log(sql);
     var db = new sqlite3.Database(DBPATH); 
@@ -616,22 +618,26 @@ app.get('/atualizaOption', (req, res) => {
 
 // Updates a record of Phone, Email, Password, Category, User_Id in the USER table (it's the U in CRUD - Update). On line 76, it opens the database, and on line 84, it closes the database.
 app.post('/atualizaOption', urlencodedParser, (req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    const { resposta, nome_option, Id_Pergunta_FK } = req.body;
-    sql = "UPDATE OPTION SET resposta = ?, nome_option = ?, Id_Pergunta_FK = ? WHERE Id_Option = ?";
-    console.log(sql);
-    var db = new sqlite3.Database(DBPATH); // Abre o banco
-    db.run(sql, [resposta, nome_option, Id_Pergunta_FK],  err => {
-        if (err) {
-            throw err;
-        }
-        res.end();
-    });
-    res.write('<p>USUARIO ATUALIZADO COM SUCESSO!</p><a href="/">VOLTAR</a>');
-    db.close(); 
-});
-
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	const atualizacao = req.body; // Obtenha a lista de objetos 'atualizacao' do corpo da requisição
+	// Conecte ao banco de dados
+	var db = new sqlite3.Database(DBPATH);
+	// Itere sobre cada objeto 'atualizacao' e atualize o banco de dados
+	atualizacao.forEach(obj => {
+	  let { resposta, Id_Option } = obj;
+	  const sql = "UPDATE OPTION SET resposta = ? WHERE Id_Option = ?";
+	  db.run(sql, [resposta, Id_Option],  err => {
+		if (err) {
+		  throw err;
+		}
+	  });
+	});
+	db.close(); // Feche a conexão com o banco de dados
+	res.write('<p>USUARIO(S) ATUALIZADO(S) COM SUCESSO!</p><a href="/">VOLTAR</a>');
+	res.end();
+  });
+  
 // Deletes a record from the USER table (it's the D in CRUD - Delete). On line 94, it opens the database, and on line 102, it closes the database. 
 app.post('/removeOption', urlencodedParser, (req, res) => {
     res.statusCode = 200;

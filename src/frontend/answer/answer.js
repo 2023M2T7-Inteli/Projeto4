@@ -4,6 +4,11 @@ var protocoloId = urlParams1.get('idProtocol');
 var urlParams2 = new URLSearchParams(window.location.search);
 var userId = urlParams2.get('idUser');
 
+var atualizacao = []
+var atualizacao2 = {}
+var atualizacao3 = {}
+var atualizacaoP2 = []
+
 fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
   .then(function (response) {
     if (response.ok) {
@@ -15,11 +20,24 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
     for (let i = 0; i < data.length; i++) {
       const titulo = data[i].Nome_Protocolo;
       const desc = data[i].Descricao;
+      const dataP = data[i].Data;
+      const horaP = data[i].Horario;
+      const visuP = data[i].Visualizacao;
 
+      var atualizacaoProtocolo = {
+        Id_Protocolo: protocoloId,
+        Atividade: "Concluido",
+        Id_Usuario_FK: userId,
+        Nome_Protocolo: titulo,
+        Descricao: desc,
+        Data: dataP,
+        Horario: horaP,
+        Visualizado: visuP
+        }
+        
+      atualizacaoP2.push(atualizacaoProtocolo)
       document.getElementById('desc').innerHTML = desc;
       document.getElementById('protocol_name').innerHTML = titulo;
-
-      console.log('oi', desc, titulo);
     }
 
       fetch('http://localhost:2021/perguntas?Id_Protocolo_FK=' + protocoloId)
@@ -33,7 +51,6 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
           var saida = "";
           data.forEach(pergunta => {
             var perguntaId = pergunta.Id_Pergunta;
-            console.log(pergunta, perguntaId);
             if (pergunta.Tipo === 'Img') {
               saida += `
                 <div class="category">
@@ -95,7 +112,7 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
                     var optionLabel = option.nome_option;
                     var optionHTML = `
                       <div class="option_div">
-                        <input type="checkbox" name="checkbox_${perguntaId}" id="checkbox_${perguntaId}_${optionId}">
+                        <input class="checss" type="checkbox" name="checkbox_${perguntaId}" id="checkbox_${perguntaId}_${optionId}" value="${optionId}">
                         <label for="checkbox_${perguntaId}_${optionId}">${optionLabel}</label>
                       </div>
                     `;
@@ -133,7 +150,7 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
                     var optionHTML = `
                     <!--Options-->
                     <div class="option_div">
-                        <input type="radio" name="option_${perguntaId}" id="option_${perguntaId}_${optionId}">
+                        <input class="radioo" type="radio" name="option_${perguntaId}" id="option_${perguntaId}_${optionId}" value="${optionId}">
                         <label for="option_${perguntaId}_${optionId}">${optionLabel}</label>
                     </div>
                     `;
@@ -159,6 +176,50 @@ function voltarTela() {
 }
 
 function enviarForms() {
+  const checkboxes2 = document.querySelectorAll('.checss');
+  Array.from(checkboxes2).map( check => {
+    var oi = check.value
+    // var varia = document.getElementById(id);
+    if (check.checked) {
+      console.log('marcado');
+      atualizacao2 = {
+        Id_Option: oi,
+        resposta: 'marcado'
+      }
+      atualizacao.push(atualizacao2)
+    } else {
+      console.log("desmarcado")
+      atualizacao3 = {
+        Id_Option: oi,
+        resposta: 'desmarcado'
+    }
+    atualizacao.push(atualizacao3)
+    }
+    
+   })
+
+   const optionboxes2 = document.querySelectorAll('.radioo');
+   Array.from(optionboxes2).map( check => {
+     var oi = check.value
+     // var varia = document.getElementById(id);
+     if (check.checked) {
+       console.log('marcado');
+       atualizacao2 = {
+         Id_Option: oi,
+         resposta: 'marcado'
+       }
+       atualizacao.push(atualizacao2)
+     } else {
+       console.log("desmarcado")
+       atualizacao3 = {
+         Id_Option: oi,
+         resposta: 'desmarcado'
+     }
+     atualizacao.push(atualizacao3)
+     }
+     
+    })
+
   var pergIdElements = document.getElementsByClassName('pergID');
   var data = []; // Array para armazenar os dados das respostas
   var formData = new FormData(); // FormData para enviar a imagem
@@ -188,9 +249,6 @@ function enviarForms() {
       formData.append('Id_Pergunta_FK', idPerguntaImg);
     }
   }
-
-  console.log('Dados do formulário:', data);
-  console.log('Img:', formData, respostaImg, idPerguntaImg);
   
   fetch('http://localhost:2021/insereResposta', {
     method: 'POST',
@@ -210,18 +268,57 @@ function enviarForms() {
       console.error('Erro na requisição:', error);
     });
 
-  fetch('http://localhost:2021/respImg', {
-    method: 'POST',
-    body: formData,
-  })
-    .then(response => {
-      if (response.ok) {
-        console.log('Imagem enviada com sucesso!');
-      } else {
-        throw new Error('Erro ao enviar a imagem. Código de status: ' + response.status);
-      }
+    fetch('http://localhost:2021/atualizaOption', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(atualizacao)
     })
-    .catch(error => {
-      console.error('Erro ao enviar a imagem:', error);
-    });
-}
+      .then(response => {
+        if (response.ok) {
+          console.log('Respostas enviadas com sucesso!', atualizacao);
+        } else {
+          throw new Error('Erro ao enviar as respostas. Código de status: ' + response.status);
+        }
+      })
+      .catch(error => {
+        console.error('Erro na requisição:', error);
+      });
+
+    fetch('http://localhost:2021/respImg', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log('Respostas enviadas com sucesso!', formData);
+        } else {
+          throw new Error('Erro ao enviar a imagem. Código de status: ' + response.status);
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao enviar a imagem:', error);
+      });
+
+  window.location.href = "/select_P/select_P.html?idUser=" + userId;
+
+  fetch('http://localhost:2021/atualizaProtocolo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(atualizacaoP2)
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log('Respostas enviadas com sucesso!', atualizacaoP2);
+        } else {
+          throw new Error('Erro ao enviar as respostas. Código de status: ' + response.status);
+        }
+      })
+      .catch(error => {
+        console.error('Erro na requisição:', error);
+      });
+  }
+  
