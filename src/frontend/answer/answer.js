@@ -7,18 +7,7 @@ var userId = urlParams2.get('idUser');
 var atualizacao = []
 var atualizacao2 = {}
 var atualizacao3 = {}
-
-// var atualizacaoProtocolo = {
-//   Id_Protocolo: protocoloId,
-//   Atividade: "Conluido",
-//   Id_Usuario_FK: userId,
-//   Nome_Protocolo: nomeP,
-//   Descricao: desc,
-//   Data: dataP,
-//   Horario: horap,
-//   Visualizado: visuP
-//   }
-
+var atualizacaoP2 = []
 
 fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
   .then(function (response) {
@@ -35,9 +24,20 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
       const horaP = data[i].Horario;
       const visuP = data[i].Visualizacao;
 
+      var atualizacaoProtocolo = {
+        Id_Protocolo: protocoloId,
+        Atividade: "Concluido",
+        Id_Usuario_FK: userId,
+        Nome_Protocolo: titulo,
+        Descricao: desc,
+        Data: dataP,
+        Horario: horaP,
+        Visualizado: visuP
+        }
+        
+      atualizacaoP2.push(atualizacaoProtocolo)
       document.getElementById('desc').innerHTML = desc;
       document.getElementById('protocol_name').innerHTML = titulo;
-
     }
 
       fetch('http://localhost:2021/perguntas?Id_Protocolo_FK=' + protocoloId)
@@ -308,11 +308,11 @@ function enviarForms() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(atualizacaoProtocolo)
+      body: JSON.stringify(atualizacaoP2)
     })
       .then(response => {
         if (response.ok) {
-          console.log('Respostas enviadas com sucesso!', atualizacaoProtocolo);
+          console.log('Respostas enviadas com sucesso!', atualizacaoP2);
         } else {
           throw new Error('Erro ao enviar as respostas. Código de status: ' + response.status);
         }
@@ -321,5 +321,4 @@ function enviarForms() {
         console.error('Erro na requisição:', error);
       });
   }
-  
   

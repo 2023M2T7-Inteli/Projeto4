@@ -97,6 +97,21 @@ section > img {
     z-index: -1;
 }
 
+#title_div > button {
+    background: none;
+    border: none;
+    outline: none;
+    width: 25px;
+    height: 25px;
+}
+
+#title_div > button > img {
+    width: 25px;
+    height: 25px;
+    margin-left: -7.3px;
+    margin-right: -7.3px;
+}
+
 /* Define the style for the done_button element. */
 #done_button {
     width: 81px;

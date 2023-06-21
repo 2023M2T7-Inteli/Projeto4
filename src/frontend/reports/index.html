@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <title>Relatório</title>
+</head>
+<body>
+    <div class="toast">
+        <div class="flex">
+            <div class="toast_color"></div>
+            <div class="flex_column">
+                <p class="toast_text"></p>
+                <div class="toast_line"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="delete_all_modal">
+        <h1>Apagar tudo</h1>
+        <p>Tem certeza que deseja apagar todas as informações deste protocolo?</p>
+        <div>
+            <button class="cancelBtn" onclick="hideModals()">Cancelar</button>
+            <button class="deleteBtn" onclick="showToast('Deletado com sucesso', 'red'), hideModals()" >Sim</button>
+        </div>
+    </div>
+    <div id="modal_bg"></div>
+    <header>
+        <img src="images/logo.png" alt="logo">
+        <h1>Protocom</h1>
+        <!-- Navegation bar -->
+        <nav>
+            <a>Criar Protocolo</a>
+            <div id="current_page">
+                <a>Relatório</a>
+                <div id="orange_bg"></div>
+            </div>
+            <a>Usuários</a>
+            <a href="../sign_up/sign_up.html">Cadastrar</a>
+        </nav>
+    </header>
+        <!-- Background -->
+        <figure id="img_div">
+            <img src="images/trees.jpeg" alt="background image" id="trees">
+            <div id="image_color"></div>
+        </figure>
+
+        <main>
+            <div id="section1">
+                <div id="search">
+                    <p>Procurar:</p> 
+                    <div class="inputsearch"><input type="text" placeholder="Pesquise aqui"></div>
+                    <p>Resultados encontrados:</p> 
+                </div>
+
+                <div id="buttons">
+                    <button>Criado em</button>
+                    <button>Nome</button>
+                    <button>Status</button>
+                    <button>Total de respostas</button>
+                    <button>Respostas restantes</button>
+                </div>
+
+                <button onclick="entrar()" class="protocols">
+                    <p class="p1">26/05/2023</p>
+                    <p class="p2">Folha do açaí</p>
+                    <p class="p3">Em progresso</p>
+                    <p class="p4">4</p>
+                    <p class="p5">4</p>
+                </button>
+
+                <div class="delete_style">
+                    <button onclick="entrar()" class="protocols">
+                        <p class="p1">26/05/2023</p>
+                        <p class="p2">Folha do açaí</p>
+                        <p class="p3">Concluido</p>
+                        <p class="p4">4</p>
+                        <p class="p5">4</p>
+                    </button>
+                    <img onclick="showModals()" onmouseenter="changeBackground(this)" onmouseleave="changeBackground2(this)" src="images/delete.png" alt="delete icon" class="delete">
+                </div>
+               
+                <div class="delete_style">
+                    <button onclick="entrar()" class="protocols">
+                        <p class="p1">26/05/2023</p>
+                        <p class="p2">Folha do açaí</p>
+                        <p class="p3">Cancelado</p>
+                        <p class="p4">4</p>
+                        <p class="p5">4</p>
+                    </button>
+                    <img onclick="showModals()" onmouseenter="changeBackground(this)" onmouseleave="changeBackground2(this)" src="images/delete.png" alt="delete icon" class="delete">
+                </div>
+        </main>
+        <script src="reports.js"></script>
+</body>
+</html>
