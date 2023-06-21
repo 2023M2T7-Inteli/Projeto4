@@ -32,7 +32,7 @@ O Protocom é uma aplicação web desenvolvida pelo grupo Tukumã para a Natura.
 
 ## 📝 LINK
 
-O link do servidor não estará disponível nesta versão.
+Esta versão de entrega não incluirá link para o deploy em um servidor.
 
 ## 📁 Estrutura de pastas
 
