@@ -192,11 +192,6 @@ section > .button-container > .user-button {
     width: calc(100%); /* Ajuste conforme necessário */
 }
 
-.search-container {
-    margin: 23px; 
-    width: 100%;
-}
-
 /* Estilo para o container de pesquisa */
 #title_div > .search-container {
     display: flex;
@@ -204,7 +199,6 @@ section > .button-container > .user-button {
     font-family: 'Rubik'; /* Aplica a fonte Rubik */
     font-size: 15px;
     width: 100%; /* Ocupa toda a largura disponível */
-    justify-content: space-between;
 }
 
 /* Estilo para o campo de pesquisa */
@@ -247,7 +241,7 @@ section > .button-container > .user-button {
 .label-container {
     display: flex;
     justify-content: space-between;
-    padding: 0 60px;
+    padding: 0 20px;
     margin-top: 20px;
 }
 
@@ -322,3 +316,20 @@ section > .button-container > .user-button {
     /* você pode adicionar mais regras de estilo aqui, se quiser */
 }
 
+.background-image {
+    width: 20px;
+    height: 20px;
+}
+
+.text-right {
+    color: white;
+    font-size: 17px;
+}
+
+.label-name p {
+    margin-left: 75px;
+}
+
+.label-status p {
+    margin-left: 90px;
+}
