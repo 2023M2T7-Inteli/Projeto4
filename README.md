@@ -32,7 +32,7 @@ O Protocom é uma aplicação web desenvolvida pelo grupo Tukumã para a Natura.
 
 ## 📝 LINK
 
-Clique <a href="http://127.0.0.1:2021/sign_in/sing_in.html">AQUI</a> para ver o projeto funcionando localmente.
+O link do servidor não estará disponível nesta versão.
 
 ## 📁 Estrutura de pastas
 
@@ -68,19 +68,26 @@ Aqui encontram-se todas as instruções necessárias para a instalação de todo
 
 1.  Baixar e instalar o node.js:  [https://nodejs.org/pt-br/](https://nodejs.org/pt-br/) (versão 16.15.1 LTS)
 2. Clone o repositório em questão.
-3.  No modo administrador, abra o "prompt de comando" ou o "terminal" e, após,  abra a pasta "src/backend" no diretório raiz do repositório clonado e digite o segundo comando:
+3.  No modo administrador, abra o "prompt de comando" ou o "terminal" e, após,  abra a pasta "src" no diretório raiz do repositório clonado e digite o segundo comando:
 
 ```sh
-npm install
+npm install sqlite3 express cors multer
 ```
 
-Isso instalará todas as dependências definidas no arquivo <b>package.json</b> que são necessárias para rodar o projeto. Agora o projeto já está pronto para ser modificado. Caso ainda deseje iniciar a aplicação, digite o comando abaixo no terminal:
+4. Isso instalará todas as dependências definidas no arquivo <b>package.json</b> que são necessárias para rodar o projeto.
+5. Em seguida, digite o comando:
+
+```sh
+node PROTOCM_V1.JS
+```
+
+6. Agora o projeto já está pronto para ser modificado. Caso ainda deseje iniciar a aplicação, digite o comando abaixo no terminal:
 
 ```sh
 npm start
 ```
-5. Agora você pode acessar a aplicação através do link http://localhost:1234/
-6. O servidor está online.
+7. Agora você pode acessar a aplicação através do link http://127.0.0.1:2021/sign_in/sign_in.html
+8. O servidor está online.
 
 ## 🗃 Histórico de lançamentos
 
