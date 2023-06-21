@@ -128,6 +128,8 @@ main {
     height: 33px;
     border-radius: 6px;
     background: none;
+    color: #FFFFFF;
+    padding-left: 12px;
 }
 
 .inputsearch > ::placeholder {
@@ -137,7 +139,6 @@ main {
     font-size: 15px;
     line-height: 18px;
     color: rgba(255, 255, 255, 0.75);
-    padding-left: 12px;
 }
 
 #buttons {
