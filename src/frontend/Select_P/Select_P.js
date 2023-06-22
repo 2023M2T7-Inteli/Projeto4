@@ -37,10 +37,7 @@ fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
       let idP = data[i].Id_Protocolo;
       let atividade = data[i].Atividade;
 
-      if (atividade === 'Concluido') {
-        displayElement.style.display = 'none';
-      } 
-
+      if (atividade != 'Concluido') {
         // Create the div element with the class "button_div"
         const buttonDiv = document.createElement("div");
         buttonDiv.className = "button_div";
@@ -135,9 +132,8 @@ fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
       
         // Add the snippet to the parent element
         container.appendChild(buttonDiv);
-
-      }
-
+      } 
+    }
     })
 
     

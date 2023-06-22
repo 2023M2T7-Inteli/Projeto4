@@ -53,6 +53,7 @@ function inserirResposta(nome, email, senha, tipoDePlantacao, categoria, senha2)
 }
 
 function criarConta() {
+  // Retrieve user input values from the form
   var nome = document.getElementById('idNome').value;
   var email = document.getElementById('idEmail').value;
   var senha = document.getElementById('idSenha').value;
@@ -60,6 +61,7 @@ function criarConta() {
   var tipoDePlantacao = document.getElementById('idPla').value;
   var categoria = "agricultor";
 
+  // Call the inserirResposta() function to handle the registration process
   inserirResposta(nome, email, senha, tipoDePlantacao, categoria, senha2);
 }
 
@@ -105,13 +107,16 @@ function exibirToast04() {
 }
 
 function limparDados() {
+  // Retrieve DOM elements for the form fields
   var idNome = document.getElementById("idNome");
   var idEmail = document.getElementById("idEmail");
   var idSenha = document.getElementById("idSenha");
   var idSenha2 = document.getElementById("idSenha2");
   var idPla = document.getElementById("idPla");
 
+  // Check if all DOM elements exist
   if (idNome && idEmail && idSenha && idSenha2 && idPla) {
+    // Clear the values of the form fields
     idNome.value = "";
     idEmail.value = "";
     idSenha.value = "";
@@ -119,5 +124,6 @@ function limparDados() {
     idPla.value = "";
   }
 }
+
 
 

@@ -11,6 +11,7 @@
     <!-- Link to custom style.css file -->
     <link rel="stylesheet" href="style.css"> <!--Makes the connection between the CSS file and the HTML file-->
     <!-- Title of the page -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Tela de login</title> 
 </head>
 <body>
@@ -32,7 +33,7 @@
             <div id="center_password2">
                 <img id="password_icon2" src="images/password.png" alt="Icone de senha">
                 <input type="password" id="input2_2" type="text" placeholder="Digite sua senha aqui">
-                <img id="seepassword_icon2" src="images/hide.png" alt="Icone de ver senha">
+                <button onclick="mostrarSenha()"><img id="seepassword_icon2" src="images/hide.png" alt="Icone de ver senha"></button>
             </div>
         <!-- Line separator -->  
         <div id="line2_2" class="line"></div>
@@ -74,18 +75,15 @@
                 
                     <h2 id="password">Senha</h2>
                         <!-- Container for password input field -->
-                        <div id="center_password">
+                        <div id="center_password" class="title_div">
                             <img id="password_icon" src="images/password.png" alt="Icone de senha">
                             <input type="password" id="idSEnha" type="text" placeholder="Digite sua senha aqui">
-                            <img id="seepassword_icon" src="images/hide.png" alt="Icone de ver senha">
+                            <img id="seepassword_icon"  onclick="mostrarSenha()" src="images/hide.png" alt="Icone de ver senha">
                         </div>
-                
                     <!-- Line separator -->
                     <div id="line2" class="line"></div>
-
                     <!-- Link for password recovery -->
-                    <a id="forget_password">Esqueci a senha</a>
-                
+                    <a id="forget_password" onclick="telaNDesenvolida()">Esqueci a senha</a>
                     <!-- Link for login -->
                     <a onclick="verificaUsuario()" id="sign_in">Entrar</a>
                 </div>  
