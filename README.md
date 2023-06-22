@@ -38,7 +38,6 @@ Esta versão de entrega não incluirá link para o deploy em um servidor.
 
 
 |--> documentos<br>
-  &emsp;| --> outros<br>
   &emsp;| T7_G4_V5_Web_application_document.docx<br>
   &emsp;| T7_G4_V5_Web_application_document.pdf<br>
 |--> imagens<br>

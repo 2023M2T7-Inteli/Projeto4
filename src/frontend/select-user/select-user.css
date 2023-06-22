@@ -193,49 +193,6 @@ section > .button-container > .user-button {
     width: calc(100%); /* Ajuste conforme necessário */
 }
 
-#img_div {
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-    position: absolute;
-    width: 100%;
-    z-index: -1;
-}
-
-#trees {
-    height: 64px;
-}
-
-#image_color {
-    background: rgba(14, 73, 54, 0.4);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-/* Setting position of element with id 'current_page' to relative and height to 48px */
-#current_page {
-    position: relative;
-    height: 48px;
-    width: fit-content;
-}
-
-/* Setting color of a element within element with id 'current_page' to white */
-#current_page>a {
-    color: rgb(255, 255, 255)
-}
-
-#orange_bg {
-    position: absolute;
-    background-color: #EB5E28;
-    width: 170px;
-    height: 100%;
-    top: 50%;
-    left: 50%;
-    z-index: -1;
-    transform: translate(-50%, -50%);
-}
-
 .search-container {
     margin: 23px; 
     width: 100%;
@@ -327,28 +284,6 @@ section > .button-container > .user-button {
     content: url("profile3.png");
 }
 
-@media (min-width: 1107px) {
-    #trees {
-        width: 100%;
-    }
-}
-
-@media (max-width: 989px) {
-    #orange_bg {
-        width: 110px;
-    }
-}
-
-@media (max-width: 728px) {
-    #orange_bg {
-        width: 80px;
-    }
-}
-
-@media (max-width: 528px) {
-    #orange_bg {
-        height: calc(100% - 35px);
-        border-radius: 5px;
-        width: calc(100% + 6px);
-    }
+.searchInput{
+    color: seashell;
 }
