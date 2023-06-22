@@ -170,30 +170,37 @@ function ordenar(data, criterion){
 }
 function changeHTML(data){
     for(i=0;i<data.length;i++){
+
+        let categoria= data[i].categoria
+
+        if(categoria=='agricultor'){
+            let name = data[i].Nome
+            let email = data[i].Email
+            let product = data[i].TipoDePlantacao
+            let html = `<button id ="user-button"class="user-button">
+            <div class="user-info">
+                <div class="name">
+                    <img src="images/profile.png" alt="Profile Picture" class="profile-picture">
+                    <p class="user-name">${name}</p>
+                </div>
+                <div class="email">
+                    <p class="user-email">${email}</p>
+                </div>
+                <div class="product">
+                    <p class="user-product">${product}</p>
+                </div>
+            </div>
+            </button>`
+            $('#button-container').append(html);
+        }
+
         if(i==0){
             $('#results').text('Resultados encontrados: 0');
         }else{
             $('#results').text('Resultados encontrados: '+(i+1));
         }
         
-        let name = data[i].Nome
-        let email = data[i].Email
-        let product = data[i].TipoDePlantacao
-        let html = `<button id ="user-button"class="user-button">
-        <div class="user-info">
-            <div class="name">
-                <img src="images/profile.png" alt="Profile Picture" class="profile-picture">
-                <p class="user-name">${name}</p>
-            </div>
-            <div class="email">
-                <p class="user-email">${email}</p>
-            </div>
-            <div class="product">
-                <p class="user-product">${product}</p>
-            </div>
-        </div>
-        </button>`
-        $('#button-container').append(html);
+        
         
     }
 }
@@ -203,3 +210,17 @@ function changeEntry(input){
     endpoint();
 
 }
+
+$("#search").on('input', () => {
+	let presets = $("#button-container").children('#user-button');
+	Array.from(presets).forEach(preset => {
+		let presetName = String($(preset).find('p:first').text());
+		if ($("#search").val() == '') {
+			$(preset).show();
+		} else if (presetName.toLowerCase().startsWith($("#search").val().toLowerCase())) {
+			$(preset).show();
+		} else {
+			$(preset).hide();
+		}
+	});
+});

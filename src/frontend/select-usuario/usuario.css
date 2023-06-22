@@ -283,3 +283,7 @@ section > .button-container > .user-button {
 .user-button:hover .profile-picture {
     content: url("profile3.png");
 }
+
+.searchInput{
+    color: seashell;
+}
