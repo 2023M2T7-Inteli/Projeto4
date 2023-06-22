@@ -184,6 +184,7 @@ app.get('/perguntas', (req, res) => {
 	db.close();
 });
 
+
 // Builds the form for updating the QUESTION table (it's the U in CRUD - Update). On line 145, it opens the database, and on line 152, it closes the database. 
 app.get('/atualizaPergunta', (req, res) => {
 	res.statusCode = 200;
