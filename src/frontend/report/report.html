@@ -31,13 +31,15 @@
         <h1>Protocom</h1>
         <!-- Navegation bar -->
         <nav>
-            <a onclick="sendToCreateProtocols()">Criar Protocolo</a>
             <div id="current_page">
-                <a>Relatório</a>
+                <a onclick="toCreate()">Criar Protocolo</a>
                 <div id="orange_bg"></div>
             </div>
-            <a onclick="sendToUsers()">Usuários</a>
-            <a onclick="sendToSignUp()">Cadastrar</a>
+            <a onclick="toRelate()">Relatórios</a>
+            <a onclick="toUser()">Usuários</a>
+            <a onclick="toCad()">Cadastrar</a>
+            <a onclick="toPerfil()">Perfil</a>
+            <button><img src="images/notifications.png" alt="Informações"></button>
         </nav>
     </header>
         <!-- Background -->
@@ -61,35 +63,7 @@
                     <button>Total de respostas</button>
                     <button>Respostas restantes</button>
                 </div>
-
-                <button onclick="entrar()" class="protocols">
-                    <p class="p1">26/05/2023</p>
-                    <p class="p2">Folha do açaí</p>
-                    <p class="p3">Em progresso</p>
-                    <p class="p4">4</p>
-                    <p class="p5">4</p>
-                </button>
-
-                <div class="delete_style">
-                    <button onclick="entrar()" class="protocols">
-                        <p class="p1">26/05/2023</p>
-                        <p class="p2">Folha do açaí</p>
-                        <p class="p3">Concluido</p>
-                        <p class="p4">4</p>
-                        <p class="p5">4</p>
-                    </button>
-                    <img onclick="showModals()" onmouseenter="changeBackground(this)" onmouseleave="changeBackground2(this)" src="images/delete.png" alt="delete icon" class="delete">
-                </div>
-               
-                <div class="delete_style">
-                    <button onclick="entrar()" class="protocols">
-                        <p class="p1">26/05/2023</p>
-                        <p class="p2">Folha do açaí</p>
-                        <p class="p3">Cancelado</p>
-                        <p class="p4">4</p>
-                        <p class="p5">4</p>
-                    </button>
-                    <img onclick="showModals()" onmouseenter="changeBackground(this)" onmouseleave="changeBackground2(this)" src="images/delete.png" alt="delete icon" class="delete">
+                <div id="protocols">
                 </div>
         </main>
         <script src="report.js"></script>

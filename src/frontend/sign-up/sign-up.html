@@ -15,12 +15,16 @@
         <img class="header-logo" src="images/Logo.png" alt="Logo">
         <h1>Protocom</h1>
         <div class="header-right">
-            <a onclick="sendToCreateProtocols()" class="header-button">Criar Protocolo</a>
-            <a onclick="sendToReport()" class="header-button">Relatório</a>
-            <a onclick="sendToUsers()" class="header-button">Usuários</a>
+            <a onclick="toCreate()" class="header-button">Criar Protocolo</a>
+            <a class="header-button" onclick="toRelate()">Relatórios</a>
+            <a class="header-button" onclick="toUser()">Usuários</a>
             <div id="current_page">
-                <a class="header-button">Cadastrar</a>
+                <a class="header-button" onclick="toCad()">Cadastrar</a>
                 <div id="orange_bg"></div>
+            </div>
+            <a class="header-button" onclick="toPerfil()">Perfil</a>
+            <div class="header-img-button">
+                <img class="header-info" src="images/notifications.png" alt="Informações">
             </div>
         </div>
     </div>

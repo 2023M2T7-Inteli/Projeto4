@@ -1,12 +1,57 @@
-const params = new URLSearchParams(window.location.search);
+var urlParams = new URLSearchParams(window.location.search);
+var userId = urlParams.get('idUser');
 
-function entrar() {
-    window.location.href = "section2.html";
+    console.log('oi', userId)
+    fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
+            .then(function (response) {
+                if (response.ok) {
+                return response.json();
+                }
+                throw new Error('Request error');
+            })
+            .then(function (data) {
+                var saida = '';
+                data.forEach(element => {
+                    var date = element.Data
+                    var name = element.Nome_Protocolo
+                    var status = element.Atividade 
+                    var id = element.Id_Protocolo
+
+                    saida += `
+                <button onclick="entrar(${id})" class="protocols">
+                        <p class="p1">${date}</p>
+                        <p class="p2">${name}</p>
+                        <p class="p3">${status}</p>
+                        <p class="p4">4</p>
+                        <p class="p5">4</p>
+                </button>
+                `
+                });
+                document.getElementById('protocols').innerHTML = saida;
+            })
+            .catch(function(error) {
+                console.error('Error:', error.message);
+            });
+
+function entrar(idProtocolo) {
+    window.location.href = "section2.html?idProtocolo=" + idProtocolo + "&idUser=" + userId;
+    console.log('aquiui')
+
+    fetch('http://localhost:2021/perguntas?Id_Protocolo_FK=' + idProtocolo)
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Request error');
+        })
+        .then(function (data) {
+            console.log("perguntas: ", data);
+        })
+        .catch(function(error) {
+            console.error('Error:', error.message);
+        });
 }
 
-function back() {
-    window.location.href = "index.html";
-}
 
 function section3() {
     window.location.href = "section3.html";
@@ -91,3 +136,16 @@ function showModals() {
     $("#modal_bg").css('display', 'block');
     $("#delete_all_modal").css('display', 'block');
 }
+
+function back() {
+    window.location.href = "/reports/index.html?idUser=" + userId;
+  }
+  
+  function toCad() {
+    window.location.href = "/sign-up/sign-up.html?idUser=" + userId;
+  }
+  
+  function toCreate() {
+    window.location.href = "/create-protocols/create-protocols.html?idUser=" + userId;
+  }
+  

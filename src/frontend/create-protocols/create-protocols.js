@@ -1246,11 +1246,18 @@ function toGray(input) {
 	$(input).css('border-color', '#E7E7E7');
 }
 
-function stopButtonsAnimations() {
-	setTimeout(function () {
-		let saveBtn = document.querySelectorAll(".saveBtn, .deleteBtn, .cancelBtn");
-		Array.from(saveBtn).forEach(button => {
-			$(button).css('animation', '');
-		});
-	}, 200);
+function toRelats() {
+	window.location.href = "/report/report.html?idUser=" + userId;
 }
+
+function toUser(){
+	// window.location.href = "/reports/index.html?idUser=" + userId;
+}
+
+function toCad(){
+	window.location.href = "/sign-up/sign-up.html?idUser=" + userId;
+}
+
+// Get the user ID from the URL
+var urlParams = new URLSearchParams(window.location.search);
+var userId = urlParams.get('idUser');

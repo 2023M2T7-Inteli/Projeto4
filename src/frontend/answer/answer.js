@@ -23,7 +23,7 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
       const desc = data[i].Descricao;
       const dataP = data[i].Data;
       const horaP = data[i].Horario;
-      const visuP = data[i].Visualizacao;
+      const visuP = data[i].Visualizado;
 
       var atualizacaoProtocolo = {
         Id_Protocolo: protocoloId,
@@ -52,7 +52,7 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
           var saida = "";
           data.forEach(pergunta => {
             var perguntaId = pergunta.Id_Pergunta;
-            if (pergunta.Tipo === 'Img') {
+            if (pergunta.Tipo === 'imagem') {
               saida += `
                 <div class="category">
                   <div class="category_header">
@@ -71,7 +71,7 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
                 <div class="line"></div>
               `;
 
-            } else if (pergunta.Tipo === 'Text') {
+            } else if (pergunta.Tipo === 'texto') {
               saida += `
                 <div class="category">
                   <div class="category_header">
@@ -87,7 +87,7 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
                 </div>
                 <div class="line"></div>
               `;
-            } else if (pergunta.Tipo === 'Checkbox') {
+            } else if (pergunta.Tipo === 'checkbox') {
               saida += `
                 <div class="category">
                   <div class="category_header">
@@ -124,7 +124,7 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
                 .catch(function (error) {
                   console.error('Erro na requisição das opções:', error);
                 });
-            } else if (pergunta.Tipo === 'Option') {
+            } else if (pergunta.Tipo === 'opcao') {
               saida += `
                 <div class="category">
                   <div class="category_header">
@@ -174,7 +174,7 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
       });
 
 function voltarTela() {
-  window.location.href = "/select_P/select_P.html?idUser=" + userId;
+  window.location.href = "/select-protocol/select-protocol.html?idUser=" + userId;
 }
 
 function enviarForms() {
@@ -349,7 +349,7 @@ function enviarForms() {
             console.error('Erro ao enviar a imagem:', error);
           });
 
-      // window.location.href = "/select_P/select_P.html?idUser=" + userId;
+        window.location.href = "/select-protocol/select-protocol.html?idUser=" + userId;
 
       fetch('http://localhost:2021/atualizaProtocolo', {
           method: 'POST',

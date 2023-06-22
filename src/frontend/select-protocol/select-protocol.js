@@ -3,7 +3,7 @@ var urlParams = new URLSearchParams(window.location.search);
 var userId = urlParams.get('idUser');
 
 function voltarTela(){
-  window.location.href = "/agricultor/agricultor.html?idUser=" + userId;
+  window.location.href = "/farmer/farmer.html?idUser=" + userId;
 }
 
 fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)

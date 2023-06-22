@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="report.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Relatório</title>
 </head>
 <body>
@@ -12,13 +14,13 @@
         <h1>Protocom</h1>
         <!-- Navegation bar -->
         <nav>
-            <a>Criar Protocolo</a>
+            <a onclick="toCreate()">Criar Protocolo</a>
             <div id="current_page">
-                <a>Relatório</a>
+                <a onclick="toRelate()">Relatório</a>
                 <div id="orange_bg"></div>
             </div>
-            <a>Usuários</a>
-            <a href="../sign_up/sign_up.html">Cadastrar</a>
+            <a onclick="toUser()">Usuários</a>
+            <a onclick="toCad()">Cadastrar</a>
         </nav>
     </header>
         <!-- Background -->
