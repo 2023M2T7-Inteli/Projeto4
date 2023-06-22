@@ -44,7 +44,7 @@
         <p>Tem certeza que deseja enivar o protocolo?</p>
         <div>
             <button class="cancelBtn" onclick="hideModals()">Cancelar</button>
-            <button class="deleteBtn" onclick="deleteAll()">Sim</button>
+            <button class="saveBtn" onclick="sendProtocol()">Sim</button>
         </div>
     </div>
 
@@ -96,8 +96,7 @@
             </div>
         </div>
     </div>
-
-    <div class="toast">
+    <!-- <div class="toast">
         <div class="flex">
             <div class="toast_color"></div>
             <div class="flex_column">
@@ -105,7 +104,7 @@
                 <div class="toast_line"></div>
             </div>
         </div>
-    </div>
+    </div> -->
     <header>
         <img src="images/logo.png" alt="logo">
         <h1>Protocom</h1>
@@ -118,8 +117,6 @@
             <a>Histórico</a>
             <a>Usuários</a>
             <a href="../sign_up/sign_up.html">Cadastrar</a>
-            <a>Perfil</a>
-            <button><img src="images/notifications.png" alt="Informações"></button>
         </nav>
     </header>
 
@@ -140,8 +137,7 @@
                     <button onclick="showSaveProtocolsModal()">Salvar</button>
                     <button onclick="showDeleteAllModal()">Apagar tudo</button>
                     <button onclick="changeColor(this)" id="categories_button">Categorias<img id="arrow_img" src="images/arrow_down.png"></button>
-                    <button>Enviar</button>
-                    <button onclick="changeColor(this)">Ajuda</button>
+                    <button onclick="showSendModal()">Enviar</button>
                 </aside>
                 <div id="articles_div">
                     <article id="new_protocol_article">
@@ -270,10 +266,14 @@
                             <div class="label_div"><label>Pesquisar:</label><input type="text" placeholder="Pesquise pelo nome do protocolo ou grupo de usuários" id="searchPresetInput"></div>
                             <div id="colunas">
                                 <div>
-                                    <p>Nome</p><img src="images/sort.png" alt="">
+                                    <button onclick="sortPresetsByName()">
+                                        <p>Nome</p><img src="images/sort.png" alt="">
+                                    </button>
                                 </div>
                                 <div>
-                                    <p>Data de criação</p><img src="images/sort.png" alt="">
+                                    <button onclick="sortPresetsByDate()">
+                                        <p>Data de criação</p><img src="images/sort.png" alt="">
+                                    </button>
                                 </div>
                             </div>
                             <div class="presets_div protocol_preset_div">

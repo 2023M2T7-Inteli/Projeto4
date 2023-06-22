@@ -40,19 +40,19 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
 
     }
 
-      fetch('http://localhost:2021/perguntas?Id_Protocolo_FK=' + protocoloId)
-        .then(function (response) {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error('Request error');
-        })
-        .then(function (data) {
-          var saida = "";
-          data.forEach(pergunta => {
-            var perguntaId = pergunta.Id_Pergunta;
-            if (pergunta.Tipo === 'Img') {
-              saida += `
+    fetch('http://localhost:2021/perguntas?Id_Protocolo_FK=' + protocoloId)
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Request error');
+      })
+      .then(function (data) {
+        var saida = "";
+        data.forEach(pergunta => {
+          var perguntaId = pergunta.Id_Pergunta;
+          if (pergunta.Tipo === 'Img') {
+            saida += `
                 <div class="category">
                   <div class="category_header">
                     <img src="images/image_category.png" alt="Ícone da categoria de imagem">
@@ -69,8 +69,8 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
                 </div>
                 <div class="line"></div>
               `;
-            } else if (pergunta.Tipo === 'Text') {
-              saida += `
+          } else if (pergunta.Tipo === 'Text') {
+            saida += `
                 <div class="category">
                   <div class="category_header">
                     <img src="images/text_category.png" alt="Ícone da categoria de texto">
@@ -85,8 +85,8 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
                 </div>
                 <div class="line"></div>
               `;
-            } else if (pergunta.Tipo === 'Checkbox') {
-              saida += `
+          } else if (pergunta.Tipo === 'Checkbox') {
+            saida += `
                 <div class="category">
                   <div class="category_header">
                     <img src="images/check_category.png" alt="Ícone da categoria de checkbox">
@@ -98,32 +98,32 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
                 </div>
                 <div class="line"></div>
               `;
-              fetch('http://localhost:2021/option?Id_Pergunta_FK=' + perguntaId)
-                .then(function (response) {
-                  if (response.ok) {
-                    return response.json();
-                  }
-                  throw new Error('Request error');
-                })
-                .then(function (options) {
-                  var checkboxDiv = document.getElementById('checkbox_' + perguntaId);
-                  options.forEach(option => {
-                    var optionId = option.Id_Option;
-                    var optionLabel = option.nome_option;
-                    var optionHTML = `
+            fetch('http://localhost:2021/option?Id_Pergunta_FK=' + perguntaId)
+              .then(function (response) {
+                if (response.ok) {
+                  return response.json();
+                }
+                throw new Error('Request error');
+              })
+              .then(function (options) {
+                var checkboxDiv = document.getElementById('checkbox_' + perguntaId);
+                options.forEach(option => {
+                  var optionId = option.Id_Option;
+                  var optionLabel = option.nome_option;
+                  var optionHTML = `
                       <div class="option_div">
                         <input class="checss" type="checkbox" name="checkbox_${perguntaId}" id="checkbox_${perguntaId}_${optionId}" value="${optionId}">
                         <label for="checkbox_${perguntaId}_${optionId}">${optionLabel}</label>
                       </div>
                     `;
-                    checkboxDiv.innerHTML += optionHTML;
-                  });
-                })
-                .catch(function (error) {
-                  console.error('Erro na requisição das opções:', error);
+                  checkboxDiv.innerHTML += optionHTML;
                 });
-            } else if (pergunta.Tipo === 'Option') {
-              saida += `
+              })
+              .catch(function (error) {
+                console.error('Erro na requisição das opções:', error);
+              });
+          } else if (pergunta.Tipo === 'Option') {
+            saida += `
                 <div class="category">
                   <div class="category_header">
                     <img src="images/option_category.png" alt="Ícone da categoria de opções">
@@ -135,41 +135,41 @@ fetch('http://localhost:2021/protocolo2?Id_Protocolo=' + protocoloId)
                 </div>
                 <div class="line"></div>
               `;
-              fetch('http://localhost:2021/option?Id_Pergunta_FK=' + perguntaId)
-                .then(function (response) {
-                  if (response.ok) {
-                    return response.json();
-                  }
-                  throw new Error('Request error');
-                })
-                .then(function (options) {
-                  var optionDiv = document.getElementById('option_' + perguntaId);
-                  options.forEach(option => {
-                    var optionId = option.Id_Option;
-                    var optionLabel = option.nome_option;
-                    var optionHTML = `
+            fetch('http://localhost:2021/option?Id_Pergunta_FK=' + perguntaId)
+              .then(function (response) {
+                if (response.ok) {
+                  return response.json();
+                }
+                throw new Error('Request error');
+              })
+              .then(function (options) {
+                var optionDiv = document.getElementById('option_' + perguntaId);
+                options.forEach(option => {
+                  var optionId = option.Id_Option;
+                  var optionLabel = option.nome_option;
+                  var optionHTML = `
                     <!--Options-->
                     <div class="option_div">
                         <input class="radioo" type="radio" name="option_${perguntaId}" id="option_${perguntaId}_${optionId}" value="${optionId}">
                         <label for="option_${perguntaId}_${optionId}">${optionLabel}</label>
                     </div>
                     `;
-                    optionDiv.innerHTML += optionHTML;
-                  });
-                })
-                .catch(function (error) {
-                  console.error('Erro na requisição das opções:', error);
+                  optionDiv.innerHTML += optionHTML;
                 });
-            }
-          });
-
-          document.getElementById('scroll2').innerHTML = saida;
-          
-        })
-        .catch(function (error) {
-          console.error('Erro na requisição das perguntas:', error);
+              })
+              .catch(function (error) {
+                console.error('Erro na requisição das opções:', error);
+              });
+          }
         });
+
+        document.getElementById('scroll2').innerHTML = saida;
+
+      })
+      .catch(function (error) {
+        console.error('Erro na requisição das perguntas:', error);
       });
+  });
 
 function voltarTela() {
   window.location.href = "/select_P/select_P.html?idUser=" + userId;
@@ -177,7 +177,7 @@ function voltarTela() {
 
 function enviarForms() {
   const checkboxes2 = document.querySelectorAll('.checss');
-  Array.from(checkboxes2).map( check => {
+  Array.from(checkboxes2).map(check => {
     var oi = check.value
     // var varia = document.getElementById(id);
     if (check.checked) {
@@ -192,33 +192,32 @@ function enviarForms() {
       atualizacao3 = {
         Id_Option: oi,
         resposta: 'desmarcado'
+      }
+      atualizacao.push(atualizacao3)
     }
-    atualizacao.push(atualizacao3)
-    }
-    
-   })
+  })
 
-   const optionboxes2 = document.querySelectorAll('.radioo');
-   Array.from(optionboxes2).map( check => {
-     var oi = check.value
-     // var varia = document.getElementById(id);
-     if (check.checked) {
-       console.log('marcado');
-       atualizacao2 = {
-         Id_Option: oi,
-         resposta: 'marcado'
-       }
-       atualizacao.push(atualizacao2)
-     } else {
-       console.log("desmarcado")
-       atualizacao3 = {
-         Id_Option: oi,
-         resposta: 'desmarcado'
-     }
-     atualizacao.push(atualizacao3)
-     }
-     
-    })
+  const optionboxes2 = document.querySelectorAll('.radioo');
+  Array.from(optionboxes2).map(check => {
+    var oi = check.value
+    // var varia = document.getElementById(id);
+    if (check.checked) {
+      console.log('marcado');
+      atualizacao2 = {
+        Id_Option: oi,
+        resposta: 'marcado'
+      }
+      atualizacao.push(atualizacao2)
+    } else {
+      console.log("desmarcado")
+      atualizacao3 = {
+        Id_Option: oi,
+        resposta: 'desmarcado'
+      }
+      atualizacao.push(atualizacao3)
+    }
+
+  })
 
   var pergIdElements = document.getElementsByClassName('pergID');
   var data = []; // Array para armazenar os dados das respostas
@@ -249,7 +248,7 @@ function enviarForms() {
       formData.append('Id_Pergunta_FK', idPerguntaImg);
     }
   }
-  
+
   fetch('http://localhost:2021/insereResposta', {
     method: 'POST',
     headers: {
@@ -268,58 +267,57 @@ function enviarForms() {
       console.error('Erro na requisição:', error);
     });
 
-    fetch('http://localhost:2021/atualizaOption', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(atualizacao)
+  fetch('http://localhost:2021/atualizaOption', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(atualizacao)
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log('Respostas enviadas com sucesso!', atualizacao);
+      } else {
+        throw new Error('Erro ao enviar as respostas. Código de status: ' + response.status);
+      }
     })
-      .then(response => {
-        if (response.ok) {
-          console.log('Respostas enviadas com sucesso!', atualizacao);
-        } else {
-          throw new Error('Erro ao enviar as respostas. Código de status: ' + response.status);
-        }
-      })
-      .catch(error => {
-        console.error('Erro na requisição:', error);
-      });
+    .catch(error => {
+      console.error('Erro na requisição:', error);
+    });
 
-    fetch('http://localhost:2021/respImg', {
-      method: 'POST',
-      body: formData,
+  fetch('http://localhost:2021/respImg', {
+    method: 'POST',
+    body: formData,
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log('Respostas enviadas com sucesso!', formData);
+      } else {
+        throw new Error('Erro ao enviar a imagem. Código de status: ' + response.status);
+      }
     })
-      .then(response => {
-        if (response.ok) {
-          console.log('Respostas enviadas com sucesso!', formData);
-        } else {
-          throw new Error('Erro ao enviar a imagem. Código de status: ' + response.status);
-        }
-      })
-      .catch(error => {
-        console.error('Erro ao enviar a imagem:', error);
-      });
+    .catch(error => {
+      console.error('Erro ao enviar a imagem:', error);
+    });
 
   window.location.href = "/select_P/select_P.html?idUser=" + userId;
 
   fetch('http://localhost:2021/atualizaProtocolo', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(atualizacaoProtocolo)
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(atualizacaoProtocolo)
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log('Respostas enviadas com sucesso!', atualizacaoProtocolo);
+      } else {
+        throw new Error('Erro ao enviar as respostas. Código de status: ' + response.status);
+      }
     })
-      .then(response => {
-        if (response.ok) {
-          console.log('Respostas enviadas com sucesso!', atualizacaoProtocolo);
-        } else {
-          throw new Error('Erro ao enviar as respostas. Código de status: ' + response.status);
-        }
-      })
-      .catch(error => {
-        console.error('Erro na requisição:', error);
-      });
-  }
-  
-  
+    .catch(error => {
+      console.error('Erro na requisição:', error);
+    });
+}
+

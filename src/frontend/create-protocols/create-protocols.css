@@ -433,6 +433,7 @@ body > div {
     overflow: hidden;
     width: calc(100% - 10px);
     cursor: pointer;
+    position: relative;
 }
 
 .category_div:hover {
@@ -448,10 +449,17 @@ body > div {
     margin-bottom: 1px;
 }
 
-.category_div > img {
+.category_div > .category_img {
     width: 20px;
     height: 20px;
     margin-left: 4px;
+}
+
+.delete_img {
+    position: absolute;
+    right: 4px;
+    width: 14px;
+    height: 14px;
 }
 
 .category_div > .category_name {
@@ -562,7 +570,7 @@ body > div {
     font-size: 13px;
 }
 
-#save_protocols_modal > p,#delete_all_modal > p {
+#save_protocols_modal > p,#delete_all_modal > p, #send_protocol_modal > p {
     margin-left: auto;
     width: 252px;
     margin-right: auto;
@@ -573,7 +581,7 @@ body > div {
     text-align: center;
 }
 
-#save_recipients_modal > div, #save_protocols_modal > div, #delete_all_modal > div {
+#save_recipients_modal > div, #save_protocols_modal > div, #delete_all_modal > div, #send_protocol_modal > div {
     display: flex;
     margin-left: auto;
     margin-right: auto;
@@ -708,7 +716,7 @@ body > div {
     padding-right: 7px;
 }
 
-#save_recipients_modal, #save_protocols_modal, #delete_all_modal {
+#save_recipients_modal, #save_protocols_modal, #delete_all_modal, #send_protocol_modal {
     position: absolute;
     background-color: white;
     border-radius: 7px;
@@ -828,6 +836,13 @@ body > div {
     animation: scrollHeight 2s ease 0s
 }
 
+#image_color {
+    background: rgba(14, 73, 54, 0.4);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
 .label_div > input {
     outline: none;
     border: 1px solid #e7e7e7;
@@ -895,7 +910,6 @@ body > div {
     height: 100%;
     margin-left: 10px;
     flex-direction: column;
-    overflow: auto;
     display: flex;
 }
 
@@ -922,16 +936,24 @@ body > div {
     justify-content: center;
 }
 
-#colunas > div > img {
+#colunas > div > button {
+    display: inherit;
+    justify-content: inherit;
+    cursor: pointer;
+}
+
+#colunas > div img {
     width: 16px;
     height: 16px;
     margin-left: 3px;
+    margin-right: -8px;
 }
 
-#colunas > div > p {
+#colunas > div p {
     font-size: 13px;
     text-align: center;
     width: fit-content;
+    white-space: nowrap;
 }
 
 .toast {
@@ -989,7 +1011,7 @@ body > div {
 
 .preset_div > p {
     font-size: 13px;
-    width: 50%;
+    width: 100%;
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
@@ -1112,6 +1134,7 @@ body > div {
     width: calc(100% - 10px);
     cursor: pointer;
     outline: none;
+    position: relative;
 }
 
 .preset_div:hover {
@@ -1133,6 +1156,20 @@ body > div {
 @media (min-width: 1107px) {
     #trees {
         width: 100%;
+    }
+}
+
+@media (max-width: 1143px) {
+    #more_label_div {
+        flex-direction: column;
+    }
+
+    #more_label_div > .label_div:last-child {
+        margin-left: 0px;
+    }
+
+    #more_label_div > .label_div:first-child {
+        margin-bottom: 20px;
     }
 }
 
@@ -1159,18 +1196,6 @@ body > div {
     aside > button > img {
         width: 11.5px;
         height: 11.5px;
-    }
-
-    #more_label_div {
-        flex-direction: column;
-    }
-
-    #more_label_div > .label_div:last-child {
-        margin-left: 0px;
-    }
-
-    #more_label_div > .label_div:first-child {
-        margin-bottom: 20px;
     }
 
     #preset_buttons_div > div > button {
@@ -1226,7 +1251,7 @@ body > div {
     }
 }
 
-@media (max-width: 661px) {
+@media (max-width: 674px) {
     #colunas > div > p {
         font-size: 9px;
         width: max-content;
