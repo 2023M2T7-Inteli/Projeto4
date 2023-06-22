@@ -18,11 +18,12 @@ align-items: center;
 
 /* Aligning the body */
 body {
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f6f6f6;
 }
 
 /* Deleting background of input elements */
@@ -54,6 +55,7 @@ font-weight: 400;
 font-size: 40px;
 line-height: 50px;
 color: #000000;
+margin-left: 6px;
 }
 
 /* Styling the logo */
@@ -70,6 +72,8 @@ display: flex;
 justify-content: center;
 align-items: center;
 height: fit-content;
+box-shadow: -2px 3px 4px 3px rgba(0, 0, 0, 0.26);
+border-radius: 23px;
 }
 
 /* Styling the section for login */
@@ -168,6 +172,7 @@ display: flex;
 width: fit-content;
 margin-left: 17px;
 margin-bottom: 13px;
+align-items: end;
 }
 
 /* Aligning for email elements responsive */
@@ -175,6 +180,7 @@ margin-bottom: 13px;
 display: flex;
 width: fit-content;
 margin-left: 17px;
+align-items: end;
 margin-bottom: 13px;
 }
 
@@ -291,6 +297,7 @@ display: flex;
 width: fit-content;
 margin-left: 17px;
 margin-bottom: 13px;
+align-items: end;
 }
 
 /* Aligning for password container responsive */
@@ -299,6 +306,7 @@ display: flex;
 width: fit-content;
 margin-left: 17px;
 margin-bottom: 13px;
+align-items: end;
 }
 
 /* Styling for password icon */
@@ -343,7 +351,8 @@ height: 16px;
 right: 132px;
 left: 374px;
 top: 274px;
-margin-left: 80px;
+margin-left: 6px;
+cursor: pointer;
 }
 
 /* Styling for see password icon responsive */
@@ -352,7 +361,7 @@ height: 16px;
 right: 132px;
 left: 374px;
 top: 274px;
-margin-left: 80px;
+margin-left: 6px;
 }
 
 /* Styling for input fields */
@@ -360,7 +369,7 @@ input {
 outline: 0;
 border: 0;
 height: 16px;
-width: 100%;
+width: 220px;
 }
 
 /* Styling for forget password element */
@@ -374,6 +383,15 @@ line-height: 15px;
 margin-left: 190px;
 margin-top: 10px;
 color: #939393;
+cursor: pointer;
+}
+
+#idEMail {
+    margin-bottom: 1px;
+}
+
+#idSEnha {
+    margin-bottom: -1.5px;
 }
 
 /* Styling for forget password element responsive */
@@ -387,6 +405,7 @@ line-height: 15px;
 margin-left: 190px;
 margin-top: 10px;
 color: #939393;
+cursor: pointer;
 }
 
 /* Styling for hover effect on forget password element */
