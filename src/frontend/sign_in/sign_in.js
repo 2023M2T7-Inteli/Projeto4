@@ -42,9 +42,6 @@ function verificaUsuario() {
         }
       }
 
-      // Check if the login was successful
-      // ...
-
 // Check if the login was successful
 if (emailExistente && senhaExistente) {
 // Login successful
@@ -78,6 +75,29 @@ if (emailExistente && senhaExistente) {
 function exibirToast00() {
   Toastify({
     text: "LOGIN ERRADO, VERIFIQUE SEUS DADOS!",
+    duration: 3000, // Duration in milliseconds
+    close: true, // Show close button
+    gravity: "top", // Toast position (top, bottom, left, right)
+    position: "right", // Toast alignment (left, center, right)
+  }).showToast();
+}
+
+function mostrarSenha() {
+  var passwordField = document.getElementById("idSEnha");
+  var passwordIcon = document.getElementById("seepassword_icon2");
+
+  if (passwordField.type === "password") {
+    passwordField.type = "text";
+    passwordIcon.src = "images/hide.png";
+  } else {
+    passwordField.type = "password";
+    passwordIcon.src = "images/show.png";
+  }
+}
+
+function telaNDesenvolida() {
+  Toastify({
+    text: "TELA NÃO DESENVOLVIDA, CONTATE O SUPORTE PARA RECUPERAR SUA SENHA!",
     duration: 3000, // Duration in milliseconds
     close: true, // Show close button
     gravity: "top", // Toast position (top, bottom, left, right)

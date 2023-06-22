@@ -97,7 +97,7 @@ section > img {
     z-index: -1;
 }
 
-#title_div > button {
+#back_button {
     background: none;
     border: none;
     outline: none;
@@ -116,7 +116,7 @@ section > img {
 #done_button {
     width: 81px;
     height: 28px;
-    background: #9F9F9F;
+    background: #EB5E28;    ;
     border-radius: 15px;
     outline: none;
     border: none;
