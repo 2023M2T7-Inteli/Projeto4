@@ -6,10 +6,12 @@ var nomeOrdered=false
 var urlParams = new URLSearchParams(window.location.search);
 var idAgricultor = urlParams.get('idAgricultor');
 
+//called when the window loads
 window.onload = function() {
     protocols();
     user();
 }
+//acess the 'protocolo' endpoint
 function protocols() {
     fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + idAgricultor)
     .then(function(response) {
@@ -18,6 +20,7 @@ function protocols() {
         }
         throw new Error('Request error');
         })
+        //show protocols on screen
         .then(function(data) {
             data.forEach(element => {
                 let html = `<button id ="user-button" class="user-button">
@@ -27,12 +30,14 @@ function protocols() {
                 </button>`
                 $('#button-container').append(html);
             });
+            //calls the function ordenar when entry is not a empty string
             if(entry!=""){
                 ordenar(data, entry);
             } 
         })
 }
 
+//acess the 'usuarios' endpoint
 function user(){
     fetch('http://localhost:2021/usuarios')
     .then(function(response) {
@@ -41,11 +46,12 @@ function user(){
             }
             throw new Error('Request error');
             })
+            //cals showUser function with data as an argument
             .then(function(data) {
                 showUser(data);
             })
     }
-
+//finds the corresponding user and changes the screen display based on it
 function showUser(data){
     var user;
     data.forEach(element => {
@@ -58,6 +64,7 @@ function showUser(data){
     document.querySelector('#tipo').textContent =  user.TipoDePlantacao;
     document.querySelector('#id').textContent = 'ID: ' + user.Id_Usuario;
 }
+//reorder protocols based on the criterion and calls the changeHTML function
 function ordenar(data, criterion){
     
     var element = document.querySelectorAll("#user-button");
@@ -163,11 +170,13 @@ function ordenar(data, criterion){
         }
         
 }
+//changes entry variable value
 function changeEntry(input){
     entry=input;
     protocols();
 
 }
+//change the displayed information based on the data recieved
 function changeHTML(data){
 
     data.forEach(element => {

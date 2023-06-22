@@ -4,22 +4,23 @@ var nomeOrdered=false
 var plantacaoOrdered=false
 const params = new URLSearchParams(window.location.search);
 
+//called when the window loads
 window.onload = function() {
     endpoint();
 };
-
+//change screen
 function sendToCreateProtocols() {
 	window.location.href = '../create-protocols/create-protocols.html?idUser=' + params.get('idUser');
 }
-
+//change screen
 function sendToReport() {
 	window.location.href = '../report/report.html?idUser=' + params.get('idUser');
 }
-
+//change screen
 function sendToSignUp() {
 	window.location.href = '../sign-up/sign-up.html?idUser=' + params.get('idUser');
 }
-
+//acess the 'usuarios' endpoint
 function endpoint(){
     fetch('http://localhost:2021/usuarios')
     .then(function(response) {
@@ -29,40 +30,44 @@ function endpoint(){
         throw new Error('Request error');
     })
         .then(function(data) {
+            //show users on screen
+            let count=0;
             for(i=0;i<data.length;i++){
-                if(i==0){
-                    $('#results').text('Resultados encontrados: 0');
-                }else{
-                    $('#results').text('Resultados encontrados: '+(i+1));
-                }
-                let id =data[i].Id_Usuario
-                let name = data[i].Nome
-                let email = data[i].Email
-                let product = data[i].TipoDePlantacao
-                let html = `<button onclick="userDetails(${id})" id ="user-button"class="user-button">
-                <div class="user-info">
-                    <div class="name">
-                        <img src="images/profile.png" alt="Profile Picture" class="profile-picture">
-                        <p class="user-name">${name}</p>
-                    </div>
-                    <div class="email">
-                        <p class="user-email">${email}</p>
-                    </div>
-                    <div class="product">
-                        <p class="user-product">${product}</p>
-                    </div>
-                </div>
-                </button>`
-                $('#button-container').append(html);
                 
+                let categoria= data[i].Categoria
+                if(categoria=='agricultor'){
+                    //show the number of users found
+                    count++;
+                    $('#results').text('Resultados encontrados: '+count);
+                    let id =data[i].Id_Usuario
+                    let name = data[i].Nome
+                    let email = data[i].Email
+                    let product = data[i].TipoDePlantacao
+                    let html = `<button onclick="userDetails(${id})" id ="user-button"class="user-button">
+                    <div class="user-info">
+                        <div class="name">
+                            <img src="images/profile.png" alt="Profile Picture" class="profile-picture">
+                            <p class="user-name">${name}</p>
+                        </div>
+                        <div class="email">
+                            <p class="user-email">${email}</p>
+                        </div>
+                        <div class="product">
+                            <p class="user-product">${product}</p>
+                        </div>
+                    </div>
+                    </button>`
+                    $('#button-container').append(html);
+                }
             }
+            //calls the function ordenar when entry is not a empty string
             if(entry!=""){
                 ordenar(data, entry);
             }
     
     })
 }
-
+//reorder users based on the criterion and calls the changeHTML function
 function ordenar(data, criterion){
     
     var element = document.querySelectorAll("#user-button");
@@ -168,12 +173,16 @@ function ordenar(data, criterion){
         }
         
 }
-function changeHTML(data){
+//change the displayed information based on the data recieved
+function changeHTML(data){ 
+    let count =0; 
     for(i=0;i<data.length;i++){
-
-        let categoria= data[i].categoria
+        let categoria= data[i].Categoria
 
         if(categoria=='agricultor'){
+            //show the number of users found
+            count++;
+            $('#results').text('Resultados encontrados: '+count);
             let id =data[i].Id_Usuario
             let name = data[i].Nome
             let email = data[i].Email
@@ -194,23 +203,17 @@ function changeHTML(data){
             </button>`
             $('#button-container').append(html);
         }
-
-        if(i==0){
-            $('#results').text('Resultados encontrados: 0');
-        }else{
-            $('#results').text('Resultados encontrados: '+(i+1));
-        }
-        
-        
-        
+             
     }
 }
+//changes entry variable value
 function changeEntry(input){
     entry=input;
     endpoint();
 
 }
 
+//changes the displayed users when the searchbar information changes
 $("#search").on('input', () => {
 	let presets = $("#button-container").children('#user-button');
 	Array.from(presets).forEach(preset => {
