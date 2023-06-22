@@ -280,9 +280,9 @@ section > .button-container > .user-button {
     align-items: center;
 }
 
-.user-button:hover .profile-picture {
+/* .user-button:hover .profile-picture {
     content: url("profile3.png");
-}
+} */
 
 .searchInput{
     color: seashell;
