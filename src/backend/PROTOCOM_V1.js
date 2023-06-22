@@ -613,11 +613,13 @@ app.post('/insereOption', urlencodedParser, (req, res) => {
     const { resposta, nome_option, Id_Pergunta_FK } = req.body;
     sql = "INSERT INTO OPTION (resposta, nome_Option, Id_Pergunta_FK) VALUES (?, ?, ?)";
     console.log(sql);
-    db.run(sql, [resposta, nome_option, Id_Pergunta_FK], err => {
-        if (err) {
-            throw err;
-        }
-    });
+	nome_option.forEach(optionName => {
+		db.run(sql, [resposta, optionName, Id_Pergunta_FK], err => {
+			if (err) {
+				throw err;
+			}
+		});
+	})
     res.write('<p>OPTION INSERIDO COM SUCESSO!</p><a href="/">VOLTAR</a>');
     db.close(); 
     res.end();
