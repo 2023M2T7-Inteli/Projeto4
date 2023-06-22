@@ -219,7 +219,6 @@ function changeHTML(data){
     }
 }
 function changeEntry(input){
-    console.log("entrous")
     entry=input;
     endpoint();
 
