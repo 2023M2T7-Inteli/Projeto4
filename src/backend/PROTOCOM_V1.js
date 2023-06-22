@@ -155,17 +155,17 @@ app.post('/inserePergunta', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	var db = new sqlite3.Database(DBPATH);
-	const { Pergunta, Tipo, Titulo } = req.body;
-	sql = "INSERT INTO PERGUNTA (Pergunta, Tipo, Titulo) VALUES (?, ?, ?)";
+	const { Pergunta, Tipo, Titulo, protocolId } = req.body;
+	sql = "INSERT INTO PERGUNTA (Pergunta, Tipo, Titulo, Id_Protocolo_FK) VALUES (?, ?, ?, ?)";
 	console.log(sql);
-	db.run(sql, [Pergunta, Tipo, Titulo], err => {
+	db.run(sql, [Pergunta, Tipo, Titulo, protocolId], function(err) {
 		if (err) {
 			throw err;
 		}
+		res.write(JSON.stringify({categoryId: this.lastID}));
+		res.end();
 	});
-	res.write('<p>PERGUNTA INSERIDA COM SUCESSO!</p><a href="/">VOLTAR</a>');
 	db.close();
-	res.end();
 });
 
 // Retrieves all records from the QUESTION table (it's the R in CRUD - Read). On line 127, it opens the database, and on line 135, it closes the database.
@@ -244,16 +244,18 @@ app.post('/insereAtividadeDoProtocolo', urlencodedParser, (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	var db = new sqlite3.Database(DBPATH);
 	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Data_de_Criacao } = req.body;
+	let protocolId;
 	sql = "INSERT INTO PROTOCOLO (Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Data_de_Criacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	console.log(sql);
-	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Data_de_Criacao], err => {
+	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Data_de_Criacao], function(err) {
 		if (err) {
 			throw err;
 		}
+		protocolId = this.lastID;
+		res.write(JSON.stringify({protocolId: protocolId}));
+		res.end()
 	});
-	res.write('<p>ATIVIDADE DO PROTOCOLO INSERIDA COM SUCESSO!</p><a href="/">VOLTAR</a>');
 	db.close();
-	res.end();
 });
 
 // Retrieves all records from the PROTOCOL table (it's the R in CRUD - Read). On line 213, it opens the database, and on line 221, it closes the database. 
@@ -610,7 +612,6 @@ app.post('/insereOption', urlencodedParser, (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     const { resposta, nome_option, Id_Pergunta_FK } = req.body;
-	console.log("oiii", resposta, nome_option, Id_Pergunta_FK)
     sql = "INSERT INTO OPTION (resposta, nome_Option, Id_Pergunta_FK) VALUES (?, ?, ?)";
     console.log(sql);
     db.run(sql, [resposta, nome_option, Id_Pergunta_FK], err => {
