@@ -2,6 +2,7 @@ var entry=""
 var emailOrdered=false
 var nomeOrdered=false
 var plantacaoOrdered=false
+const params = new URLSearchParams(window.location.search);
 
 window.onload = function() {
     endpoint();
@@ -19,6 +20,18 @@ window.onload = function() {
         });
     });
 };
+
+function sendToCreateProtocols() {
+	window.location.href = '../create-protocols/create-protocols.html?idUser=' + params.get('idUser');
+}
+
+function sendToReport() {
+	window.location.href = '../report/report.html?idUser=' + params.get('idUser');
+}
+
+function sendToSignUp() {
+	window.location.href = '../sign-up/sign-up.html?idUser=' + params.get('idUser');
+}
 
 function endpoint(){
     fetch('http://localhost:2021/usuarios')

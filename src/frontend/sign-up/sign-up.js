@@ -3,6 +3,19 @@ var email = ""; // Variable to store the email
 var senha = ""; // Variable to store the password
 var tipoDePlantacao = ""; // Variable to store the type of plantation
 var senha2 = ""; // Variable to confirm the password
+const params = new URLSearchParams(window.location.search);
+
+function sendToCreateProtocols() {
+	window.location.href = '../create-protocols/create-protocols.html?idUser=' + params.get('idUser');
+}
+
+function sendToReport() {
+	window.location.href = '../report/report.html?idUser=' + params.get('idUser');
+}
+
+function sendToUsers() {
+	window.location.href = '../select-user/select-user.html?idUser=' + params.get('idUser');
+}
 
 function inserirResposta(nome, email, senha, tipoDePlantacao, categoria, senha2) {
   // Create an XMLHttpRequest object

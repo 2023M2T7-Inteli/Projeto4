@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar</title> <!-- Title of the page -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="sign_up.css"> <!-- Links the CSS file associated with this page -->
+    <link rel="stylesheet" href="sign-up.css"> <!-- Links the CSS file associated with this page -->
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon"> <!-- Adds a shortcut icon to the page -->
 </head>
 <body>
@@ -15,9 +15,9 @@
         <img class="header-logo" src="images/Logo.png" alt="Logo">
         <h1>Protocom</h1>
         <div class="header-right">
-            <a href="../create-protocols/create-protocols.html" class="header-button">Criar Protocolo</a>
-            <a class="header-button">Histórico</a>
-            <a class="header-button">Usuários</a>
+            <a onclick="sendToCreateProtocols()" class="header-button">Criar Protocolo</a>
+            <a onclick="sendToReport()" class="header-button">Relatório</a>
+            <a onclick="sendToUsers()" class="header-button">Usuários</a>
             <div id="current_page">
                 <a class="header-button">Cadastrar</a>
                 <div id="orange_bg"></div>
@@ -90,7 +90,7 @@
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="sign_up.js"></script> <!-- Links the JavaScript file associated with this page -->
+    <script src="sign-up.js"></script> <!-- Links the JavaScript file associated with this page -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>

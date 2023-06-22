@@ -45,7 +45,7 @@ app.use(express.static("../frontend"));
 
 /* Redirect root to sign_in.html */
 app.get('/', (req, res) => {
-	res.redirect('/sign_in/sign_in.html');
+	res.redirect('/sign-in/sign-in.html');
 });
 
 /******** CRUD ************/

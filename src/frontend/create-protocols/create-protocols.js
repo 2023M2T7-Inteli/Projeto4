@@ -52,6 +52,18 @@ var isAscendingByName;
 var sortStatus = 0;
 const params = new URLSearchParams(window.location.search);
 
+function sendToReport() {
+	window.location.href = '../report/report.html?idUser=' + params.get('idUser');
+}
+
+function sendToUsers() {
+	window.location.href = '../select-user/select-user.html?idUser=' + params.get('idUser');
+}
+
+function sendToSignUp() {
+	window.location.href = '../sign-up/sign-up.html?idUser=' + params.get('idUser');
+}
+
 function changeColor(button) {
 	if (selectedButton == categoriesButton && button != categoriesButton) {
 		var buttons = document.getElementsByClassName("category");

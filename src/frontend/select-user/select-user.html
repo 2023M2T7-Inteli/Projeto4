@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responder protocolo</title>
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="usuario.css">
+    <link rel="stylesheet" href="select-user.css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
 </head>
@@ -16,21 +16,22 @@
         <h1>Protocom</h1>
         <!-- Navegation bar -->
         <nav>
+            <a onclick="sendToCreateProtocols()">Criar Protocolo</a>
+            <a onclick="sendToReport()">Relatório</a>
             <div id="current_page">
-                <a>Criar Protocolo</a>
+                <a>Usuários</a>
                 <div id="orange_bg"></div>
             </div>
-            <a>Histórico</a>
-            <a>Usuários</a>
-            <a href="../sign_up/sign_up.html">Cadastrar</a>
+            <a onclick="sendToSignUp()">Cadastrar</a>
         </nav>
     </header>
 
     <!--Background-->
-    <div id="img_div">
+    <figure id="img_div">
         <img src="images/trees.jpeg" alt="background image" id="trees">
         <div id="image_color"></div>
-    </div>
+    </figure>
+
     <section>
         <!-- Title of the protocol -->
         <div id="title_div">
@@ -62,6 +63,6 @@
             <div class="line"></div>
         </div>
     </section>
-    <script src="usuario.js"></script>
+    <script src="select-user.js"></script>
 </body>
 </html>

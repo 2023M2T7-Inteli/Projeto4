@@ -24,7 +24,7 @@ header {
 }
 
 /* Setting h1 element's font family to 'Righteous', font size to 20px, font weight to 400 and left margin to 6px */
-header > h1 {
+header>h1 {
     font-family: 'Righteous';
     font-size: 20px;
     font-weight: 400;
@@ -32,14 +32,14 @@ header > h1 {
 }
 
 /* Setting width and height of img element to 30px and left margin to 16px */
-header > img {
+header>img {
     width: 30px;
     height: 30px;
     margin-left: 16px;
 }
 
 /* Displaying nav element as flex container with width of 100%, items justified with space around and aligned to center */
-header > nav {
+header>nav {
     display: flex;
     width: 100%;
     justify-content: space-around;
@@ -47,13 +47,13 @@ header > nav {
 }
 
 /* Displaying div element as flex container with items aligned to center */
-header > nav > div {
+header>nav>div {
     display: flex;
     align-items: center;
 }
 
 /* Setting font size of a element to 14px, cursor to pointer, color to dark gray, text decoration to none, display to block and height to fit-content */
-header > nav a {
+header>nav a {
     font-size: 14px;
     cursor: pointer;
     color: #535353;
@@ -63,16 +63,16 @@ header > nav a {
 }
 
 /* Setting color of a element on hover to black */
-header > nav a:hover{
+header>nav a:hover {
     color: black;
 }
 
 /* Setting width and height of img element within button element to 25px */
-header > nav > button > img {
+header>nav>button>img {
     width: 25px;
     height: 25px;
 }
-  
+
 /* Displaying main element as flex container with items aligned to center and height of 100vh minus 48px */
 main {
     display: flex;
@@ -97,7 +97,7 @@ aside {
 }
 
 /* Setting font weight of button element within aside element to 300, font size to 13px, color to light gray with low opacity, text aligned to start, cursor to pointer, height to 55px, left and right padding to 15px, display to flex and items aligned to center */
-aside > button {
+aside>button {
     font-weight: 300;
     font-size: 13px;
     color: rgba(255, 255, 255, 0.35);
@@ -111,24 +111,24 @@ aside > button {
 }
 
 /* Setting left padding of element with class 'category' within aside element to 25px, height to 45px and adding slideDown animation */
-aside > .category {
+aside>.category {
     padding-left: 25px;
     height: 45px;
     animation: slideDown 1s ease;
 }
 
 /* Setting color of button element within aside element on hover to light gray with higher opacity */
-aside > button:hover {
+aside>button:hover {
     color: rgba(255, 255, 255, 0.75);
 }
 
 /* Setting top margin of first child button element within aside element to 14px */
-aside > button:first-child {
+aside>button:first-child {
     margin-top: 14px;
 }
 
 /* Setting width and height of img element within button element within aside element to 18px and left margin to auto */
-aside > button > img {
+aside>button>img {
     width: 16px;
     height: 16px;
     margin-left: auto;
@@ -142,7 +142,9 @@ article {
 
 /* Setting left margin of label element to 22px, font weight to 400, font size to 13px, display to block, color to dark gray, width to 100px, min-width to max-content and top margin to 6px */
 
-label, input, textarea {
+label,
+input,
+textarea {
     display: block;
 }
 
@@ -166,7 +168,7 @@ textarea {
 }
 
 /* Setting font weight of p element to 400, font size to 15px and color to light gray */
-.centralize > p {
+.centralize>p {
     font-weight: 400;
     font-size: 15px;
     color: #9F9F9F;
@@ -202,7 +204,8 @@ textarea {
 }
 
 /* Displaying elements with id 'left_sec' and 'right_sec' as flex containers with items in column direction and height of calc(100vh -48px) */
-#left_sec, #right_sec {
+#left_sec,
+#right_sec {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 48px);
@@ -224,7 +227,7 @@ textarea {
 }
 
 /* Setting background color of section element within element with id 'left_sec' to white, adding box shadow, setting border radius to 7px, width to calc(100% - 25px), height to 90%, overflow to auto and display as flex container */
-#left_sec > section {
+#left_sec>section {
     background-color: white;
     box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.12);
     border-radius: 7px;
@@ -235,7 +238,7 @@ textarea {
 }
 
 /* Setting background color of section element within element with id 'right_sec' to white, adding box shadow, setting border radius to 7px, width to calc(100% - 50px), height to calc(50% -12.5px) and overflow to auto */
-#right_sec > section {
+#right_sec>section {
     background-color: white;
     box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.12);
     border-radius: 7px;
@@ -252,22 +255,10 @@ textarea {
 }
 
 /* Setting color of a element within element with id 'current_page' to white */
-#current_page > a {
+#current_page>a {
     color: rgb(255, 255, 255)
 }
 
-#orange_bg {
-    position: absolute;
-    background-color: #EB5E28;
-    width: 170px;
-    height: 100%;
-    top: 50%;
-    left: 50%;
-    z-index: -1;
-    transform: translate(-50%, -50%);
-}
-
-/* Setting position of element with id 'orange_bg' to absolute and background color to orange. Setting width to 170px and height to 100%. Setting own position to center */
 #orange_bg {
     position: absolute;
     background-color: #EB5E28;
@@ -288,6 +279,7 @@ textarea {
     width: 100%;
     z-index: -1;
 }
+
 /* Setting height of element with id 'trees' to 64px */
 #trees {
     height: 64px;
@@ -311,7 +303,7 @@ textarea {
 }
 
 /* Setting height of element with class 'centralize' within element with id 'categories_article' to 100%, bottom margin to 13px and display as flex container with items justified to center and aligned to center */
-#categories_article > .centralize {
+#categories_article>.centralize {
     height: 100%;
     margin-bottom: 13px;
     display: flex;
@@ -328,7 +320,7 @@ textarea {
     width: 100%;
 }
 
-#more_label_div > div:last-child {
+#more_label_div>div:last-child {
     margin-left: 10px;
 }
 
@@ -343,13 +335,13 @@ textarea {
     margin-right: 13px;
 }
 
-#total_categories_div > p{
+#total_categories_div>p {
     color: #535353;
     font-size: 13px;
     font-weight: 400;
 }
 
-#total_categories_div > button {
+#total_categories_div>button {
     position: absolute;
     right: 10px;
     color: #535353;
@@ -360,17 +352,18 @@ textarea {
     cursor: pointer;
 }
 
-#total_categories_div > button:hover {
+#total_categories_div>button:hover {
     color: black;
 }
 
-#total_categories_div > button > img {
+#total_categories_div>button>img {
     width: 9px;
     height: 9px;
     margin-left: 5px;
 }
 
-#presets_article, #recipient_article {
+#presets_article,
+#recipient_article {
     height: calc(100% - 13px);
     margin-bottom: 13px;
 }
@@ -381,13 +374,13 @@ textarea {
     margin-bottom: -7px;
 }
 
-#preset_buttons_div > div {
+#preset_buttons_div>div {
     margin-left: auto;
     margin-right: 22px;
     display: flex;
 }
 
-#preset_buttons_div > div > button {
+#preset_buttons_div>div>button {
     background-color: #1d1d1d;
     height: 33px;
     color: rgb(255, 255, 255, 35%);
@@ -395,30 +388,32 @@ textarea {
     cursor: pointer;
 }
 
-#protocol_preset:hover, #recipient_preset:hover, #historic_preset:hover {
+#protocol_preset:hover,
+#recipient_preset:hover,
+#historic_preset:hover {
     color: rgba(255, 255, 255, 0.75) !important;
 }
 
-#preset_buttons_div > div > button > img {
+#preset_buttons_div>div>button>img {
     display: none;
 }
 
-#preset_buttons_div > div > button:nth-child(1) {
+#preset_buttons_div>div>button:nth-child(1) {
     border-radius: 6px 0px 0px 6px;
     background-color: #EB5E28;
     color: rgb(255, 255, 255, 75%);
     margin-right: -1px;
 }
 
-#preset_buttons_div > div > button:nth-child(2) {
+#preset_buttons_div>div>button:nth-child(2) {
     margin-right: -1px;
 }
 
-#preset_buttons_div > div > button:nth-child(3) {
+#preset_buttons_div>div>button:nth-child(3) {
     border-radius: 0px 6px 6px 0px;
 }
 
-body > div {
+body>div {
     display: none;
 }
 
@@ -441,7 +436,7 @@ body > div {
     border-color: white;
 }
 
-.category_div:hover > p {
+.category_div:hover>p {
     color: white;
 }
 
@@ -449,7 +444,7 @@ body > div {
     margin-bottom: 1px;
 }
 
-.category_div > .category_img {
+.category_div>.category_img {
     width: 20px;
     height: 20px;
     margin-left: 4px;
@@ -462,7 +457,7 @@ body > div {
     height: 14px;
 }
 
-.category_div > .category_name {
+.category_div>.category_name {
     margin-left: 7.5px;
     font-size: 15px;
     color: #535353;
@@ -470,7 +465,7 @@ body > div {
     min-width: fit-content;
 }
 
-.category_div > .category_description {
+.category_div>.category_description {
     margin-left: 15px;
     font-size: 12px;
     color: #727272;
@@ -484,11 +479,11 @@ body > div {
     width: 100%;
 }
 
-#more_label_div > .label_div {
+#more_label_div>.label_div {
     margin-bottom: 0px;
 }
 
-.label_div > label {
+.label_div>label {
     font-weight: 400;
     font-size: 13px;
     color: #535353;
@@ -500,7 +495,7 @@ body > div {
     margin-bottom: 13px;
 }
 
-#presets_article .label_div > label {
+#presets_article .label_div>label {
     min-width: 75px;
 }
 
@@ -530,7 +525,7 @@ body > div {
     align-items: baseline;
 }
 
-#save_button_div > button {
+#save_button_div>button {
     background-color: #9F9F9F;
     color: rgb(255, 255, 255, 75%);
     width: 144px;
@@ -543,25 +538,27 @@ body > div {
     margin-bottom: -7px;
 }
 
-.modal > .label_div > input, .modal > .label_div > textarea {
+.modal>.label_div>input,
+.modal>.label_div>textarea {
     margin-right: 30px;
     margin-left: 9px;
 }
 
-.modal > .label_div > label {
+.modal>.label_div>label {
     margin-left: 30px;
 }
 
 #modal_bg {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.33);;
+    background-color: rgba(0, 0, 0, 0.33);
+    ;
     display: none;
     position: absolute;
     z-index: 1;
 }
 
-#save_recipients_modal > input {
+#save_recipients_modal>input {
     border: 1px solid #E7E7E7;
     border-radius: 6px;
     outline: none;
@@ -570,7 +567,9 @@ body > div {
     font-size: 13px;
 }
 
-#save_protocols_modal > p,#delete_all_modal > p, #send_protocol_modal > p {
+#save_protocols_modal>p,
+#delete_all_modal>p,
+#send_protocol_modal>p {
     margin-left: auto;
     width: 252px;
     margin-right: auto;
@@ -581,7 +580,10 @@ body > div {
     text-align: center;
 }
 
-#save_recipients_modal > div, #save_protocols_modal > div, #delete_all_modal > div, #send_protocol_modal > div {
+#save_recipients_modal>div,
+#save_protocols_modal>div,
+#delete_all_modal>div,
+#send_protocol_modal>div {
     display: flex;
     margin-left: auto;
     margin-right: auto;
@@ -634,7 +636,7 @@ body > div {
     transition: opacity 0.6s ease;
     opacity: 0;
 }
-  
+
 .saveBtn:hover::before {
     opacity: 1;
 }
@@ -644,6 +646,7 @@ body > div {
         width: 85px;
         height: 26px;
     }
+
     to {
         width: 100px;
         height: 30.58px;
@@ -655,6 +658,7 @@ body > div {
         width: 100px;
         height: 30.58px;
     }
+
     to {
         width: 85px;
         height: 26px;
@@ -692,12 +696,12 @@ body > div {
     transition: opacity 0.6s ease;
     opacity: 0;
 }
-  
+
 .deleteBtn:hover::before {
     opacity: 1;
 }
 
-.modal > h1 {
+.modal>h1 {
     font-size: 16px;
     color: #000000;
     width: fit-content;
@@ -707,7 +711,7 @@ body > div {
     margin-top: 10px;
 }
 
-.modal > input {
+.modal>input {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 24px;
@@ -716,7 +720,10 @@ body > div {
     padding-right: 7px;
 }
 
-#save_recipients_modal, #save_protocols_modal, #delete_all_modal, #send_protocol_modal {
+#save_recipients_modal,
+#save_protocols_modal,
+#delete_all_modal,
+#send_protocol_modal {
     position: absolute;
     background-color: white;
     border-radius: 7px;
@@ -729,7 +736,9 @@ body > div {
     transform: translate(-50%, -50%);
 }
 
-#add_image_modal, #add_text_modal, #add_option_modal {
+#add_image_modal,
+#add_text_modal,
+#add_option_modal {
     display: none;
     position: absolute;
     background-color: white;
@@ -743,44 +752,58 @@ body > div {
     transform: translate(-50%, -50%);
 }
 
-#add_image_modal > div:last-child, #add_text_modal > div:last-child, #add_option_modal > div:last-child {
+#add_image_modal>div:last-child,
+#add_text_modal>div:last-child,
+#add_option_modal>div:last-child {
     display: flex;
     align-items: center;
     margin-right: 30px;
     width: calc(100% - 30px);
 }
 
-#add_image_modal > div:last-child > .label_div, #add_text_modal > div:last-child > .label_div {
+#add_image_modal>div:last-child>.label_div,
+#add_text_modal>div:last-child>.label_div {
     margin-bottom: 0px;
     width: fit-content;
 }
 
-#add_image_modal > div:last-child > div:last-child, #add_text_modal > div:last-child > div:last-child, #add_option_modal > div:last-child > div:last-child {
+#add_image_modal>div:last-child>div:last-child,
+#add_text_modal>div:last-child>div:last-child,
+#add_option_modal>div:last-child>div:last-child {
     display: flex;
     width: 100%;
     justify-content: end;
 }
 
-#add_image_modal > div:last-child > .label_div > label, #add_text_modal > div:last-child > .label_div > label, #add_option_modal .label_div > label {
+#add_image_modal>div:last-child>.label_div>label,
+#add_text_modal>div:last-child>.label_div>label,
+#add_option_modal .label_div>label {
     margin-left: 30px;
     min-width: 73.5px;
 }
 
-#add_image_modal > div:last-child > .label_div > input, #add_text_modal > div:last-child > .label_div > input {
+#add_image_modal>div:last-child>.label_div>input,
+#add_text_modal>div:last-child>.label_div>input {
     margin-left: 9px;
     width: 30px;
 }
 
-#add_image_modal > .label_div:nth-child(2), #add_text_modal > .label_div:nth-child(2), #add_option_modal .label_div:nth-child(2) {
+#add_image_modal>.label_div:nth-child(2),
+#add_text_modal>.label_div:nth-child(2),
+#add_option_modal .label_div:nth-child(2) {
     margin-top: 22px;
     margin-bottom: 22px;
 }
 
-#add_image_modal > .label_div:nth-child(3), #add_text_modal > .label_div:nth-child(3), #add_option_modal .label_div:nth-child(3) {
+#add_image_modal>.label_div:nth-child(3),
+#add_text_modal>.label_div:nth-child(3),
+#add_option_modal .label_div:nth-child(3) {
     margin-bottom: 22px;
 }
 
-#add_image_modal > .label_div > label, #add_text_modal > .label_div > label, #add_option_modal .label_div > label {
+#add_image_modal>.label_div>label,
+#add_text_modal>.label_div>label,
+#add_option_modal .label_div>label {
     min-width: 73.5px;
 }
 
@@ -811,7 +834,8 @@ body > div {
     margin-bottom: 8px;
 }
 
-#add_option_modal textarea, #add_option_modal input {
+#add_option_modal textarea,
+#add_option_modal input {
     margin-right: 30px;
     margin-left: 9px;
 }
@@ -843,7 +867,7 @@ body > div {
     height: 100%;
 }
 
-.label_div > input {
+.label_div>input {
     outline: none;
     border: 1px solid #e7e7e7;
     border-radius: 6px;
@@ -888,7 +912,7 @@ body > div {
     display: flex;
 }
 
-#recipient_article .main_article > div:first-child {
+#recipient_article .main_article>div:first-child {
     height: 100%;
     width: 70%;
     display: flex;
@@ -897,7 +921,7 @@ body > div {
     margin-right: 9px;
 }
 
-#recipient_article .main_article > div:nth-child(2) {
+#recipient_article .main_article>div:nth-child(2) {
     display: flex;
     align-items: end;
     height: 100%;
@@ -905,7 +929,7 @@ body > div {
     overflow: auto;
 }
 
-#recipient_article .main_article > div:last-child {
+#recipient_article .main_article>div:last-child {
     width: 30%;
     height: 100%;
     margin-left: 10px;
@@ -925,31 +949,31 @@ body > div {
     overflow: auto;
 }
 
-#presets_article .main_article > div {
+#presets_article .main_article>div {
     height: 100%;
     overflow: auto;
 }
 
-#colunas > div {
+#colunas>div {
     display: flex;
     width: 100%;
     justify-content: center;
 }
 
-#colunas > div > button {
+#colunas>div>button {
     display: inherit;
     justify-content: inherit;
     cursor: pointer;
 }
 
-#colunas > div img {
+#colunas>div img {
     width: 16px;
     height: 16px;
     margin-left: 3px;
     margin-right: -8px;
 }
 
-#colunas > div p {
+#colunas>div p {
     font-size: 13px;
     text-align: center;
     width: fit-content;
@@ -1009,7 +1033,7 @@ body > div {
     transition: width 2.6s linear 0.6s;
 }
 
-.preset_div > p {
+.preset_div>p {
     font-size: 13px;
     width: 100%;
     text-align: center;
@@ -1017,7 +1041,7 @@ body > div {
     white-space: nowrap;
 }
 
-.categories_main_article{
+.categories_main_article {
     margin-bottom: 13px;
 }
 
@@ -1027,7 +1051,7 @@ body > div {
     background-color: #e7e7e7;
 }
 
-#recipient_article .label_div > label {
+#recipient_article .label_div>label {
     min-width: 75px;
 }
 
@@ -1039,14 +1063,14 @@ body > div {
 }
 
 /* Styling for list items within .category_inputs > ul */
-.category_inputs > ul > li {
+.category_inputs>ul>li {
     list-style: none;
     margin-top: 9px;
     margin-bottom: 9px;
 }
 
 /* Styling for buttons within .category_inputs > ul > li */
-.category_inputs > ul > li > button {
+.category_inputs>ul>li>button {
     border: none;
     background-color: transparent;
 }
@@ -1061,7 +1085,7 @@ body > div {
     margin-right: 10px;
 }
 
-.user_div > img {
+.user_div>img {
     width: 15px;
     height: 15px;
 }
@@ -1081,7 +1105,7 @@ body > div {
     cursor: pointer;
 }
 
-.user_profile_button > img {
+.user_profile_button>img {
     width: 15px;
     height: 15px;
 }
@@ -1107,7 +1131,7 @@ body > div {
 }
 
 /* Styling for labels within user_div */
-.user_div > p {
+.user_div>p {
     padding-left: 4px;
     font-size: 13px;
     color: #535353;
@@ -1118,7 +1142,7 @@ body > div {
 }
 
 /* Styling for labels within hovered user_div */
-.user_div > p:hover {
+.user_div>p:hover {
     color: #000000;
 }
 
@@ -1164,21 +1188,21 @@ body > div {
         flex-direction: column;
     }
 
-    #more_label_div > .label_div:last-child {
+    #more_label_div>.label_div:last-child {
         margin-left: 0px;
     }
 
-    #more_label_div > .label_div:first-child {
+    #more_label_div>.label_div:first-child {
         margin-bottom: 20px;
     }
 }
 
 @media (max-width: 1107px) {
-    #preset_buttons_div > div > button {
+    #preset_buttons_div>div>button {
         width: 90px;
     }
 
-    #save_button_div > button {
+    #save_button_div>button {
         width: 110px;
     }
 }
@@ -1189,16 +1213,16 @@ body > div {
         width: 110px;
     }
 
-    aside > button {
+    aside>button {
         font-size: 9px;
     }
 
-    aside > button > img {
+    aside>button>img {
         width: 11.5px;
         height: 11.5px;
     }
 
-    #preset_buttons_div > div > button {
+    #preset_buttons_div>div>button {
         width: 35px;
         font-size: 0px;
         display: flex;
@@ -1206,17 +1230,17 @@ body > div {
         align-items: center;
     }
 
-    #preset_buttons_div > div > button > img {
+    #preset_buttons_div>div>button>img {
         display: block;
         height: 20px;
         width: 20px;
     }
 
-    #preset_buttons_div > div {
+    #preset_buttons_div>div {
         margin-right: 23px;
     }
 
-    #recipient_article .label_div > #selected_label {
+    #recipient_article .label_div>#selected_label {
         font-size: 10.5px;
         width: fit-content;
     }
@@ -1224,7 +1248,7 @@ body > div {
 
 /* Setting font size of a element within nav element within header element to 11px, width and height of img element within button element within nav element within header element to 20px, height and width of img element within header element to 23px and left margin to 8px, font size of h1 element within header element to 20px for screens with maximum width of 728px */
 @media (max-width: 728px) {
-    header > nav a {
+    header>nav a {
         font-size: 11px;
     }
 
@@ -1232,17 +1256,17 @@ body > div {
         width: 80px;
     }
 
-    header > nav > button > img{
+    header>nav>button>img {
         width: 20px;
         height: 20px;
     }
 
-    header > img {
+    header>img {
         height: 23px;
         width: 23px;
     }
 
-    header > h1 {
+    header>h1 {
         font-size: 20px;
     }
 
@@ -1252,41 +1276,41 @@ body > div {
 }
 
 @media (max-width: 674px) {
-    #colunas > div > p {
+    #colunas>div>p {
         font-size: 9px;
         width: max-content;
     }
 
-    .preset_div > p {
+    .preset_div>p {
         font-size: 9px;
     }
 
-    .user_div > p {
+    .user_div>p {
         font-size: 9px;
     }
 
-    .category_div > .category_name {
+    .category_div>.category_name {
         font-size: 10px;
     }
 
-    .label_div > label {
+    .label_div>label {
         font-size: 9px;
         min-width: 62px;
         margin-top: 0px;
         margin-bottom: 3px;
     }
 
-    #recipient_article .label_div > #selected_label {
+    #recipient_article .label_div>#selected_label {
         font-size: 7.5px;
         width: fit-content;
     }
 
-    #total_categories_div > p {
+    #total_categories_div>p {
         font-size: 9px;
         margin-left: 1px;
     }
 
-    #total_categories_div > button {
+    #total_categories_div>button {
         font-size: 9px;
     }
 
@@ -1298,11 +1322,11 @@ body > div {
         font-size: 11px;
     }
 
-    #recipient_article .label_div > label {
+    #recipient_article .label_div>label {
         min-width: 50px;
     }
 
-    .label_div > input {
+    .label_div>input {
         font-size: 9px;
         width: calc(100% - 22px);
         margin-right: 0px;
@@ -1315,12 +1339,12 @@ body > div {
         margin-right: 0px;
     }
 
-    #preset_buttons_div > div > button {
+    #preset_buttons_div>div>button {
         height: 20px;
         width: 20px;
     }
 
-    #save_button_div > button {
+    #save_button_div>button {
         height: 20px;
         width: 45px;
         font-size: 9px;
@@ -1338,7 +1362,7 @@ body > div {
         min-width: 80px;
     }
 
-    #preset_buttons_div > div > button > img {
+    #preset_buttons_div>div>button>img {
         display: block;
         height: 14px;
         width: 14px;
@@ -1350,7 +1374,7 @@ body > div {
     #trees {
         display: none;
     }
-    
+
     #orange_bg {
         width: 100%;
     }
@@ -1365,35 +1389,37 @@ body > div {
         margin-top: -11px;
     }
 
-    body > header, body > figure, body > main {
+    body>header,
+    body>figure,
+    body>main {
         height: 0px;
         width: 0px;
         overflow: hidden;
     }
 
-    body > div {
+    body>div {
         display: block;
     }
 }
 
 /* Adjusting font sizes, image sizes and margins for header elements for screens with maximum width of 464px */
 @media (max-width: 464px) {
-    header > nav > a {
+    header>nav>a {
         font-size: 9px;
     }
 
-    header > nav > button > img{
+    header>nav>button>img {
         width: 15px;
         height: 15px;
     }
 
-    header > img {
+    header>img {
         height: 19px;
         width: 19px;
         margin-left: 8px;
     }
 
-    header > h1 {
+    header>h1 {
         font-size: 16px;
         margin-left: 2px;
     }

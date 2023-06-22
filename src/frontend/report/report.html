@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="report.css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <title>Relatório</title>
 </head>
@@ -31,13 +31,13 @@
         <h1>Protocom</h1>
         <!-- Navegation bar -->
         <nav>
-            <a>Criar Protocolo</a>
+            <a onclick="sendToCreateProtocols()">Criar Protocolo</a>
             <div id="current_page">
                 <a>Relatório</a>
                 <div id="orange_bg"></div>
             </div>
-            <a>Usuários</a>
-            <a href="../sign_up/sign_up.html">Cadastrar</a>
+            <a onclick="sendToUsers()">Usuários</a>
+            <a onclick="sendToSignUp()">Cadastrar</a>
         </nav>
     </header>
         <!-- Background -->
@@ -92,6 +92,6 @@
                     <img onclick="showModals()" onmouseenter="changeBackground(this)" onmouseleave="changeBackground2(this)" src="images/delete.png" alt="delete icon" class="delete">
                 </div>
         </main>
-        <script src="reports.js"></script>
+        <script src="report.js"></script>
 </body>
 </html>

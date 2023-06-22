@@ -1,3 +1,5 @@
+const params = new URLSearchParams(window.location.search);
+
 function entrar() {
     window.location.href = "section2.html";
 }
@@ -12,6 +14,18 @@ function section3() {
 
 function back2() {
     window.location.href = "section2.html";
+}
+
+function sendToCreateProtocols() {
+	window.location.href = '../create-protocols/create-protocols.html?idUser=' + params.get('idUser');
+}
+
+function sendToUsers() {
+	window.location.href = '../select-user/select-user.html?idUser=' + params.get('idUser');
+}
+
+function sendToSignUp() {
+	window.location.href = '../sign-up/sign-up.html?idUser=' + params.get('idUser');
 }
 
 function showToast(text, color) {
