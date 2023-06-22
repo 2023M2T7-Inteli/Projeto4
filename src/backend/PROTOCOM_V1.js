@@ -45,7 +45,7 @@ app.use(express.static("../frontend"));
 
 /* Redirect root to sign_in.html */
 app.get('/', (req, res) => {
-	res.redirect('/sign_in/sign_in.html');
+	res.redirect('/sign-in/sign-in.html');
 });
 
 /******** CRUD ************/
@@ -242,10 +242,10 @@ app.post('/insereAtividadeDoProtocolo', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	var db = new sqlite3.Database(DBPATH);
-	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK } = req.body;
-	sql = "INSERT INTO PROTOCOLO (Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	const { Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Data_de_Criacao } = req.body;
+	sql = "INSERT INTO PROTOCOLO (Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Data_de_Criacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	console.log(sql);
-	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK], err => {
+	db.run(sql, [Atividade, Nome_Protocolo, Descricao, Data, Horario, Visualizado, Id_Usuario_FK, Data_de_Criacao], err => {
 		if (err) {
 			throw err;
 		}
@@ -526,17 +526,56 @@ app.post('/insertGroup', (req, res) => {
 	res.end()
 })
 
-app.get('/catchGroup', (req, res) => {
+app.post('/catchGroup', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Acess-Control-Allow-Origin', '*');
 	var db = new sqlite3.Database(DBPATH);
-	let sql = "SELECT * FROM GRUPO";
-	db.all(sql, [], (err, rows) => {
+	let userId = req.body.userId;
+	let sql = "SELECT * FROM GRUPO WHERE Id_Pesquisador_FK = ?";
+	db.all(sql, [userId], (err, rows) => {
 		if (err) {
 			console.log(err);
 		} else {
 			console.log('DADOS ENVIADOS COM SUCESSO!');
 			res.send(rows)
+		}
+	})
+	db.close();
+});
+
+app.post('/catchProtocolsPresets', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Acess-Control-Allow-Origin', '*');
+	var db = new sqlite3.Database(DBPATH);
+	let userId = req.body.userId;
+	let sql = "SELECT * FROM PROTOCOLO WHERE Id_Usuario_FK = ?";
+	db.all(sql, [userId], (err, rows) => {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('PROTOCOLOS ENVIADOS COM SUCESSO!');
+			res.send(rows)
+		}
+	})
+	db.close();
+});
+
+app.post('/deletePreset', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Acess-Control-Allow-Origin', '*');
+	var db = new sqlite3.Database(DBPATH);
+	let {type, id} = req.body;
+	let sql;
+	if (type == 'protocol' || type == 'historic') {
+		sql = "DELETE FROM PROTOCOLO WHERE Id_Protocolo = ?";
+	} else if (type == 'group') {
+		sql = "DELETE FROM GRUPO WHERE Id_Grupo = ?";
+	}
+	db.all(sql, [id], (err, rows) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(rows);
 		}
 	})
 	db.close();
@@ -571,7 +610,7 @@ app.post('/insereOption', urlencodedParser, (req, res) => {
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     const { resposta, nome_option, Id_Pergunta_FK } = req.body;
 	console.log("oiii", resposta, nome_option, Id_Pergunta_FK)
-    sql = "INSERT INTO OPTION (resposta, nome_option, Id_Pergunta_FK) VALUES (?, ?, ?)";
+    sql = "INSERT INTO OPTION (resposta, nome_Option, Id_Pergunta_FK) VALUES (?, ?, ?)";
     console.log(sql);
     db.run(sql, [resposta, nome_option, Id_Pergunta_FK], err => {
         if (err) {

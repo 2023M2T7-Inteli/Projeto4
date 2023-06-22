@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo!</title>
+    <link rel="stylesheet" href="farmer.css">
+</head>
+<body>
+    <header> <!-- Header. Where is located the menu to access the sidebar, the icon to return to the initial screen and the name Protocom -->
+        <img id="logo" src="images/logo.png" alt="logo">
+        <h2 id="title_header">Protocom</h2>
+        <div id="icons_div">
+            <div id="chat_div">
+                <img id="chat" src="images/chat.png" alt="Botão para acessar o chat">
+                <div id="notification2">1</div>
+            </div>
+            <img id="gear" src="images/gear.png" alt="Botão para acessar as configurações">
+        </div>
+    </header>
+    <div id="img_div">
+        <img id="trees" src="images/trees.jpeg" alt="Design">
+    </div>
+    <main>
+        <div id="center_all">
+            <!-- Title of the page -->
+            <h1 id="title">O que você gostaria de acessar?</h1>
+            <!-- Subtitle of the page -->
+            <p id="subtitle">Selecione uma das opções abaixo</p>
+            <div id="divbtn1">
+                <!-- Button to access the protocols that need to be sent -->
+                <button onclick="redirecionarTela01()" id="btn_1" class="button">
+                    <h1 id="title1_btn">Protocolos pendentes</h1>
+                    <p id="text1_btn">Aqui você pode acessar os protocolos que você ainda precisa responder.</p>
+                <div id="notification"></div>
+                </button>
+            </div>
+            <div id="divbtn2">
+                <!-- Button to access the protocols that have been sent -->
+                <button onclick="redirecionarTela02()" id="btn_2" class="button">
+                    <h1 id="title2_btn">Tarefas entregues</h1>
+                    <p id="text2_btn">Aqui você pode acessar as tarefas que você já realizou.</p>
+                </button>
+            </div>
+        </div>
+    </main>   
+    <script src="farmer.js"></script>
+</body>
+</html>

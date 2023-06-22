@@ -7,7 +7,9 @@ $(document).ready(() => {
 
 	toProtocol();
 	updateGroup();
-	updateCategories()
+	updateCategories();
+	updateHistoric();
+	updateProtocols();
 
 	document.addEventListener('dragstart', element => {
 		element.target.classList.add('dragging');
@@ -36,13 +38,31 @@ $(document).ready(() => {
 })
 
 var selectedButton = null;
+var lastClickedPresetButton;
 var categoriesButton = document.getElementById("categories_button");
 var categoriesButtonArrow = document.getElementById("arrow_img");
 var categoriesButtonClicked = false;
 var isExpanded = false;
 var selectedUsers = new Array();
+var categoriesList = new Array();
 var lastClickedOptionButton;
+var toastIndex = 0;
+var isAscendingByDate;
+var isAscendingByName;
+var sortStatus = 0;
 const params = new URLSearchParams(window.location.search);
+
+function sendToReport() {
+	window.location.href = '../report/report.html?idUser=' + params.get('idUser');
+}
+
+function sendToUsers() {
+	window.location.href = '../select-user/select-user.html?idUser=' + params.get('idUser');
+}
+
+function sendToSignUp() {
+	window.location.href = '../sign-up/sign-up.html?idUser=' + params.get('idUser');
+}
 
 function changeColor(button) {
 	if (selectedButton == categoriesButton && button != categoriesButton) {
@@ -135,6 +155,7 @@ function zoom() {
 }
 
 function toProtocol() {
+	lastClickedPresetButton = 'protocol';
 	$('#protocol_preset').css('background-color', '#EB5E28');
 	$('#protocol_preset').css('color', 'rgb(255, 255, 255, 0.75)');
 
@@ -144,8 +165,10 @@ function toProtocol() {
 	$('#historic_preset').css('background-color', '#1d1d1d');
 	$('#historic_preset').css('color', 'rgb(255, 255, 255, 0.35)');
 
-	document.querySelectorAll('#colunas > div:first-child > p')[0].innerText = 'Nome';
-
+	document.querySelectorAll('#colunas > div:first-child p')[0].innerText = 'Nome';
+	if ($("#colunas").children('#status_column').length > 0) {
+		$("#colunas").children('#status_column').remove()
+	}
 	$('.recipient_preset_div').css('display', 'none');
 	$('.historic_preset_div').css('display', 'none');
 
@@ -158,9 +181,12 @@ function toProtocol() {
 		$("#presets_article").find($(".centralize_p")).css('display', 'none');
 		$('.protocol_preset_div').css('display', 'block');
 	}
+
+	$('#searchPresetInput').attr('placeholder', 'Pesquise pelo nome do protocolo');
 }
 
 function toRecipient() {
+	lastClickedPresetButton = 'recipient';
 	$('#recipient_preset').css('background-color', '#EB5E28');
 	$('#recipient_preset').css('color', 'rgb(255, 255, 255, 75%)');
 
@@ -170,8 +196,10 @@ function toRecipient() {
 	$('#historic_preset').css('background-color', '#1d1d1d');
 	$('#historic_preset').css('color', 'rgb(255, 255, 255, 35%)');
 
-	document.querySelectorAll('#colunas > div:first-child > p')[0].innerText = 'Grupo';
-	updateGroup();
+	document.querySelectorAll('#colunas > div:first-child p')[0].innerText = 'Grupo';
+	if ($("#colunas").children('#status_column').length > 0) {
+		$("#colunas").children('#status_column').remove()
+	}
 
 	$('.protocol_preset_div').css('display', 'none');
 	$('.historic_preset_div').css('display', 'none');
@@ -185,27 +213,76 @@ function toRecipient() {
 		$('.recipient_preset_div').css('display', 'block');
 		$("#presets_article").find($(".centralize_p")).css('display', 'none');
 	}
+
+	$('#searchPresetInput').attr('placeholder', 'Pesquise pelo nome do grupo');
 }
 
 function updateGroup() {
 	let xhr = new XMLHttpRequest();
-	xhr.open('get', '/catchGroup', true);
+	xhr.open('post', '/catchGroup', true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	xhr.onload = function () {
 		if (xhr.status == 200) {
 			let html = '';
 			JSON.parse(xhr.responseText).forEach(group => {
-				html += `<button class="preset_div">
-						<p>${group.Grupo}</p>
-						<p>${group.Data}</p>
+				html += `<button onmouseover="whiteImage(this)" onmouseout="blackImage(this)" class="preset_div" data-id="${group.Id_Grupo}">
+						<p class="preset_name">${group.Grupo}</p>
+						<p class="preset_date">${group.Data}</p>
+						<img onclick="deletePreset(this)" class="delete_img" src="images/delete.png" alt="delete category image">
 						</button>`
 			});
 			$(".recipient_preset_div").html(html);
+			if (lastClickedPresetButton == 'recipient') {
+				if ($(".recipient_preset_div").children('.preset_div').length == 0) {
+					$("#colunas").hide();
+					$("#presets_article").find($(".centralize_p")).css('display', 'flex');
+					$('.recipient_preset_div').css('display', 'none');
+				} else {
+					$("#colunas").css('display', 'flex');
+					$('.recipient_preset_div').css('display', 'block');
+					$("#presets_article").find($(".centralize_p")).css('display', 'none');
+				}
+			}
 		} else {
 			console.log('ERROR: ' + xhr.status);
 		}
 	}
-	xhr.send()
+	xhr.send(JSON.stringify({ userId: params.get('idUser') }));
+}
+
+function updateProtocols() {
+	let xhr = new XMLHttpRequest();
+	xhr.open('post', '/catchProtocolsPresets', true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.onload = function () {
+		if (xhr.status == 200) {
+			let html = '';
+			JSON.parse(xhr.responseText).forEach(protocol => {
+				if (protocol.Atividade == 'Predefinicao') {
+					html += `<button onmouseover="whiteImage(this)" onmouseout="blackImage(this)" class="preset_div" data-id="${protocol.Id_Protocolo}">
+					<p class="preset_name">${protocol.Nome_Protocolo}</p>
+					<p class="preset_date">${protocol.Data_de_Criacao}</p>
+					<img onclick="deletePreset(this)" class="delete_img" src="images/delete.png" alt="delete category image">
+					</button>`
+				}
+			});
+			$(".protocol_preset_div").html(html);
+			if (lastClickedPresetButton == 'protocol') {
+				if ($(".protocol_preset_div").children('.preset_div').length == 0) {
+					$("#colunas").hide();
+					$("#presets_article").find($(".centralize_p")).css('display', 'flex');
+					$('.protocol_preset_div').css('display', 'none');
+				} else {
+					$("#colunas").css('display', 'flex');
+					$("#presets_article").find($(".centralize_p")).css('display', 'none');
+					$('.protocol_preset_div').css('display', 'block');
+				}
+			}
+		} else {
+			console.log('ERROR: ' + xhr.status);
+		}
+	}
+	xhr.send(JSON.stringify({ userId: params.get('idUser') }));
 }
 
 function updateUsers() {
@@ -228,7 +305,44 @@ function updateCategories() {
 	}
 }
 
+function updateHistoric() {
+	let xhr = new XMLHttpRequest();
+	xhr.open('post', '/catchProtocolsPresets', true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.onload = function () {
+		if (xhr.status == 200) {
+			let html = '';
+			JSON.parse(xhr.responseText).forEach(protocol => {
+				if (protocol.Atividade != 'Predefinicao') {
+					html += `<button onmouseover="whiteImage(this)" onmouseout="blackImage(this)" class="preset_div" data-id="${protocol.Id_Protocolo}">
+					<p class="preset_name">${protocol.Nome_Protocolo}</p>
+					<p class="preset_date">${protocol.Data_de_Criacao}</p>
+					<p class="preset_status">${protocol.Atividade}</p>
+					<img onclick="deletePreset(this)" class="delete_img" src="images/delete.png" alt="delete category image">
+					</button>`
+				}
+			});
+			$(".historic_preset_div").html(html);
+			if (lastClickedPresetButton == 'historic') {
+				if ($(".historic_preset_div").children('.preset_div').length == 0) {
+					$("#colunas").hide();
+					$("#presets_article").find($(".centralize_p")).css('display', 'flex');
+					$('.historic_preset_div').css('display', 'none');
+				} else {
+					$("#colunas").css('display', 'flex');
+					$("#presets_article").find($(".centralize_p")).css('display', 'none');
+					$('.historic_preset_div').css('display', 'block');
+				}
+			}
+		} else {
+			console.log('ERROR: ' + xhr.status);
+		}
+	}
+	xhr.send(JSON.stringify({ userId: params.get('idUser') }));
+}
+
 function toHistoric() {
+	lastClickedPresetButton = 'historic';
 	$('#historic_preset').css('background-color', '#EB5E28');
 	$('#historic_preset').css('color', 'rgb(255, 255, 255, 75%)');
 
@@ -238,8 +352,10 @@ function toHistoric() {
 	$('#protocol_preset').css('background-color', '#1d1d1d');
 	$('#protocol_preset').css('color', 'rgb(255, 255, 255, 35%)');
 
-	document.querySelectorAll('#colunas > div:first-child > p')[0].innerText = 'Nome';
-
+	document.querySelectorAll('#colunas > div:first-child p')[0].innerText = 'Nome';
+	if ($("#colunas").children('#status_column').length == 0) {
+		$("#colunas").append(`<div id="status_column"><button onclick="sortPresetsByStatus()"><p>Status</p><img src="images/sort.png"></button></div>`);
+	}
 	$('.protocol_preset_div').css('display', 'none');
 	$('.recipient_preset_div').css('display', 'none');
 
@@ -252,6 +368,8 @@ function toHistoric() {
 		$("#presets_article").find($(".centralize_p")).css('display', 'none');
 		$('.historic_preset_div').css('display', 'block');
 	}
+
+	$('#searchPresetInput').attr('placeholder', 'Pesquise pelo nome do protocolo');
 }
 
 // Requisição para pegar os agricultores
@@ -320,6 +438,166 @@ function sortUsers() {
 		return (pA < pB) ? -1 : (pA > pB) ? 1 : 0;
 	});
 	elements.detach().appendTo(container);
+}
+
+function sortPresetsByName() {
+	if (!isAscendingByName) {
+		let container = $(`.protocol_preset_div`);
+		let elements = $(container).children('.preset_div');
+		elements.sort(function (a, b) {
+			let pA = $(a).find('.preset_name').text().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');;
+			let pB = $(b).find('.preset_name').text().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');;
+			return (pA < pB) ? -1 : (pA > pB) ? 1 : 0;
+		});
+		elements.detach().appendTo(container);
+
+		container = $(`.recipient_preset_div`);
+		elements = $(container).children('.preset_div');
+		elements.sort(function (a, b) {
+			let pA = $(a).find('.preset_name').text().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');;
+			let pB = $(b).find('.preset_name').text().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');;
+			return (pA < pB) ? -1 : (pA > pB) ? 1 : 0;
+		});
+		elements.detach().appendTo(container);
+
+
+		container = $(`.historic_preset_div`);
+		elements = $(container).children('.preset_div');
+		elements.sort(function (a, b) {
+			let pA = $(a).find('.preset_name').text().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');;
+			let pB = $(b).find('.preset_name').text().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');;
+			return (pA < pB) ? -1 : (pA > pB) ? 1 : 0;
+		});
+		elements.detach().appendTo(container);
+		isAscendingByName = true;
+	} else {
+		let container = $(`.protocol_preset_div`);
+		let elements = $(container).children('.preset_div');
+		elements.sort(function (a, b) {
+			let pA = $(a).find('.preset_name').text().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');;
+			let pB = $(b).find('.preset_name').text().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');;
+			return (pA < pB) ? 1 : (pA > pB) ? -1 : 0;
+		});
+		elements.detach().appendTo(container);
+
+		container = $(`.recipient_preset_div`);
+		elements = $(container).children('.preset_div');
+		elements.sort(function (a, b) {
+			let pA = $(a).find('.preset_name').text().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');;
+			let pB = $(b).find('.preset_name').text().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');;
+			return (pA < pB) ? 1 : (pA > pB) ? -1 : 0;
+		});
+		elements.detach().appendTo(container);
+
+
+		container = $(`.historic_preset_div`);
+		elements = $(container).children('.preset_div');
+		elements.sort(function (a, b) {
+			let pA = $(a).find('.preset_name').text().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');;
+			let pB = $(b).find('.preset_name').text().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');;
+			return (pA < pB) ? 1 : (pA > pB) ? -1 : 0;
+		});
+		elements.detach().appendTo(container);
+		isAscendingByName = false;
+	}
+}
+
+function sortPresetsByDate() {
+	if (!isAscendingByDate) {
+		let container = $(`.protocol_preset_div`);
+		let elements = $(container).children('.preset_div');
+		elements.sort(function (a, b) {
+			let pA = getDateFromElement(a);
+			let pB = getDateFromElement(b);
+			return (pA < pB) ? -1 : (pA > pB) ? 1 : 0;
+		});
+		elements.detach().appendTo(container);
+
+		container = $(`.historic_preset_div`);
+		elements = $(container).children('.preset_div');
+		elements.sort(function (a, b) {
+			let pA = getDateFromElement(a);
+			let pB = getDateFromElement(b);
+			return (pA < pB) ? -1 : (pA > pB) ? 1 : 0;
+		});
+		elements.detach().appendTo(container);
+
+		container = $(`.recipient_preset_div`);
+		elements = $(container).children('.preset_div');
+		elements.sort(function (a, b) {
+			let pA = getDateFromElement(a);
+			let pB = getDateFromElement(b);
+			return (pA < pB) ? -1 : (pA > pB) ? 1 : 0;
+		});
+		elements.detach().appendTo(container);
+		isAscendingByDate = true
+	} else {
+		let container = $(`.protocol_preset_div`);
+		let elements = $(container).children('.preset_div');
+		elements.sort(function (a, b) {
+			let pA = getDateFromElement(a);
+			let pB = getDateFromElement(b);
+			return (pA < pB) ? 1 : (pA > pB) ? -1 : 0;
+		});
+		elements.detach().appendTo(container);
+
+		container = $(`.historic_preset_div`);
+		elements = $(container).children('.preset_div');
+		elements.sort(function (a, b) {
+			let pA = getDateFromElement(a);
+			let pB = getDateFromElement(b);
+			return (pA < pB) ? 1 : (pA > pB) ? -1 : 0;
+		});
+		elements.detach().appendTo(container);
+
+		container = $(`.recipient_preset_div`);
+		elements = $(container).children('.preset_div');
+		elements.sort(function (a, b) {
+			let pA = getDateFromElement(a);
+			let pB = getDateFromElement(b);
+			return (pA < pB) ? 1 : (pA > pB) ? -1 : 0;
+		});
+		elements.detach().appendTo(container);
+		isAscendingByDate = false
+	}
+}
+
+function sortPresetsByStatus() {
+	let container = $(".historic_preset_div");
+	let elements = $(container).children('.preset_div');
+	elements.sort(function (a, b) {
+		let statusA = getStatusOrder(a);
+		let statusB = getStatusOrder(b);
+		if (sortStatus % 3 === 0) {
+			return statusA - statusB;
+		} else if (sortStatus % 3 === 1) {
+			return statusA === statusB ? 0 : (statusA === 2 ? -1 : 1);
+		} else {
+			return statusA === statusB ? 0 : (statusA === 3 ? -1 : 1);
+		}
+	});
+	elements.detach().appendTo(container);
+	sortStatus++;
+}
+
+function getStatusOrder(element) {
+	let status = $(element).find('.preset_status').text().toLowerCase();
+	if (status === 'ativo') {
+		return 1;
+	} else if (status === 'cancelado') {
+		return 2;
+	} else if (status === 'concluido') {
+		return 3;
+	}
+}
+
+function getDateFromElement(element) {
+	let dateString = $(element).find('.preset_date').text().trim();
+	let parts = dateString.split('/');
+	let day = parseInt(parts[0]);
+	let month = parseInt(parts[1]) - 1; // month is zero-based
+	let year = parseInt(parts[2]);
+	return new Date(year, month, day);
 }
 
 function sortSelectedUsers() {
@@ -391,7 +669,7 @@ function saveRecipients() {
 function saveRecipients2() {
 	if ($("#save_modal_input").val() != '') {
 		let xhr = new XMLHttpRequest();
-		xhr.open('get', '/catchGroup', true);
+		xhr.open('post', '/catchGroup', true);
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.onload = function () {
 			if (xhr.status == 200) {
@@ -408,18 +686,18 @@ function saveRecipients2() {
 					xhr.onload = function () {
 						if (xhr.status == 200) {
 							showToast('Grupo criado com sucesso!', 'green');
-							hideModals();
 							updateGroup();
+							hideModals();
 						}
 					}
-					const currentDate = new Date();
-					const day = currentDate.getDate();
+					let currentDate = new Date();
+					let day = currentDate.getDate();
 					let month = currentDate.getMonth() + 1;
 					if (month < 10) {
 						month = `0${month}`;
 					}
-					const year = currentDate.getFullYear();
-					const date = `${day}/${month}/${year}`
+					let year = currentDate.getFullYear();
+					let date = `${day}/${month}/${year}`
 					let data = {
 						id_searcher: params.get('idUser'),
 						group: $("#save_modal_input").val().charAt(0).toUpperCase() + $("#save_modal_input").val().slice(1).toLowerCase(),
@@ -499,26 +777,73 @@ function hideModals() {
 }
 
 function showToast(text, color) {
-	if ($('.toast').hasClass('turn_visible')) {
-	} else {
-		if (color == 'green') {
-			color = '#1F8C69';
-		} else if (color == 'red') {
-			color = '#EA3535';
-		}
-		$(".toast_text").text(text);
-		$(".toast_color").css('background-color', color);
-		$('.toast').addClass('turn_visible');
-		$(".toast_line").addClass('line_transition');
-		$('.toast_line').one('transitionend', function () {
-			$('.toast').addClass('turn_invisible');
-			$('.toast').one('transitionend', function () {
-				$('.toast').removeClass('turn_visible turn_invisible');
-				$('.toast_line').removeClass('line_transition');
+	$('body').append(`<div class="toast" data-id="${toastIndex}">
+						<div class="flex">
+							<div class="toast_color"></div>
+							<div class="flex_column">
+								<p class="toast_text"></p>
+								<div class="toast_line"></div>
+							</div>
+						</div>
+					</div>`
+	)
+	if (color == 'green') {
+		color = '#1F8C69';
+	} else if (color == 'red') {
+		color = '#EA3535';
+	} else if (color == 'yellow') {
+		color = '#E3B505'
+	}
+	let toast = $(`.toast[data-id="${toastIndex}"]`);
+	let toast_text = toast.find(".toast_text");
+	let toast_color = toast.find(".toast_color");
+	let toast_line = toast.find(".toast_line");
+	console.log(toastIndex)
+	setTimeout(function () {
+		toast_text.text(text);
+		toast_color.css('background-color', color);
+		toast.addClass('turn_visible');
+		toast_line.addClass('line_transition');
+		toast_line.one('transitionend', function () {
+			toast.one('transitionend', function () {
+				toast.addClass('turn_invisible');
+				toast.one('transitionend', function () {
+					toast.removeClass('turn_visible turn_invisible');
+					toast_line.removeClass('line_transition');
+					toast.remove();
+					if ($('.toast').length == 0) {
+						toastIndex = 0;
+					}
+				});
 			});
 		});
-	}
+	}, 50)
+	toastIndex += 1;
 }
+
+// function showToast(text, color) {
+// 	if ($('.toast').hasClass('turn_visible')) {
+// 	} else {
+// 		if (color == 'green') {
+// 			color = '#1F8C69';
+// 		} else if (color == 'red') {
+// 			color = '#EA3535';
+// 		} else if (color == 'yellow') {
+// 			color = '#E3B505'
+// 		}
+// 		$(".toast_text").text(text);
+// 		$(".toast_color").css('background-color', color);
+// 		$('.toast').addClass('turn_visible');
+// 		$(".toast_line").addClass('line_transition');
+// 		$('.toast_line').one('transitionend', function () {
+// 			$('.toast').addClass('turn_invisible');
+// 			$('.toast').one('transitionend', function () {
+// 				$('.toast').removeClass('turn_visible turn_invisible');
+// 				$('.toast_line').removeClass('line_transition');
+// 			});
+// 		});
+// 	}
+// }
 
 function goUserInfo(button) {
 	window.location.href = '../por-enquanto/user-info.html?userId=' + $(button).data("id");
@@ -555,8 +880,108 @@ function showDeleteAllModal() {
 	$("#delete_all_modal").css('display', 'block');
 }
 
+function showSendModal() {
+	$("#modal_bg").css('display', 'block');
+	$('#send_protocol_modal').css('display', 'block')
+}
+
 function saveProtocol() {
-	
+	if ($("#protocol_title").val() != '' && $('#total_categories').text() != '0' && $("#selectedUsers").children('.flex').length > 0) {
+		let xhr = new XMLHttpRequest();
+		xhr.open('post', '/insereAtividadeDoProtocolo', true);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function () {
+			if (xhr.status == 200) {
+				updateProtocols();
+				showToast('Protocolo salvo com sucesso!', 'green');
+			}
+		}
+		let date, time;
+		if ($('#protocol_date').val() == '') {
+			date = 'Ilimitado';
+		} else {
+			date = $('#protocol_date').val();
+		}
+		if ($('#protocol_time').val() == '') {
+			time = '23:59';
+		} else {
+			time = $('#protocol_time').val();
+		}
+		let currentDate = new Date();
+		let day = currentDate.getDate();
+		let month = currentDate.getMonth() + 1;
+		if (month < 10) {
+			month = `0${month}`;
+		}
+		let year = currentDate.getFullYear();
+		let currentFormatedDate = `${day}/${month}/${year}`
+		let data = {
+			Atividade: 'Predefinicao',
+			Nome_Protocolo: $('#protocol_title').val(),
+			Descricao: $('#protocol_desc').val(),
+			Data: date,
+			Horario: time,
+			Visualizado: 'False',
+			Id_Usuario_FK: params.get('idUser'),
+			Data_de_Criacao: currentFormatedDate
+		}
+		xhr.send(JSON.stringify(data));
+		sendCategories();
+	} else {
+		showToast('Preencha o protocolo corretamente.', 'red');
+	}
+	hideModals();
+}
+
+function sendProtocol() {
+	if ($("#protocol_title").val() != '' && $('#total_categories').text() != '0' && $("#selectedUsers").children('.flex').length > 0) {
+		let xhr = new XMLHttpRequest();
+		xhr.open('post', '/insereAtividadeDoProtocolo', true);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function () {
+			if (xhr.status == 200) {
+				updateHistoric();
+				showToast('Protocolo enviado com sucesso!', 'green');
+			}
+		}
+		let date, time;
+		if ($('#protocol_date').val() == '') {
+			date = 'Ilimitado';
+		} else {
+			date = $('#protocol_date').val();
+		}
+		if ($('#protocol_time').val() == '') {
+			time = '23:59';
+		} else {
+			time = $('#protocol_time').val();
+		}
+		let currentDate = new Date();
+		let day = currentDate.getDate();
+		let month = currentDate.getMonth() + 1;
+		if (month < 10) {
+			month = `0${month}`;
+		}
+		let year = currentDate.getFullYear();
+		let currentFormatedDate = `${day}/${month}/${year}`
+		let data = {
+			Atividade: 'Ativo',
+			Nome_Protocolo: $('#protocol_title').val(),
+			Descricao: $('#protocol_desc').val(),
+			Data: date,
+			Horario: time,
+			Visualizado: 'False',
+			Id_Usuario_FK: params.get('idUser'),
+			Data_de_Criacao: currentFormatedDate
+		}
+		xhr.send(JSON.stringify(data));
+	} else {
+		showToast('Preencha o protocolo corretamente.', 'red');
+	}
+	hideModals();
+}
+
+function sendCategories() {
+
 }
 
 function addImage() {
@@ -569,18 +994,25 @@ function addImage() {
 		}
 		for (let i = 0; i < parseInt($("#qnt_image_category").val()); i++) {
 			let html = `<button class="category_div" onmouseover="whiteImage(this)" onmouseout="blackImage(this)" draggable="true">
-						<img src="images/image_category.png" alt="image category">
+						<img class="category_img" src="images/image_category.png" alt="image category">
 						<p class="category_name">${$("#title_image_category").val().charAt(0).toUpperCase() + $("#title_image_category").val().slice(1).toLowerCase()}</p>
 						<p class="category_description">${span}</p>
+						<img onclick="deleteCategory(this)" class="delete_img" src="images/delete.png" alt="delete category image">
 						</button>`;
 			$(".categories_main_article").append(html);
-			$("#total_categories").text(parseInt($("#total_categories").text()) + 1)
+			$("#total_categories").text(parseInt($("#total_categories").text()) + 1);
+			categoriesList.push({
+				Titulo: $("#title_image_category").val().charAt(0).toUpperCase() + $("#title_image_category").val().slice(1).toLowerCase(),
+				Pergunta: $("#desc_image_category").val().charAt(0).toUpperCase() + $("#desc_image_category").val().slice(1),
+				Tipo: 'imagem'
+			});
 		}
 		if ($("#qnt_image_category").val() == 1) {
 			showToast('Categoria inserida com sucesso!', 'green');
 		} else {
 			showToast('Categorias inseridas com sucesso!', 'green');
 		}
+		stopButtonsAnimations();
 		hideModals();
 	} else {
 		if ($("#title_image_category").val() == '') {
@@ -602,14 +1034,21 @@ function addText() {
 			span = '<span></span>';
 		}
 		let html = `<button class="category_div" onmouseover="whiteImage(this)" onmouseout="blackImage(this)" draggable="true">
-						<img src="images/text_category.png" alt="text category">
+						<img class="category_img" src="images/text_category.png" alt="text category">
 						<p class="category_name">${$("#title_text_category").val().charAt(0).toUpperCase() + $("#title_text_category").val().slice(1).toLowerCase()}</p>
 						<p class="category_description">${span}</p>
+						<img onclick="deleteCategory(this)" class="delete_img" src="images/delete.png" alt="delete category image">
 					</button>`;
 		$(".categories_main_article").append(html);
+		categoriesList.push({
+			Titulo: $("#title_text_category").val().charAt(0).toUpperCase() + $("#title_text_category").val().slice(1).toLowerCase(),
+			Pergunta: $("#desc_text_category").val().charAt(0).toUpperCase() + $("#desc_text_category").val().slice(1),
+			Tipo: 'texto'
+		});
 		showToast('Categoria inserida com sucesso!', 'green');
+		stopButtonsAnimations();
 		hideModals();
-		$("#total_categories").text(parseInt($("#total_categories").text()) + 1)
+		$("#total_categories").text(parseInt($("#total_categories").text()) + 1);
 	} else {
 		$("#title_text_category").css('border-color', '#EA3535');
 	}
@@ -648,14 +1087,28 @@ function addOptionCategory() {
 			span = '<span></span>';
 		}
 		let html = `<button class="category_div" onmouseover="whiteImage(this)" onmouseout="blackImage(this)" draggable="true">
-						<img src="images/${buttonName}_category.png" alt="${buttonName} category">
+						<img class="category_img" src="images/${buttonName}_category.png" alt="${buttonName} category">
 						<p class="category_name">${$("#title_option_category").val().charAt(0).toUpperCase() + $("#title_option_category").val().slice(1).toLowerCase()}</p>
 						<p class="category_description">${span}</p>
+						<img onclick="deletePreset(this)" class="delete_img" src="images/delete.png" alt="delete category image">
 					</button>`;
 		$(".categories_main_article").append(html);
+		let options = new Array();
+		$("#add_option_modal").find('li').each((index, option) => {
+			if ($(option).find('.options').val() != '') {
+				options.push($(option).find('.options').val().charAt(0).toUpperCase() + $(option).find('.options').val().slice(1));
+			}
+		})
+		categoriesList.push({
+			Titulo: $("#title_option_category").val().charAt(0).toUpperCase() + $("#title_option_category").val().slice(1).toLowerCase(),
+			Pergunta: $("#desc_option_category").val().charAt(0).toUpperCase() + $("#desc_option_category").val().slice(1),
+			Tipo: 'opcao',
+			nome_option: options
+		});
 		hideModals();
+		stopButtonsAnimations();
 		showToast('Categoria inserida com sucesso!', 'green');
-		$("#total_categories").text(parseInt($("#total_categories").text()) + 1)
+		$("#total_categories").text(parseInt($("#total_categories").text()) + 1);
 	} else {
 		if ($("#title_option_category").val() == '') {
 			$("#title_option_category").css('border-color', '#EA3535');
@@ -665,41 +1118,80 @@ function addOptionCategory() {
 }
 
 function deleteAll() {
-	$("#protocol_title").val('');
-	$("#protocol_desc").val('');
-	$("#protocol_date").val('');
-	$("#protocol_time").val('');
-	$("#selectedUsers").children('.flex').each((index, user) => {
-		selectUser($(user).find('.user_div').attr('id'))
-	})
-	hideModals()
-	showToast('Informações do protocolo apagadas!', 'green')
+	if ($("#protocol_title").val() != '' || $("#protocol_desc").val() != '' || $("#protocol_date").val() != '' || $("#protocol_time").val() != '' || $('#total_categories').text() != '0' || $("#selectedUsers").children('.flex').length > 0) {
+		$("#protocol_title").val('');
+		$("#protocol_desc").val('');
+		$("#protocol_date").val('');
+		$("#protocol_time").val('');
+		$("#selectedUsers").children('.flex').each((index, user) => {
+			selectUser($(user).find('.user_div').attr('id'));
+		})
+		$('.categories_main_article').html('');
+		$('#total_categories').text('0');
+		showToast('Informações do protocolo apagadas!', 'green');
+		categoriesList.splice(0, categoriesList.length);
+	} else {
+		showToast('Não há informações para apagar.', 'yellow');
+	}
+	updateCategories();
+	hideModals();
+}
+
+function deleteCategory(img) {
+	$(img).parent().remove();
+	$("#total_categories").text($("#total_categories").text() - 1);
+}
+
+function deletePreset(img) {
+	let type;
+	if ($(img).closest(".recipient_preset_div").length > 0) {
+		type = 'group';
+	} else if ($(img).closest(".protocol_preset_div").length > 0) {
+		type = 'protocol';
+	} else if ($(img).closest(".historic_preset_div").length > 0) {
+		type = 'historic';
+	}
+	let xhr = new XMLHttpRequest();
+	xhr.open('post', '/deletePreset', true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.onload = function () {
+		if (xhr.status == 200) {
+			$(img).parent().remove();
+			showToast('Predefinição excluída com sucesso!', 'green')
+			updateGroup();
+			updateProtocols();
+			updateHistoric();
+		}
+	}
+	xhr.send(JSON.stringify({ id: $(img).parent().data('id'), type: type }));
 }
 
 function whiteImage(button) {
-	let alt = $(button).find('img').attr('alt');
+	let alt = $(button).find('.category_img').attr('alt');
 	if (alt == 'image category') {
-		$(button).find('img').attr('src', 'images/image_category_white.png')
+		$(button).find('.category_img').attr('src', 'images/image_category_white.png')
 	} else if (alt == 'text category') {
-		$(button).find('img').attr('src', 'images/text_category_white.png')
+		$(button).find('.category_img').attr('src', 'images/text_category_white.png')
 	} else if (alt == 'option category') {
-		$(button).find('img').attr('src', 'images/option_category_white.png')
+		$(button).find('.category_img').attr('src', 'images/option_category_white.png')
 	} else if (alt == 'check category') {
-		$(button).find('img').attr('src', 'images/check_category_white.png')
+		$(button).find('.category_img').attr('src', 'images/check_category_white.png')
 	}
+	$(button).find('.delete_img').attr('src', 'images/white_delete.png');
 }
 
 function blackImage(button) {
-	let alt = $(button).find('img').attr('alt');
+	let alt = $(button).find('.category_img').attr('alt');
 	if (alt == 'image category') {
-		$(button).find('img').attr('src', 'images/image_category.png')
+		$(button).find('.category_img').attr('src', 'images/image_category.png')
 	} else if (alt == 'text category') {
-		$(button).find('img').attr('src', 'images/text_category.png')
+		$(button).find('.category_img').attr('src', 'images/text_category.png')
 	} else if (alt == 'option category') {
-		$(button).find('img').attr('src', 'images/option_category.png')
+		$(button).find('.category_img').attr('src', 'images/option_category.png')
 	} else if (alt == 'check category') {
-		$(button).find('img').attr('src', 'images/check_category.png')
+		$(button).find('.category_img').attr('src', 'images/check_category.png')
 	}
+	$(button).find('.delete_img').attr('src', 'images/delete.png');
 }
 
 function addOption() {
@@ -720,4 +1212,13 @@ function addOption() {
 
 function toGray(input) {
 	$(input).css('border-color', '#E7E7E7');
+}
+
+function stopButtonsAnimations() {
+	setTimeout(function () {
+		let saveBtn = document.querySelectorAll(".saveBtn, .deleteBtn, .cancelBtn");
+		Array.from(saveBtn).forEach(button => {
+			$(button).css('animation', '');
+		});
+	}, 200);
 }

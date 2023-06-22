@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="answer.css">
     <script src="https://cdn.jsdelivr.net/npm/uuid/dist/umd/uuidv4.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
     <header>
@@ -29,7 +30,7 @@
         <section>
             <!-- Title of the protocol -->
             <div class="title_div2" id="title_div">
-                <button onclick="voltarTela()"><img src="images/back.png" alt="back"></button>
+                <button id="back_button" onclick="voltarTela()"><img src="images/back.png" alt="back"></button>
                 <h1>Protocolo: <span id="protocol_name"></span></h1>
                 <button onclick="enviarForms()" id="done_button">Pronto</button>
             </div>

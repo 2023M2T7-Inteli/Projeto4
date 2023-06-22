@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Shortcut icon -->
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <!-- Link to Toastify CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- Link to custom style.css file -->
+    <link rel="stylesheet" href="style.css"> <!--Makes the connection between the CSS file and the HTML file-->
+    <!-- Title of the page -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Tela de login</title> 
+</head>
+<body>
+    <!-- Container for login form responsive -->
+    <div id="container-data2">
+        <img id="logo2" src="images/logo.png" alt="Logo do Protocom"> 
+        <h1 id="title_logo2">Entrar</h1>
+        <h2 id="email2">Email</h2>
+            <!-- Container for email input field -->
+            <div id="center_email2">
+                <img id="email_icon2" src="images/email.png" alt="Icone de email">
+                <input id="input1_2" type="text" placeholder="Digite seu email aqui">
+            </div>
+        <!-- Line separator -->
+        <div id="line1_2" class="line"></div>
+    
+        <h2 id="password2">Senha</h2>
+            <!-- Container for password input field -->
+            <div id="center_password2">
+                <img id="password_icon2" src="images/password.png" alt="Icone de senha">
+                <input type="password" id="input2_2" type="text" placeholder="Digite sua senha aqui">
+                <img onclick="mostrarSenha()" id="seepassword_icon2" src="images/hide.png" alt="Icone de ver senha">
+            </div>
+        <!-- Line separator -->  
+        <div id="line2_2" class="line"></div>
+
+        <!-- Link for password recovery -->
+        <a id="forget_password2" href="../forgot_password/sing_in.html">Esqueci a senha</a>
+        <!-- Link for login -->
+        <a id="sign_in2" href="../MainFarmer/sing_in.html">Entrar</a>
+    </div>  
+    <!-- Image of green leaves -->
+    <img id="green_leaves" src="images/folhas_verdes.png" alt="Folhas verdes">
+    <!-- Image of orange leaves -->
+    <img id="orange_leaves" src="images/folhas_laranjas.png" alt="Folhas laranjas">   
+
+    <!-- Start of main section -->
+    <main>
+        <!-- Logo and title of the website -->
+        <div id="logodiv">
+            <img id="logo" src="images/logo.png" alt="Logo do Protocom"> 
+            <h1 id="title">Protocom</h1>
+        </div>     
+        <!-- Container section -->      
+        <section id="container"> 
+            <div id="section1">
+                <!-- Container for login form -->
+                <div id="container-dados">
+                    <!-- Title of the login section -->
+                    <h1 id="title_logo">Entrar</h1>
+                    <!-- Email heading -->
+                    <h2 id="email">Email</h2>
+                        <!-- Container for email input field -->
+                        <div id="center_email">
+                            <img id="email_icon" src="images/email.png" alt="Icone de email">
+                            <input id="idEMail" type="text" placeholder="Digite seu email aqui">
+                        </div>
+                    <!-- Line separator -->
+                    <div id="line1" class="line"></div>
+                
+                    <h2 id="password">Senha</h2>
+                        <!-- Container for password input field -->
+                        <div id="center_password" class="title_div">
+                            <img id="password_icon" src="images/password.png" alt="Icone de senha">
+                            <input type="password" id="idSEnha" type="text" placeholder="Digite sua senha aqui">
+                            <img id="seepassword_icon"  onclick="mostrarSenha()" src="images/hide.png" alt="Icone de ver senha">
+                        </div>
+                    <!-- Line separator -->
+                    <div id="line2" class="line"></div>
+                    <!-- Link for password recovery -->
+                    <a id="forget_password" onclick="telaNDesenvolida()">Esqueci a senha</a>
+                    <!-- Link for login -->
+                    <a onclick="verificaUsuario()" id="sign_in">Entrar</a>
+                </div>  
+            </div>
+    
+            <!-- Second section -->
+            <div id="section2">
+                <!-- Title of the section -->
+                <h1 id="title2">Bem-vindo(a)!</h1>
+    
+                <!-- Description of the section -->
+                <h2 id="description">Transforme informações em conhecimento!</h2>
+
+                <!-- Image of trees -->
+                <img id="trees" src="images/arvores.png" alt="Árvores">
+            </div>
+        </section>
+    </main>
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Toastify library -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- Custom JavaScript file -->
+    <script src="sign-in.js"></script>
+</body>
+</html>
