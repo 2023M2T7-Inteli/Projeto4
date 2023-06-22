@@ -21,7 +21,6 @@ function protocols() {
                 <p class="date">${element.Data_de_Criacao}</p>
                 <p class="protocol">${element.Nome_Protocolo}</p>
                 <p class="status">${element.Atividade}</p>
-                <p class="permission">${element.Data_de_Criacao}</p>
                 </button>`
                 $('#button-container').append(html);
             });
