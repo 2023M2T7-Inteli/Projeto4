@@ -894,6 +894,8 @@ function saveProtocol() {
 			if (xhr.status == 200) {
 				updateProtocols();
 				showToast('Protocolo salvo com sucesso!', 'green');
+				let protocolId = JSON.parse(xhr.responseText).protocolId;
+				sendCategories(protocolId);
 			}
 		}
 		let date, time;
@@ -926,7 +928,6 @@ function saveProtocol() {
 			Data_de_Criacao: currentFormatedDate
 		}
 		xhr.send(JSON.stringify(data));
-		sendCategories();
 	} else {
 		showToast('Preencha o protocolo corretamente.', 'red');
 	}
@@ -980,8 +981,37 @@ function sendProtocol() {
 	hideModals();
 }
 
-function sendCategories() {
+function sendCategories(protocolId) {
+	categoriesList.forEach(category => {
+		category.protocolId = protocolId;
+		let xhr = new XMLHttpRequest();
+		xhr.open('post', '/inserePergunta', true);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function() {
+			if (xhr.status == 200) {
+				console.log('Categoria enviada com sucesso!');
+				if (category.Tipo == 'opcao' || category.Tipo == 'checkbox') {
+					let categoryId = JSON.parse(xhr.responseText).categoryId;
+					sendOptions(category, categoryId);
+				}
+			} else {
+				console.log('ERROR: ' + xhr.status);
+			}
+		}
+		xhr.send(JSON.stringify(category));
+	})
+}
 
+function sendOptions(category, categoryId) {
+	category.categoryId = categoryId;
+	console.log(categoryId)
+	let xhr2 = new XMLHttpRequest();
+	xhr2.open('post', '/inserePergunta', true);
+	xhr2.setRequestHeader('Content-Type', 'application/json');
+	xhr2.onload = function() {
+		console.log('Opções enviadas com sucesso!');
+	}
+	xhr2.send(JSON.stringify(category))
 }
 
 function addImage() {
@@ -1056,11 +1086,13 @@ function addText() {
 }
 
 function addOptionCategory() {
-	let buttonName;
+	let buttonName, typeName;
 	if ($(lastClickedOptionButton).text() == 'Checkbox') {
 		buttonName = 'check';
+		typeName = 'checkbox';
 	} else {
 		buttonName = 'option';
+		typeName = 'opcao';
 	}
 	let filledOptions = 0;
 	$(".options").each((index, option) => {
@@ -1102,7 +1134,7 @@ function addOptionCategory() {
 		categoriesList.push({
 			Titulo: $("#title_option_category").val().charAt(0).toUpperCase() + $("#title_option_category").val().slice(1).toLowerCase(),
 			Pergunta: $("#desc_option_category").val().charAt(0).toUpperCase() + $("#desc_option_category").val().slice(1),
-			Tipo: 'opcao',
+			Tipo: typeName,
 			nome_option: options
 		});
 		hideModals();
