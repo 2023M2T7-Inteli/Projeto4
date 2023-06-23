@@ -14,6 +14,11 @@ body {
     background-color: #f6f6f6;
 }
 
+#bell {
+    height: 23px;
+    width: 23px;
+}
+
 /* Displaying header as flex container with items aligned to center and height of 48px */
 header {
     display: flex;
@@ -332,4 +337,27 @@ section > .button-container > .user-button {
 
 .label-status p {
     margin-left: 90px;
+}
+
+/* Setting position of element with id 'current_page' to relative and height to 48px */
+#current_page {
+    position: relative;
+    height: 48px;
+    width: fit-content;
+}
+
+/* Setting color of a element within element with id 'current_page' to white */
+#current_page>a {
+    color: rgb(255, 255, 255)
+}
+
+#orange_bg {
+    position: absolute;
+    background-color: #EB5E28;
+    width: 170px;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    transform: translate(-50%, -50%);
 }

@@ -227,21 +227,21 @@ function back() {
     window.location.href = "/report/report.html?idUser=" + userId;
   }
   
-  function toCad() {
+  function toReports (){
+    window.location.href = "/report/report.html?idUser=" + userId;
+  }
+  
+  function toUser (){
+    window.location.href = "/select-user/select-user.html?idUser=" + userId;
+  }
+  
+  function toCad (){
     window.location.href = "/sign-up/sign-up.html?idUser=" + userId;
   }
   
-  function toCreate() {
+  function toCreate (){
     window.location.href = "/create-protocols/create-protocols.html?idUser=" + userId;
   }
-
-  function toRelats() {
-	window.location.href = "/report/report.html?idUser=" + userId;
-}
-
-function toUser(){
-	// window.location.href = "/reports/index.html?idUser=" + userId;
-}
 
 
   

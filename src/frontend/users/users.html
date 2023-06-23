@@ -15,13 +15,15 @@
         <h1>Protocom</h1>
         <!-- Navegation bar -->
         <nav>
+            <a onclick="toCreate()">Criar protocolo</a>
+            <a onclick="toReports()">Relatórios</a>
             <div id="current_page">
-                <a>Criar Protocolo</a>
+                <a>Usuários</a>
                 <div id="orange_bg"></div>
             </div>
-            <a>Histórico</a>
-            <a>Usuários</a>
-            <a href="../sign_up/sign_up.html">Cadastrar</a>
+            <a onclick="toCad()">Cadastrar</a>
+            <a>Perfil</a>
+            <img src="images/notifications.png" alt="Informações" id="bell">
         </nav>
     </header>
 
@@ -34,7 +36,7 @@
         <!-- Title of the protocol -->
         <div id="title_div">
             <div class="search-container">
-                <img src="images/white_back.png" alt="Background" class="background-image">
+                <img onclick="toBack()" src="images/white_back.png" alt="Background" class="background-image">
                 <p class="text-right">Joao Souza</p>
             </div>
         </div>

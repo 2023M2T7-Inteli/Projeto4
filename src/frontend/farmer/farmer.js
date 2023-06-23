@@ -47,6 +47,7 @@ fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
       } else {
         h1.style.color = '#000000';
         p.style.color = '#000000';
+        elemento.style.background = 'linear-gradient(93.1deg, #1F8C69 0.35%, #0E4936 100%';
         notification = 0;
         document.getElementById('notification').textContent = notification;
       }

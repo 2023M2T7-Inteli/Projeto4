@@ -1374,3 +1374,22 @@ function addCategories(protocolId) {
 function addOptions() {
 	console.log('AINDA NAO ADDOPTIONS')
 }
+
+function toReports (){
+    window.location.href = "/report/report.html?idUser=" + userId;
+  }
+  
+  function toUser (){
+    window.location.href = "/select-user/select-user.html?idUser=" + userId;
+  }
+  
+  function toCad (){
+    window.location.href = "/sign-up/sign-up.html?idUser=" + userId;
+  }
+  
+  function toCreate (){
+    window.location.href = "/create-protocols/create-protocols.html?idUser=" + userId;
+  }
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var userId = urlParams.get('idUser');
