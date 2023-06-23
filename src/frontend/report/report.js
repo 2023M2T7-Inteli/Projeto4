@@ -12,13 +12,13 @@ var userId = urlParams.get('idUser');
             .then(function (data) {
                 var saida = '';
                 data.forEach(element => {
-                    var date = element.Data
+                    var date = element.Data_de_Criacao
                     var name = element.Nome_Protocolo
                     var status = element.Atividade 
                     var id = element.Id_Protocolo
 
                     saida += `
-                <button onclick="entrar(${id})" class="protocols">
+                <button onclick="section2(${id})" class="protocols">
                         <p class="p1">${date}</p>
                         <p class="p2">${name}</p>
                         <p class="p3">${status}</p>
@@ -26,51 +26,19 @@ var userId = urlParams.get('idUser');
                         <p class="p5">4</p>
                 </button>
                 `
-                });
                 document.getElementById('protocols').innerHTML = saida;
+                });
             })
             .catch(function(error) {
                 console.error('Error:', error.message);
             });
 
-function entrar(idProtocolo) {
-    window.location.href = "section2.html?idProtocolo=" + idProtocolo + "&idUser=" + userId;
-    console.log('aquiui')
-
-    fetch('http://localhost:2021/perguntas?Id_Protocolo_FK=' + idProtocolo)
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Request error');
-        })
-        .then(function (data) {
-            console.log("perguntas: ", data);
-        })
-        .catch(function(error) {
-            console.error('Error:', error.message);
-        });
-}
-
-
-function section3() {
-    window.location.href = "section3.html";
+function section2(idProtocolo) {
+    window.location.href = "/report/report-2.html?idUser=" + userId + "&idProtocolo=" + idProtocolo;
 }
 
 function back2() {
     window.location.href = "section2.html";
-}
-
-function sendToCreateProtocols() {
-	window.location.href = '../create-protocols/create-protocols.html?idUser=' + params.get('idUser');
-}
-
-function sendToUsers() {
-	window.location.href = '../select-user/select-user.html?idUser=' + params.get('idUser');
-}
-
-function sendToSignUp() {
-	window.location.href = '../sign-up/sign-up.html?idUser=' + params.get('idUser');
 }
 
 function showToast(text, color) {
@@ -138,7 +106,7 @@ function showModals() {
 }
 
 function back() {
-    window.location.href = "/reports/index.html?idUser=" + userId;
+    window.location.href = "/report/report.html?idUser=" + userId;
   }
   
   function toCad() {
@@ -148,4 +116,14 @@ function back() {
   function toCreate() {
     window.location.href = "/create-protocols/create-protocols.html?idUser=" + userId;
   }
+
+  function toRelats() {
+	window.location.href = "/report/report.html?idUser=" + userId;
+}
+
+function toUser(){
+	// window.location.href = "/reports/index.html?idUser=" + userId;
+}
+
+
   
