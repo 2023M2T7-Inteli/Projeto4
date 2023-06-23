@@ -48,11 +48,11 @@ function endpoint(){
                 }else{
                     $('#results').text('Resultados encontrados: '+(i+1));
                 }
-                
+                let id =data[i].Id_Usuario
                 let name = data[i].Nome
                 let email = data[i].Email
                 let product = data[i].TipoDePlantacao
-                let html = `<button id ="user-button"class="user-button">
+                let html = `<button onclick="userDetails(${id})" id ="user-button"class="user-button">
                 <div class="user-info">
                     <div class="name">
                         <img src="images/profile.png" alt="Profile Picture" class="profile-picture">
@@ -187,10 +187,11 @@ function changeHTML(data){
         let categoria= data[i].categoria
 
         if(categoria=='agricultor'){
+            let id =data[i].Id_Usuario
             let name = data[i].Nome
             let email = data[i].Email
             let product = data[i].TipoDePlantacao
-            let html = `<button id ="user-button"class="user-button">
+            let html = `<button onclick="userDetails(${id})" id ="user-button"class="user-button">
             <div class="user-info">
                 <div class="name">
                     <img src="images/profile.png" alt="Profile Picture" class="profile-picture">
@@ -237,3 +238,7 @@ $("#search").on('input', () => {
 		}
 	});
 });
+
+function userDetails(id){
+    window.location.href = "/users/users.html?idAgricultor=" +id;
+}

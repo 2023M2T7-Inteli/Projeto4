@@ -1003,10 +1003,10 @@ function sendCategories(protocolId) {
 }
 
 function sendOptions(category, categoryId) {
-	category.categoryId = categoryId;
+	category.Id_Pergunta_FK = categoryId;
 	console.log(categoryId)
 	let xhr2 = new XMLHttpRequest();
-	xhr2.open('post', '/inserePergunta', true);
+	xhr2.open('post', '/insereOption', true);
 	xhr2.setRequestHeader('Content-Type', 'application/json');
 	xhr2.onload = function() {
 		console.log('Opções enviadas com sucesso!');
