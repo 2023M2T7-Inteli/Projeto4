@@ -563,6 +563,56 @@ app.post('/catchProtocolsPresets', (req, res) => {
 	db.close();
 });
 
+app.post('/catchSpecificProtocolPreset', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Acess-Control-Allow-Origin', '*');
+	var db = new sqlite3.Database(DBPATH);
+	let userId = req.body.userId;
+	let protocolId = req.body.protocolId;
+	let sql = "SELECT * FROM PROTOCOLO WHERE Id_Usuario_FK = ? AND Id_Protocolo = ?";
+	db.all(sql, [userId, protocolId], (err, rows) => {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('PROTOCOLOS ENVIADOS COM SUCESSO!');
+			res.send(rows)
+		}
+	})
+	db.close();
+});
+
+app.post('/catchSpecificRecipients', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Acess-Control-Allow-Origin', '*');
+	var db = new sqlite3.Database(DBPATH);
+	let protocolId = req.body.protocolId;
+	let sql = "SELECT Id_Usuario_FK FROM DESTINATARIOS WHERE Id_Protocolo_FK = ?";
+	db.all(sql, [protocolId], (err, rows) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(rows)
+		}
+	})
+	db.close();
+});
+
+app.post('/catchSpecificCategories', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Acess-Control-Allow-Origin', '*');
+	var db = new sqlite3.Database(DBPATH);
+	let protocolId = req.body.protocolId;
+	let sql = "SELECT * FROM PERGUNTA WHERE Id_Protocolo_FK = ?";
+	db.all(sql, [protocolId], (err, rows) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(rows)
+		}
+	})
+	db.close();
+});
+
 app.post('/deletePreset', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Acess-Control-Allow-Origin', '*');
@@ -574,14 +624,20 @@ app.post('/deletePreset', (req, res) => {
 	} else if (type == 'group') {
 		sql = "DELETE FROM GRUPO WHERE Id_Grupo = ?";
 	}
-	db.all(sql, [id], (err, rows) => {
-		if (err) {
-			console.log(err);
+	db.run('PRAGMA foreign_keys = ON;', function(error) {
+		if (error) {
+			console.error('Error while enabling foreign key constraints', error);
 		} else {
-			res.send(rows);
+			db.run(sql, [id], (err, rows) => {
+				if (err) {
+					console.log(err);
+				} else {
+					res.end();
+				}
+			})
 		}
-	})
 	db.close();
+	})
 })
 
 app.post('/respImg', upload.single('file'), (req, res) => {
@@ -698,6 +754,24 @@ app.post('/removeOption', urlencodedParser, (req, res) => {
     });
     db.close(); 
 });
+
+app.post('/sendRecipients', (req, res) => {
+	res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    const { users, Id_Protocolo_FK } = req.body;
+    sql = "INSERT INTO DESTINATARIOS (Id_Protocolo_FK, Id_Usuario_FK) VALUES (?, ?)";
+    var db = new sqlite3.Database(DBPATH);
+	users.forEach(user => {
+		console.log(user)
+		db.run(sql, [Id_Protocolo_FK, user],  err => {
+			if (err) {
+				throw err;
+			}
+		});
+	})
+	res.end();
+    db.close(); 
+})
   
 app.listen(port, hostname, () => {
 	console.log(`Servidor rodando em http://${hostname}:${port}/`);

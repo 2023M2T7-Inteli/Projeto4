@@ -259,7 +259,7 @@ function updateProtocols() {
 			let html = '';
 			JSON.parse(xhr.responseText).forEach(protocol => {
 				if (protocol.Atividade == 'Predefinicao') {
-					html += `<button onmouseover="whiteImage(this)" onmouseout="blackImage(this)" class="preset_div" data-id="${protocol.Id_Protocolo}">
+					html += `<button onclick="addPreset(this)" onmouseover="whiteImage(this)" onmouseout="blackImage(this)" class="preset_div" data-id="${protocol.Id_Protocolo}">
 					<p class="preset_name">${protocol.Nome_Protocolo}</p>
 					<p class="preset_date">${protocol.Data_de_Criacao}</p>
 					<img onclick="deletePreset(this)" class="delete_img" src="images/delete.png" alt="delete category image">
@@ -895,7 +895,7 @@ function saveProtocol() {
 				updateProtocols();
 				showToast('Protocolo salvo com sucesso!', 'green');
 				let protocolId = JSON.parse(xhr.responseText).protocolId;
-				sendCategories(protocolId);
+				sendRecipients(protocolId);
 			}
 		}
 		let date, time;
@@ -929,7 +929,7 @@ function saveProtocol() {
 		}
 		xhr.send(JSON.stringify(data));
 	} else {
-		showToast('Preencha o protocolo corretamente.', 'red');
+		showToast('Preencha os campos obrigatórios.', 'red');
 	}
 	hideModals();
 }
@@ -943,6 +943,8 @@ function sendProtocol() {
 			if (xhr.status == 200) {
 				updateHistoric();
 				showToast('Protocolo enviado com sucesso!', 'green');
+				let protocolId = JSON.parse(xhr.responseText).protocolId;
+				sendRecipients(protocolId);
 			}
 		}
 		let date, time;
@@ -976,7 +978,7 @@ function sendProtocol() {
 		}
 		xhr.send(JSON.stringify(data));
 	} else {
-		showToast('Preencha o protocolo corretamente.', 'red');
+		showToast('Preencha os campos obrigatórios.', 'red');
 	}
 	hideModals();
 }
@@ -993,6 +995,8 @@ function sendCategories(protocolId) {
 				if (category.Tipo == 'opcao' || category.Tipo == 'checkbox') {
 					let categoryId = JSON.parse(xhr.responseText).categoryId;
 					sendOptions(category, categoryId);
+				} else {
+					deleteAll(false);
 				}
 			} else {
 				console.log('ERROR: ' + xhr.status);
@@ -1005,13 +1009,29 @@ function sendCategories(protocolId) {
 function sendOptions(category, categoryId) {
 	category.Id_Pergunta_FK = categoryId;
 	console.log(categoryId)
-	let xhr2 = new XMLHttpRequest();
-	xhr2.open('post', '/insereOption', true);
-	xhr2.setRequestHeader('Content-Type', 'application/json');
-	xhr2.onload = function() {
-		console.log('Opções enviadas com sucesso!');
+	let xhr = new XMLHttpRequest();
+	xhr.open('post', '/insereOption', true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.onload = function() {
+		if (xhr.status == 200) {
+			console.log('Opções enviadas com sucesso!');
+			deleteAll(false);
+		}
 	}
-	xhr2.send(JSON.stringify(category))
+	xhr.send(JSON.stringify(category));
+}
+
+function sendRecipients(protocolId) {
+	let xhr = new XMLHttpRequest();
+	xhr.open('post', '/sendRecipients', true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.onload = function() {
+		if (xhr.status == 200) {
+			console.log('Destinatários enviados com sucesso!');
+			sendCategories(protocolId);
+		}
+	}
+	xhr.send(JSON.stringify({users: selectedUsers, Id_Protocolo_FK: protocolId}));
 }
 
 function addImage() {
@@ -1149,7 +1169,7 @@ function addOptionCategory() {
 	updateCategories();
 }
 
-function deleteAll() {
+function deleteAll(willShowToast = true) {
 	if ($("#protocol_title").val() != '' || $("#protocol_desc").val() != '' || $("#protocol_date").val() != '' || $("#protocol_time").val() != '' || $('#total_categories').text() != '0' || $("#selectedUsers").children('.flex').length > 0) {
 		$("#protocol_title").val('');
 		$("#protocol_desc").val('');
@@ -1160,7 +1180,9 @@ function deleteAll() {
 		})
 		$('.categories_main_article').html('');
 		$('#total_categories').text('0');
-		showToast('Informações do protocolo apagadas!', 'green');
+		if (willShowToast) {
+			showToast('Informações do protocolo apagadas!', 'green');
+		}
 		categoriesList.splice(0, categoriesList.length);
 	} else {
 		showToast('Não há informações para apagar.', 'yellow');
@@ -1253,4 +1275,102 @@ function stopButtonsAnimations() {
 			$(button).css('animation', '');
 		});
 	}, 200);
+}
+
+function addPreset(button) {
+	$("#protocol_title").val('');
+	$("#protocol_desc").val('');
+	$("#protocol_date").val('');
+	$("#protocol_time").val('');
+	let protocolId = $(button).data('id');
+	let xhr = new XMLHttpRequest();
+	xhr.open('post', '/catchSpecificProtocolPreset', true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.onload = function() {
+		if (xhr.status == 200) {
+			let protocol = JSON.parse(xhr.responseText);
+			$("#protocol_title").val(protocol[0].Nome_Protocolo);
+			$("#protocol_desc").val(protocol[0].Descricao);
+			if (protocol[0].Data != 'Ilimitado') {
+				$("#protocol_date").val(protocol[0].Data);
+				$("#protocol_time").val(protocol[0].Horario);
+			}
+			addRecipients(protocolId)
+		} else {
+			console.log('ERROR: ' + xhr.status)
+		}
+	}
+	xhr.send(JSON.stringify({userId: params.get('idUser'), protocolId: protocolId}))
+}
+
+function addRecipients(protocolId) {
+	$("#selectedUsers").children('.flex').each((index, user) => {
+		selectUser($(user).find('.user_div').attr('id'));
+	})
+	let xhr = new XMLHttpRequest();
+	xhr.open('post', '/catchSpecificRecipients', true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.onload = function() {
+		if (xhr.status == 200) {
+			JSON.parse(xhr.responseText).forEach(user => {
+				if (!selectedUsers.includes(user.Id_Usuario_FK)) {
+					selectUser(`userId${user.Id_Usuario_FK}`)
+				}
+			})
+			addCategories(protocolId);
+		} else {
+			console.log('ERROR: ' + xhr.status);
+		}
+	}
+	xhr.send(JSON.stringify({protocolId: protocolId}))
+}
+
+function addCategories(protocolId) {
+	$(".categories_main_article").html('');
+	categoriesList.splice(0);
+	let xhr = new XMLHttpRequest();
+	xhr.open('post', '/catchSpecificCategories', true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.onload = function() {
+		if (xhr.status == 200) {
+			JSON.parse(xhr.responseText).forEach(category => {
+				let type;
+				console.log(category)
+				if (category.Tipo == 'opcao' || category.Tipo == 'checkbox') {
+					addOptions();
+				} else {
+					if (category.Tipo == 'opcao') {
+						type = 'option';
+					} else if (category.Tipo == 'checkbox') {
+						type = 'check';
+					} else if (category.Tipo == 'texto') {
+						type = 'text';
+					} else if (category.Tipo == 'imagem') {
+						type = 'image';
+					}
+					let html = `<button class="category_div" onmouseover="whiteImage(this)" onmouseout="blackImage(this)" draggable="true">
+									<img class="category_img" src="images/${type}_category.png" alt="${type} category">
+									<p class="category_name">${category.Titulo}</p>
+									<p class="category_description">${category.Pergunta}</p>
+									<img onclick="deleteCategory(this)" class="delete_img" src="images/delete.png" alt="delete category image">
+								</button>`;
+					$(".categories_main_article").append(html);
+					updateCategories();
+					categoriesList.push({
+						Titulo: category.Titulo,
+						Pergunta: category.Pergunta,
+						Tipo: category.Tipo
+					});
+					console.log(categoriesList)
+				}
+			})
+		} else {
+			console.log('ERROR: ' + xhr.status);
+		}
+	}
+	xhr.send(JSON.stringify({protocolId: protocolId}))
+}
+
+function addOptions() {
+	console.log('AINDA NAO ADDOPTIONS')
 }
