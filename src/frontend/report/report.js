@@ -1,31 +1,44 @@
-const params = new URLSearchParams(window.location.search);
+var urlParams = new URLSearchParams(window.location.search);
+var userId = urlParams.get('idUser');
 
-function entrar() {
-    window.location.href = "section2.html";
-}
+    console.log('oi', userId)
+    fetch('http://localhost:2021/protocolo?Id_Usuario_FK=' + userId)
+            .then(function (response) {
+                if (response.ok) {
+                return response.json();
+                }
+                throw new Error('Request error');
+            })
+            .then(function (data) {
+                var saida = '';
+                data.forEach(element => {
+                    var date = element.Data_de_Criacao
+                    var name = element.Nome_Protocolo
+                    var status = element.Atividade 
+                    var id = element.Id_Protocolo
 
-function back() {
-    window.location.href = "index.html";
-}
+                    saida += `
+                <button onclick="section2(${id})" class="protocols">
+                        <p class="p1">${date}</p>
+                        <p class="p2">${name}</p>
+                        <p class="p3">${status}</p>
+                        <p class="p4">4</p>
+                        <p class="p5">4</p>
+                </button>
+                `
+                document.getElementById('protocols').innerHTML = saida;
+                });
+            })
+            .catch(function(error) {
+                console.error('Error:', error.message);
+            });
 
-function section3() {
-    window.location.href = "section3.html";
+function section2(idProtocolo) {
+    window.location.href = "/report/report-2.html?idUser=" + userId + "&idProtocolo=" + idProtocolo;
 }
 
 function back2() {
     window.location.href = "section2.html";
-}
-
-function sendToCreateProtocols() {
-	window.location.href = '../create-protocols/create-protocols.html?idUser=' + params.get('idUser');
-}
-
-function sendToUsers() {
-	window.location.href = '../select-user/select-user.html?idUser=' + params.get('idUser');
-}
-
-function sendToSignUp() {
-	window.location.href = '../sign-up/sign-up.html?idUser=' + params.get('idUser');
 }
 
 function showToast(text, color) {
@@ -91,3 +104,26 @@ function showModals() {
     $("#modal_bg").css('display', 'block');
     $("#delete_all_modal").css('display', 'block');
 }
+
+function back() {
+    window.location.href = "/report/report.html?idUser=" + userId;
+  }
+  
+  function toCad() {
+    window.location.href = "/sign-up/sign-up.html?idUser=" + userId;
+  }
+  
+  function toCreate() {
+    window.location.href = "/create-protocols/create-protocols.html?idUser=" + userId;
+  }
+
+  function toRelats() {
+	window.location.href = "/report/report.html?idUser=" + userId;
+}
+
+function toUser(){
+	// window.location.href = "/reports/index.html?idUser=" + userId;
+}
+
+
+  

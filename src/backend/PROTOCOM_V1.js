@@ -385,9 +385,10 @@ app.get('/numeroProtocolos', (req, res) => {
 app.get('/respostas', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
+	let Id_Pergunta = req.query.Id_Pergunta_FK;
 	var db = new sqlite3.Database(DBPATH);
-	var sql = 'SELECT * FROM RESPOSTA';
-		db.all(sql, [],  (err, rows ) => {
+	var sql = 'SELECT * FROM RESPOSTA WHERE Id_Pergunta_FK = ?;';
+		db.all(sql, [Id_Pergunta],  (err, rows ) => {
 			if (err) {
 				throw err;
 			}

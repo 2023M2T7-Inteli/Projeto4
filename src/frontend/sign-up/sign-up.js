@@ -138,5 +138,19 @@ function limparDados() {
   }
 }
 
+function toCad() {
+  window.location.href = "/sign-up/sign-up.html?idUser=" + userId;
+}
 
+function toCreate() {
+  window.location.href = "/create-protocols/create-protocols.html?idUser=" + userId;
+}
+
+// Get the user ID from the URL
+var urlParams = new URLSearchParams(window.location.search);
+var userId = urlParams.get('idUser');
+
+function toRelate() {
+  window.location.href = "/report/report.html?idUser=" + userId;
+}
 

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="report.css">
+    <link rel="stylesheet" href="answer.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Relatório</title>
 </head>
 <body>
@@ -12,13 +14,15 @@
         <h1>Protocom</h1>
         <!-- Navegation bar -->
         <nav>
-            <a>Criar Protocolo</a>
             <div id="current_page">
-                <a>Relatório</a>
+                <a onclick="toCreate()">Criar Protocolo</a>
                 <div id="orange_bg"></div>
             </div>
-            <a>Usuários</a>
-            <a href="../sign_up/sign_up.html">Cadastrar</a>
+            <a onclick="toRelats()">Relatórios</a>
+            <a onclick="toUser()">Usuários</a>
+            <a onclick="toCad()">Cadastrar</a>
+            <a>Perfil</a>
+            <button><img src="images/notifications.png" alt="Informações"></button>
         </nav>
     </header>
         <!-- Background -->
@@ -31,58 +35,14 @@
             <div id="section2">
                 <div id="titlesection2">
                     <img onclick="back()" src="images/back.png" alt="arrow" id="arrow">
-                    <p>Protocolo:</p> 
+                    <p>Protocolo: <span id="protocol_name"></span></p> 
                 </div>
                 <div id="scroll">
-                    <p id="phrase">Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa Bla bla bla descrição aaaa</p>
+                    <p id="phrase"> </p>
                     <div id="line1" class="line"></div>
-                    <div id="picturesplant">
-                        <img src="images/picture-icon.png" alt="picture-icon" id="picture">
-                        <p>Fotos da planta</p>
-                    </div>
-                    <div id="line2" class="line"></div>
-                    <div id="climate">
-                        <img src="images/justified.png" alt="picture-icon" id="justified">
-
-                            <div id="climate_text">
-                                <p>Clima</p>
-                                <p id="p2">Como estava o clima quando você extraiu a planta?</p>
-                            </div>
-
-                    </div>
-                    
-                    <div id="line3" class="line"></div>
-                    <div id="statep">
-                        <img src="images/button.png" alt="circle" id="state">
-                        <div id="text_state">
-                            <p>Estado da planta</p>
-                            <p id="p2">A planta estava madura ou verde ao extraí-la?</p>
-                            <li>Verde</li>
-                            <li>Madura</li>
-                        </div>
-                    </div>
-                    <div id="line4" class="line"></div>
-                    <div id="process">
-                        <img src="images/check.png" alt="check" id="check">
-                        <div id="text_process">
-                            <p>Processos</p>
-                            <p id="p2">Marque os processos que você realizou</p>
-                            <li>Fiz isso</li>
-                            <li>Fiz aquilo</li>
-                            <li>Fiz isso</li>
-                        </div>
-                    </div>
-                    <div id="line5" class="line"></div>
-                    <p id="p_answers">Respostas</p>
-                    <button onclick="section3()" class="answers">
-                        <p class="paragraph1">1.</p>
-                        <img src="images/profile-user.png" alt="profile" class="profile">
-                        <p class="paragraph2">João</p>
-                        <p class="paragraph3">Lido!</p>
-                    </button>
                 </div>
             </div>
         </main>
-        <script src="reports.js"></script>
+        <script src="report2.js"></script>
 </body>
 </html>

@@ -1,0 +1,658 @@
+/* Import the "Righteous" font from Google Fonts. */
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+/* Import the "Rubik" font with different weights from Google Fonts. */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
+
+/* Set initial styles for all elements, removing default margins and paddings, and setting "Rubik" as the default font. */
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Rubik";
+}
+
+/* Set the background color of the body to #f6f6f6. */
+body {
+    background-color: #f6f6f6;
+}
+
+/* Define the style for the header, with a height of 48px and vertical alignment in the center. */
+header {
+    height: 48px;
+    display: flex;
+    align-items: center;
+}
+
+/* Define the style for the header image (logo). */
+header > img {
+    margin-left: 16px;
+    width: 30px;
+    height: 30px;
+}
+
+/* Define the style for the header title (Protocom). */
+header > h1 {
+    font-family: 'Righteous';
+    font-weight: 400;
+    font-size: 20px;
+    margin-left: 6px;
+}
+
+/* Define the style for the main section. */
+main {
+    height: calc(100vh - 48px);
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Define the style for each section inside the main section. */
+main > section {
+    width: 690px;
+    height: 90%;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 16px -2px rgba(0, 0, 0, 0.12);
+}
+
+/* Define the style for images inside the section. */
+section > img {
+    width: 30px;
+    height: 30px;
+}
+
+/* Define the style for the icons_div element. */
+#icons_div {
+    margin-left: auto;
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+}
+
+/* Define the style for images inside the icons_div. */
+#icons_div > img {
+    width: 30px;
+    height: 30px;
+}
+
+/* Define the style for the settings_icon element. */
+#settings_icon {
+    margin-left: 13px;
+    margin-right: -2.5px;
+}
+
+/* Define the style for the trees element. */
+#trees {
+    height: 64px;
+}
+
+/* Define the style for the img_div element. */
+#img_div {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+
+#back_button {
+    background: none;
+    border: none;
+    outline: none;
+    width: 25px;
+    height: 25px;
+}
+
+#title_div > button > img {
+    width: 25px;
+    height: 25px;
+    margin-left: -7.3px;
+    margin-right: -7.3px;
+}
+
+/* Define the style for the done_button element. */
+#done_button {
+    width: 81px;
+    height: 28px;
+    background: #EB5E28;    ;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.75);
+    opacity: 75%;
+    margin-left: auto;
+    font-size: 17px;
+    font-weight: 300;
+    margin-right: 22px;
+}
+
+/* Define the hover style for the done_button element. */
+#done_button:hover {
+    cursor: pointer;
+}
+
+/* Selects an element with the ID "title_div" */
+#title_div {
+    display: flex;
+    align-items: center;
+    height: 47px;
+    margin-left: 22px;
+}
+
+/* Selects the <img> elements within #title_div */
+#title_div > img {
+    width: 25px;
+    height: 25px;
+    margin-left: -7.3px;
+    margin-right: -7.3px;
+}
+
+/* Selects the <h1> elements within #title_div */
+#title_div > h1 {
+    font-size: 17px;
+    font-weight: 500;
+    margin-left: 16px;
+}
+
+/* Selects an element with the ID "scroll" */
+#scroll {
+    width: 690px;
+    height: calc(100% - 49px);
+    overflow: auto;
+}
+
+/* Selects the scrollbar track of #scroll in WebKit browsers */
+#scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Selects the scrollbar thumb of #scroll in WebKit browsers */
+#scroll::-webkit-scrollbar-thumb {
+    background-color: #1d1d1d;
+    border-radius: 6px;
+}
+
+/* Selects the end part of the scrollbar track of #scroll in WebKit browsers */
+#scroll::-webkit-scrollbar-track-piece:end {
+    background-color: #e7e7e7;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+/* Selects the start part of the scrollbar track of #scroll in WebKit browsers */
+#scroll::-webkit-scrollbar-track-piece:start {
+    background-color: #e7e7e7;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+/* Selects the first child of #scroll */
+#scroll > *:first-child {
+    margin-top: 14.5px;
+}
+
+/* Selects the second-to-last child of #scroll */
+#scroll > *:nth-last-child(2) {
+    margin-bottom: 13px;
+}
+
+/* Selects an element with the ID "desc" */
+#desc {
+    font-family: 'Rubik';
+    font-weight: 500;
+    font-size: 15px;
+    color: #000000;
+    width: calc(100% - 64px);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+}
+
+/* Selects images with IDs "orange_leaves" and "green_leaves" */
+#orange_leaves, #green_leaves {
+    position: absolute;
+    height: 240px;
+    width: 240px;
+    z-index: -1;
+    opacity: 0;
+}
+
+/* Selects the #orange_leaves image */
+#orange_leaves {
+    transform: rotate(45deg);
+    left: -68px;
+    bottom: -78px;
+}
+
+/* Selects the #green_leaves image */
+#green_leaves {
+    transform: rotate(-45deg);
+    bottom: -68px;
+    right: -78px;
+}
+
+/* Selects an element with the ID "image_color" */
+#image_color {
+    background: rgba(14, 73, 54, 0.4);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* Selects elements with the class "line_1" */
+.line_1 {
+    height: 2px;
+    background-color: #e7e7e7;
+    width: calc(100% - 30px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Div with a one-line function. */
+.line {
+    height: 2px;
+    background-color: #e7e7e7;
+    width: calc(100% - 30px);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 14.5px;
+    margin-bottom: 14.5px;
+}
+
+/* Categories div */
+.category {
+    width: calc(100% - 64px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Header div of the categories div*/
+.category > .category_header {
+    display: flex;
+    align-items: center;
+}
+
+/* Selects the images within .category > div */
+.category > div > img {
+    height: 20px;
+    width: 20px;
+}
+
+/* Styling for headings within .category > div */
+.category > div > h2 {
+    font-family: 'Rubik';
+    font-weight: 500;
+    font-size: 15px;
+    margin-left: 6px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for textarea within .category > div */
+.category > div > textarea {
+    width: 100%;
+    border: 1px solid #e7e7e7;
+    height: 64px;
+    border-radius: 6px;
+    outline: none;
+    resize: none;
+    padding: 5px;
+    font-size: 13px;
+}
+
+/* Styling for focused textarea within .category > div */
+.category > div > textarea:focus {
+    border: 1px solid black;
+}
+
+/* Hide the label when textarea is focused or has a value */
+.category > div > textarea:focus + label, .category > div > textarea:valid + label {
+    display: none;
+}
+
+/* Styling for labels within .category > div */
+.category > div > label {
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    font-weight: 300;
+    font-size: 13px;
+    color: #e7e7e7;
+    pointer-events: none;
+}
+
+/* Styling for headings within .category */
+.category > h3 {
+    font-family: 'Rubik';
+    font-weight: 400;
+    font-size: 13px;
+    color: #535353;
+    margin-left: 26px;
+    margin-top: 2px;
+}
+
+/* Styling for .category_inputs container */
+.category_inputs {
+    margin-top: 13px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* Styling for .category_inputs_checkbox container */
+.category_inputs_checkbox {
+    margin-top: 13px;
+    position: relative;
+    display: block;
+}
+
+/* Styling for list items within .category_inputs > ul */
+.category_inputs > ul > li {
+    list-style: none;
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+/* Styling for buttons within .category_inputs > ul > li */
+.category_inputs > ul > li > button {
+    border: none;
+    background-color: transparent;
+}
+
+/* Styling for option_div container */
+.option_div {
+    width: fit-content;
+    display: flex;
+    align-self: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Styling for checkbox input within .option_div */
+.option_div > input[type=checkbox] {
+    appearance: none;
+    min-width: 17px;
+    height: 17px;
+    border: 1.5px solid #535353;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Styling for checkbox input when hovered */
+.option_div:hover input[type=checkbox] {
+    border: 1.5px solid #000000;
+}
+
+/* Styling for radio input within .option_div */
+.option_div > input[type=radio] {
+    appearance: none;
+    border: 2px solid #535353;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Styling for radio input when hovered */
+.option_div:hover input[type=radio] {
+    border: 2px solid #000000;
+}
+
+
+/* Styling for labels within hovered option_div */
+.option_div:hover label {
+    color: #000000;
+}
+
+/* Styling for checkbox's unchecked state */
+.option_div > input[type=checkbox]::before{
+    content: "";
+    width: 11px;
+    height: 11px;
+    background-image: url(images/check_gray.png);
+    background-size: cover;
+    opacity: 0;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+}
+
+/* Styling for checkbox's checked state when hovered */
+.option_div:hover input[type=checkbox]::before {
+    background-image: url(images/check.png);
+}
+
+/* Styling for checkbox's checked state */
+.option_div > input[type=checkbox]:checked::before {
+    opacity: 1;
+}
+
+/* Styling for .category_inputs_checkbox's option_div container */
+.category_inputs_checkbox > .option_div {
+    margin-bottom: 5px;
+}
+
+/* Styling for last child option_div in .category_inputs_checkbox */
+.category_inputs_checkbox > .option_div:last-child {
+    margin-bottom: 0px;
+}
+
+/* Styling for radio input's checked state */
+.option_div > input[type=radio]::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    background-color: #535353;
+    border-color: #535353;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+/* Styling for radio input's checked state when hovered */
+.option_div:hover input[type=radio]::before {
+    background-color: #000000;
+}
+
+/* Styling for radio input's checked state */
+.option_div > input[type=radio]:checked::before {
+    opacity: 1;
+}
+
+/* Styling for last child option_div */
+.option_div:last-child {
+    margin-right: 0px;
+}
+
+/* Styling for labels within option_div */
+.option_div > label {
+    padding-left: 4px;
+    font-size: 13px;
+    color: #535353;
+    margin-top: 1px;
+    cursor: pointer
+}
+
+/* Styling for labels within hovered option_div */
+.option_div > label:hover {
+    color: #000000;
+}
+
+/* Styling for added_image class */
+.added_image {
+    color: #535353;
+    font-size: 13px;
+}
+
+/* Styling for added_image class when hovered */
+.added_image:hover {
+    color: #000000;
+    cursor: pointer;
+}
+
+/* Styling for add_image class */
+.add_image {
+    color: white;
+    font-size: 10px;
+    width: 81px;
+    height: 18px;
+    background: linear-gradient(92.83deg, #1F8C69 0%, #0E4936 100%);
+    border-radius: 10px;
+}
+
+/* Styling for add_image class when hovered */
+.add_image:hover {
+    cursor: pointer;
+    background: linear-gradient(92.83deg, #FF7541 0%, #E04C13 100%);
+}
+
+/* Styling for span elements within list items */
+.category_inputs > ul > li > span {
+    font-size: 13px;
+    width: 72px;
+    display: inline-block;
+}
+
+/* Styling for first child list item */
+.category_inputs > ul > li:first-child {
+    margin-top: 0px;
+}
+
+/* Styling for last child list item */
+.category_inputs > ul > li:last-child {
+    margin-bottom: 0px;
+}
+
+/* Hide the last child element within #scroll container */ 
+/* section > #scroll > div:last-child {
+    display: none;
+} */
+
+/* Media queries for different screen sizes */
+@media (min-width: 1107px) {
+    /* Styling for #trees on screens narrower than 500px */
+    #trees {
+        width: 100%;
+    }
+}
+
+@media (max-width: 720px) {
+    /* Styling for main section and #scroll on screens narrower than 720px */
+    main > section, #scroll {
+        width: calc(100vw - 48px);
+    }
+}
+
+@media (max-width: 500px) {
+    /* Styling for #trees on screens narrower than 500px */
+    #trees {
+        display: none;
+    }
+     /* Styling for main section on screens narrower than 500px */
+    main > section {
+        height: calc(100% - 82px);
+        border-radius: 7px;
+    }
+
+    /* Hide the scrollbar within #scroll container */
+    #scroll::-webkit-scrollbar {
+        width: 0px;
+    }
+
+     /* Styling for title_div h1 on screens narrower than 500px */
+    #title_div > h1 {
+        font-size: 14px;
+    }
+
+    /* Styling for title_div img on screens narrower than 500px */
+    #title_div > img {
+        height: 22px;
+        width: 22px;
+    }
+
+    /* Styling for #desc element on screens narrower than 500px */
+    #desc {
+        font-size: 12px;
+    }
+
+     /* Styling for .category > div > h2 on screens narrower than 500px */
+    .category > div > h2 {
+        font-size: 12px;
+    }
+
+     /* Styling for .category > h3 on screens narrower than 500px */
+    .category > h3 {
+        font-size: 11px;
+    }
+
+    /* Styling for .category_inputs > ul > li > span on screens narrower than 500px */
+    .category_inputs > ul > li > span {
+        font-size: 12px;
+    }
+
+    /* Styling for .added_image on screens narrower than 500px */
+    .added_image {
+        font-size: 12px;
+    }
+
+    /* Styling for .add_image on screens narrower than 500px */
+    .add_image {
+        font-size: 9px;
+        width: 74px;
+        height: 17px;
+    }
+
+    /* Styling for .category > div > label on screens narrower than 500px */
+    .category > div > label {
+        font-size: 12px;
+    }
+
+    /* Styling for .option_div > label on screens narrower than 500px */
+    .option_div > label {
+        font-size: 12px;
+    }
+
+    /* Styling for #done_button on screens narrower than 500px */
+    #done_button {
+        width: 58px;
+        height: 20px;
+        font-size: 12px;
+    }
+
+    /* Styling for header on screens narrower than 500px */
+    header {
+        height: 58px;
+        margin-bottom: -14px;
+    }
+
+    /* Styling for main on screens narrower than 500px */
+    main {
+        height: calc(100vh - 44px);
+    }
+
+    /* Reset opacity for #orange_leaves and #green_leaves on screens narrower than 500px */
+    #orange_leaves, #green_leaves {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 378px) {
+    /* Adjusting the width of the span elements within .category_inputs > ul > li on screens narrower than 378px */
+    .category_inputs > ul > li > span {
+        width: 65px;
+    }
+
+    /* Adjusting the font-size of the .added_image class on screens narrower than 378px */
+    .added_image {
+        font-size: 10px;
+    }
+}
