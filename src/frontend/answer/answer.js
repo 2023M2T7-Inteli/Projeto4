@@ -297,7 +297,7 @@ function enviarForms() {
         console.log("atualiza check: ", atualizacaoCheck);
         console.log("Atualização radio: ", atualizacaoRadio);
 
-      if (isFormValid === true && isFormValid2 === true && isFormValid3 === true) {
+      if (isFormValid === false && isFormValid2 === true && isFormValid3 === true) {
         fetch('http://localhost:2021/insereResposta', {
           method: 'POST',
           headers: {
