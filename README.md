@@ -30,6 +30,8 @@
 
 O Protocom é uma aplicação web desenvolvida pelo grupo Tukumã para a Natura. A solução busca resolver a dificuldade na coleta de dados da cadeia produtiva de insumos na Amazônia e sua digitalização. A plataforma permite o registro e a digitalização de informações sobre origem, práticas sustentáveis e certificações, promovendo transparência e rastreabilidade. O Protocom facilita a interação entre produtores, fornecedores, pesquisadores e a Natura, promovendo a sustentabilidade e responsabilidade socioambiental, simplificando e agilizando o processo de coleta de dados na região amazônica.
 
+Para ter acesso ao vídeo explicativo da nossa aplicação web, acesse o seguinte link: https://www.youtube.com/watch?v=NIt9Ntp-opw
+
 ## 📝 LINK
 
 Esta versão de entrega não incluirá link para o deploy em um servidor.
@@ -89,8 +91,6 @@ npm start
 8. O servidor está online.
 
 ## 🗃 Histórico de lançamentos
-* 0.4.3 - 22/06/2023
-    * Finalização do frontend da tela de "create-protocols"
       
 * 0.4.4 - 21/06/2023
     * Finalização do frontend da tela de "create-protocols"
