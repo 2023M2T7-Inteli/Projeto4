@@ -89,7 +89,27 @@ npm start
 8. O servidor está online.
 
 ## 🗃 Histórico de lançamentos
+* 0.4.3 - 22/06/2023
+    * Finalização do frontend da tela de "create-protocols"
+      
+* 0.4.4 - 21/06/2023
+    * Finalização do frontend da tela de "create-protocols"
+    * Alteração no frontend da tela de "create-protocols"
+    * Alteração na tela de "select-usuario"
+    * Finalização do desenvolvimento da página "view-usuario"
+    * Atualização no read.me
+    * Alteração no backend e frontend da tela de responder protocolos (answer)
+    * Alteração no backend e frontend da tela de login (sign in)
+    * Alteração no frontend da tela do agricultor
 
+* 0.4.3 - 20/06/2023
+    * Correção de erros no armazenamento de documentos da tela de responder protocolos (answer)
+    * Atualização e alteração no read.me
+    * Alteração de alguns detalhes de design na página "select-usuario"
+    * Atualização da integração da tela de criação de protocolos
+    * Modificação no banco de dados
+    * finalização da integração da tela de responder (answer)
+      
 * 0.4.2 - 19/06/2023
     * Correção de erros no armazenamento de documentos da tela de responder protocolos (answer)
     * Atualização no frontend da tela "create-protocols"
