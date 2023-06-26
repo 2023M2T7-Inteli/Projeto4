@@ -1,7 +1,7 @@
 # Inteli - Instituto de Tecnologia e Liderança 
 
 <p align="center">
-<a href= "https://www.inteli.edu.br/"><img src="/imagens/inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0"></a>
+<a href= "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.inteli.edu.br%2F&psig=AOvVaw2XL1f93YfJYxye8U9-9ma5&ust=1687886217521000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCMDvuaa44f8CFQAAAAAdAAAAABAI"><img src="/imagens/inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0"></a>
 </p>
 
 # Protocom
@@ -30,7 +30,7 @@
 
 O Protocom é uma aplicação web desenvolvida pelo grupo Tukumã para a Natura. A solução busca resolver a dificuldade na coleta de dados da cadeia produtiva de insumos na Amazônia e sua digitalização. A plataforma permite o registro e a digitalização de informações sobre origem, práticas sustentáveis e certificações, promovendo transparência e rastreabilidade. O Protocom facilita a interação entre produtores, fornecedores, pesquisadores e a Natura, promovendo a sustentabilidade e responsabilidade socioambiental, simplificando e agilizando o processo de coleta de dados na região amazônica.
 
-Para ter acesso ao vídeo explicativo da nossa aplicação web, acesse o seguinte link: https://www.youtube.com/watch?v=NIt9Ntp-opw
+Para ter acesso ao vídeo explicativo da nossa aplicação web, acesse o seguinte link: https://www.youtube.com/watch?v=0IkuDsZrW2w&ab_channel=VingadoresBRA
 
 ## 📝 LINK
 
