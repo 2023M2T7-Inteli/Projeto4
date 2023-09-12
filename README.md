@@ -69,7 +69,7 @@ Aqui encontram-se todas as instruções necessárias para a instalação de todo
 
 1.  Baixar e instalar o node.js:  [https://nodejs.org/pt-br/](https://nodejs.org/pt-br/) (versão 16.15.1 LTS)
 2. Clone o repositório em questão.
-3.  No modo administrador, abra o "prompt de comando" ou o "terminal" e, após,  abra a pasta "src" no diretório raiz do repositório clonado e digite o segundo comando:
+3.  No modo administrador, abra o "prompt de comando" ou o "terminal" e, após,  abra a pasta "src" no diretório raiz do repositório clonado, depois abra a pasta "backend" e digite o segundo comando:
 
 ```sh
 npm install sqlite3 express cors multer
@@ -79,7 +79,7 @@ npm install sqlite3 express cors multer
 5. Em seguida, digite o comando:
 
 ```sh
-node PROTOCM_V1.JS
+node PROTOCOM_V1.JS
 ```
 
 6. Agora o projeto já está pronto para ser modificado. Caso ainda deseje iniciar a aplicação, digite o comando abaixo no terminal:
